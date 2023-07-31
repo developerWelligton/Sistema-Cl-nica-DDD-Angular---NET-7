@@ -1110,6 +1110,16 @@
           }
         }
       },
+      "Domain/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v7.0",
+        "compile": {
+          "bin/placeholder/Domain.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/Domain.dll": {}
+        }
+      },
       "Entities/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v7.0",
@@ -3358,6 +3368,11 @@
         "version.txt"
       ]
     },
+    "Domain/1.0.0": {
+      "type": "project",
+      "path": "../Domain/Domain.csproj",
+      "msbuildProject": "../Domain/Domain.csproj"
+    },
     "Entities/1.0.0": {
       "type": "project",
       "path": "../Entities/Entities.csproj",
@@ -3366,6 +3381,7 @@
   },
   "projectFileDependencyGroups": {
     "net7.0": [
+      "Domain >= 1.0.0",
       "Entities >= 1.0.0",
       "Microsoft.AspNetCore.Identity.EntityFrameworkCore >= 7.0.3",
       "Microsoft.EntityFrameworkCore.SqlServer >= 7.0.3"
@@ -3402,6 +3418,9 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "projectReferences": {
+            "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Domain\\Domain.csproj": {
+              "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Domain\\Domain.csproj"
+            },
             "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj": {
               "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj"
             }

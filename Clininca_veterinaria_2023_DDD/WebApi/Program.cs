@@ -1,5 +1,7 @@
+using Domain.Interfaces.Generics;
 using Entities.Entidades;
 using Infra.Configuracao;
+using Infra.Repositorio.Generics;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -18,6 +20,10 @@ builder.Services.AddDbContext<ContextBase>(options =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddEntityFrameworkStores<ContextBase>();
 var app = builder.Build();
+
+
+//INTERFACE E REPOSITORIO
+builder.Services.AddSingleton(typeof(InterfaceGeneric<>), typeof(RepositoryGenerics<>));
 
 
 
