@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Clininca_veterinaria_2023_DDD\\WebApi\\WebApi.csproj": {}
+    "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\WebApi\\WebApi.csproj": {}
   },
   "projects": {
-    "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Clininca_veterinaria_2023_DDD\\WebApi\\WebApi.csproj": {
+    "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Clininca_veterinaria_2023_DDD\\WebApi\\WebApi.csproj",
-        "projectName": "WebApi",
-        "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Clininca_veterinaria_2023_DDD\\WebApi\\WebApi.csproj",
+        "projectUniqueName": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj",
+        "projectName": "Entities",
+        "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj",
         "packagesPath": "C:\\Users\\cloud\\.nuget\\packages\\",
-        "outputPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Clininca_veterinaria_2023_DDD\\WebApi\\obj\\",
+        "outputPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
@@ -43,7 +43,172 @@
         "net7.0": {
           "targetAlias": "net7.0",
           "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Infra\\Infra.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Infra\\Infra.csproj",
+        "projectName": "Infra",
+        "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Infra\\Infra.csproj",
+        "packagesPath": "C:\\Users\\cloud\\.nuget\\packages\\",
+        "outputPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Infra\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cloud\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj": {
+                "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.201\\RuntimeIdentifierGraph.json"
+        }
+      }
+    },
+    "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\WebApi\\WebApi.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\WebApi\\WebApi.csproj",
+        "projectName": "WebApi",
+        "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\WebApi\\WebApi.csproj",
+        "packagesPath": "C:\\Users\\cloud\\.nuget\\packages\\",
+        "outputPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\WebApi\\obj\\",
+        "projectStyle": "PackageReference",
+        "fallbackFolders": [
+          "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
+        ],
+        "configFilePaths": [
+          "C:\\Users\\cloud\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj": {
+                "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj"
+              },
+              "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Infra\\Infra.csproj": {
+                "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Infra\\Infra.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
+            "Microsoft.AspNetCore.Identity.UI": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
             "Microsoft.AspNetCore.OpenApi": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.SqlServer": {
+              "target": "Package",
+              "version": "[7.0.3, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[7.0.3, )"
             },

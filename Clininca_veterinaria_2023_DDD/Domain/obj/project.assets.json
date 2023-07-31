@@ -14,11 +14,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Clininca_veterinaria_2023_DDD\\Domain\\Domain.csproj",
+      "projectUniqueName": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Domain\\Domain.csproj",
       "projectName": "Domain",
-      "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Clininca_veterinaria_2023_DDD\\Domain\\Domain.csproj",
+      "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Domain\\Domain.csproj",
       "packagesPath": "C:\\Users\\cloud\\.nuget\\packages\\",
-      "outputPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Clininca_veterinaria_2023_DDD\\Domain\\obj\\",
+      "outputPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Domain\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files\\dotnet\\sdk\\NuGetFallbackFolder"
