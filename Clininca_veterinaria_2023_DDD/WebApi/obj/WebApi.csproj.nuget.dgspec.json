@@ -30,7 +30,11 @@
         "frameworks": {
           "net7.0": {
             "targetAlias": "net7.0",
-            "projectReferences": {}
+            "projectReferences": {
+              "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj": {
+                "projectPath": "D:\\welligton\\projetos\\clinica_veterinaria_2023_ddd\\Sistema-Cl-nica-DDD-Angular---NET-7\\Clininca_veterinaria_2023_DDD\\Entities\\Entities.csproj"
+              }
+            }
           }
         },
         "warningProperties": {

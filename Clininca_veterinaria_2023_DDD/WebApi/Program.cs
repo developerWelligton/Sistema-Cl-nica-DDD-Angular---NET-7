@@ -1,6 +1,16 @@
 using Domain.Interfaces.Generics;
+using Domain.Interfaces.IAnimal;
+using Domain.Interfaces.IClientes;
+using Domain.Interfaces.IConsulta;
+using Domain.Interfaces.IConsulta_Exame;
+using Domain.Interfaces.IEspecie;
+using Domain.Interfaces.IExame;
+using Domain.Interfaces.ISecretarias;
+using Domain.Interfaces.IUsuarioSistemaClinica;
+using Domain.Interfaces.IVeterinario;
 using Entities.Entidades;
 using Infra.Configuracao;
+using Infra.Repositorio;
 using Infra.Repositorio.Generics;
 using Microsoft.EntityFrameworkCore;
 
@@ -24,8 +34,15 @@ var app = builder.Build();
 
 //INTERFACE E REPOSITORIO
 builder.Services.AddSingleton(typeof(InterfaceGeneric<>), typeof(RepositoryGenerics<>));
-
-
+builder.Services.AddSingleton<InterfaceAnimal, RepositorioAnimal>();
+builder.Services.AddSingleton<InterfaceClientes, RepositorioClientes>();
+builder.Services.AddSingleton<InterfaceConsulta, RepositorioConsulta>();
+builder.Services.AddSingleton<InterfaceConsultaExame, RepositorioConsultaExame>();
+builder.Services.AddSingleton<InterfaceEspecie, RepositorioEspecie>();
+builder.Services.AddSingleton<InterfaceExame, RepositorioExame>();
+builder.Services.AddSingleton<InterfaceSecretarias, RepositorioSecretarias>();
+builder.Services.AddSingleton<InterfaceVeterinario, RepositorioVeterinario>();
+builder.Services.AddSingleton<InterfaceUsuarioSistemaClinica, RepositorioUsuarioSistemaClinica>();
 
 
 // Configure the HTTP request pipeline.
