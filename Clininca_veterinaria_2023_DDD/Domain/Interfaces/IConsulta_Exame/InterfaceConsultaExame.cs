@@ -22,6 +22,7 @@ namespace Domain.Interfaces.IConsulta_Exame
 
         // Método personalizado para buscar consultas com exames em uma data específica
         Task<IList<Consulta_Exame>> BuscarConsultasComExamesPorData(DateTime dataExame);
+        Task Add(Exame exame);
 
         // Outros métodos personalizados conforme as necessidades do sistema...
 

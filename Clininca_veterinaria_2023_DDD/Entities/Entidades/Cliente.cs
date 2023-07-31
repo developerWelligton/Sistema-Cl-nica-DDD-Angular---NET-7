@@ -5,11 +5,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Notificacoes;
 
 namespace Entities.Entidades
 {
 
-    public class Cliente
+    public class Cliente: Notifica
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

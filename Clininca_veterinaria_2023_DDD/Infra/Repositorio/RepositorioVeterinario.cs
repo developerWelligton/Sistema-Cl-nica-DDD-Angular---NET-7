@@ -46,26 +46,14 @@ namespace Infra.Repositorio
             }
         }
 
-        public async Task<IList<Veterinario>> BuscarVeterinariosComConsultas()
+        public Task<IList<Veterinario>> BuscarVeterinariosComConsultas()
         {
-            using (var banco = new ContextBase(_optionsBuilder))
-            {
-                return await banco.Veterinarios
-                            .Include(v => v.Consultas)
-                            .Where(v => v.Consultas.Any())
-                            .ToListAsync();
-            }
+            throw new NotImplementedException();
         }
 
-        public async Task<IList<Veterinario>> BuscarVeterinariosSemConsultas()
+        public Task<IList<Veterinario>> BuscarVeterinariosSemConsultas()
         {
-            using (var banco = new ContextBase(_optionsBuilder))
-            {
-                return await banco.Veterinarios
-                            .Include(v => v.Consultas)
-                            .Where(v => !v.Consultas.Any())
-                            .ToListAsync();
-            }
+            throw new NotImplementedException();
         }
     }
 }

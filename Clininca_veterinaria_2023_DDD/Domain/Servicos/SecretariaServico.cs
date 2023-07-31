@@ -4,9 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Domain.Interfaces.InterfaceServicos
+namespace Domain.Servicos
 {
-    public interface IConsultaExame
+    internal class SecretariaServico
     {
     }
 }

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace Domain.Interfaces.InterfaceServicos
 {
-    public interface IUsuarioSistemaClinicaServico
+    public interface IConsultaExameServico
     {
-        public Task CadastraUsuarioNoSistema(UsuarioSistemaClinica usuarioSistemaClinica);
-        
+        public Task AdicionarExame(Exame exame);
+        public Task AtualizaExame(Exame exame);
     }
 }

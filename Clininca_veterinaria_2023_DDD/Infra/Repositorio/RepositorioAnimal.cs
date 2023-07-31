@@ -5,7 +5,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.Entidades;
-using Entities;
 using Domain.Interfaces.IAnimal;
 using Infra.Configuracao;
 using Microsoft.EntityFrameworkCore;

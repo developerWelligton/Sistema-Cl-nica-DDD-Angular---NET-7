@@ -1,5 +1,4 @@
-﻿using Entities;
-using Entities.Entidades;
+﻿using Entities.Entidades;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;

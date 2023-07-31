@@ -5,11 +5,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Entities.Notificacoes;
 
 namespace Entities.Entidades
 {
     [Table("UsuarioSistemaClinica")]
-    public class UsuarioSistemaClinica
+    public class UsuarioSistemaClinica: Notifica
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

@@ -1,4 +1,4 @@
-﻿using Entities.Entidades;
+﻿using Entities.Notificacoes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,10 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Entities
+namespace Entities.Entidades
 {
     [Table("Animal")]
-    public class Animal
+    public class Animal :Notifica
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
