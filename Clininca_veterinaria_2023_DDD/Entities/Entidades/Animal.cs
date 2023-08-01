@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace Entities.Entidades
 {
     [Table("Animal")]
-    public class Animal :Notifica
+    public class Animal  
     {
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]

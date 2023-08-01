@@ -14,7 +14,6 @@ namespace Entities.Entidades
     public class UsuarioSistemaClinica 
     {
         [Key]
-        [JsonIgnore]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_Usuario { get; set; }
 

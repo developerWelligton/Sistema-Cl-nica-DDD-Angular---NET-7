@@ -3,16 +3,19 @@ using Domain.Interfaces.IUsuarioSistemaClinica;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Entities.Entidades;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+using WebApi.Model;
 
 namespace WebApi.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class UsuarioSistema  : ControllerBase
+    public class UsuarioSistemaController : ControllerBase
     {
         private readonly InterfaceUsuarioSistemaClinica _interfaceUsuarioSistemaClinica;
         private readonly IUsuarioSistemaClinicaServico _isuarioSistemaClinicaServico;
-        public UsuarioSistema(InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica, IUsuarioSistemaClinicaServico isuarioSistemaClinicaServico)
+        public UsuarioSistemaController(InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica, IUsuarioSistemaClinicaServico isuarioSistemaClinicaServico)
         {
             _interfaceUsuarioSistemaClinica = interfaceUsuarioSistemaClinica;
             _isuarioSistemaClinicaServico = isuarioSistemaClinicaServico;
@@ -25,7 +28,7 @@ namespace WebApi.Controllers
             return await _interfaceUsuarioSistemaClinica.BuscarPorNome(nome);
         }
 
-        [HttpPost("/api/AdicionarUsuarioClinica")]
+        [HttpPost("/api/UsuarioClinica")]
         [Produces("application/json")]
         public async Task<ActionResult<UsuarioSistemaClinica>> AdicionarUsuarioClinica([FromBody] UsuarioSistemaClinica usuarioSistemaClinica)
         {
@@ -36,16 +39,49 @@ namespace WebApi.Controllers
 
             await _interfaceUsuarioSistemaClinica.Add(usuarioSistemaClinica);
 
-            // se a ID é gerada pelo banco de dados e você pode recuperá-la após a inserção, use-a aqui
             return CreatedAtAction(nameof(AdicionarUsuarioClinica), new { id = usuarioSistemaClinica.ID_Usuario }, usuarioSistemaClinica);
         }
 
-
-        [HttpGet("/api/ListarUsuarioClinica")]
+        [HttpGet("/api/UsuariosClinica")]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<UsuarioSistemaClinica>>> ListarUsuarioClinica()
         {
             return Ok(await _interfaceUsuarioSistemaClinica.List());
+        }
+
+        [HttpPut("{id}")]
+        [Produces("application/json")]
+        public async Task<IActionResult> AtualizarUsuarioClinica(int id, [FromBody] UsuarioSistemaClinicaDto usuarioSistemaClinicaDto)
+        {
+            var userFromDb = await _interfaceUsuarioSistemaClinica.GetEntityById(id);
+            if (userFromDb == null)
+            {
+                return NotFound();
+            }
+
+            userFromDb.Nome = usuarioSistemaClinicaDto.Nome;
+            userFromDb.Email = usuarioSistemaClinicaDto.Email; 
+            userFromDb.Senha = usuarioSistemaClinicaDto.Senha;
+            // Adicione mais campos conforme necessário
+
+            await _interfaceUsuarioSistemaClinica.Update(userFromDb);
+
+            return NoContent();
+        }
+
+        [HttpDelete("{id}")]
+        [Produces("application/json")]
+        public async Task<IActionResult> DeletarUsuarioClinica(int id)
+        {
+            var userFromDb = await _interfaceUsuarioSistemaClinica.GetEntityById(id);
+            if (userFromDb == null)
+            {
+                return NotFound();
+            }
+
+            await _interfaceUsuarioSistemaClinica.Delete(userFromDb);
+
+            return NoContent();
         }
     }
 }
