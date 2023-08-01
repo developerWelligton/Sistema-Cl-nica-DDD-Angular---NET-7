@@ -12,8 +12,7 @@ namespace Entities.Entidades
 {
 
     public class Cliente 
-    {
-        [JsonIgnore]
+    { 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_Cliente { get; set; }
