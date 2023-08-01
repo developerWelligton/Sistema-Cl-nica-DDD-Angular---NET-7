@@ -11,6 +11,7 @@ using Domain.Interfaces.IUsuarioSistemaClinica;
 using Domain.Interfaces.IVeterinario;
 using Domain.Servicos;
 using Entities.Entidades;
+using Entities.Notificacoes;
 using Infra.Configuracao;
 using Infra.Repositorio;
 using Infra.Repositorio.Generics;
@@ -58,9 +59,9 @@ builder.Services.AddSingleton<IEspecieServico, EspecieServico>();
 builder.Services.AddSingleton<IExameServico, ExameServico>(); 
 builder.Services.AddSingleton<ISecretariaServico, SecretariaServico>(); 
 builder.Services.AddSingleton<IVeterinarioServico, VeterinarioServico>(); 
-builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClinicaServico>(); 
- 
+builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClinicaServico>();
 
+builder.Services.AddTransient<ValidacaoServico>();
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)

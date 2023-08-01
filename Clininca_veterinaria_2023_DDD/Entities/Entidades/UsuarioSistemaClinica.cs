@@ -6,13 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using Entities.Notificacoes;
+using System.Text.Json.Serialization;
 
 namespace Entities.Entidades
 {
     [Table("UsuarioSistemaClinica")]
-    public class UsuarioSistemaClinica: Notifica
+    public class UsuarioSistemaClinica 
     {
         [Key]
+        [JsonIgnore]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_Usuario { get; set; }
 

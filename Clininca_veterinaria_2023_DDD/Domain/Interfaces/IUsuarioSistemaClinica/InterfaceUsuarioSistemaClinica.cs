@@ -11,6 +11,7 @@ namespace Domain.Interfaces.IUsuarioSistemaClinica
     public interface InterfaceUsuarioSistemaClinica : InterfaceGeneric<UsuarioSistemaClinica>
     {
 
+
         // Método personalizado para buscar um usuário pelo nome
         Task<UsuarioSistemaClinica> BuscarPorNome(string nome);
 
