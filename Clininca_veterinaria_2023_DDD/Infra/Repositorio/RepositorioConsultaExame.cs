@@ -23,6 +23,10 @@ namespace Infra.Repositorio
 
         }
 
+        public Task Add(Exame exame)
+        {
+            throw new NotImplementedException();
+        }
 
         public async Task<IList<Consulta_Exame>> BuscarConsultasComExames()
         {

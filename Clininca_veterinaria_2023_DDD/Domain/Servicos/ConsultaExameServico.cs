@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace Domain.Servicos
 {
-    internal class ConsultaExameServico : IConsultaExameServico
+    public class ConsultaExameServico : IConsultaExameServico
     {
         private readonly InterfaceConsultaExame _InterfaceConsultaExame;
 
@@ -18,11 +18,10 @@ namespace Domain.Servicos
         {
             _InterfaceConsultaExame = InterfaceConsultaExame;
         }
+
         public Task AdicionarExame(Exame exame)
         {
-            var valido = exame.ValidaPropriedadeString(exame.Nome, "Nome");
-            if (valido)
-                await _InterfaceConsultaExame.Add(exame);
+            throw new NotImplementedException();
         }
 
         public Task AtualizaExame(Exame exame)

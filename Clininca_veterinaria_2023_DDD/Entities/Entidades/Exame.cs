@@ -16,15 +16,11 @@ namespace Entities.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_Exame { get; set; }
 
-        [Required]
-        [StringLength(100)]
+       
         public string Nome { get; set; }
-
-        [Required]
-        [StringLength(255)]
+         
         public string Detalhes { get; set; }
-
-        [Required]
+         
         public decimal Custo { get; set; }
     }
 }
