@@ -35,7 +35,8 @@ namespace WebApi.Controllers
             {
                 Nome = exameDto.Nome,
                 Detalhes = exameDto.Detalhes,
-                Custo = exameDto.Custo
+                Custo = exameDto.Custo,
+                ClienteId = exameDto.ClienteId
             };
 
             await _InterfaceExame.Add(exame);

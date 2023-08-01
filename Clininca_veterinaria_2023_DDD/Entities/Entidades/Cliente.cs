@@ -39,6 +39,8 @@ namespace Entities.Entidades
         [JsonIgnore]
         [ForeignKey("ID_Usuario")]
         public UsuarioSistemaClinica UsuarioSistemaClinica { get; set; }
-
+       
+        // Lista de exames associados a este cliente.
+        public virtual ICollection<Exame> Exames { get; set; }
     }
 }

@@ -22,5 +22,12 @@ namespace Entities.Entidades
         public string Detalhes { get; set; }
          
         public decimal Custo { get; set; }
+
+        // Chave estrangeira para Cliente.
+        public int ClienteId { get; set; }
+
+        // Navegação propriedade.
+        [ForeignKey("ClienteId")]
+        public virtual Cliente Cliente { get; set; }
     }
 }
