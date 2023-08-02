@@ -19,8 +19,7 @@ namespace Infra.Configuracao
         public DbSet<UsuarioSistemaClinica> UsuarioSistemaClinicas { get; set; }
         public DbSet<Cliente> Clientes { get; set; }
         public DbSet<Secretaria> Secretarias { get; set; }
-        public DbSet<Veterinario> Veterinarios { get; set; }
-        public DbSet<Especie> Especies { get; set; }
+        public DbSet<Veterinario> Veterinarios { get; set; } 
         public DbSet<Animal> Animais { get; set; }
         public DbSet<Consulta> Consultas { get; set; }
         public DbSet<Exame> Exames { get; set; }

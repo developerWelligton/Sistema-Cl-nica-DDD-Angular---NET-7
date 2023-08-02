@@ -18,13 +18,7 @@ namespace Entities.Entidades
 
         [Required]
         [StringLength(100)]
-        public string Nome { get; set; }
-
-        [Required]
-        public int ID_Especie { get; set; }
-
-        [ForeignKey("ID_Especie")]
-        public Especie Especie { get; set; }
+        public string Nome { get; set; } 
 
         [Required]
         public int ID_Cliente { get; set; }

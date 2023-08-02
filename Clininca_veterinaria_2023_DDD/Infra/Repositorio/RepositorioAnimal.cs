@@ -62,18 +62,9 @@ namespace Infra.Repositorio
             }
         }
 
-        public async Task<IList<Animal>> RemoverPorEspecie(string especie)
+        public Task<IList<Animal>> RemoverPorEspecie(string especie)
         {
-            using (var banco = new ContextBase(_optionsBuilder))
-            {
-                var animals = await banco.Animais
-                                         .Where(a => a.Especie.Nome == especie)
-                                         .ToListAsync();
-                banco.Animais.RemoveRange(animals);
-                await banco.SaveChangesAsync();
-                return animals;
-            }
+            throw new NotImplementedException();
         }
-
     }
 }
