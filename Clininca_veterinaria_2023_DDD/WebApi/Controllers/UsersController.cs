@@ -14,11 +14,14 @@ namespace WebApi.Controllers
     public class UsersController : ControllerBase
     {
         private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _singInManager;
-        public UsersController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> singInManager)
+        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly RoleManager<IdentityRole> _roleManager; // Adicionando o RoleManager
+
+        public UsersController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager) // Injetando o RoleManager no construtor
         {
             _userManager = userManager;
-            _singInManager = singInManager;
+            _signInManager = signInManager;
+            _roleManager = roleManager; // Atribuindo RoleManager ao campo
         }
         [AllowAnonymous]
         [Produces("application/json")]
@@ -38,6 +41,8 @@ namespace WebApi.Controllers
             };
 
             var result = await _userManager.CreateAsync(user, login.senha);
+            var createRoleResult = await _roleManager.CreateAsync(new IdentityRole("cliente"));
+            var usuarioRoleResult = _userManager.AddToRoleAsync(user, "cliente").Result;
 
             if(result.Errors.Any())
             {

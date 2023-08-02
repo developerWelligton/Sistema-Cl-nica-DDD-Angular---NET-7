@@ -6,6 +6,7 @@ using Entities.Entidades;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApi.Model;
+using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {
@@ -30,6 +31,7 @@ namespace WebApi.Controllers
 
         [HttpPost("/api/UsuarioClinica")]
         [Produces("application/json")]
+        [Authorize(Roles = "admin")]
         public async Task<ActionResult<UsuarioSistemaClinica>> AdicionarUsuarioClinica([FromBody] UsuarioSistemaClinica usuarioSistemaClinica)
         {
             if (!ModelState.IsValid)

@@ -15,6 +15,7 @@ using Infra.Configuracao;
 using Infra.Repositorio;
 using Infra.Repositorio.Generics;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.IdentityModel.Tokens;
 using WebApi.Token;
@@ -33,6 +34,7 @@ builder.Services.AddDbContext<ContextBase>(options =>
         builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ContextBase>();
  
 
