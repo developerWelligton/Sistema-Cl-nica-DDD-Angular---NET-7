@@ -26,23 +26,22 @@ namespace WebApi.Controllers
         [AllowAnonymous]
         [Produces("application/json")]
         [HttpPost("/api/AdicionaUsuario")]
-        public async Task<IActionResult> AdicionarUsuario([FromBody] Login login)
+        public async Task<IActionResult> AdicionarUsuario([FromBody] LoginDTO loginDTO)
         {
-            if(string.IsNullOrWhiteSpace(login.email) ||string.IsNullOrWhiteSpace(login.senha) || string.IsNullOrWhiteSpace(login.cpf))
+            if(string.IsNullOrWhiteSpace(loginDTO.email) ||string.IsNullOrWhiteSpace(loginDTO.senha) || string.IsNullOrWhiteSpace(loginDTO.cpf))
             {
                 return Ok("Falta alguns dados");
             }
             var user = new ApplicationUser
             {
-                Email = login.email,
-                UserName  = login.email,
-                CPF = login.cpf,
-
+                Email = loginDTO.email,
+                UserName  = loginDTO.email,
+                CPF = loginDTO.cpf
             };
 
-            var result = await _userManager.CreateAsync(user, login.senha);
-            var createRoleResult = await _roleManager.CreateAsync(new IdentityRole("cliente"));
-            var usuarioRoleResult = _userManager.AddToRoleAsync(user, "cliente").Result;
+            var result = await _userManager.CreateAsync(user, loginDTO.senha);
+            var createRoleResult = await _roleManager.CreateAsync(new IdentityRole(loginDTO.role));
+            var usuarioRoleResult = _userManager.AddToRoleAsync(user, loginDTO.role).Result;
 
             if(result.Errors.Any())
             {
