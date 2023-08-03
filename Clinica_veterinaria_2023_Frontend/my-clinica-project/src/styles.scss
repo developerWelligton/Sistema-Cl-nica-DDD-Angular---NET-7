@@ -6,14 +6,73 @@
 
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 
-
 body {
   font-family: "Poppins";
   margin: 0;
   background: #3330d3;
-
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
+  color: #FFF; /* Para melhorar a visibilidade do texto contra o fundo escuro */
+}
+
+.container-base {
+  padding: 88px 16px 0px 128px;
+  display: flex; /* Para centralizar o conteúdo da página */
+  justify-content: center; /* Alinha horizontalmente ao centro */
+  align-items: center; /* Alinha verticalmente ao centro */
+  min-height: 100vh; /* Garante que o container preencha a tela */
+
+  .content-page {
+    background: white;
+    padding: 32px; /* Aumentado para mais espaço */
+    border-radius: 10px;
+    min-height: 800px;
+    width: 80%; /* Ajustado para ser mais responsivo */
+    max-width: 1200px; /* Ajustado para ser mais responsivo */
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.2); /* Sombra suavizada */
+
+    .card-header {
+      z-index: 3 !important;
+      width: 250px; /* Ajustado para ser mais responsivo */
+      padding: 20px; /* Aumentado para mais espaço */
+      background-color: #4caf50;
+      box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+      border-radius: 8px;
+      margin-bottom: 16px;
+      color: #fff; /* Para melhorar a visibilidade do texto contra o fundo colorido */
+
+      .card-title {
+        font-size: 20px; /* Aumentado para mais destaque */
+        font-weight: 600; /* Aumentado para mais destaque */
+        text-align: center; /* Alinha o texto ao centro */
+      }
+
+      .card-description {
+        color: #333;
+        margin: 16px 0;
+        text-align: center; /* Alinha o texto ao centro */
+      }
+
+      .card-links {
+        list-style: none;
+        padding-left: 0;
+        text-align: center; /* Alinha os links ao centro */
+      }
+
+      .card-link {
+        color: #4caf50;
+        text-decoration: none;
+        margin: 5px 0; /* Adiciona um pequeno espaço entre os links */
+        display: inline-block; /* Permite o uso de padding */
+        padding: 5px 0; /* Adiciona um pequeno padding para aumentar a área clicável */
+      }
+
+      .card-link:hover {
+        text-decoration: underline;
+        color: #fff; /* Muda a cor quando o link é passado com o mouse */
+      }
+    }
+  }
 }
