@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './pages/login/login.component';
+import { AuthGuard } from './pages/guard/auth.guard';
 
 const routes: Routes = [
   {
@@ -16,19 +17,23 @@ const routes: Routes = [
   },
   {
     path:'dashboard',
-    loadChildren:() => import('./pages/dashboard/dashboard.module').then(m=>m.DashboardModule)
+    loadChildren:() => import('./pages/dashboard/dashboard.module').then(m=>m.DashboardModule),
+    canActivate:[AuthGuard]
   },
   {
     path:'secretaria',
-    loadChildren:() => import('./pages/secretaria/secretaria.module').then(m=>m.SecretariaModule)
+    loadChildren:() => import('./pages/secretaria/secretaria.module').then(m=>m.SecretariaModule),
+    canActivate:[AuthGuard]
   },
   {
     path:'veterinario',
-    loadChildren:() => import('./pages/veterinario/veterinario.module').then(m=>m.VeterinarioModule)
+    loadChildren:() => import('./pages/veterinario/veterinario.module').then(m=>m.VeterinarioModule),
+    canActivate:[AuthGuard]
   },
   {
     path:'cliente',
-    loadChildren:() => import('./pages/cliente/cliente.module').then(m=>m.ClienteModule)
+    loadChildren:() => import('./pages/cliente/cliente.module').then(m=>m.ClienteModule),
+    canActivate:[AuthGuard]
   }
 ];
 
