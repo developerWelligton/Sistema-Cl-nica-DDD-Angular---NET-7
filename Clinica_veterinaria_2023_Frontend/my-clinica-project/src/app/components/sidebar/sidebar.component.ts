@@ -18,15 +18,15 @@ export class SidebarComponent {
         break;
 
       case 2:
-        this.router.navigate(['/veterinario'])
+        this.router.navigate(['/secretaria'])
         break;
 
       case 3:
-        this.router.navigate(['/categoria'])
+        this.router.navigate(['/veterinario'])
         break;
 
       case 4:
-        this.router.navigate(['/despesa'])
+        this.router.navigate(['/cliente'])
         break;
 
       default:

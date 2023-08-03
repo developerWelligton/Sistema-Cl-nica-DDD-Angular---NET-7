@@ -17,6 +17,18 @@ const routes: Routes = [
   {
     path:'dashboard',
     loadChildren:() => import('./pages/dashboard/dashboard.module').then(m=>m.DashboardModule)
+  },
+  {
+    path:'secretaria',
+    loadChildren:() => import('./pages/secretaria/secretaria.module').then(m=>m.SecretariaModule)
+  },
+  {
+    path:'veterinario',
+    loadChildren:() => import('./pages/veterinario/veterinario.module').then(m=>m.VeterinarioModule)
+  },
+  {
+    path:'cliente',
+    loadChildren:() => import('./pages/cliente/cliente.module').then(m=>m.ClienteModule)
   }
 ];
 
