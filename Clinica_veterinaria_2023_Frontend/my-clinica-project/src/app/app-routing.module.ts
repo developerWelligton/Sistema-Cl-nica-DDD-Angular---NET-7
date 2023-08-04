@@ -19,7 +19,7 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuard],
-    data: { roles: ['admin', 'user'] } // Mudar 'expectedRoles' para 'roles' para corresponder com a chave de dados na função canActivate
+    data: { roles: ['admin', 'veterinario','cliente','secretaria'] } // Mudar 'expectedRoles' para 'roles' para corresponder com a chave de dados na função canActivate
   },
   {
     path:'secretaria',

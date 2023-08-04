@@ -1,5 +1,6 @@
+import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from './../../services/menu.service';
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -7,11 +8,21 @@ import { Router } from '@angular/router';
   templateUrl: './sidebar.component.html',
   styleUrls: ['./sidebar.component.scss']
 })
-export class SidebarComponent {
+export class SidebarComponent implements OnInit {
+  userRole: string;
 
-  constructor(private router: Router , public menuService:MenuService) {}
+  constructor(
+    private router: Router,
+    public menuService:MenuService,
+    private authService: AuthService
+  ) {}
 
-  selectMenu(menu:number){
+  ngOnInit(): void {
+    this.userRole = this.authService.getRole();
+    alert(this.userRole)
+  }
+
+  selectMenu(menu:number) {
     switch(menu){
       case 1:
         this.router.navigate(['/dashboard'])
@@ -34,5 +45,4 @@ export class SidebarComponent {
     }
     this.menuService.menuSelecionado = menu;
   }
-
 }
