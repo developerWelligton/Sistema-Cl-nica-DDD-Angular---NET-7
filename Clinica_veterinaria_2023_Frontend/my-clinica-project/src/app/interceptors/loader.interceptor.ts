@@ -50,9 +50,13 @@ export class LoaderInterceptor implements HttpInterceptor {
         try {
           const decodedToken: any = jwt_decode(this.token);
           const roleClaim = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
-          return roleClaim || ""; // Return the role claim value if it exists, otherwise return an empty string
+          const userRole = roleClaim || "";
+
+          // Store the user's role in the Local Storage
+          localStorage.setItem('userRole', userRole);
+
+          return userRole;
         } catch (error) {
-          // Handle the error in case of decoding failure
           console.error("Erro ao decodificar o token:", error);
           return "";
         }
@@ -88,7 +92,6 @@ export class LoaderInterceptor implements HttpInterceptor {
         this.token=this.authService.getToken;
         let request = req.clone({ headers });
         this.status.setHttpStatus(true);
-        debugger
         this.getRoleFromToken()
         this.spinner.show();
 
