@@ -1,3 +1,4 @@
+
 import { Injectable } from "@angular/core";
 import {
     HttpEvent,
@@ -12,6 +13,8 @@ import { catchError, finalize, map } from "rxjs/operators";
 
 import { NgxSpinnerService } from "ngx-spinner";
 import { AuthService } from "../services/auth.service";
+import jwt_decode from 'jwt-decode';
+
 
 
 //CORAÇÃO DA SEGURANÇA DO PROJETO
@@ -34,13 +37,28 @@ export class HTTPStatus {
 @Injectable()
 export class LoaderInterceptor implements HttpInterceptor {
     private _requests = 0;
-
+    private token:string;
     constructor(
         private spinner: NgxSpinnerService,
         private status: HTTPStatus,
         private authService: AuthService,
         private router: Router,
     ) { }
+    // Método para fazer o decode do token e obter a "role"
+    public getRoleFromToken(): string {
+      if (this.token) {
+        try {
+          const decodedToken: any = jwt_decode(this.token);
+          const roleClaim = decodedToken['http://schemas.microsoft.com/ws/2008/06/identity/claims/role'];
+          return roleClaim || ""; // Return the role claim value if it exists, otherwise return an empty string
+        } catch (error) {
+          // Handle the error in case of decoding failure
+          console.error("Erro ao decodificar o token:", error);
+          return "";
+        }
+      }
+      return "";
+    }
 
     intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<unknown>> {
         ++this._requests;
@@ -67,9 +85,11 @@ export class LoaderInterceptor implements HttpInterceptor {
                 //INJETA O TOKEN EM TODAS SUAS API
                 .append("Authorization", "Bearer " + this.authService.getToken);
         }
-
+        this.token=this.authService.getToken;
         let request = req.clone({ headers });
         this.status.setHttpStatus(true);
+        debugger
+        this.getRoleFromToken()
         this.spinner.show();
 
         return next.handle(request).pipe(
