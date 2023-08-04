@@ -23,12 +23,12 @@ export class AuthGuard implements CanActivate {
           let redirect: string = state.root.queryParams['redirect'];
           let blnUnAuthorize = false;
           let requiredRoles: string[] = next.data['roles'] || []; // Get the required roles from route data (you'll need to set this in your routing module)
-
+          debugger
           // Get the user's role from Local Storage
           const userRole: string = localStorage.getItem('userRole');
 
           // Role validation
-          if (status === false || !this.isAuthorized(userRole, requiredRoles)) {
+          if (status === false) {
             blnUnAuthorize = true;
           }
 
