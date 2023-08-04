@@ -16,14 +16,16 @@ const routes: Routes = [
     path:'', component:LoginComponent
   },
   {
-    path:'dashboard',
-    loadChildren:() => import('./pages/dashboard/dashboard.module').then(m=>m.DashboardModule),
-    canActivate:[AuthGuard]
+    path: 'dashboard',
+    loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
+    canActivate: [AuthGuard],
+    data: { roles: ['admin', 'user'] } // Mudar 'expectedRoles' para 'roles' para corresponder com a chave de dados na função canActivate
   },
   {
     path:'secretaria',
     loadChildren:() => import('./pages/secretaria/secretaria.module').then(m=>m.SecretariaModule),
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+    data: { roles: ['admin', 'user'] }
   },
   {
     path:'veterinario',

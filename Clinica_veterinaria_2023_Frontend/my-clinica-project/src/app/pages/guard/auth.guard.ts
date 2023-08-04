@@ -10,7 +10,7 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private httpStatus: HTTPStatus // Add the HTTPStatus service here
+    private httpStatus: HTTPStatus
   ) {}
 
   canActivate(
@@ -22,24 +22,22 @@ export class AuthGuard implements CanActivate {
         this.authService.UsuarioEstaAutenticado().then((status) => {
           let redirect: string = state.root.queryParams['redirect'];
           let blnUnAuthorize = false;
-          let requiredRoles: string[] = next.data['roles'] || []; // Get the required roles from route data (you'll need to set this in your routing module)
-          debugger
-          // Get the user's role from Local Storage
+          let requiredRoles: string[] = next.data['roles'] || [];
           const userRole: string = localStorage.getItem('userRole');
 
-          // Role validation
           if (status === false) {
+            blnUnAuthorize = true;
+          } else if (!this.isAuthorized(userRole, requiredRoles)) { // Usar a função isAuthorized para verificar se o usuário está autorizado
             blnUnAuthorize = true;
           }
 
-          // Redirect to login or unauthorized page
           if (blnUnAuthorize && redirect != null && redirect.length > 0) {
             this.router.navigate(['login', { redirect }]);
           } else if (blnUnAuthorize) {
-            this.router.navigate(['unauthorized']); // Create an unauthorized page/route in your application
+            this.router.navigate(['unauthorized']);
           }
 
-          resolve(!blnUnAuthorize); // Return true if the user is authorized and false otherwise
+          resolve(!blnUnAuthorize);
         })
         .catch(() => {
           this.router.navigate(['login']);
@@ -50,8 +48,7 @@ export class AuthGuard implements CanActivate {
   }
 
   private isAuthorized(userRole: string, requiredRoles: string[]): boolean {
-    // Implement your authorization logic here.
-    // For example, you can check if the user's role is present in the requiredRoles array.
     return requiredRoles.includes(userRole);
   }
 }
+
