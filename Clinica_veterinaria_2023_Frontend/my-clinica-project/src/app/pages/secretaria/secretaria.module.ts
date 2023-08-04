@@ -1,13 +1,16 @@
-import { NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { CommonModule } from '@angular/common';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { ReactiveFormsModule } from '@angular/forms';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
 import { SecretariaRoutingModule } from './secretaria-routing.module';
 import { SecretariaComponent } from './secretaria.component';
+import { SharedModule } from 'src/app/shared/shared.module';
+import { AuthGuard } from '../guard/auth.guard';
+import { LoaderInterceptor } from 'src/app/interceptors/loader.interceptor';
 
 @NgModule({
   declarations: [
@@ -17,8 +20,11 @@ import { SecretariaComponent } from './secretaria.component';
     CommonModule,
     SecretariaRoutingModule,
     NavbarModule,
-    SidebarModule
+    SidebarModule,
+    SharedModule
   ],
-  providers: []
+  providers: [
+  ],
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class SecretariaModule { }
