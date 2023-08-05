@@ -12,6 +12,11 @@ const routes: Routes = [
     path:'notfound',
     component: NotfoundConsultComponent
   },
+  // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
+  {
+    path: '**',
+    redirectTo: 'notfound'
+  }
 ];
 
 @NgModule({
