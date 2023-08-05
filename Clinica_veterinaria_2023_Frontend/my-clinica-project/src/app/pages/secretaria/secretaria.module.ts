@@ -11,10 +11,12 @@ import { SecretariaComponent } from './secretaria.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthGuard } from '../guard/auth.guard';
 import { LoaderInterceptor } from 'src/app/interceptors/loader.interceptor';
+import { NotfoundConsultComponent } from './notfound-consult/notfound-consult.component';
 
 @NgModule({
   declarations: [
-    SecretariaComponent
+    SecretariaComponent,
+    NotfoundConsultComponent
   ],
   imports: [
     CommonModule,
