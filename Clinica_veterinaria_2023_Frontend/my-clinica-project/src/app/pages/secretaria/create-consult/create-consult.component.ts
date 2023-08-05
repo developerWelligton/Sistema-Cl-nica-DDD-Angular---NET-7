@@ -67,6 +67,25 @@ export class CreateConsultComponent {
     );
   }
 
+  // Within CreateConsultComponent.ts
+
+onSearch(term: string) {
+  if (term) {
+      this.animalService.searchAnimals(term).subscribe(
+          (animals: any[]) => {
+              this.listAnimals = animals.map(animal => ({
+                  id: animal.iD_Animal,
+                  name: animal.nome
+              }));
+          },
+          error => {
+              console.error('Error fetching animals:', error);
+          }
+      );
+  }
+}
+
+
   submitForm() {
     const formData = this.consultaForm.value;
 

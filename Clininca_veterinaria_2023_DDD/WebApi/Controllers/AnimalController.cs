@@ -94,5 +94,20 @@ namespace WebApi.Controllers
 
             return NoContent();
         }
+
+        // Within AnimalController.cs
+
+        [HttpGet("search/{term}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<Animal>>> SearchAnimals(string term)
+        {
+            var animals = await _InterfaceAnimal.SearchByName(term);
+            if (animals == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(animals);
+        }
     }
 }

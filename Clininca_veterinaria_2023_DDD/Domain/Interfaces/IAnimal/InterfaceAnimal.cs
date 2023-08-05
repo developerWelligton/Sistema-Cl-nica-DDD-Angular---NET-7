@@ -29,6 +29,10 @@ namespace Domain.Interfaces.IAnimal
 
         // Nota: Lembre-se de que você pode adicionar métodos aqui para ações específicas 
         // relacionadas a animais na sua aplicação.
+
+        // Within InterfaceAnimal.cs
+
+        Task<IEnumerable<Animal>> SearchByName(string term);
     }
 } 
   

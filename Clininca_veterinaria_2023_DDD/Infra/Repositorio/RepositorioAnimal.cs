@@ -66,5 +66,16 @@ namespace Infra.Repositorio
         {
             throw new NotImplementedException();
         }
+
+        public async Task<IEnumerable<Animal>> SearchByName(string term)
+        {
+
+
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                return await banco.Animais.Where(a => a.Nome.Contains(term))
+                .ToListAsync();
+            };
+        }
     }
 }
