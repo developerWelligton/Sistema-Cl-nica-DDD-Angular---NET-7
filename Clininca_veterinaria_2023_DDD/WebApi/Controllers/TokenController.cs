@@ -9,6 +9,9 @@ using System.Security.Claims;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// Controller para autenticação e geração de tokens JWT.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class TokenController : ControllerBase
@@ -24,8 +27,28 @@ namespace WebApi.Controllers
             _roleManager = roleManager;
         }
 
+        /// <summary>
+        /// Cria um token JWT para autenticação do usuário.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de requisição:
+        /// 
+        ///     POST /api/CreateToken
+        ///     {
+        ///         "Email": "usuario@exemplo.com",
+        ///         "Password": "senha"
+        ///     }
+        ///     
+        /// O token gerado será retornado na resposta.
+        /// </remarks>
+        /// <param name="Input">Dados de login do usuário.</param>
+        /// <returns>O token JWT gerado se a autenticação for bem-sucedida.</returns>
+        /// <response code="200">Retorna o token JWT se a autenticação for bem-sucedida.</response>
+        /// <response code="401">Retorna não autorizado se a autenticação falhar.</response>
         [AllowAnonymous]
         [Produces("application/json")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(401)]
         [HttpPost("/api/CreateToken")]
         public async Task<IActionResult> CreateToken([FromBody] InputModel Input)
         {

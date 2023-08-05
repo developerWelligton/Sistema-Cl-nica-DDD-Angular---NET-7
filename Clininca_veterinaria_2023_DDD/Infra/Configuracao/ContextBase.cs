@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Configuracao
 {
+    #pragma warning disable CS1591
     public class ContextBase : IdentityDbContext<ApplicationUser>
     {
         public ContextBase(DbContextOptions options) : base(options) {
@@ -74,4 +75,5 @@ namespace Infra.Configuracao
         }
 
     }
+    #pragma warning restore CS1591
 }
