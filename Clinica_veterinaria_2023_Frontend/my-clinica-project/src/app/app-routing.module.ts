@@ -25,17 +25,19 @@ const routes: Routes = [
     path:'secretaria',
     loadChildren:() => import('./pages/secretaria/secretaria.module').then(m=>m.SecretariaModule),
     canActivate:[AuthGuard],
-    data: { roles: ['admin', 'user'] }
+    data: { roles: ['admin','secretaria'] }
   },
   {
     path:'veterinario',
     loadChildren:() => import('./pages/veterinario/veterinario.module').then(m=>m.VeterinarioModule),
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+    data: { roles: ['admin','veterinario'] }
   },
   {
     path:'cliente',
     loadChildren:() => import('./pages/cliente/cliente.module').then(m=>m.ClienteModule),
-    canActivate:[AuthGuard]
+    canActivate:[AuthGuard],
+    data: { roles: ['admin','cliente'] }
   }
 ];
 
