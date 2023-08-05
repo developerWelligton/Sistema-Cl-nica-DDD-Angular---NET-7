@@ -9,6 +9,9 @@ using WebApi.Models;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// Controller para adicionar novos usuários.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UsersController : ControllerBase
@@ -23,8 +26,32 @@ namespace WebApi.Controllers
             _signInManager = signInManager;
             _roleManager = roleManager; // Atribuindo RoleManager ao campo
         }
+        /// <summary>
+        /// Adiciona um novo usuário ao sistema.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de requisição:
+        /// 
+        ///     POST /api/AdicionaUsuario
+        ///     {
+        ///         "email": "usuario@exemplo.com",
+        ///         "senha": "senha",
+        ///         "cpf": "123.456.789-10",
+        ///         "role": "Usuario" // Role do usuário (papel)
+        ///     }
+        ///     
+        /// Retorna "Usuario Adicionado!" se o usuário for criado com sucesso.
+        /// </remarks>
+        /// <param name="loginDTO">Dados do novo usuário.</param>
+        /// <returns>Mensagem de sucesso ou lista de erros, se houver.</returns>
+        /// <response code="200">Retorna "Usuario Adicionado!" se o usuário for criado com sucesso.</response>
+        /// <response code="400">Retorna "Falta alguns dados" se os campos email, senha ou cpf estiverem em branco.</response>
+        /// <response code="401">Retorna a lista de erros se a criação do usuário falhar.</response>
         [AllowAnonymous]
         [Produces("application/json")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        [ProducesResponseType(typeof(string), 401)]
         [HttpPost("/api/AdicionaUsuario")]
         public async Task<IActionResult> AdicionarUsuario([FromBody] LoginDTO loginDTO)
         {

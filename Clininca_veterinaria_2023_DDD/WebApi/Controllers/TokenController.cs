@@ -28,7 +28,7 @@ namespace WebApi.Controllers
         }
 
         /// <summary>
-        /// Cria um token JWT para autenticação do usuário.
+        /// Cria um token JWT para autenticação do usuário entrar no sistema da clínica petz.
         /// </summary>
         /// <remarks>
         /// Exemplo de requisição:

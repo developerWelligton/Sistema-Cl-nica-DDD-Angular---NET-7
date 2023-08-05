@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace WebApi.Controllers
 {
+    /// <summary>
+    /// Controller para adicionar novos usuários à clínica.
+    /// </summary>
     [Route("api/[controller]")]
     [ApiController]
     public class UsuarioSistemaController : ControllerBase
@@ -29,9 +32,30 @@ namespace WebApi.Controllers
             return await _interfaceUsuarioSistemaClinica.BuscarPorNome(nome);
         }
 
+        /// <summary>
+        /// Adiciona um novo usuário ao sistema da clínica.
+        /// </summary>
+        /// <remarks>
+        /// Exemplo de requisição:
+        /// 
+        ///     POST /api/UsuarioClinica
+        ///     {
+        ///         "nome": "Nome do Usuário",
+        ///         "cpf": "123.456.789-10",
+        ///         "email": "usuario@exemplo.com",
+        ///         "role": "cliente" // Role do usuário (veterinario, cliente, secretaria, admin, etc.)
+        ///     }
+        ///     
+        /// Retorna o novo usuário adicionado no corpo da resposta.
+        /// </remarks>
+        /// <param name="usuarioSistemaClinica">Dados do novo usuário.</param>
+        /// <returns>O novo usuário adicionado.</returns>
+        /// <response code="201">Retorna o novo usuário adicionado com sucesso.</response>
+        /// <response code="400">Retorna um erro de validação se o modelo de dados não for válido.</response>
         [HttpPost("/api/UsuarioClinica")]
         [Produces("application/json")]
-        [Authorize(Roles = "admin")]
+        [ProducesResponseType(typeof(UsuarioSistemaClinica), 201)]
+        [ProducesResponseType(400)]
         public async Task<ActionResult<UsuarioSistemaClinica>> AdicionarUsuarioClinica([FromBody] UsuarioSistemaClinica usuarioSistemaClinica)
         {
             if (!ModelState.IsValid)
