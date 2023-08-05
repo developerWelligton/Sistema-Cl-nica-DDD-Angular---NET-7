@@ -19,7 +19,7 @@ export class SidebarComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRole = this.authService.getRole();
-    alert(this.userRole)
+    //alert(this.userRole)
   }
 
   selectMenu(menu:number) {
