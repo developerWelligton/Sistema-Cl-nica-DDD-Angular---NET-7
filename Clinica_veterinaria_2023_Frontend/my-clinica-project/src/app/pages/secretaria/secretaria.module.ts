@@ -27,7 +27,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     NavbarModule,
     SidebarModule,
     SharedModule,
-    NgSelectModule
+    NgSelectModule,
+    ReactiveFormsModule
 
   ],
   providers: [

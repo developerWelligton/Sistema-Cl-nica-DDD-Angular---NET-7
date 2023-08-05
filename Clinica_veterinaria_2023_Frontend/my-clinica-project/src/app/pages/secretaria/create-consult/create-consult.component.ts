@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-create-consult',
@@ -6,17 +7,33 @@ import { Component } from '@angular/core';
   styleUrls: ['./create-consult.component.scss']
 })
 export class CreateConsultComponent {
-  selectedVeterinario: any;
+  consultaForm: FormGroup;
   listVeterinarios = [
     { id: 1, name: 'Dr. Smith' },
-    { id: 2, name: 'Dr. Johnson' },
-    // ... you can add more veterinarios here
+    { id: 2, name: 'Dr. Jane' },
+    { id: 3, name: 'Dr. Doe' }
+    // ... add as many as you want
+  ];
+  listAnimals = [
+    { id: 1, name: 'Buddy' },
+    { id: 2, name: 'Milo' },
+    { id: 3, name: 'Tiger' }
+    // ... add as many as you want
   ];
 
-  selectedAnimal: any;
-  listAnimals = [
-    { id: 1, name: 'Tiger' },
-    { id: 2, name: 'Lion' },
-    // ... you can add more animals here
-  ];
+  constructor(private fb: FormBuilder) {}
+
+  ngOnInit() {
+    this.consultaForm = this.fb.group({
+      descricao: [''],
+      veterinario: [''],
+      animal: [''],
+      dataConsulta: ['']
+    });
+  }
+
+  submitForm() {
+    alert(JSON.stringify(this.consultaForm.value));
+    console.log(this.consultaForm.value);
+  }
 }
