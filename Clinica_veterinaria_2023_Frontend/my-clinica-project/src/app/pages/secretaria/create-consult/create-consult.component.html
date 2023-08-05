@@ -15,6 +15,24 @@
     <div class="card-header">
       <!-- Título do cartão -->
       <h3 class="card-title">Marcar Consulta</h3>
+
     </div>
+    <!-- Formulário -->
+    <form>
+      <label>Descricao:</label>
+      <input type="text" id="nome" name="nome" required>
+
+      <label>Veterinario</label>
+      <ng-select class="select-padrao" [(ngModel)]="selectedVeterinario" [items]="listVeterinarios" bindLabel="name" [multiple]="false" [clearable]="false"></ng-select>
+
+      <label>Animal</label>
+      <ng-select class="select-padrao" [(ngModel)]="selectedAnimal" [items]="listAnimals" bindLabel="name" [multiple]="false" [clearable]="false"></ng-select>
+
+      <label for="data_consulta">Data da Consulta</label>
+      <input type="date" id="data_consulta" name="data_consulta" required>
+
+      <button type="submit">Enviar</button>
+    </form>
+
   </div>
 </div>
