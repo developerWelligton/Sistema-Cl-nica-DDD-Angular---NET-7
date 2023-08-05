@@ -2,7 +2,9 @@
 
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
+import { AnimalService } from 'src/app/services/animal.service';
 import { ConsultService } from 'src/app/services/consult.service';
+import { VeterinarioService } from 'src/app/services/veterinario.service';
 
 @Component({
   selector: 'app-create-consult',
@@ -24,7 +26,12 @@ export class CreateConsultComponent {
     // ... add as many as you want
   ];
 
-  constructor(private fb: FormBuilder, private consultService: ConsultService) {}
+  constructor(
+    private fb: FormBuilder,
+    private consultService: ConsultService,
+    private animalService: AnimalService,
+    private vetService: VeterinarioService  // Inject VeterinarioService
+  ) {}
 
   ngOnInit() {
     this.consultaForm = this.fb.group({
@@ -33,6 +40,31 @@ export class CreateConsultComponent {
       animal: [''],
       dataConsulta: ['']
     });
+
+    this.animalService.getAllAnimals().subscribe(
+      (animals: any[]) => {
+        this.listAnimals = animals.map(animal => ({
+          id: animal.iD_Animal,
+          name: animal.nome
+        }));
+      },
+      error => {
+        console.error('Error fetching animals:', error);
+      }
+    );
+
+    // Fetch list of veterinarians
+    this.vetService.getAllVets().subscribe(
+      (vets: any[]) => {
+        this.listVeterinarios = vets.map(vet => ({
+          id: vet.iD_Veterinario,
+          name: vet.nome
+        }));
+      },
+      error => {
+        console.error('Error fetching veterinarians:', error);
+      }
+    );
   }
 
   submitForm() {
@@ -41,19 +73,22 @@ export class CreateConsultComponent {
     const payload = {
       dataConsulta: formData.dataConsulta,
       descricao: formData.descricao,
-      iD_Veterinario: formData.veterinario.id,  // Assuming the veterinarian object has 'id' property
-      iD_Animal: formData.animal.id  // Assuming the animal object has 'id' property
+      iD_Veterinario: formData.veterinario.id,
+      iD_Animal: formData.animal.id
     };
 
     this.consultService.createConsulta(payload).subscribe(
       response => {
         console.log('Consulta created:', response);
         alert('Consulta successfully created!');
+
+        // Reset the form after successful submission
+        this.consultaForm.reset();
       },
       error => {
         console.error('There was an error:', error);
         alert('Error creating consulta!');
       }
     );
-  }
+}
 }
