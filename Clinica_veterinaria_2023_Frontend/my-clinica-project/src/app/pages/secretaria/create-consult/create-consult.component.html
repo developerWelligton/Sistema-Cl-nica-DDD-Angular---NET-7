@@ -24,10 +24,25 @@
       <input type="text" formControlName="descricao">
 
       <label>Veterinário</label>
-      <ng-select class="select-padrao" formControlName="veterinario" [items]="listVeterinarios" bindLabel="name" [multiple]="false" [clearable]="false" (search)="onSearchVet($event.term)"></ng-select>
+      <ng-select class="select-padrao"
+      formControlName="veterinario"
+      [items]="listVeterinarios"
+      bindLabel="name"
+      [multiple]="false"
+      [clearable]="false"
+      (search)="onSearchVet($event.term)"
+      [clearable]="true"></ng-select>
 
       <label>Animal</label>
-      <ng-select class="select-padrao" formControlName="animal" [items]="listAnimals" bindLabel="name" [multiple]="false" [clearable]="false" [searchable]="true" (search)="onSearchAni($event.term)"></ng-select>
+      <ng-select class="select-padrao"
+      formControlName="animal"
+      [items]="listAnimals"
+      bindLabel="name"
+      [multiple]="false"
+      [clearable]="false"
+      [searchable]="true"
+      (search)="onSearchAni($event.term)"
+      [clearable]="true"></ng-select>
 
       <label for="data_consulta">Data da Consulta</label>
       <input type="date" formControlName="dataConsulta">

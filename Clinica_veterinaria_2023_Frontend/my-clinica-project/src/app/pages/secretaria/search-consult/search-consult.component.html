@@ -28,7 +28,8 @@
                 [multiple]="false"
                 [clearable]="false"
                 [searchable]="true"
-                (search)="onSearchCli($event.term)">
+                (search)="onSearchCli($event.term)"
+                [clearable]="true">
       </ng-select>
 
       <label>Veterinário</label>
@@ -39,11 +40,20 @@
                 [multiple]="false"
                 [clearable]="false"
                 [searchable]="true"
-                (search)="onSearchVet($event.term)">
+                (search)="onSearchVet($event.term)"
+                [clearable]="true">
       </ng-select>
 
       <label>Animal</label>
-      <ng-select class="select-padrao" formControlName="animal" [items]="listAnimals" bindLabel="name" [multiple]="false" [clearable]="false" [searchable]="true" (search)="onSearchAni($event.term)"></ng-select>
+      <ng-select class="select-padrao"
+      formControlName="animal"
+      [items]="listAnimals"
+      bindLabel="name"
+      [multiple]="false"
+      [clearable]="false"
+      [searchable]="true"
+      (search)="onSearchAni($event.term)"
+      [clearable]="true"></ng-select>
 
 
       <!-- Campo de data da consulta -->
