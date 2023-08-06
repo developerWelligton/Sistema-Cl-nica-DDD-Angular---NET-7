@@ -30,7 +30,7 @@ import { SearchConsultComponent } from './search-consult/search-consult.componen
     SidebarModule,
     SharedModule,
     NgSelectModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
 
   ],
   providers: [

@@ -4,4 +4,5 @@ export interface Consulta {
   cliente: string;
   animal: string;
   veterinario: string;
+  descricao: string
 }

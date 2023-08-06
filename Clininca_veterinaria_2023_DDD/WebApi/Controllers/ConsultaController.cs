@@ -136,6 +136,7 @@ namespace WebApi.Controllers
                 {
                     IdConsulta = consulta.ID_Consulta,
                     Data = consulta.DataConsulta,
+                    Descricao = consulta.Descricao,
                     Cliente = cliente.Nome,
                     Animal = animal.Nome,
                     Veterinario = veterinario.Nome

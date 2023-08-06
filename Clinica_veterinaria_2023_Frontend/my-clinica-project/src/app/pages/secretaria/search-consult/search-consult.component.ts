@@ -155,6 +155,7 @@ searchConsultas(): void {
   const clienteNome = formData.cliente.name || '';
   const animalNome = formData.animal.name || '';
   const veterinarioNome = formData.veterinario.name || '';
+  const dataConsulta = formData.dataConsulta || '';
   const pageIndex = formData.pageIndex || 0;
   const pageSize = formData.pageSize || 10;
 
@@ -164,7 +165,8 @@ searchConsultas(): void {
     pageSize,
     clienteNome,
     animalNome,
-    veterinarioNome
+    veterinarioNome,
+    dataConsulta
   ).subscribe(
     (data: ConsultaResponse) => {
       this.consultas = data.consultas;  // Ajuste aqui, usando data.consultas

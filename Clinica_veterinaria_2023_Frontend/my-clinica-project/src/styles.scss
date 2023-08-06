@@ -6,7 +6,7 @@
 
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
-
+@import '@angular/material/prebuilt-themes/indigo-pink.css';
 body {
   font-family: "Poppins";
   margin: 0;
@@ -233,8 +233,32 @@ $text-color: #000000; // Texto preto
     }
 
     @media (max-width: 768px) {
-      th, td {
-        padding: 5px 8px;
+
+      th{
+        font-size: 9px; // Reduzindo o tamanho da fonte para telas menores
+        padding: 3px;
+        margin: 0px;
+        justify-content: center;
+      }
+      td {
+        font-size: 9px; // Reduzindo o tamanho da fonte para telas menores
+        padding: 3px;
+        margin: 0px;
+        justify-items: center;
+      }
+
+      &::-webkit-scrollbar {
+        width: 6px;
+        height: 6px;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background: #888;
+        border-radius: 3px;
+      }
+
+      &::-webkit-scrollbar-thumb:hover {
+        background: #555;
       }
     }
   }

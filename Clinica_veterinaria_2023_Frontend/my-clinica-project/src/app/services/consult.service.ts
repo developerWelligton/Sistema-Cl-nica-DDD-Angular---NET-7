@@ -29,7 +29,8 @@ import { ConsultaResponse } from '../models/consulta-response.model';
       pageSize: number = 10,
       clienteNome: string = '',
       animalNome: string = '',
-      veterinarioNome: string = ''
+      veterinarioNome: string = '',
+      dataConsulta: string =''
     ): Observable<ConsultaResponse> {
 
       // Usando HttpParams para construir os parâmetros do URL
@@ -38,7 +39,8 @@ import { ConsultaResponse } from '../models/consulta-response.model';
         .set('pageSize', pageSize.toString())
         .set('clienteNome', clienteNome)
         .set('animalNome', animalNome)
-        .set('veterinarioNome', veterinarioNome);
+        .set('veterinarioNome', veterinarioNome)
+        .set('dataConsulta', dataConsulta);
 
       return this.http.get<ConsultaResponse>(`${this.baseUrl}/Consultas/Detalhadas`, { params: params });
     }

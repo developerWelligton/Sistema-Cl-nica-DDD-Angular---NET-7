@@ -58,7 +58,8 @@
 
       <!-- Campo de data da consulta -->
       <label>Data da Consulta:</label>
-      <input type="date" formControlName="dataConsulta">
+      <input type="date" formControlName="dataConsulta" >
+
 
       <!-- Botão de busca -->
       <button type="submit">Buscar</button>
@@ -68,34 +69,36 @@
 
   <h3 class="card-title" style="color: #000000;">Lista de Consultas</h3>
   <p class="card-description" style="color: #000000;">Aqui estão as consultas registradas:</p>
-<div class="table-responsive">
-  <!-- Tabela de consultas -->
-  <table class="table-erp">
-    <thead>
-        <tr>
-            <th>ID Consulta</th>
-            <th>Data</th>
-            <th>Cliente</th>
-            <th>Veterinário</th>
-            <th>Animal</th>
-        </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let consulta of consultas">
-        <td>{{consulta.idConsulta}}</td>
-        <td>{{consulta.data | date:'yyyy-MM-dd'}}</td>
-        <td>{{consulta.cliente}}</td>
-        <td>{{consulta.veterinario}}</td>
-        <td>{{consulta.animal}}</td>
-    </tr>
-    </tbody>
-</table>
-</div>
-<!-- Controles de Paginação -->
-<div class="pagination-container">
-  <button class="pagination-btn" (click)="prevPage()" [disabled]="currentPage <= 0">Anterior</button>
-  <button class="pagination-btn" (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Próxima</button>
-</div>
+    <div class="table-responsive">
+      <!-- Tabela de consultas -->
+        <table class="table-erp">
+          <thead>
+              <tr>
+                  <th>ID Consulta</th>
+                  <th>Data</th>
+                  <th>Descrição</th>
+                  <th>Cliente</th>
+                  <th>Veterinário</th>
+                  <th>Animal</th>
+              </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let consulta of consultas">
+              <td>{{consulta.idConsulta}}</td>
+              <td>{{consulta.data | date:'dd/MM/yyyy'}}</td>
+              <td>{{consulta.descricao}}</td>
+              <td>{{consulta.cliente}}</td>
+              <td>{{consulta.veterinario}}</td>
+              <td>{{consulta.animal}}</td>
+          </tr>
+          </tbody>
+      </table>
+    </div>
+    <!-- Controles de Paginação -->
+    <div class="pagination-container">
+      <button class="pagination-btn" (click)="prevPage()" [disabled]="currentPage <= 0">Anterior</button>
+      <button class="pagination-btn" (click)="nextPage()" [disabled]="currentPage >= totalPages - 1">Próxima</button>
+    </div>
 
   </div>
 </div>
