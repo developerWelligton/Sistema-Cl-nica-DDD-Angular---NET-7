@@ -23,21 +23,20 @@
       <label>Nome do Cliente:</label>
       <input type="text" formControlName="clienteNome">
 
-      <!-- Campo de nome do paciente (animal) -->
-      <label>Animal</label>
-      <ng-select class="select-padrao" formControlName="animal" [items]="listAnimals" bindLabel="name" [multiple]="false" [clearable]="false" [searchable]="true" (search)="onSearch($event.term)"></ng-select>
-
-
-      <!-- Campo de nome do veterinário -->
-      <label>Nome do Veterinário:</label>
+      <label>Veterinário</label>
       <ng-select class="select-padrao"
-      formControlName="veterinarioNome"
-      [items]="listVeterinarios"
-      bindLabel="nome"
-      [multiple]="false"
-      [clearable]="false"
-      [searchable]="true"
-      (search)="onSearch($event.term)"></ng-select>
+                formControlName="veterinario"
+                [items]="listVeterinarios"
+                bindLabel="name"
+                [multiple]="false"
+                [clearable]="false"
+                [searchable]="true"
+                (search)="onSearchVet($event.term)">
+      </ng-select>
+
+      <label>Animal</label>
+      <ng-select class="select-padrao" formControlName="animal" [items]="listAnimals" bindLabel="name" [multiple]="false" [clearable]="false" [searchable]="true" (search)="onSearchAni($event.term)"></ng-select>
+
 
       <!-- Campo de data da consulta -->
       <label>Data da Consulta:</label>

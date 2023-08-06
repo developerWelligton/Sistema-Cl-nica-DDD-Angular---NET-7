@@ -20,7 +20,7 @@ export class SearchConsultComponent implements OnInit {
   totalPages: number = 0; // Você deve calcular isso baseado na quantidade total de registros
   searchTerm$ = new Subject<string>();
   consultaForm: FormGroup;
-  listVeterinarios = [];
+
 
   listAnimals = [
     { id: 1, name: 'Buddy' },
@@ -29,23 +29,23 @@ export class SearchConsultComponent implements OnInit {
     // ... add as many as you want
   ];
 
-  vetz = [
-    { id: 1, name: 'Buddy' },
-    { id: 2, name: 'Milo' },
-    { id: 3, name: 'Tiger' }
+  listVeterinarios = [
+    { id: 1, name: 'Dr. Smith' },
+    { id: 2, name: 'Dr. Jane' },
+    { id: 3, name: 'Dr. Doe' }
     // ... add as many as you want
   ];
   constructor(private consultService: ConsultService,
     private formBuilder: FormBuilder,
-    private veterinarioService: VeterinarioService,
-    private animalService: AnimalService,) { }
+    private animalService: AnimalService,
+    private vetService: VeterinarioService) { }
 
   ngOnInit(): void {
     this.loadPage(this.currentPage);
     this.consultaForm = this.formBuilder.group({
       clienteNome: [''],
       animalNome: [''],
-      veterinarioNome: [''],
+      veterinario: [''],
       dataConsulta: [''],
       pageIndex: [0],
       pageSize: [10]
@@ -63,10 +63,12 @@ export class SearchConsultComponent implements OnInit {
       console.error('Error fetching animals:', error);
     });
 
-    this.veterinarioService.getAllVets().subscribe(
-      (vers: Veterinario[]) => {
-        this.vetz = vers.map(vet => ({
-          id: vet.ID_Veterinario,
+
+    // Fetch list of veterinarians
+    this.vetService.getAllVets().subscribe(
+      (vets: any[]) => {
+        this.listVeterinarios = vets.map(vet => ({
+          id: vet.iD_Veterinario,
           name: vet.nome
         }));
       },
@@ -74,25 +76,42 @@ export class SearchConsultComponent implements OnInit {
         console.error('Error fetching veterinarians:', error);
       }
     );
-
-  this.searchTerm$.pipe(
-    debounceTime(300),  // aguarda 300ms após a última mudança
-    switchMap(term => this.veterinarioService.searchVeterinarios(term))
-  ).subscribe(veterinarios => {
-    this.listVeterinarios = veterinarios;
-  }, error => {
-    // handle error, for example:
-    console.error('Error fetching veterinarians', error);
-  });
   }
 
-  onSearch(term: string) {
-    if (term) {
-        this.veterinarioService.searchVeterinarios(term).subscribe(veterinarios => {
-          this.listVeterinarios = veterinarios;
-        });
-    }
+//SELECT ANIMAL
+onSearchAni(term: string) {
+  if (term) {
+      this.animalService.searchAnimals(term).subscribe(
+          (animals: any[]) => {
+              this.listAnimals = animals.map(animal => ({
+                  id: animal.iD_Animal,
+                  name: animal.nome
+              }));
+          },
+          error => {
+              console.error('Error fetching animals:', error);
+          }
+      );
   }
+}
+
+
+//SELECT VETERINÁRIO
+onSearchVet(term: string) {
+  if (term) {
+      this.vetService.searchVeterinarios(term).subscribe(
+          (vetz: any[]) => {
+              this.listVeterinarios = vetz.map(vet => ({
+                  id: vet.iD_Veterinario,
+                  name: vet.nome
+              }));
+          },
+          error => {
+              console.error('Error fetching vetz:', error);
+          }
+      );
+  }
+}
 
   searchConsultas(): void {
     const formData = this.consultaForm.value;

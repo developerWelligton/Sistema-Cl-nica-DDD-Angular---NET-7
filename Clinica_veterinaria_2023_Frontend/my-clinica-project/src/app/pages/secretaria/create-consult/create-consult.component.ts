@@ -5,7 +5,10 @@ import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the a
 import { AnimalService } from 'src/app/services/animal.service';
 import { ConsultService } from 'src/app/services/consult.service';
 import { VeterinarioService } from 'src/app/services/veterinario.service';
-
+interface Veterinario {
+  iD_Veterinario: number;
+  nome: string;
+}
 @Component({
   selector: 'app-create-consult',
   templateUrl: './create-consult.component.html',
