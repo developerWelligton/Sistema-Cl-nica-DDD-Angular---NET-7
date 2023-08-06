@@ -148,12 +148,32 @@ onSearchCli(term: string) {
   }
 }
 
-  searchConsultas(): void {
-    const formData = this.consultaForm.value;
-    alert(JSON.stringify(formData))
-    // Aqui, você pode enviar os dados do formulário para o servidor ou usá-los para filtrar consultas no frontend
-  }
+searchConsultas(): void {
+  const formData = this.consultaForm.value;
 
+  // Extraia os valores necessários do formData
+  const clienteNome = formData.cliente.name || '';
+  const animalNome = formData.animal.name || '';
+  const veterinarioNome = formData.veterinario.name || '';
+  const pageIndex = formData.pageIndex || 0;
+  const pageSize = formData.pageSize || 10;
+
+  // Use os valores extraídos para chamar o serviço e buscar as consultas
+  this.consultService.listDetailedQueriesMultiple(
+    pageIndex,
+    pageSize,
+    clienteNome,
+    animalNome,
+    veterinarioNome
+  ).subscribe(
+    (data: ConsultaResponse) => {
+      this.consultas = data.consultas;  // Ajuste aqui, usando data.consultas
+    },
+    error => {
+      console.error("Erro ao buscar consultas: ", error);
+    }
+  );
+}
 
   loadPage(page: number): void {
     this.consultService.listDetailedQueries(page, this.pageSize).subscribe((data: ConsultaResponse) => {
