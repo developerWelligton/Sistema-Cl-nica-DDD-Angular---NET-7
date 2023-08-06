@@ -150,51 +150,55 @@ onSearchCli(term: string) {
 
 searchConsultas(): void {
   const formData = this.consultaForm.value;
+  console.log(JSON.stringify(formData))
 
   // Extraia os valores necessários do formData
-  const clienteNome = formData.cliente.name || '';
-  const animalNome = formData.animal.name || '';
-  const veterinarioNome = formData.veterinario.name || '';
-  const dataConsulta = formData.dataConsulta || '';
+  const clienteNome = formData.cliente && formData.cliente.name ? formData.cliente.name : "";
+const animalNome = formData.animal && formData.animal.name ? formData.animal.name : "";
+const veterinarioNome = formData.veterinario && formData.veterinario.name ? formData.veterinario.name : "";
+const dataConsulta = formData.dataConsulta || "";
   const pageIndex = formData.pageIndex || 0;
   const pageSize = formData.pageSize || 10;
 
   // Use os valores extraídos para chamar o serviço e buscar as consultas
-  this.consultService.listDetailedQueriesMultiple(
-    pageIndex,
-    pageSize,
-    clienteNome,
-    animalNome,
-    veterinarioNome,
-    dataConsulta
-  ).subscribe(
-    (data: ConsultaResponse) => {
-      this.consultas = data.consultas;  // Ajuste aqui, usando data.consultas
-    },
-    error => {
-      console.error("Erro ao buscar consultas: ", error);
-    }
-  );
+  debugger
+  this.fetchConsultas(pageIndex, pageSize, clienteNome, animalNome, veterinarioNome, dataConsulta);
+
 }
 
   loadPage(page: number): void {
-    this.consultService.listDetailedQueries(page, this.pageSize).subscribe((data: ConsultaResponse) => {
-      this.consultas = data.consultas;
-      this.totalPages = Math.ceil(data.total / this.pageSize);
-    });
+    this.fetchConsultas(page);
   }
 
-prevPage(): void {
+  prevPage(): void {
     if (this.currentPage > 0) {
-        this.currentPage--;
-        this.loadPage(this.currentPage);
+        this.fetchConsultas(this.currentPage - 1);
     }
-}
+  }
 
-nextPage(): void {
+  nextPage(): void {
     if (this.currentPage < this.totalPages - 1) {
-        this.currentPage++;
-        this.loadPage(this.currentPage);
+        this.fetchConsultas(this.currentPage + 1);
     }
-}
+  }
+
+  private fetchConsultas(page: number = 0, size: number = this.pageSize, cliente?: string, animal?: string, veterinario?: string, data?: string): void {
+    this.consultService.listDetailedQueriesMultiple(
+      page,
+      size,
+      cliente,
+      animal,
+      veterinario,
+      data
+    ).subscribe(
+      (data: ConsultaResponse) => {
+        this.consultas = data.consultas;
+        this.totalPages = Math.ceil(data.total / size);
+        this.currentPage = page;
+      },
+      error => {
+        console.error("Erro ao buscar consultas: ", error);
+      }
+    );
+  }
 }
