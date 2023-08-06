@@ -14,12 +14,14 @@ import { LoaderInterceptor } from 'src/app/interceptors/loader.interceptor';
 import { NotfoundConsultComponent } from './notfound-consult/notfound-consult.component';
 import { CreateConsultComponent } from './create-consult/create-consult.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { SearchConsultComponent } from './search-consult/search-consult.component';
 
 @NgModule({
   declarations: [
     SecretariaComponent,
     NotfoundConsultComponent,
-    CreateConsultComponent
+    CreateConsultComponent,
+    SearchConsultComponent
   ],
   imports: [
     CommonModule,

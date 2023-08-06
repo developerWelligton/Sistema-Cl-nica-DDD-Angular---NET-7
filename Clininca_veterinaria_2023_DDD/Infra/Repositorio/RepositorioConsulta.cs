@@ -74,5 +74,49 @@ namespace Infra.Repositorio
                 return consultaExame?.Exame;
             }
         }
+
+        public async Task<int> CountAsync()
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                return await banco.Consultas.CountAsync();
+            }
+        }
+
+
+
+        public async Task<IList<Consulta>> ListWithFilters(
+     string clienteNome = null,
+     string animalNome = null,
+     string veterinarioNome = null,
+     DateTime? dataConsulta = null)  // Adicionado parâmetro para filtro por data
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                var consultas = banco.Consultas.AsQueryable();
+
+                if (!string.IsNullOrEmpty(clienteNome))
+                {
+                    consultas = consultas.Where(c => c.Animal.Cliente.Nome == clienteNome);
+                }
+                if (!string.IsNullOrEmpty(animalNome))
+                {
+                    consultas = consultas.Where(c => c.Animal.Nome == animalNome);
+                }
+                if (!string.IsNullOrEmpty(veterinarioNome))
+                {
+                    consultas = consultas.Where(c => c.Veterinario.Nome == veterinarioNome);
+                }
+
+                // Filtro por data:
+                if (dataConsulta.HasValue)
+                {
+                    consultas = consultas.Where(c => c.DataConsulta.Date == dataConsulta.Value.Date);
+                }
+
+                return await consultas.ToListAsync();
+            }
+        }
+         
     }
 } 

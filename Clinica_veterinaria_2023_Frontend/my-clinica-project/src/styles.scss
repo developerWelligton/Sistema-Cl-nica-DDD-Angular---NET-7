@@ -168,4 +168,113 @@ form {
     }
   }
 }
+//
 
+
+//tabelas
+// Definindo variáveis para cores e outros valores
+$table-bg: #f5f7fa;
+$table-border: #e1e4e8;
+$table-header-bg: #2c3e50;
+$table-header-color: #ecf0f1;
+$row-hover-bg: #e9ecef;
+
+// Definindo o estilo principal da tabela com a classe .table-erp
+// Definindo variáveis para cores e outros valores
+
+$table-bg: #ffffff;  // Fundo branco
+$table-border: #e1e4e8;
+$table-header-bg: #2c3e50;
+$table-header-color: #ecf0f1;
+$row-hover-bg: #e9ecef;
+$text-color: #000000; // Texto preto
+.table-responsive {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch; // Garante uma rolagem suave em dispositivos touch no iOS
+
+  // Estilização para a barra de rolagem
+  &::-webkit-scrollbar {
+    width: 8px;  // Largura para barra de rolagem vertical
+    height: 8px; // Altura para barra de rolagem horizontal
+  }
+
+  &::-webkit-scrollbar-track {
+    background: #f1f1f1;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: #888;
+    border-radius: 4px;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: #555;
+  }
+
+  .table-erp {
+    width: 100%;
+    border-collapse: collapse;
+    color: #000;
+
+    th, td {
+      padding: 8px 12px;
+      border: 1px solid #ddd;
+      text-align: left;
+    }
+
+    th {
+      background-color: #f2f2f2;
+    }
+
+    tr:hover {
+      background-color: #f5f5f5;
+    }
+
+    @media (max-width: 768px) {
+      th, td {
+        padding: 5px 8px;
+      }
+    }
+  }
+}
+
+
+//paginação
+.container-base {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  .content-page {
+    width: 80%; // Este é apenas um exemplo. Ajuste conforme necessário.
+
+    .pagination-container {
+      display: flex;
+      justify-content: center;
+      margin-top: 20px;
+
+      .pagination-btn {
+        background-color: #007BFF;
+        color: #FFF;
+        border: none;
+        padding: 12px 24px;
+        margin: 0 8px;
+        border-radius: 20px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+        font-weight: bold;
+
+        &:hover {
+          background-color: #0056b3;
+        }
+
+        &[disabled] {
+          cursor: not-allowed;
+          opacity: 0.6;
+        }
+      }
+    }
+  }
+}

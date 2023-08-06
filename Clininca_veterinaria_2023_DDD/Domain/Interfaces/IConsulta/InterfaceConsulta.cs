@@ -30,5 +30,15 @@ namespace Domain.Interfaces.IConsulta
 
         // Nota: Lembre-se de que você pode adicionar mais métodos aqui para ações específicas 
         // relacionadas às consultas na sua aplicação.
+
+        Task<int> CountAsync();
+
+        // Novo método para listar com filtros
+        Task<IList<Consulta>> ListWithFilters(
+         string clienteNome = null,
+         string animalNome = null,
+         string veterinarioNome = null,
+         DateTime? dataConsulta = null);
+
     }
 }

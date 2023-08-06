@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { SecretariaComponent } from './secretaria.component';
 import { NotfoundConsultComponent } from './notfound-consult/notfound-consult.component';
 import { CreateConsultComponent } from './create-consult/create-consult.component';
+import { SearchConsultComponent } from './search-consult/search-consult.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path:'notfound',
     component: NotfoundConsultComponent
+  },
+  {
+    path:'search',
+    component: SearchConsultComponent
   },
   // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
   {

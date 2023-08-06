@@ -8,6 +8,8 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Domain.Interfaces.IAnimal;
+using Domain.Interfaces.IVeterinario;
 
 namespace WebApi.Controllers
 {
@@ -17,10 +19,22 @@ namespace WebApi.Controllers
     {
         private readonly InterfaceConsulta _interfaceConsulta;
         private readonly IConsultaServico _iConsultaServico;
-        public ConsultaController(InterfaceConsulta interfaceConsulta, IConsultaServico iConsultaServico)
+        //
+        private readonly InterfaceClientes _interfaceCliente;
+        private readonly InterfaceAnimal _interfaceAnimal;
+        private readonly InterfaceVeterinario _interfaceVeterinario;
+        public ConsultaController(
+     InterfaceConsulta interfaceConsulta,
+     IConsultaServico iConsultaServico,
+     InterfaceClientes interfaceCliente,
+     InterfaceAnimal interfaceAnimal,
+     InterfaceVeterinario interfaceVeterinario)
         {
             _interfaceConsulta = interfaceConsulta;
             _iConsultaServico = iConsultaServico;
+            _interfaceCliente = interfaceCliente;
+            _interfaceAnimal = interfaceAnimal;
+            _interfaceVeterinario = interfaceVeterinario;
         }
 
         [HttpPost("/api/Consulta")]
@@ -86,5 +100,55 @@ namespace WebApi.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("/api/Consultas/Detalhadas")]
+        [Produces("application/json")]
+        public async Task<ActionResult<object>> ListarConsultasDetalhadas(
+           [FromQuery] int pageIndex = 0,
+            [FromQuery] int pageSize = 10,
+            [FromQuery] string? clienteNome = null,
+            [FromQuery] string? animalNome = null,
+            [FromQuery] string? veterinarioNome = null,
+            [FromQuery] DateTime? dataConsulta = null)  // Adicionado parâmetro para filtro por data
+        {
+            // Use o método ListWithFilters para obter as consultas filtradas.
+            IList<Consulta> consultas = await _interfaceConsulta.ListWithFilters(clienteNome, animalNome, veterinarioNome);
+
+            // Aplicar filtro por data:
+            if (dataConsulta.HasValue)
+            {
+                consultas = consultas.Where(c => c.DataConsulta.Date == dataConsulta.Value.Date).ToList();
+            }
+
+            var totalConsultas = consultas.Count;  // Total após aplicar o filtro
+
+            // Paginação:
+            consultas = consultas.Skip(pageIndex * pageSize).Take(pageSize).ToList();
+
+            var consultaDetalhada = new List<object>();
+            foreach (var consulta in consultas)
+            {
+                var animal = await _interfaceAnimal.GetEntityById(consulta.ID_Animal);
+                var cliente = await _interfaceCliente.GetEntityById(animal.ID_Cliente);
+                var veterinario = await _interfaceVeterinario.GetEntityById(consulta.ID_Veterinario);
+
+                consultaDetalhada.Add(new
+                {
+                    IdConsulta = consulta.ID_Consulta,
+                    Data = consulta.DataConsulta,
+                    Cliente = cliente.Nome,
+                    Animal = animal.Nome,
+                    Veterinario = veterinario.Nome
+                });
+            }
+
+            return Ok(new
+            {
+                Total = totalConsultas,
+                Consultas = consultaDetalhada
+            });
+        }
+
+         
     }
 }
