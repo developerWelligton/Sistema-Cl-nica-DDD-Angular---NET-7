@@ -88,5 +88,18 @@ namespace WebApi.Controllers
 
             return NoContent();
         }
+
+        [HttpGet("search/{term}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<Veterinario>>> SearchVeterionarios(string term)
+        {
+            var vets = await _InterfaceVeterinario.SearchByName(term);
+            if (vets == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(vets);
+        }
     }
 }

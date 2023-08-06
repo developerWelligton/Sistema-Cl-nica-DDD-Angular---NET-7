@@ -55,5 +55,10 @@ namespace Infra.Repositorio
         {
             throw new NotImplementedException();
         }
+
+        public Task<IEnumerable<Animal>> SearchByName(string term)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

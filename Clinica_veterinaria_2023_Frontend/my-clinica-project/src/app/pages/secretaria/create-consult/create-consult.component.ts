@@ -67,9 +67,9 @@ export class CreateConsultComponent {
     );
   }
 
-  // Within CreateConsultComponent.ts
 
-onSearch(term: string) {
+//SELECT ANIMAL
+onSearchAni(term: string) {
   if (term) {
       this.animalService.searchAnimals(term).subscribe(
           (animals: any[]) => {
@@ -80,6 +80,24 @@ onSearch(term: string) {
           },
           error => {
               console.error('Error fetching animals:', error);
+          }
+      );
+  }
+}
+
+
+//SELECT VETERIONÁRIO
+onSearchVet(term: string) {
+  if (term) {
+      this.vetService.searchVeterinarios(term).subscribe(
+          (vetz: any[]) => {
+              this.listVeterinarios = vetz.map(vet => ({
+                  id: vet.iD_Veterinario,
+                  name: vet.nome
+              }));
+          },
+          error => {
+              console.error('Error fetching vetz:', error);
           }
       );
   }
