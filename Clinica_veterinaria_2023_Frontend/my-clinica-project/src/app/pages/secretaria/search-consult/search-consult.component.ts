@@ -7,6 +7,7 @@ import { ConsultaResponse } from 'src/app/models/consulta-response.model';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject, debounceTime, switchMap } from 'rxjs';
 import { AnimalService } from 'src/app/services/animal.service';
+import { ClienteService } from 'src/app/services/cliente.service';
 
 @Component({
   selector: 'app-search-consult',
@@ -35,16 +36,18 @@ export class SearchConsultComponent implements OnInit {
     { id: 3, name: 'Dr. Doe' }
     // ... add as many as you want
   ];
+  listClientes=[]
   constructor(private consultService: ConsultService,
     private formBuilder: FormBuilder,
     private animalService: AnimalService,
-    private vetService: VeterinarioService) { }
+    private vetService: VeterinarioService,
+    private clienteService: ClienteService) { }
 
   ngOnInit(): void {
     this.loadPage(this.currentPage);
     this.consultaForm = this.formBuilder.group({
-      clienteNome: [''],
-      animalNome: [''],
+      cliente: [''],
+      animal: [''],
       veterinario: [''],
       dataConsulta: [''],
       pageIndex: [0],
@@ -76,6 +79,21 @@ export class SearchConsultComponent implements OnInit {
         console.error('Error fetching veterinarians:', error);
       }
     );
+
+      this.clienteService.getAllCliente().subscribe(
+        (clientes: any[]) => {
+          this.listClientes = clientes.map(cliente => ({
+            id: cliente.iD_Cliente,
+            name: cliente.nome
+
+
+          }));
+        },
+        error => {
+          console.error('Error fetching clientes:', error);
+        }
+      );
+      console.log( this.listClientes)
   }
 
 //SELECT ANIMAL
@@ -99,11 +117,28 @@ onSearchAni(term: string) {
 //SELECT VETERINÁRIO
 onSearchVet(term: string) {
   if (term) {
-      this.vetService.searchVeterinarios(term).subscribe(
-          (vetz: any[]) => {
-              this.listVeterinarios = vetz.map(vet => ({
-                  id: vet.iD_Veterinario,
-                  name: vet.nome
+      this.clienteService.searchClientes(term).subscribe(
+          (clientes: any[]) => {
+              this.listClientes = clientes.map(cliente => ({
+                  id: cliente.iD_Cliente,
+                  name: cliente.nome
+              }));
+          },
+          error => {
+              console.error('Error fetching vetz:', error);
+          }
+      );
+  }
+}
+
+//SELECT CLIENTE
+onSearchCli(term: string) {
+  if (term) {
+      this.clienteService.searchClientes(term).subscribe(
+          (clientes: any[]) => {
+              this.listClientes = clientes.map(cliente => ({
+                  id: cliente.iD_Cliente,
+                  name: cliente.nome
               }));
           },
           error => {

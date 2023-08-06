@@ -92,7 +92,7 @@ namespace WebApi.Controllers
         [HttpGet("search/{term}")]
         [Produces("application/json")]
         public async Task<ActionResult<IEnumerable<Veterinario>>> SearchVeterionarios(string term)
-        {
+            {
             var vets = await _InterfaceVeterinario.SearchByName(term);
             if (vets == null)
             {

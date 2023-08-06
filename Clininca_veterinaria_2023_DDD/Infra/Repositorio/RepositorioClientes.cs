@@ -76,5 +76,17 @@ namespace Infra.Repositorio
                 return await banco.Clientes.CountAsync();
             }
         }
+         
+
+        public async Task<IEnumerable<Cliente>> SearchByName(string term)
+        {
+
+
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                return await banco.Clientes.Where(a => a.Nome.Contains(term))
+                .ToListAsync();
+            };
+        }
     }
 }

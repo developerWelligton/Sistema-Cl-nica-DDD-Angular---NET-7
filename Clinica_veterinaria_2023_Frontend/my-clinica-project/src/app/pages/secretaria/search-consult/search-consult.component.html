@@ -21,7 +21,15 @@
 
       <!-- Campo de nome do cliente -->
       <label>Nome do Cliente:</label>
-      <input type="text" formControlName="clienteNome">
+      <ng-select class="select-padrao"
+                formControlName="cliente"
+                [items]="listClientes"
+                bindLabel="name"
+                [multiple]="false"
+                [clearable]="false"
+                [searchable]="true"
+                (search)="onSearchCli($event.term)">
+      </ng-select>
 
       <label>Veterinário</label>
       <ng-select class="select-padrao"

@@ -60,5 +60,10 @@ namespace Infra.Repositorio
         {
             throw new NotImplementedException();
         }
+
+        Task<IEnumerable<Veterinario>> InterfaceVeterinario.SearchByName(string term)
+        {
+            throw new NotImplementedException();
+        }
     }
 }

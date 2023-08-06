@@ -30,6 +30,6 @@
         // Nota: Lembre-se de que você pode adicionar mais métodos aqui para ações específicas 
         // relacionadas aos veterinários na sua aplicação.
 
-        Task<IEnumerable<Animal>> SearchByName(string term);
+        Task<IEnumerable<Veterinario>> SearchByName(string term);
     }
 }

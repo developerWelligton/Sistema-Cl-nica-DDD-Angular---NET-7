@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Domain.Interfaces.IVeterinario;
 
 namespace WebApi.Controllers
 {
@@ -86,6 +87,19 @@ namespace WebApi.Controllers
             await _interfaceClientes.Delete(cliente);
 
             return NoContent();
+        }
+
+        [HttpGet("search/{term}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<Cliente>>> SearchCliente(string term)
+        {
+            var vets = await _interfaceClientes.SearchByName(term);
+            if (vets == null)
+            {
+                return NotFound();
+            }
+
+            return Ok(vets);
         }
     }
 }
