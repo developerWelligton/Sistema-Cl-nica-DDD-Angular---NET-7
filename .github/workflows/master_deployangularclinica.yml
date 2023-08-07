@@ -1,69 +1,27 @@
-name: Build and deploy Node.js app to Azure Web App - deployAngularClinica
-
-on:
-  push:
-    branches:
-      - master
-  workflow_dispatch:
-
+name: Deploy
+on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-
     steps:
-      - uses: actions/checkout@v2
-
-      - name: Set up Node.js version
-        uses: actions/setup-node@v1
+      - name: checkout
+        uses: actions/checkout@v2
         with:
-          node-version: '18.x'
-
-      - name: npm install and build
-        working-directory: Clinica_veterinaria_2023_Frontend/my-clinica-project
-        run: |
-          ls  # Apenas para verificar se o diretório está correto
-          npm install
-          npm run build --if-present
-
-      - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+          fetch-depth: 1
+      - name: setup node
+        uses: actions/setup-node@v2
         with:
-          name: my-clinica-project
-          path: Clinica_veterinaria_2023_Frontend/my-clinica-project/dist/my-clinica-project
-
-  deploy:
-    runs-on: ubuntu-latest
-    needs: build
-    environment:
-      name: 'production'
-      url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+          node-version: '17'
+      - name: "deps"
+        run: "npm ci"
+      - name: "build"
+        run: "make"
+      - name: upload
+        uses: appleboy/scp-action@v0.1.2
         with:
-          name: my-clinica-project
-
-      - name: Set up Azure CLI
-        uses: azure/CLI@v1
-        with:
-          azcliversion: latest
-
-      - name: Login to Azure
-        uses: azure/login@v1
-        with:
-          creds: |
-            {
-              "clientId": "${{ secrets.AZURE_CLIENT_ID }}",
-              "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}",
-              "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}",
-              "tenantId": "${{ secrets.AZURE_TENANT_ID }}"
-            }
-
-      - name: 'Deploy to Azure Web App'
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'deployAngularClinica'
-          slot-name: 'production'
-          package: ${{ steps.download.outputs.artifact-path }}/my-clinica-project
+          source: ./dist/*
+          strip_components: 1 
+          host: ${{ secrets.HOST }}
+          username: ${{ secrets.USERNAME }}
+          port: ${{ secrets.PORT }}
+          key: ${{ secrets.SSH_KEY }}
