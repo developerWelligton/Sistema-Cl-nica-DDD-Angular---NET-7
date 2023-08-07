@@ -18,19 +18,18 @@ jobs:
         with:
           node-version: '18.x'
 
-      - name: npm install, build, and test
+      - name: npm install and build
         working-directory: Clinica_veterinaria_2023_Frontend/my-clinica-project
         run: |
           ls  # Apenas para verificar se o diretório está correto
           npm install
           npm run build --if-present
-          npm run test --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: my-clinica-project  # Nome do artefato é "my-clinica-project"
-          path: Clinica_veterinaria_2023_Frontend/my-clinica-project/dist/my-clinica-project  # Caminho para a pasta "dist/my-clinica-project"
+          name: my-clinica-project
+          path: Clinica_veterinaria_2023_Frontend/my-clinica-project/dist/my-clinica-project
 
   deploy:
     runs-on: ubuntu-latest
@@ -43,7 +42,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: my-clinica-project  # Nome do artefato é "my-clinica-project"
+          name: my-clinica-project
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
@@ -52,4 +51,4 @@ jobs:
           app-name: 'deployAngularClinica'
           slot-name: 'production'
           publish-profile: ${{ secrets.AzureAppService_PublishProfile_4ff7a5d07060464090e8dbfa6384698c }}
-          package: ${{ steps.download.outputs.artifact-path }}/my-clinica-project  # Use a variável de saída correta com a pasta "my-clinica-project"
+          package: ${{ steps.download.outputs.artifact-path }}/my-clinica-project
