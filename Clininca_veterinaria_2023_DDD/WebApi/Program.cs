@@ -2,7 +2,7 @@ using Domain.Interfaces.Generics;
 using Domain.Interfaces.IAnimal;
 using Domain.Interfaces.IClientes;
 using Domain.Interfaces.IConsulta;
-using Domain.Interfaces.IConsulta_Exame; 
+using Domain.Interfaces.IConsulta_Exame;
 using Domain.Interfaces.IExame;
 using Domain.Interfaces.InterfaceServicos;
 using Domain.Interfaces.ISecretarias;
@@ -36,7 +36,7 @@ builder.Services.AddSwaggerGen(options =>
     {
         Version = "v1",
         Title = "CLÍNICA PETZ API",
-        Description = "API DAS FUNCIONALIDADES DO WEBAPP",   
+        Description = "API DAS FUNCIONALIDADES DO WEBAPP",
     });
     // using System.Reflection;
     var xmlFilename = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
@@ -50,7 +50,7 @@ builder.Services.AddDbContext<ContextBase>(options =>
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ContextBase>();
- 
+
 
 
 //INTERFACE E REPOSITORIO
@@ -58,7 +58,7 @@ builder.Services.AddSingleton(typeof(InterfaceGeneric<>), typeof(RepositoryGener
 builder.Services.AddSingleton<InterfaceAnimal, RepositorioAnimal>();
 builder.Services.AddSingleton<InterfaceClientes, RepositorioClientes>();
 builder.Services.AddSingleton<InterfaceConsulta, RepositorioConsulta>();
-builder.Services.AddSingleton<InterfaceConsultaExame, RepositorioConsultaExame>(); 
+builder.Services.AddSingleton<InterfaceConsultaExame, RepositorioConsultaExame>();
 builder.Services.AddSingleton<InterfaceExame, RepositorioExame>();
 builder.Services.AddSingleton<InterfaceSecretarias, RepositorioSecretarias>();
 builder.Services.AddSingleton<InterfaceVeterinario, RepositorioVeterinario>();
@@ -66,12 +66,12 @@ builder.Services.AddSingleton<InterfaceUsuarioSistemaClinica, RepositorioUsuario
 
 //INTERFACE DOMINIO
 builder.Services.AddSingleton<IAnimalServico, AnimalServico>();
-builder.Services.AddSingleton<IClienteServico, ClienteServico>(); 
+builder.Services.AddSingleton<IClienteServico, ClienteServico>();
 builder.Services.AddSingleton<IConsultaServico, ConsultaServico>();
-builder.Services.AddSingleton<IConsultaExameServico, ConsultaExameServico>();  
-builder.Services.AddSingleton<IExameServico, ExameServico>(); 
-builder.Services.AddSingleton<ISecretariaServico, SecretariaServico>(); 
-builder.Services.AddSingleton<IVeterinarioServico, VeterinarioServico>(); 
+builder.Services.AddSingleton<IConsultaExameServico, ConsultaExameServico>();
+builder.Services.AddSingleton<IExameServico, ExameServico>();
+builder.Services.AddSingleton<ISecretariaServico, SecretariaServico>();
+builder.Services.AddSingleton<IVeterinarioServico, VeterinarioServico>();
 builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClinicaServico>();
 
 builder.Services.AddTransient<ValidacaoServico>();
@@ -127,9 +127,11 @@ app.UseCors(x =>
 x.AllowAnyOrigin()
 .AllowAnyMethod()
 .AllowAnyHeader()
-.WithOrigins(devClient)); 
+.WithOrigins(devClient));
 app.UseHttpsRedirection();
 
+// Alteração aqui
+app.UseUrls("http://0.0.0.0:5272");
 
 app.UseAuthentication();
 app.UseAuthorization();
