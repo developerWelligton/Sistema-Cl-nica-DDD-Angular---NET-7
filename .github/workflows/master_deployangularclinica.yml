@@ -18,14 +18,13 @@ jobs:
         with:
           node-version: '18.x'
 
-     - name: npm install, build, and test
-       working-directory: Clinica_veterinaria_2023_Frontend/my-clinica-project
-       run: |
-        ls  # Apenas para verificar se o diretório está correto
-        npm install
-        npm run build --if-present
-        npm run test --if-present
-t
+      - name: npm install, build, and test
+        working-directory: Clinica_veterinaria_2023_Frontend/my-clinica-project
+        run: |
+          ls  # Apenas para verificar se o diretório está correto
+          npm install
+          npm run build --if-present
+          npm run test --if-present
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
