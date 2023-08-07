@@ -30,7 +30,7 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: node-app
+          name: dist
           path: Sistema-Clínica-DDD-Angular---NET-7/Clinica_veterinaria_2023_Frontend/my-clinica-project/dist
 
   deploy:
