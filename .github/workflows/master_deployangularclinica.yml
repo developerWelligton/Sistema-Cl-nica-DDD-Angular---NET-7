@@ -44,13 +44,6 @@ jobs:
         with:
           name: my-clinica-project
 
-      - name: 'Deploy to Azure Web App' 
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: 'deployAngularClinica'
-          slot-name: 'production'
-          publish-profile: ${{ secrets.AzureAppService_PublishProfile_1e9713210a9a4375b2e1a7ca0508bb86 }}
-          package: .
+     
 
           
