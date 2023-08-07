@@ -44,7 +44,11 @@ jobs:
         with:
           name: my-clinica-project
 
-      # Efetua o login no Azure usando os secrets específicos
+      - name: Set up Azure CLI
+        uses: azure/CLI@v1
+        with:
+          azcliversion: latest
+
       - name: Login to Azure
         uses: azure/login@v1
         with:
