@@ -105,8 +105,9 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
     });
-
+builder.WebHost.UseUrls("http://*:5272");
 var app = builder.Build();
+ 
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -122,7 +123,7 @@ app.UseSwaggerUI(options =>
 
 //CORS
 var devClient = "http://localhost:4200";
-
+ 
 app.UseCors(x =>
 x.AllowAnyOrigin()
 .AllowAnyMethod()
