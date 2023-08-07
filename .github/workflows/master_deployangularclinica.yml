@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy Node.js app to Azure Web App - deployAngularClinica
 
 on:
@@ -22,6 +19,7 @@ jobs:
           node-version: '18.x'
 
       - name: npm install, build, and test
+        working-directory: Sistema-Clínica-DDD-Angular---NET-7/Clinica_veterinaria_2023_Frontend/my-clinica-project
         run: |
           npm install
           npm run build --if-present
@@ -31,13 +29,13 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: node-app
-          path: .
+          path: Sistema-Clínica-DDD-Angular---NET-7/Clinica_veterinaria_2023_Frontend/my-clinica-project/dist
 
   deploy:
     runs-on: ubuntu-latest
     needs: build
     environment:
-      name: 'Production'
+      name: 'production'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
 
     steps:
@@ -51,6 +49,6 @@ jobs:
         uses: azure/webapps-deploy@v2
         with:
           app-name: 'deployAngularClinica'
-          slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_8A1BBE27403B4F118B93B024F62EBAB7 }}
+          slot-name: 'production'
+          publish-profile: ${{ secrets.AzureAppService_PublishProfile_4ff7a5d07060464090e8dbfa6384698c }}
           package: .
