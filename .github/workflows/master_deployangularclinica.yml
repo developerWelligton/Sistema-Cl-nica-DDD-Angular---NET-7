@@ -44,14 +44,18 @@ jobs:
         with:
           name: my-clinica-project
 
-      # Use o secret JSON chamado AZURE_CREDENTIALS
-      - name: Set up Azure credentials
-        run: echo '${{ secrets.AZURE_CREDENTIALS }}' > /tmp/credentials.json
-
+      # Efetua o login no Azure usando os secrets específicos
       - name: Login to Azure
         uses: azure/login@v1
         with:
-          creds: /tmp/credentials.json
+          creds: |
+            {
+              "clientId": "${{ secrets.AZURE_CLIENT_ID }}",
+              "clientSecret": "${{ secrets.AZURE_CLIENT_SECRET }}",
+              "subscriptionId": "${{ secrets.AZURE_SUBSCRIPTION_ID }}",
+              "tenantId": "${{ secrets.AZURE_TENANT_ID }}",
+              "activeDirectoryEndpointUrl": "https://login.microsoftonline.com"
+            }
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
