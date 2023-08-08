@@ -122,7 +122,7 @@ app.UseSwaggerUI(options =>
 });
 
 //CORS
-var devClient = "http://localhost:4200";
+var devClient = "http://20.228.138.7:4200";
 
 app.UseCors(x =>
     x.WithOrigins(devClient, "https://angular-pratice.online")
