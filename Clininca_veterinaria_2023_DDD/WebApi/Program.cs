@@ -105,7 +105,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
     });
-builder.WebHost.UseUrls("http://*:5272");
+builder.WebHost.UseUrls("http://*:5000");
 var app = builder.Build();
  
 
