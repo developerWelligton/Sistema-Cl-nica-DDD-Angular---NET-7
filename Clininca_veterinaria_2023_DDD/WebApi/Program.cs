@@ -122,7 +122,7 @@ app.UseSwaggerUI(options =>
 });
 
 //CORS
-var devClient = "http://185.211.7.12:4200";
+var devClient = "http://localhost:4200";
  
 app.UseCors(x =>
 x.AllowAnyOrigin()
