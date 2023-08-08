@@ -123,13 +123,13 @@ app.UseSwaggerUI(options =>
 
 //CORS
 var devClient = "http://localhost:4200";
- 
+
 app.UseCors(x =>
-x.AllowAnyOrigin()
-.AllowAnyMethod()
-.AllowAnyHeader()
-.WithOrigins(devClient)); 
-app.UseHttpsRedirection();
+    x.WithOrigins(devClient, "https://angular-pratice.online")
+     .AllowAnyMethod()
+     .AllowAnyHeader()
+     .AllowCredentials()
+);
 
 
 app.UseAuthentication();
