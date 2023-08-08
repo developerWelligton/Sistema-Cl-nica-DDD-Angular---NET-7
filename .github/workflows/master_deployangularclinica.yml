@@ -27,8 +27,9 @@ jobs:
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-         name: my-clinica-project
-         path: dist/my-clinica-project
+            name: my-clinica-project
+            path: Clinica_veterinaria_2023_Frontend/my-clinica-project/dist/my-clinica-project
+
 
   deploy:
     runs-on: ubuntu-latest
