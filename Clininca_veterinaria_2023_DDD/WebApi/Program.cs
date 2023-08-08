@@ -105,7 +105,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
     });
-builder.WebHost.UseUrls("http://*:5000");
+builder.WebHost.UseUrls("http://*:5272");
 var app = builder.Build();
  
 
@@ -122,14 +122,14 @@ app.UseSwaggerUI(options =>
 });
 
 //CORS
-var devClient = "http://20.228.138.7:4200";
-
+var devClient = "http://localhost:4200";
+ 
 app.UseCors(x =>
-    x.WithOrigins(devClient, "https://angular-pratice.online")
-     .AllowAnyMethod()
-     .AllowAnyHeader()
-     .AllowCredentials()
-);
+x.AllowAnyOrigin()
+.AllowAnyMethod()
+.AllowAnyHeader()
+.WithOrigins(devClient)); 
+app.UseHttpsRedirection();
 
 
 app.UseAuthentication();
