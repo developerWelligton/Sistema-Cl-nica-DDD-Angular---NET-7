@@ -36,9 +36,9 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
-          name: dist
+          name: my-clinica-project
 
       - name: 'Deploy to Azure Web App'
         id: deploy-to-webapp
