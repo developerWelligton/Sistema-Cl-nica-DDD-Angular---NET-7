@@ -10,9 +10,12 @@ export class LoginService {
   constructor(private httpClient: HttpClient) {
    }
 
-   private readonly baseUrl =  environment['endPoint'];
+   private readonly baseUrl = environment.apiUrl;
 
-   login(Email:string, Password:string){
-    return this.httpClient.post<any>(`${this.baseUrl}/CreateToken`,{email:Email,password:Password});
-   }
+
+   login(Email: string, Password: string) {
+    return this.httpClient.post<any>(`${this.baseUrl}/CreateToken`, { email: Email, password: Password });
+    console.log(Email)
+    console.log(Password)
+  }
 }
