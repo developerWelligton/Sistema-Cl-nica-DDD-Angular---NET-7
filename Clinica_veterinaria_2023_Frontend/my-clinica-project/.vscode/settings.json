@@ -1,0 +1,8 @@
+{
+    "appService.zipIgnorePattern": [
+        "node_modules{,/**}",
+        ".vscode{,/**}"
+    ],
+    "appService.defaultWebAppToDeploy": "/subscriptions/aa876088-b6a8-4517-8978-b96a6836b66e/resourceGroups/grupo-recurso-1/providers/Microsoft.Web/sites/WebAppClinicaAzure",
+    "appService.deploySubpath": "dist\\my-clinica-project"
+}
