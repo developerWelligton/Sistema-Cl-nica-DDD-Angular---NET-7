@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  endPoint: 'https://app-clinica-petz.azurewebsites.net'
+  endPoint: 'http://104.215.126.210:5272'
 }
