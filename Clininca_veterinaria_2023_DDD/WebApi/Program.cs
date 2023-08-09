@@ -105,7 +105,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
     });
-builder.WebHost.UseUrls("http://*:5272");
+//builder.WebHost.UseUrls("http://*:5272");
 var app = builder.Build();
  
 
@@ -122,7 +122,7 @@ app.UseSwaggerUI(options =>
 });
 
 //CORS
-var prodClient = "http://104.215.126.210:4200";
+var prodClient = "http://localhost:4200";
 
 app.UseCors(x =>
 x.AllowAnyOrigin()

@@ -70,8 +70,13 @@ namespace Infra.Configuracao
         }
 
         public string ObterStringConexao()
-        {
+        {   //base cloud
             return "Data Source=db-entity-clinica.database.windows.net;User ID=sa-clinica;Password=@Well32213115;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+           
+            
+            
+            //base local
+            //return "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_identity_clinica;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"
         }
 
     }
