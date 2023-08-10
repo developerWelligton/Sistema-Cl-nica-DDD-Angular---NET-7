@@ -105,7 +105,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
     });
-builder.WebHost.UseUrls("https://20.228.138.7:5272");
+builder.WebHost.UseUrls("http://*:5273", "https://*:5272");
 
 var app = builder.Build();
  
@@ -125,7 +125,9 @@ app.UseSwaggerUI(options =>
 //CORS
 var prodClient = "http://clinica-azure.southcentralus.cloudapp.azure.com";
 var prodClient2 = "https://20.228.138.7:5272";
- 
+var prodClient3 = "http://104.215.126.210:5272";
+
+  
 var devClient = "http://localhost:4200";
 
 app.UseCors(x => x
