@@ -108,7 +108,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 //builder.WebHost.UseUrls("http://20.228.138.7:5272");
 
-builder.WebHost.UseUrls("http://*:5272");
+builder.WebHost.UseUrls("http://*:4201");
 
 var app = builder.Build();
  
@@ -126,15 +126,14 @@ app.UseSwaggerUI(options =>
 });
 
 //CORS
-var prodClient = "http://clinica-azure.southcentralus.cloudapp.azure.com";
-var prodClient2 = "https://20.228.138.7:5272";
+var prodClient = "http://clinica-azure.southcentralus.cloudapp.azure.com"; 
 var prodClient3 = "http://104.215.126.210:5272";
 
   
 var devClient = "http://localhost:4200";
 
 app.UseCors(x => x
-    .WithOrigins(prodClient, devClient, prodClient2)
+    .WithOrigins(prodClient, devClient, prodClient3)
     .AllowAnyMethod()
     .AllowAnyHeader());
 
