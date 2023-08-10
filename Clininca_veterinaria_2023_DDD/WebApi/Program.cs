@@ -122,7 +122,7 @@ app.UseSwaggerUI(options =>
 });
 
 //CORS
-var prodClient = "http://localhost:4200";
+var prodClient = "http://clinica-azure.southcentralus.cloudapp.azure.com";
 
 app.UseCors(x =>
 x.AllowAnyOrigin()
