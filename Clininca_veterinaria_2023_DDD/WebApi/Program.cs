@@ -123,12 +123,12 @@ app.UseSwaggerUI(options =>
 
 //CORS
 var prodClient = "http://clinica-azure.southcentralus.cloudapp.azure.com";
-
+var devClient = "http://localhost:4200";
 app.UseCors(x =>
 x.AllowAnyOrigin()
 .AllowAnyMethod()
 .AllowAnyHeader()
-.WithOrigins(prodClient));
+.WithOrigins(prodClient, devClient));
 
 
 app.UseAuthentication();

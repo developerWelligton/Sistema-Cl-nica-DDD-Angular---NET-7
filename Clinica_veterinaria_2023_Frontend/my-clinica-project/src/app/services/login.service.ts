@@ -8,11 +8,12 @@ import { environment } from 'src/assets/environment';
 export class LoginService {
 
   constructor(private httpClient: HttpClient) {
-   }
+  }
 
-   private readonly baseUrl =  environment['endPoint'];
+  private readonly baseUrl = environment.apiUrl; // Usando a propriedade correta
 
-   login(Email:string, Password:string){
-    return this.httpClient.post<any>(`${this.baseUrl}/CreateToken`,{email:Email,password:Password});
-   }
+  login(Email: string, Password: string) {
+    debugger
+    return this.httpClient.post<any>(`${this.baseUrl}/api/CreateToken`, { email: Email, password: Password });
+  }
 }
