@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, delay, of } from 'rxjs';
 import { Veterinario } from '../models/veterinario-model';
 import { Cliente } from '../models/cliente-model';
+import { environment } from 'src/assets/environment';
 //FAZER environment
 
 @Injectable({
@@ -10,7 +11,7 @@ import { Cliente } from '../models/cliente-model';
 })
 export class ClienteService {
 
-  private baseUrl = 'https://localhost:7131/api';  // Assuming you have apiUrl in your environment settings
+  private baseUrl = environment.apiUrl;
   private useMock = false;  // Change this to false to use real API
 
   constructor(private http: HttpClient) { }

@@ -3,6 +3,7 @@
 import { Observable } from 'rxjs';
 import { Consulta } from '../models/consulta.model';
 import { ConsultaResponse } from '../models/consulta-response.model';
+import { environment } from 'src/assets/environment';
   //FAZER environment
 
   @Injectable({
@@ -10,7 +11,7 @@ import { ConsultaResponse } from '../models/consulta-response.model';
   })
   export class ConsultService {
 
-    private baseUrl = 'https://localhost:7131/api';  // Assuming you have apiUrl in your environment settings
+    private baseUrl = environment.apiUrl;
 
     constructor(private http: HttpClient) { }
 

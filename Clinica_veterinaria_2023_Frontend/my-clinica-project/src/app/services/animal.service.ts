@@ -1,6 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, delay, of } from 'rxjs';
+import { environment } from 'src/assets/environment';
 //FAZER environment
 
 @Injectable({
@@ -8,7 +9,7 @@ import { Observable, delay, of } from 'rxjs';
 })
 export class AnimalService {
 
-  private baseUrl = 'https://localhost:7131/api';  // Assuming you have apiUrl in your environment settings
+  private baseUrl = environment.apiUrl;
 
   constructor(private http: HttpClient) { }
 

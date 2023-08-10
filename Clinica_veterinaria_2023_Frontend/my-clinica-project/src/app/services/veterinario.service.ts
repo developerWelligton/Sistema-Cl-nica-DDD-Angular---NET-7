@@ -2,14 +2,16 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, delay, of } from 'rxjs';
 import { Veterinario } from '../models/veterinario-model';
+import { environment } from 'src/assets/environment';
 //FAZER environment
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class VeterinarioService {
-
-  private baseUrl = 'https://localhost:7131/api';  // Assuming you have apiUrl in your environment settings
+  private baseUrl = environment.apiUrl;
+  //private baseUrl = 'https://localhost:7131/api';  // Assuming you have apiUrl in your environment settings
   private useMock = false;  // Change this to false to use real API
 
   constructor(private http: HttpClient) { }
