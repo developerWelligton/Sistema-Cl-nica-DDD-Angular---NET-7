@@ -48,4 +48,5 @@ jobs:
           app-name: 'deployAngularClinica'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1CF422D7B46C493E8EBE78AE3B82D1BF }}
-          package: './my-clinica-project'
+          package: 'Sistema-Cl-nica-DDD-Angular---NET-7\Clinica_veterinaria_2023_Frontend\my-clinica-project\dist'
+
