@@ -65,12 +65,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "my-clinica-project:build:production",
-              "proxyConfig": "src/proxy.conf.js"
+              "browserTarget": "my-clinica-project:build:production"
             },
             "development": {
-              "browserTarget": "my-clinica-project:build:development",
-              "proxyConfig": "src/proxy.conf.js"
+              "browserTarget": "my-clinica-project:build:development"
             }
           },
           "defaultConfiguration": "development"
