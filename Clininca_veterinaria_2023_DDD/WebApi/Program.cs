@@ -76,13 +76,13 @@ builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClini
 
 builder.Services.AddTransient<ValidacaoServico>();
 
-builder.WebHost.UseUrls("https://*:5272");
+builder.WebHost.UseUrls("http://*:5272");
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyPolicy", policy =>
     {
         policy.WithOrigins()
-         .AllowAnyOrigin()
+                .AllowAnyOrigin()
               .AllowAnyHeader()
               .AllowAnyMethod();
                

@@ -13,7 +13,7 @@ export class LoginService {
   private readonly baseUrl = environment.apiUrl; // Usando a propriedade correta
 
   login(Email: string, Password: string) {
-    debugger
-    return this.httpClient.post<any>(`${this.baseUrl}/api/CreateToken`, { email: Email, password: Password });
+    // Usando HTTP aqui
+    return this.httpClient.post<any>(`http://104.215.126.210:5272/api/CreateToken`, { email: Email, password: Password });
   }
 }
