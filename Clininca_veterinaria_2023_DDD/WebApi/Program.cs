@@ -126,8 +126,8 @@ app.UseSwaggerUI(options =>
 });
 
 //CORS
-var prodClient = "http://clinica-azure.southcentralus.cloudapp.azure.com"; 
-var prodClient3 = "http://104.215.126.210:5272";
+var prodClient = "https://proud-mud-015203a10.3.azurestaticapps.net"; 
+var prodClient3 = "https://104.215.126.210:5272";
 
   
 var devClient = "http://localhost:4200";
