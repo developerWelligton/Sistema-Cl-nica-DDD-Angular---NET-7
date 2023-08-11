@@ -9,7 +9,7 @@ import { environment } from 'src/environments/environment';
 })
 export class AnimalService {
 
-  private baseUrl = environment.apiUrl;
+  private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) { }
 
@@ -23,10 +23,11 @@ export class AnimalService {
   // Mock method for searching animals
   searchAnimalMock(term: string): Observable<any[]> {
     const mockAnimals = [
+      /*
       { iD_Animal: 1, nome: 'Buddy' },
       { iD_Animal: 2, nome: 'Milo' },
       { iD_Animal: 3, nome: 'Tiger' },
-      { iD_Animal: 4, nome: 'Lucky' }
+      { iD_Animal: 4, nome: 'Lucky' }*/
       //... you can add more for the mockup
     ];
 

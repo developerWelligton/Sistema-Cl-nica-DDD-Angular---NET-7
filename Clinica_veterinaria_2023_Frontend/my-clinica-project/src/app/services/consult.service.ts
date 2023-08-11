@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
   })
   export class ConsultService {
 
-    private baseUrl = environment.apiUrl;
+    private baseUrl = `${environment.apiUrl}/api`;
 
     constructor(private http: HttpClient) { }
 

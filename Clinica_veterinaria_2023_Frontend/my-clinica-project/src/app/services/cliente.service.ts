@@ -11,7 +11,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ClienteService {
 
-  private baseUrl = environment.apiUrl;
+  private baseUrl = `${environment.apiUrl}/api`;
   private useMock = false;  // Change this to false to use real API
 
   constructor(private http: HttpClient) { }

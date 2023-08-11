@@ -10,15 +10,15 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class VeterinarioService {
-  private baseUrl = environment.apiUrl;
+  private baseUrl = `${environment.apiUrl}/api`;
   //private baseUrl = 'https://localhost:7131/api';  // Assuming you have apiUrl in your environment settings
   private useMock = false;  // Change this to false to use real API
 
   constructor(private http: HttpClient) { }
 
   private VETERINARIOS_MOCK: Veterinario[] = [
-    { ID_Veterinario: 1, nome: 'Dr. Smith', especializacao: 'Cirurgia', email: 'drsmith@example.com', telefone: '+1234567890', ID_Usuario: 10 },
-    { ID_Veterinario: 2, nome: 'Dr. Alice', especializacao: 'Ortopedia', email: 'dralice@example.com', telefone: '+1234567891', ID_Usuario: 11 },
+    //{ ID_Veterinario: 1, nome: 'Dr. Smith', especializacao: 'Cirurgia', email: 'drsmith@example.com', telefone: '+1234567890', ID_Usuario: 10 },
+    //{ ID_Veterinario: 2, nome: 'Dr. Alice', especializacao: 'Ortopedia', email: 'dralice@example.com', telefone: '+1234567891', ID_Usuario: 11 },
     // ... Adicione outros veterinários mock conforme necessário
   ];
 
