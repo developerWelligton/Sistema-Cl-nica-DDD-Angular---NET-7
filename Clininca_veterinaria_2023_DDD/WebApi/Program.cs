@@ -75,14 +75,20 @@ builder.Services.AddSingleton<IVeterinarioServico, VeterinarioServico>();
 builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClinicaServico>();
 
 builder.Services.AddTransient<ValidacaoServico>();
+
+builder.WebHost.UseUrls("https://*:5272");
 builder.Services.AddCors(options =>
 {
-    options.AddPolicy(name: "MyPolicy",
-        policy =>
-        {
-            policy.WithOrigins("http://104.215.126.210:5272", "https://proud-mud-015203a10.3.azurestaticapps.net/");
-        });
+    options.AddPolicy("MyPolicy", policy =>
+    {
+        policy.WithOrigins()
+         .AllowAnyOrigin()
+              .AllowAnyHeader()
+              .AllowAnyMethod();
+               
+    });
 });
+
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
@@ -113,9 +119,8 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
         };
     });
 
-//builder.WebHost.UseUrls("http://20.228.138.7:5272");
-
-builder.WebHost.UseUrls("http://*:5272");
+// builder.WebHost.UseUrls("http://20.228.138.7:5272");
+ 
 
 var app = builder.Build();
  
@@ -132,18 +137,9 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 
-//CORS
-var prodClient = "https://proud-mud-015203a10.3.azurestaticapps.net/login"; 
-var prodClient3 = "http://104.215.126.210:5272";
+//CORS  
 
-  
-var devClient = "http://localhost:4200";
-
-app.UseCors(x => {
-    x.AllowAnyOrigin();
-    x.AllowAnyMethod();
-    x.AllowAnyHeader();
-});
+app.UseCors("MyPolicy");
 
 
 app.UseHttpsRedirection();
