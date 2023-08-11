@@ -48,4 +48,4 @@ jobs:
           app-name: 'deployAngularClinica'
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_1CF422D7B46C493E8EBE78AE3B82D1BF }}
-          package: .
+          package: './my-clinica-project'
