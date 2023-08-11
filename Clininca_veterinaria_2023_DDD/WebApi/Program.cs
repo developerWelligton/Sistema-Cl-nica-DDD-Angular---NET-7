@@ -108,7 +108,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 //builder.WebHost.UseUrls("http://20.228.138.7:5272");
 
-builder.WebHost.UseUrls("http://*:5272");
+builder.WebHost.UseUrls("https://*:5272");
 
 var app = builder.Build();
  
