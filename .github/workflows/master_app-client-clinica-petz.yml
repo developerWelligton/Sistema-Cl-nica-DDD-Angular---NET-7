@@ -19,25 +19,19 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: '18.x'
-          
-      - name: Imprimir conteúdo do diretório
-        run: |
-            pwd
-            ls -la
+          node-version: '18.x' 
     
-      - name: npm install, build, and test
+      - name: Install dependencies and build
+        working-directory: Clinica_veterinaria_2023_Frontend/my-clinica-project
         run: |
-          cd Sistema-Cl-nica-DDD-Angular---NET-7\Clinica_veterinaria_2023_Frontend\my-clinica-project
           npm install
-          npm run build --if-present
-          npm run test --if-present
+          npm run build
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
         with:
-          name: node-app
-          path: 'Sistema-Cl-nica-DDD-Angular---NET-7\Clinica_veterinaria_2023_Frontend\my-clinica-project\dist' # Adjust path to build output
+          name: my-clinica-project
+          path: 'dist/my-clinica-project' # Adjust path to build output
 
   deploy:
     runs-on: ubuntu-latest
@@ -50,7 +44,7 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: node-app
+          name: my-clinica-project
           path: 'Sistema-Cl-nica-DDD-Angular---NET-7\Clinica_veterinaria_2023_Frontend\my-clinica-project\dist' # Adjust path to download location
 
       - name: 'Deploy to Azure Web App'
@@ -58,6 +52,7 @@ jobs:
         id: deploy-to-webapp
         with:
           app-name: 'app-client-clinica-petz'
+          package: ./my-clinica-project
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_13BAA36506B8490189974CF198BA012F }}
-          package: 'Sistema-Cl-nica-DDD-Angular---NET-7\Clinica_veterinaria_2023_Frontend\my-clinica-project\dist' # Adjust path to package
+          
