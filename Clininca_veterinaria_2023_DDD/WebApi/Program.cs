@@ -108,7 +108,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 
 //builder.WebHost.UseUrls("http://20.228.138.7:5272");
 
-builder.WebHost.UseUrls("https://*:5272");
+builder.WebHost.UseUrls("http://*:5272");
 
 var app = builder.Build();
  
@@ -127,7 +127,7 @@ app.UseSwaggerUI(options =>
 
 //CORS
 var prodClient = "https://proud-mud-015203a10.3.azurestaticapps.net"; 
-var prodClient3 = "https://104.215.126.210:5272";
+var prodClient3 = "http://104.215.126.210:5272";
 
   
 var devClient = "http://localhost:4200";
