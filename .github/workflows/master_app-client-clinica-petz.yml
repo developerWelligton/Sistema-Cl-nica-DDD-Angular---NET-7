@@ -44,9 +44,8 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: my-clinica-project
-          path: 'Sistema-Cl-nica-DDD-Angular---NET-7\Clinica_veterinaria_2023_Frontend\my-clinica-project\dist' # Adjust path to download location
-
+          name: my-clinica-project 
+          
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
