@@ -133,11 +133,10 @@ var prodClient3 = "http://104.215.126.210:5272";
 var devClient = "http://localhost:4200";
 
 app.UseCors(x => {
-    x.WithOrigins(prodClient, devClient, prodClient3);
+    x.AllowAnyOrigin();
     x.AllowAnyMethod();
     x.AllowAnyHeader();
-     }
-);
+});
 
 
 
