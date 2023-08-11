@@ -83,7 +83,7 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyPolicy", policy =>
     {
-        policy.WithOrigins("http://localhost:4200")
+        policy.WithOrigins("http://localhost:4200", "https://app-client-clinica-petz.azurewebsites.net")
                 .AllowAnyOrigin( )
               .AllowAnyHeader()
               .AllowAnyMethod();
