@@ -1,6 +1,3 @@
-# Docs for the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
-# More GitHub Actions for Azure: https://github.com/Azure/actions
-
 name: Build and deploy Node.js app to Azure Web App - app-client-clinica-petz
 
 on:
@@ -19,8 +16,8 @@ jobs:
       - name: Set up Node.js version
         uses: actions/setup-node@v1
         with:
-          node-version: '18.x' 
-    
+          node-version: '18.x'
+
       - name: Install dependencies and build
         working-directory: Clinica_veterinaria_2023_Frontend/my-clinica-project
         run: |
@@ -31,7 +28,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: my-clinica-project
-          path: 'dist/my-clinica-project' # Adjust path to build output
+          path: 'Clinica_veterinaria_2023_Frontend/my-clinica-project/dist/my-clinica-project' # Adjust path to build output
 
   deploy:
     runs-on: ubuntu-latest
@@ -44,8 +41,8 @@ jobs:
       - name: Download artifact from build job
         uses: actions/download-artifact@v2
         with:
-          name: my-clinica-project 
-          
+          name: my-clinica-project
+
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
@@ -54,4 +51,3 @@ jobs:
           package: ./my-clinica-project
           slot-name: 'Production'
           publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_13BAA36506B8490189974CF198BA012F }}
-          
