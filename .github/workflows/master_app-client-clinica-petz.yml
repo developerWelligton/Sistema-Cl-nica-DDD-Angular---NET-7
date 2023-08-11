@@ -20,13 +20,7 @@ jobs:
         uses: actions/setup-node@v1
         with:
           node-version: '18.x'
-
-      - name: Debug current directory
-          run: |
-            echo "Current directory:"
-            pwd
-            echo "Listing files:"
-            ls -al
+          
       - name: npm install, build, and test
         run: |
           cd Sistema-Cl-nica-DDD-Angular---NET-7\Clinica_veterinaria_2023_Frontend\my-clinica-project
