@@ -79,6 +79,7 @@ builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClini
 builder.Services.AddTransient<ValidacaoServico>();
 
 //builder.WebHost.UseUrls("http://*:5272");
+/*
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyPolicy", policy =>
@@ -89,7 +90,7 @@ builder.Services.AddCors(options =>
               .AllowAnyMethod();
                
     });
-});
+});*/
 
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
@@ -134,9 +135,10 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 //CORS  
-
+ 
+var devProduction = "https://app-client-clinica-petz.azurewebsites.net";
 var devClient = "http://localhost:4200";
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins(devClient));
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins(devClient, devProduction));
 
 app.UseHttpsRedirection();
 
