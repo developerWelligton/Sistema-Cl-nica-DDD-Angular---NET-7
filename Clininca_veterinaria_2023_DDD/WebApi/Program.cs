@@ -30,6 +30,8 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
+//builder.Services.AddSwaggerGen();
+
 builder.Services.AddSwaggerGen(options =>
 {
     options.SwaggerDoc("v1", new OpenApiInfo
@@ -45,7 +47,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddDbContext<ContextBase>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+        builder.Configuration.GetConnectionString("ProdConnection")));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
@@ -76,13 +78,13 @@ builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClini
 
 builder.Services.AddTransient<ValidacaoServico>();
 
-builder.WebHost.UseUrls("http://*:5272");
+//builder.WebHost.UseUrls("http://*:5272");
 builder.Services.AddCors(options =>
 {
     options.AddPolicy("MyPolicy", policy =>
     {
-        policy.WithOrigins()
-                .AllowAnyOrigin()
+        policy.WithOrigins("http://localhost:4200")
+                .AllowAnyOrigin( )
               .AllowAnyHeader()
               .AllowAnyMethod();
                
@@ -123,27 +125,23 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
  
 
 var app = builder.Build();
- 
 
 // Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+app.UseSwagger();
 app.UseSwaggerUI(options =>
 {
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     options.RoutePrefix = string.Empty;
 });
-
 //CORS  
 
-app.UseCors("MyPolicy");
-
+var devClient = "http://localhost:4200";
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins(devClient));
 
 app.UseHttpsRedirection();
+
 app.UseAuthentication();
+
 app.UseAuthorization();
 
 app.MapControllers();
