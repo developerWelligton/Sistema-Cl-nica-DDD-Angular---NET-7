@@ -51,7 +51,7 @@ builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.R
     .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ContextBase>();
  
-
+builder.Services.AddCors();
 
 //INTERFACE E REPOSITORIO
 builder.Services.AddSingleton(typeof(InterfaceGeneric<>), typeof(RepositoryGenerics<>));
@@ -132,10 +132,13 @@ var prodClient3 = "http://104.215.126.210:5272";
   
 var devClient = "http://localhost:4200";
 
-app.UseCors(x => x
-    .WithOrigins(prodClient, devClient, prodClient3)
-    .AllowAnyMethod()
-    .AllowAnyHeader());
+app.UseCors(x => {
+    x.WithOrigins(prodClient, devClient, prodClient3);
+    x.AllowAnyMethod();
+    x.AllowAnyHeader();
+     }
+);
+
 
 
 app.UseAuthentication();
