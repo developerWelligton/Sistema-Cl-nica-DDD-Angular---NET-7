@@ -80,7 +80,7 @@ builder.Services.AddCors(options =>
     options.AddPolicy(name: "MyPolicy",
         policy =>
         {
-            policy.WithOrigins("https://104.215.126.210:5272");
+            policy.WithOrigins("https://104.215.126.210:5272", "https://proud-mud-015203a10.3.azurestaticapps.net/");
         });
 });
 
