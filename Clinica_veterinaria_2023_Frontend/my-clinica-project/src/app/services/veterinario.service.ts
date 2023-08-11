@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, delay, of } from 'rxjs';
 import { Veterinario } from '../models/veterinario-model';
-import { environment } from 'src/assets/environment';
+import { environment } from 'src/environments/environment';
 //FAZER environment
 
 

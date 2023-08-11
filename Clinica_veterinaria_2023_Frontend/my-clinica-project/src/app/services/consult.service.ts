@@ -3,7 +3,7 @@
 import { Observable } from 'rxjs';
 import { Consulta } from '../models/consulta.model';
 import { ConsultaResponse } from '../models/consulta-response.model';
-import { environment } from 'src/assets/environment';
+import { environment } from 'src/environments/environment';
   //FAZER environment
 
   @Injectable({
