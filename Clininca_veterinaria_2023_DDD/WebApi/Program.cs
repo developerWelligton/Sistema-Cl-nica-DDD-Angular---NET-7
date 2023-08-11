@@ -126,7 +126,7 @@ app.UseSwaggerUI(options =>
 });
 
 //CORS
-var prodClient = "https://proud-mud-015203a10.3.azurestaticapps.net"; 
+var prodClient = "https://proud-mud-015203a10.3.azurestaticapps.net/login"; 
 var prodClient3 = "http://104.215.126.210:5272";
 
   
