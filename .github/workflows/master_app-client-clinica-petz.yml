@@ -21,6 +21,11 @@ jobs:
         with:
           node-version: '18.x'
           
+      - name: Imprimir conteúdo do diretório
+        run: |
+            pwd
+            ls -la
+    
       - name: npm install, build, and test
         run: |
           cd Sistema-Cl-nica-DDD-Angular---NET-7\Clinica_veterinaria_2023_Frontend\my-clinica-project
