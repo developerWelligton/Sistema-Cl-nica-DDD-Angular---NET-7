@@ -135,8 +135,9 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 //CORS  
- 
-var devProduction = "https://app-client-clinica-petz.azurewebsites.net";
+
+//var devProduction = "https://app-client-clinica-petz.azurewebsites.net";
+var devProduction = "https://app-api-clinica-petz.azurewebsites.net";
 var devClient = "http://localhost:4200";
 app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins(devClient, devProduction));
 
