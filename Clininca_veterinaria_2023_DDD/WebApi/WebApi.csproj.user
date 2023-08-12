@@ -4,6 +4,6 @@
     <ActiveDebugProfile>https</ActiveDebugProfile>
     <Controller_SelectedScaffolderID>ApiControllerEmptyScaffolder</Controller_SelectedScaffolderID>
     <Controller_SelectedScaffolderCategoryPath>root/Common/Api</Controller_SelectedScaffolderCategoryPath>
-    <NameOfLastUsedPublishProfile>D:\welligton\projetos\clinica_veterinaria_2023_ddd\Sistema-Cl-nica-DDD-Angular---NET-7\Clininca_veterinaria_2023_DDD\WebApi\Properties\PublishProfiles\first-static-web-app-azure5 - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
+    <NameOfLastUsedPublishProfile>D:\welligton\projetos\clinica_veterinaria_2023_ddd\Sistema-Cl-nica-DDD-Angular---NET-7\Clininca_veterinaria_2023_DDD\WebApi\Properties\PublishProfiles\app-api-clinica - Web Deploy.pubxml</NameOfLastUsedPublishProfile>
   </PropertyGroup>
 </Project>
