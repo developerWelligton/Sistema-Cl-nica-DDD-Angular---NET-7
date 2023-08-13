@@ -38,8 +38,8 @@ const RxJS = [LoaderInterceptor, HTTPStatus]
   providers: [
     AuthGuard,
     RxJS,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true},{provide: LocationStrategy, useClass: HashLocationStrategy
-    }
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true}
+
   ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
