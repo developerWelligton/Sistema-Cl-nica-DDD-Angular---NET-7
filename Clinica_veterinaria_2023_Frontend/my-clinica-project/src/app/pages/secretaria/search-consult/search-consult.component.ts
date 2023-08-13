@@ -44,56 +44,56 @@ export class SearchConsultComponent implements OnInit {
     private clienteService: ClienteService) { }
 
   ngOnInit(): void {
-  //   this.loadPage(this.currentPage);
-  //   this.consultaForm = this.formBuilder.group({
-  //     cliente: [''],
-  //     animal: [''],
-  //     veterinario: [''],
-  //     dataConsulta: [''],
-  //     pageIndex: [0],
-  //     pageSize: [10]
-  // }
-  // ),
+    this.loadPage(this.currentPage);
+    this.consultaForm = this.formBuilder.group({
+      cliente: [''],
+      animal: [''],
+      veterinario: [''],
+      dataConsulta: [''],
+      pageIndex: [0],
+      pageSize: [10]
+  }
+  ),
 
-  // this.animalService.getAllAnimals().subscribe(
-  //   (animals: any[]) => {
-  //     this.listAnimals = animals.map(animal => ({
-  //       id: animal.iD_Animal,
-  //       name: animal.nome
-  //     }));
-  //   },
-  //   error => {
-  //     console.error('Error fetching animals:', error);
-  //   });
-
-
-  //   // Fetch list of veterinarians
-  //   this.vetService.getAllVets().subscribe(
-  //     (vets: any[]) => {
-  //       this.listVeterinarios = vets.map(vet => ({
-  //         id: vet.iD_Veterinario,
-  //         name: vet.nome
-  //       }));
-  //     },
-  //     error => {
-  //       console.error('Error fetching veterinarians:', error);
-  //     }
-  //   );
-
-  //     this.clienteService.getAllCliente().subscribe(
-  //       (clientes: any[]) => {
-  //         this.listClientes = clientes.map(cliente => ({
-  //           id: cliente.iD_Cliente,
-  //           name: cliente.nome
+  this.animalService.getAllAnimals().subscribe(
+    (animals: any[]) => {
+      this.listAnimals = animals.map(animal => ({
+        id: animal.iD_Animal,
+        name: animal.nome
+      }));
+    },
+    error => {
+      console.error('Error fetching animals:', error);
+    });
 
 
-  //         }));
-  //       },
-  //       error => {
-  //         console.error('Error fetching clientes:', error);
-  //       }
-  //     );
-  //     console.log( this.listClientes)
+    // Fetch list of veterinarians
+    this.vetService.getAllVets().subscribe(
+      (vets: any[]) => {
+        this.listVeterinarios = vets.map(vet => ({
+          id: vet.iD_Veterinario,
+          name: vet.nome
+        }));
+      },
+      error => {
+        console.error('Error fetching veterinarians:', error);
+      }
+    );
+
+      this.clienteService.getAllCliente().subscribe(
+        (clientes: any[]) => {
+          this.listClientes = clientes.map(cliente => ({
+            id: cliente.iD_Cliente,
+            name: cliente.nome
+
+
+          }));
+        },
+        error => {
+          console.error('Error fetching clientes:', error);
+        }
+      );
+      console.log( this.listClientes)
   }
 
 //SELECT ANIMAL
