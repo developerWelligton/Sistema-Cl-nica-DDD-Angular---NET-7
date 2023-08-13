@@ -29,6 +29,7 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+
 builder.Services.AddEndpointsApiExplorer();
 //builder.Services.AddSwaggerGen();
 
@@ -47,7 +48,7 @@ builder.Services.AddSwaggerGen(options =>
 
 builder.Services.AddDbContext<ContextBase>(options =>
     options.UseSqlServer(
-        builder.Configuration.GetConnectionString("ProdConnection")));
+        builder.Configuration.GetConnectionString("DefaultConnection")));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
@@ -77,21 +78,7 @@ builder.Services.AddSingleton<IVeterinarioServico, VeterinarioServico>();
 builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClinicaServico>();
 
 builder.Services.AddTransient<ValidacaoServico>();
-
-//builder.WebHost.UseUrls("http://*:5272");
-/*
-builder.Services.AddCors(options =>
-{
-    options.AddPolicy("MyPolicy", policy =>
-    {
-        policy.WithOrigins("http://localhost:4200", "https://app-client-clinica-petz.azurewebsites.net")
-                .AllowAnyOrigin( )
-              .AllowAnyHeader()
-              .AllowAnyMethod();
-               
-    });
-});*/
-
+  
 
 builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
     .AddJwtBearer(option =>
@@ -121,9 +108,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
     });
-
-// builder.WebHost.UseUrls("http://20.228.138.7:5272");
- 
+  
 
 var app = builder.Build();
 
@@ -139,7 +124,9 @@ app.UseSwaggerUI(options =>
 //var devProduction = "https://app-client-clinica-petz.azurewebsites.net";
 var devProduction = "https://app-client-clinica-petz.azurewebsites.net";
 var devClient = "http://localhost:4200";
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins(devClient, devProduction));
+var devClient2 = "http://localhost:5272";
+
+app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins(devClient, devProduction, devClient2));
 
 app.UseHttpsRedirection();
 
