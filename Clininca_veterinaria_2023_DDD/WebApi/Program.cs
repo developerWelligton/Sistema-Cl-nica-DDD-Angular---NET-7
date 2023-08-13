@@ -46,9 +46,14 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
+//TO DEVELOPER
+var devEnvironmentDataBase = builder.Configuration.GetConnectionString("DefaultConnection");
+
+//TO DEPLOY IN AZURE
+var prodEnvironmentDataBase = builder.Configuration.GetConnectionString("ProdConnection");
+
 builder.Services.AddDbContext<ContextBase>(options =>
-    options.UseSqlServer(
-        builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(devEnvironmentDataBase));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
