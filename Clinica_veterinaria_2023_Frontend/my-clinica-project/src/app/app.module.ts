@@ -4,7 +4,10 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './pages/login/login.component';
-import { CommonModule } from '@angular/common';
+import { CommonModule, HashLocationStrategy,LocationStrategy } from '@angular/common';
+
+
+
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTPStatus, LoaderInterceptor } from './interceptors/loader.interceptor';
@@ -35,7 +38,8 @@ const RxJS = [LoaderInterceptor, HTTPStatus]
   providers: [
     AuthGuard,
     RxJS,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true}
+    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true},{provide: LocationStrategy, useClass: HashLocationStrategy
+    }
   ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]
