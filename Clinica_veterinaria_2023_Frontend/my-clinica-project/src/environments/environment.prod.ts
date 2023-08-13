@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://app-client-clinica-petz.azurewebsites.net' // LOCAL
+  apiUrl: 'https://app-api-clinica.azurewebsites.net' //  SUA API BACKEND
 };
