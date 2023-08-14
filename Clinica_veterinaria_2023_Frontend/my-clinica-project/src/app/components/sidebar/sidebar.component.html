@@ -31,6 +31,14 @@
       </div>
     </div>
   </div>
+  <div class="grupo-menu"  *ngIf="userRole === 'admin'">
+    <div class="container-icone-menu">
+      <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(5)"
+      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 5, '':this.menuService.menuSelecionado != 5}">
+          Admin
+      </div>
+    </div>
+  </div>
 
 
 </div>

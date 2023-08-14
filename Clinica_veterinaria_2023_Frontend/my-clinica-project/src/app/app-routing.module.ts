@@ -37,6 +37,12 @@ const routes: Routes = [
     canActivate: [AuthGuard],
     data: { roles: ['admin', 'cliente'] }
   },
+  {
+    path: 'admin',
+    loadChildren: () => import('./pages/admin/admin.module').then(m => m.AdminModule),
+    canActivate: [AuthGuard],
+    data: { roles: ['admin'] }
+  },
   // Rota coringa - Redireciona para a rota 'dashboard' se a rota não for encontrada
   {
     path: '**',

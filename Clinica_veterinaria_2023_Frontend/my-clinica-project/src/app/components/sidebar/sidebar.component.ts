@@ -40,6 +40,10 @@ export class SidebarComponent implements OnInit {
         this.router.navigate(['/cliente'])
         break;
 
+      case 5:
+        this.router.navigate(['/admin'])
+        break;
+
       default:
         break;
     }
