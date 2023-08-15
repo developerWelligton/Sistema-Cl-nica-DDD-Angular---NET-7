@@ -113,7 +113,10 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
             }
         };
     });
-  
+
+//CORS
+builder.Services.AddCors();
+
 
 var app = builder.Build();
 
@@ -126,18 +129,20 @@ app.UseSwaggerUI(options =>
 });
 //CORS      
 
-//var devProduction = "https://app-client-clinica-petz.azurewebsites.net";
 var devProduction = "https://app-client-clinica-petz.azurewebsites.net";
-var devClient = "http://localhost:4200";
-var devClient2 = "http://localhost:5272";
+var frontendOrigin = "http://localhost:4200";
+var redirectOrigin = "https://localhost:7131";
 
-app.UseCors(x => x.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader().WithOrigins(devClient, devProduction, devClient2));
+app.UseCors(policy => policy
+    .WithOrigins(frontendOrigin, redirectOrigin, devProduction)
+    .AllowAnyMethod()
+    .AllowAnyHeader());
 
 app.UseHttpsRedirection();
-
 app.UseAuthentication();
-
 app.UseAuthorization();
+
+
 
 app.MapControllers();
 
