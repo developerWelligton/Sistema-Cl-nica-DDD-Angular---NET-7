@@ -25,21 +25,22 @@
       <label>Nome:</label>
       <input type="text" formControlName="user_nome">
 
-      <label>Cpf</label>
-      <input type="text" formControlName="user_cpf">
-
-
       <label>Email</label>
       <input type="text" formControlName="user_email">
 
+      <label>Senha</label>
+      <input type="text" formControlName="user_senha">
+
       <label>Grupo de Usuário</label>
       <ng-select class="select-padrao"
-                formControlName="user_group"
-                [items]="listUserGroup"
-                bindLabel="name"
-                [multiple]="false"
-                [clearable]="false">
-      </ng-select>
+      formControlName="user_group"
+      [items]="listUserGroup"
+      bindLabel="name"
+      bindValue="name"
+      [multiple]="false"
+      [clearable]="false">
+</ng-select>
+
       <br>
       <button type="submit" (click)="submitForm()">Enviar</button>
     </form>
