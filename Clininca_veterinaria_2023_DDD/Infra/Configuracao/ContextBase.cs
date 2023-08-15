@@ -30,7 +30,7 @@ namespace Infra.Configuracao
         {
             if (!optionsBuilder.IsConfigured)
             {
-                optionsBuilder.UseSqlServer(ObterStringConexao());
+                optionsBuilder.UseSqlServer(ObterStringConexaoDeveloperLocal());
                 base.OnConfiguring(optionsBuilder);
             }
             
@@ -69,14 +69,19 @@ namespace Infra.Configuracao
             base.OnModelCreating(builder);
         }
 
-        public string ObterStringConexao()
+        public string ObterStringConexaoProductionAzure()
         {   //base cloud
             return "Server=tcp:serverpetzdatabase.database.windows.net,1433;Initial Catalog=db-entity-clinica;Persist Security Info=False;User ID=sa-clinica;Password=@Well32213115;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
 
 
 
+          }
+
+        public string ObterStringConexaoDeveloperLocal()
+        {
+
             //base local
-            //return "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_identity_clinica;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False"
+            return "Data Source=(localdb)\\MSSQLLocalDB;Initial Catalog=db_identity_clinica;Integrated Security=True;Connect Timeout=30;Encrypt=False;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
         }
 
     }
