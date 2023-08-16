@@ -16,14 +16,77 @@
     <!-- Cabeçalho do cartão -->
     <div class="card-header">
       <!-- Título do cartão -->
-      <h3 class="card-title">Painel de Usuario no Portal Petz </h3>
+      <h3 class="card-title">Painel de Usuarios Cadastrados no Portal Petz </h3>
 
     </div>
 
+    <!-- Angular Material Table for Users -->
+    <div class="card-content">
+      <div class="filter-container">
+        <h4 class="filter-title">User Filters</h4> <!-- The added title -->
+
+        <div class="input-wrapper">
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Filter by Name</mat-label>
+                <input matInput #nameFilter>
+            </mat-form-field>
+
+            <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Filter by Email</mat-label>
+                <input matInput #emailFilter>
+            </mat-form-field>
+
+              <!-- Grupo de Usuário Field -->
+              <mat-form-field appearance="outline" class="input-field">
+                <mat-label>Grupo de Usuário</mat-label>
+                <mat-select #userGroupDropdown formControlName="user_group">
+                    <mat-option *ngFor="let group of listUserGroup" [value]="group.name">
+                        {{ group.name }}
+                    </mat-option>
+                </mat-select>
+            </mat-form-field>
+        </div>
+
+        <div class="button-wrapper">
+          <button mat-raised-button color="primary" (click)="applyFilter(nameFilter.value, emailFilter.value, userGroupDropdown.value)">Buscar</button>
+        </div>
+    </div>
+<br>
 
 
 
+      <mat-table [dataSource]="usersList">
 
+        <!-- ID Column -->
+        <ng-container matColumnDef="id">
+          <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.iD_Usuario}} </mat-cell>
+        </ng-container>
 
+        <!-- Name Column -->
+        <ng-container matColumnDef="name">
+          <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.nome}} </mat-cell>
+        </ng-container>
+
+        <!-- Email Column -->
+        <ng-container matColumnDef="email">
+          <mat-header-cell *matHeaderCellDef> Email </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.email}} </mat-cell>
+        </ng-container>
+
+        <!-- Role Column -->
+        <ng-container matColumnDef="role">
+          <mat-header-cell *matHeaderCellDef> Role </mat-header-cell>
+          <mat-cell *matCellDef="let user"> {{user.role}} </mat-cell>
+        </ng-container>
+
+        <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+        <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+
+      </mat-table>
+    </div>
   </div>
+
+
 </div>
