@@ -1,7 +1,5 @@
 <navbar></navbar>
 <sidebar></sidebar>
-
-
 <div class="container-base">
   <!-- Conteúdo da página -->
   <div class="content-page">
@@ -17,9 +15,7 @@
     <div class="card-header">
       <!-- Título do cartão -->
       <h3 class="card-title">Painel de Usuarios Cadastrados no Portal Petz </h3>
-
     </div>
-
     <!-- Angular Material Table for Users -->
     <div class="card-content">
       <div class="filter-container">
@@ -51,12 +47,8 @@
           <button mat-raised-button color="primary" (click)="applyFilter(nameFilter.value, emailFilter.value, userGroupDropdown.value)">Buscar</button>
         </div>
     </div>
-<br>
-
-
-
+    <br>
       <mat-table [dataSource]="usersList">
-
         <!-- ID Column -->
         <ng-container matColumnDef="id">
           <mat-header-cell *matHeaderCellDef> ID </mat-header-cell>
