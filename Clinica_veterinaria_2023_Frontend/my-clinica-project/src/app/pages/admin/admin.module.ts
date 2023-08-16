@@ -22,6 +22,7 @@ import { MatTableModule } from '@angular/material/table';
     ListUserComponent
 
   ],
+  exports:[CreateUserComponent],
   imports: [
 
     CommonModule,

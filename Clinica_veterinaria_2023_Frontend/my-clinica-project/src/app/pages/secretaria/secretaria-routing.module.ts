@@ -4,6 +4,8 @@ import { SecretariaComponent } from './secretaria.component';
 import { NotfoundConsultComponent } from './notfound-consult/notfound-consult.component';
 import { CreateConsultComponent } from './create-consult/create-consult.component';
 import { SearchConsultComponent } from './search-consult/search-consult.component';
+import { CreateUserComponent } from '../admin/create-user/create-user.component';
+import { ListUserComponent } from '../admin/list-user/list-user.component';
 
 const routes: Routes = [
   {
@@ -21,6 +23,14 @@ const routes: Routes = [
   {
     path:'search',
     component: SearchConsultComponent
+  },
+  {
+    path:'create-user',
+    component: CreateUserComponent
+  },
+  {
+    path:'list-user',
+    component:ListUserComponent
   },
   // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
   {

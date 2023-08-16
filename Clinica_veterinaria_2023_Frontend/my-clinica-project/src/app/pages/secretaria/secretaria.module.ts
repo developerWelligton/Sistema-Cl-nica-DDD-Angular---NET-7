@@ -15,13 +15,14 @@ import { NotfoundConsultComponent } from './notfound-consult/notfound-consult.co
 import { CreateConsultComponent } from './create-consult/create-consult.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SearchConsultComponent } from './search-consult/search-consult.component';
+import { AdminModule } from '../admin/admin.module';
 
 @NgModule({
   declarations: [
     SecretariaComponent,
     NotfoundConsultComponent,
     CreateConsultComponent,
-    SearchConsultComponent
+    SearchConsultComponent,
   ],
   imports: [
     CommonModule,
@@ -31,6 +32,7 @@ import { SearchConsultComponent } from './search-consult/search-consult.componen
     SharedModule,
     NgSelectModule,
     ReactiveFormsModule,
+    AdminModule
 
   ],
   providers: [
