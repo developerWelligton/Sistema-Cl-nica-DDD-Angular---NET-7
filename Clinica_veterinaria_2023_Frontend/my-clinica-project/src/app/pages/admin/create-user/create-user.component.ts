@@ -4,6 +4,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
+import { AuthService } from 'src/app/services/auth.service';
 
 
 export enum UserGroup {
@@ -20,16 +21,22 @@ export enum UserGroup {
 })
 export class CreateUserComponent {
   createUserForm: FormGroup;
-
   listUserGroup: { id: string, name: string }[] = [];
+
+  userRole: string = 'secretaria';
 
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
-    private router: Router
+    private router: Router,
+    private authService: AuthService
   ) {}
 
   ngOnInit() {
+  //ROLE
+  this.userRole = this.authService.getRole();
+  alert(this.userRole)
+
     this.createUserForm = this.fb.group({
       user_nome: [''],
       user_email: [''],
@@ -40,12 +47,30 @@ export class CreateUserComponent {
   }
 
   private populateUserGroups(): void {
-    this.listUserGroup = Object.values(UserGroup).map(group => ({
-        id: group,
-        name: group
+    let groupsToInclude = [];
+
+    switch (this.userRole) {
+      case 'secretaria':
+        groupsToInclude = [UserGroup.Cliente];
+        break;
+      case 'admin':
+        groupsToInclude = [
+          UserGroup.Cliente,
+          UserGroup.Veterinario,
+          UserGroup.Secretaria,
+          UserGroup.Admin
+        ];
+        break;
+      // You can add more cases as needed
+    }
+
+    this.listUserGroup = groupsToInclude.map(group => ({
+      id: group,
+      name: group
     }));
+
     console.log(this.listUserGroup); // Check the output
- }
+  }
 
   submitForm() {
     const formData = this.createUserForm.value;

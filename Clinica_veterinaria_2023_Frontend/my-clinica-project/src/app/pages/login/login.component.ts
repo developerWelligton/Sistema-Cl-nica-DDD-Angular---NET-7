@@ -42,6 +42,7 @@ export class LoginComponent {
       },
       err=>{
         alert("Ocorreu um erro")
+        this.router.navigate(['/login'])
       }
     )
   }
