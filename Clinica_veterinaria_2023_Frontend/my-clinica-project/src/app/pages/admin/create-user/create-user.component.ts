@@ -38,12 +38,15 @@ export class CreateUserComponent {
     });
     this.populateUserGroups();
   }
+
   private populateUserGroups(): void {
     this.listUserGroup = Object.values(UserGroup).map(group => ({
-      id: group,  // You can keep this if you wish, but it's not necessary for the selection process.
-      name: group
+        id: group,
+        name: group
     }));
-}
+    console.log(this.listUserGroup); // Check the output
+ }
+
   submitForm() {
     const formData = this.createUserForm.value;
 

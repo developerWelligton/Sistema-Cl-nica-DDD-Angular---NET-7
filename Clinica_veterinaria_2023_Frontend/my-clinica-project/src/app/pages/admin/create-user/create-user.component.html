@@ -21,32 +21,41 @@
     </div>
     <!-- Formulário -->
 
-    <form [formGroup]="createUserForm">
-      <label>Nome:</label>
-      <input type="text" formControlName="user_nome">
+    <form [formGroup]="createUserForm" class="modern-form">
 
-      <label>Email</label>
-      <input type="text" formControlName="user_email">
+      <!-- Nome Field -->
+      <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Nome</mat-label>
+          <input matInput type="text" formControlName="user_nome">
+      </mat-form-field>
 
-      <label>Senha</label>
-      <input type="text" formControlName="user_senha">
+      <!-- Email Field -->
+      <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" formControlName="user_email">
+      </mat-form-field>
 
-      <label>Grupo de Usuário</label>
-      <ng-select class="select-padrao"
-      formControlName="user_group"
-      [items]="listUserGroup"
-      bindLabel="name"
-      bindValue="name"
-      [multiple]="false"
-      [clearable]="false">
-</ng-select>
+      <!-- Senha Field -->
+      <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Senha</mat-label>
+          <input matInput type="password" formControlName="user_senha">
+      </mat-form-field>
 
-      <br>
-      <button type="submit" (click)="submitForm()">Enviar</button>
-    </form>
+      <!-- Grupo de Usuário Field -->
+      <mat-form-field appearance="outline" class="full-width-input">
+          <mat-label>Grupo de Usuário</mat-label>
+          <mat-select formControlName="user_group">
+              <mat-option *ngFor="let group of listUserGroup" [value]="group.name">
+                  {{ group.name }}
+              </mat-option>
+          </mat-select>
+      </mat-form-field>
 
-
-
+      <!-- Submit Button -->
+      <div class="button-wrapper">
+          <button mat-raised-button color="primary" type="submit" (click)="submitForm()">Enviar</button>
+      </div>
+  </form>
 
 
   </div>

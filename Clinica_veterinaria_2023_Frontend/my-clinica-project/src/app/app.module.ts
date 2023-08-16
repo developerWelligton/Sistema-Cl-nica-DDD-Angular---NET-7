@@ -13,6 +13,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTPStatus, LoaderInterceptor } from './interceptors/loader.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthGuard } from './pages/guard/auth.guard';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /**/
 
@@ -24,6 +25,7 @@ const RxJS = [LoaderInterceptor, HTTPStatus]
     LoginComponent
   ],
   imports: [
+    BrowserAnimationsModule,
     BrowserModule,
     AppRoutingModule,
 

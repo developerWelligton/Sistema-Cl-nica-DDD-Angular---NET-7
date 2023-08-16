@@ -7,6 +7,7 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+
 body {
   font-family: "Poppins";
   margin: 0;
@@ -301,4 +302,52 @@ $text-color: #000000; // Texto preto
       }
     }
   }
+
+
+  //ANGULAR MATERIAL STYLE GLOBAL
+  .modern-form {
+    max-width: 600px;
+    margin: 2rem auto;
+    padding: 1rem;
+
+    .full-width-input {
+        width: 100%;
+        margin-bottom: 1.5rem;
+
+        // Increase the font size in the input for better readability
+        input {
+            font-size: 18px;
+        }
+
+        // This is for the label of mat-form-field
+        mat-label {
+            font-size: 18px;
+        }
+    }
+
+    .button-wrapper {
+        display: flex;
+        justify-content: center;
+        margin-top: 1.5rem;
+
+        button {
+            // Increase padding for larger button
+            padding: 10px 30px;
+
+            // Custom color for the button
+            background-color: #009688;  // This is teal, replace with any color you like
+            color: white; // Text color
+
+            // Change font size for the button
+            font-size: 18px;
+
+            // Hover effect
+            &:hover {
+                background-color: darken(#009688, 10%); // Darken the teal a bit on hover
+            }
+        }
+    }
+}
+
+  //ANGULAR MATERIAL STYLE GLOBAL
 }
