@@ -7,6 +7,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using WebApi.Model;
 using Microsoft.AspNetCore.Authorization;
+using Domain.Interfaces.IClientes;
 
 namespace WebApi.Controllers
 {
@@ -19,10 +20,15 @@ namespace WebApi.Controllers
     {
         private readonly InterfaceUsuarioSistemaClinica _interfaceUsuarioSistemaClinica;
         private readonly IUsuarioSistemaClinicaServico _isuarioSistemaClinicaServico;
-        public UsuarioSistemaController(InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica, IUsuarioSistemaClinicaServico isuarioSistemaClinicaServico)
+        private readonly InterfaceClientes _interfaceClientes;
+        public UsuarioSistemaController(
+            InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica, 
+            IUsuarioSistemaClinicaServico isuarioSistemaClinicaServico,
+             InterfaceClientes interfaceClientes)
         {
             _interfaceUsuarioSistemaClinica = interfaceUsuarioSistemaClinica;
             _isuarioSistemaClinicaServico = isuarioSistemaClinicaServico;
+            _interfaceClientes = interfaceClientes; // Atribuir a interface
         }
 
         [HttpGet("/api/BuscarPorNome")]
@@ -64,6 +70,19 @@ namespace WebApi.Controllers
             }
 
             await _interfaceUsuarioSistemaClinica.Add(usuarioSistemaClinica);
+
+            if (usuarioSistemaClinica.Role.ToLower() == "cliente")
+            {
+                var cliente = new Cliente
+                {
+                    Nome = usuarioSistemaClinica.Nome,
+                    Email = usuarioSistemaClinica.Email,
+                    // Adicione outros campos conforme necessário.
+                    ID_Usuario = usuarioSistemaClinica.ID_Usuario
+                };
+
+                await _interfaceClientes.Add(cliente);
+            }
 
             return CreatedAtAction(nameof(AdicionarUsuarioClinica), new { id = usuarioSistemaClinica.ID_Usuario }, usuarioSistemaClinica);
         }
