@@ -69,4 +69,29 @@ export class AdminService {
 
 
 
+            deleteUser(id: number): Observable<any> {
+
+              const headers = new HttpHeaders({
+                'Authorization': `Bearer ${this.authService.getToken}`
+              });
+              debugger
+              return this.http.delete(`${this.baseUrl}/UsuarioSistema/${id}`).pipe(
+                tap(() => {
+                  console.log('User deleted successfully');
+                }),
+                catchError(error => {
+                  if (error.status === 0) {
+                    console.error('API Connection Error:', error);
+                  } else if (error.status >= 500) {
+                    console.error('Backend Bug/Error:', error);
+                  } else {
+                    console.error('General Error:', error);
+                  }
+                  return throwError(error);
+                })
+              );
+            }
+
+
+
 }

@@ -6,7 +6,7 @@
         <th>Name</th>
         <th>Email</th>
         <th>Role</th>
-        <th>Ações</th> <!-- Apenas uma coluna para Ações -->
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
@@ -16,9 +16,9 @@
         <td>{{ user.email }}</td>
         <td>{{ user.role }}</td>
         <td>
-          <a href="#"  >Editar</a> | <!-- Estes são links, mas você pode ajustar para botões se preferir -->
-          <a href="#"  >Visualizar</a> |
-          <a href="#"  >Excluir</a>
+          <a href="#" (click)="editUser(user)">Editar</a> |
+          <a href="#" (click)="viewUser(user)">Visualizar</a> |
+          <a href="#" (click)="deleteUser(user.iD_Usuario)">Excluir</a>
         </td>
       </tr>
     </tbody>
