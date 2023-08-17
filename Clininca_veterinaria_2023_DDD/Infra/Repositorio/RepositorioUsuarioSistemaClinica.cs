@@ -47,6 +47,19 @@ namespace Infra.Repositorio
             }
         }
 
+        public async Task<UsuarioSistemaClinica> BuscarUsuarioPorIdUsuarioSistema(int idUsuario)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                var usuarioSistema = await banco.UsuarioSistemaClinicas.FindAsync(idUsuario);
+                if (usuarioSistema == null)
+                {
+                    throw new NotImplementedException();
+                }
+                return usuarioSistema;
+            }
+        }
+
         public Task DeleteByUsuarioId(int idUsuario)
         {
             throw new NotImplementedException();

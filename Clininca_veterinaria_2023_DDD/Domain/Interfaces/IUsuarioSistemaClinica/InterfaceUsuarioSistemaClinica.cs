@@ -24,6 +24,7 @@ namespace Domain.Interfaces.IUsuarioSistemaClinica
         // Método personalizado para verificar se o usuário tem permissão para uma determinada ação
         Task<bool> VerificarPermissao(int idUsuario, string acao);
         Task DeleteByUsuarioId(int idUsuario);
+        Task<UsuarioSistemaClinica> BuscarUsuarioPorIdUsuarioSistema(int id);
 
         // Outros métodos personalizados conforme as necessidades do sistema...
 

@@ -91,7 +91,7 @@ namespace Infra.Repositorio
             };
         }
 
-       
+
 
         public async Task<Cliente> BuscarClientePorIdUsuarioSistema(int idUsuarioSistema)
         {
@@ -103,11 +103,12 @@ namespace Infra.Repositorio
 
                 if (cliente == null)
                 {
-                    throw new KeyNotFoundException("No Cliente found with the provided ID_Usuario");
+                    throw new KeyNotFoundException($"No Cliente associated with ID_Usuario: {idUsuarioSistema} was found.");
                 }
 
                 return cliente;
             }
         }
+
     }
 }

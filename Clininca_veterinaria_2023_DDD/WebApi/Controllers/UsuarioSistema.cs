@@ -122,16 +122,20 @@ namespace WebApi.Controllers
             {
                 // Get the Cliente from the service
                 var clienteFromDb = await _interfaceClientes.BuscarClientePorIdUsuarioSistema(id); // Assuming the method to get a client by id is named BuscarClientesPorUsuarioId
-
-                // If no Cliente is found, return a NotFound response
                 if (clienteFromDb == null)
                 {
                     return NotFound(new { message = "Cliente not found for the provided ID." });
                 }
+                var idUsuario = clienteFromDb.ID_Usuario;
+                var usuarioFromDb = await _interfaceUsuarioSistemaClinica.BuscarUsuarioPorIdUsuarioSistema(id);
+                // If no Cliente is found, return a NotFound response
+                
+
 
                 // If a Cliente is found, delete it. For simplicity, deleting the first client found. Adjust as necessary.
                 await _interfaceClientes.Delete(clienteFromDb); // Assuming the Delete method in the service takes a Cliente object
 
+                await _interfaceUsuarioSistemaClinica.Delete(usuarioFromDb);
                 // Return a NoContent response to indicate successful deletion
                 return NoContent();
             }
