@@ -34,5 +34,7 @@ namespace Domain.Servicos
             if (valido)
                 await _interfaceClientes.Update(cliente);
         }
+
+       
     }
 }

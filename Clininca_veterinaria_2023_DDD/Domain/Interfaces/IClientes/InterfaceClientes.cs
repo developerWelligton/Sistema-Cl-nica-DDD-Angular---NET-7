@@ -31,5 +31,7 @@ namespace Domain.Interfaces.IClientes
         // Nota: Lembre-se de que você pode adicionar mais métodos aqui para ações específicas 
         // relacionadas aos clientes na sua aplicação.
         Task<IEnumerable<Cliente>> SearchByName(string term);
+         
+        Task<Cliente> BuscarClientePorIdUsuarioSistema(int idUsuarioSistema);
     }
 }

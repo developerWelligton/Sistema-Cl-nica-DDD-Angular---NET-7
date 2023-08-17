@@ -47,6 +47,11 @@ namespace Infra.Repositorio
             }
         }
 
+        public Task DeleteByUsuarioId(int idUsuario)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task<bool> VerificarPermissao(int idUsuario, string acao)
         {
             using (var banco = new ContextBase(_optionsBuilder))

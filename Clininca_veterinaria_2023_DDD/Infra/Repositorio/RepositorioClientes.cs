@@ -40,6 +40,8 @@ namespace Infra.Repositorio
             }
         }
 
+       
+
         public async Task<Cliente> BuscarPorEmail(string email)
         {
             using (var banco = new ContextBase(_optionsBuilder))
@@ -87,6 +89,25 @@ namespace Infra.Repositorio
                 return await banco.Clientes.Where(a => a.Nome.Contains(term))
                 .ToListAsync();
             };
+        }
+
+       
+
+        public async Task<Cliente> BuscarClientePorIdUsuarioSistema(int idUsuarioSistema)
+        {
+            using (var context = new ContextBase(_optionsBuilder))
+            {
+                var cliente = await context.Clientes
+                    .AsNoTracking()
+                    .FirstOrDefaultAsync(c => c.ID_Usuario == idUsuarioSistema);
+
+                if (cliente == null)
+                {
+                    throw new KeyNotFoundException("No Cliente found with the provided ID_Usuario");
+                }
+
+                return cliente;
+            }
         }
     }
 }

@@ -22,7 +22,7 @@ namespace WebApi.Controllers
         private readonly IUsuarioSistemaClinicaServico _isuarioSistemaClinicaServico;
         private readonly InterfaceClientes _interfaceClientes;
         public UsuarioSistemaController(
-            InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica, 
+            InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica,
             IUsuarioSistemaClinicaServico isuarioSistemaClinicaServico,
              InterfaceClientes interfaceClientes)
         {
@@ -105,7 +105,7 @@ namespace WebApi.Controllers
             }
 
             userFromDb.Nome = usuarioSistemaClinicaDto.Nome;
-            userFromDb.Email = usuarioSistemaClinicaDto.Email; 
+            userFromDb.Email = usuarioSistemaClinicaDto.Email;
             userFromDb.Senha = usuarioSistemaClinicaDto.Senha;
             // Adicione mais campos conforme necessário
 
@@ -116,17 +116,32 @@ namespace WebApi.Controllers
 
         [HttpDelete("{id}")]
         [Produces("application/json")]
-        public async Task<IActionResult> DeletarUsuarioClinica(int id)
+        public async Task<IActionResult> DeletarCliente(int id)
         {
-            var userFromDb = await _interfaceUsuarioSistemaClinica.GetEntityById(id);
-            if (userFromDb == null)
+            try
             {
-                return NotFound();
+                // Get the Cliente from the service
+                var clienteFromDb = await _interfaceClientes.BuscarClientePorIdUsuarioSistema(id); // Assuming the method to get a client by id is named BuscarClientesPorUsuarioId
+
+                // If no Cliente is found, return a NotFound response
+                if (clienteFromDb == null)
+                {
+                    return NotFound(new { message = "Cliente not found for the provided ID." });
+                }
+
+                // If a Cliente is found, delete it. For simplicity, deleting the first client found. Adjust as necessary.
+                await _interfaceClientes.Delete(clienteFromDb); // Assuming the Delete method in the service takes a Cliente object
+
+                // Return a NoContent response to indicate successful deletion
+                return NoContent();
             }
-
-            await _interfaceUsuarioSistemaClinica.Delete(userFromDb);
-
-            return NoContent();
+            catch (Exception ex)
+            {
+                // Log the exception if necessary
+                // Return a BadRequest or an appropriate error response
+                return BadRequest(new { message = "An error occurred while deleting the Cliente.", details = ex.Message });
+            }
         }
+
     }
 }
