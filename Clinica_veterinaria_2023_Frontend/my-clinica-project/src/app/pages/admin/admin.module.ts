@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
@@ -14,12 +14,14 @@ import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { ListUserComponent } from './list-user/list-user.component';
 import { MatTableModule } from '@angular/material/table';
+import { UserTableComponent } from './list-user/user-table/user-table.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     CreateUserComponent,
-    ListUserComponent
+    ListUserComponent,
+    UserTableComponent
 
   ],
   exports:[CreateUserComponent],
@@ -37,7 +39,11 @@ import { MatTableModule } from '@angular/material/table';
     MatButtonModule,
     MatTableModule,
 
+
+
   ],
   providers: []
+  ,
+  schemas:[CUSTOM_ELEMENTS_SCHEMA]
 })
 export class AdminModule { }

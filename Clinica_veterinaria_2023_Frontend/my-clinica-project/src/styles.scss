@@ -197,7 +197,7 @@ $text-color: #000000; // Texto preto
   // Estilização para a barra de rolagem
   &::-webkit-scrollbar {
     width: 8px;  // Largura para barra de rolagem vertical
-    height: 8px; // Altura para barra de rolagem horizontal
+    height: 15px; // Altura para barra de rolagem horizontal
   }
 
   &::-webkit-scrollbar-track {
@@ -236,13 +236,13 @@ $text-color: #000000; // Texto preto
     @media (max-width: 768px) {
 
       th{
-        font-size: 9px; // Reduzindo o tamanho da fonte para telas menores
+        font-size: 12px; // Reduzindo o tamanho da fonte para telas menores
         padding: 3px;
         margin: 0px;
         justify-content: center;
       }
       td {
-        font-size: 9px; // Reduzindo o tamanho da fonte para telas menores
+        font-size:11px; // Reduzindo o tamanho da fonte para telas menores
         padding: 3px;
         margin: 0px;
         justify-items: center;
