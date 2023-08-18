@@ -40,17 +40,18 @@ export class AdminService {
 
               createAdmin(data: any) {
                 const transformedData = {
-                    nome: data.user_nome,
-                    email: data.user_email,
-                    senha: data.user_senha,
-                    role: data.user_group
-                };
+                  email: data.user_email,
+                  senha: data.user_senha,
+                  cpf:"XXXXX",
+                  role: data.user_group,
+                  nome: data.user_nome,
 
+                };
                 const headers = new HttpHeaders({
                     'Authorization': `Bearer ${this.authService.getToken}`
                 });
                 //debugger
-                return this.http.post(`${this.baseUrl}/UsuarioClinica`, transformedData, { headers: headers }).pipe(
+                return this.http.post(`${this.baseUrl}/AdicionaUsuario`, transformedData, { headers: headers }).pipe(
                     tap(() => {
                         console.log('Success');
                     }),
@@ -75,7 +76,7 @@ export class AdminService {
                 'Authorization': `Bearer ${this.authService.getToken}`
               });
               debugger
-              return this.http.delete(`${this.baseUrl}/UsuarioSistema/${id}`).pipe(
+              return this.http.delete(`${this.baseUrl}/UsuarioSistema/${id}`, { headers: headers }).pipe(
                 tap(() => {
                   console.log('User deleted successfully');
                 }),
