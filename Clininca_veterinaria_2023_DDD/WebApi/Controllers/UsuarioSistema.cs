@@ -9,6 +9,7 @@ using WebApi.Model;
 using Microsoft.AspNetCore.Authorization;
 using Domain.Interfaces.IClientes;
 using Domain.Interfaces.ISecretarias;
+using Domain.Interfaces.IVeterinario;
 
 namespace WebApi.Controllers
 {
@@ -23,17 +24,20 @@ namespace WebApi.Controllers
         private readonly IUsuarioSistemaClinicaServico _isuarioSistemaClinicaServico;
         private readonly InterfaceClientes _interfaceClientes;
         private readonly InterfaceSecretarias _interfaceSecretarias;
+        private readonly InterfaceVeterinario _interfaceVeterinario;
         public UsuarioSistemaController(
             InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica,
             IUsuarioSistemaClinicaServico isuarioSistemaClinicaServico,
             InterfaceClientes interfaceClientes,
-            InterfaceSecretarias interfaceSecretarias 
+            InterfaceSecretarias interfaceSecretarias,
+            InterfaceVeterinario interfaceVeterinario
              )
         {
             _interfaceUsuarioSistemaClinica = interfaceUsuarioSistemaClinica;
             _isuarioSistemaClinicaServico = isuarioSistemaClinicaServico;
             _interfaceClientes = interfaceClientes; // Atribuir a interface
             _interfaceSecretarias = interfaceSecretarias;
+            _interfaceVeterinario = interfaceVeterinario;
         }
 
         [HttpGet("/api/BuscarPorNome")]
@@ -103,6 +107,20 @@ namespace WebApi.Controllers
 
                 await _interfaceSecretarias.Add(secretaria);
                 // I assumed that you might have an _interfaceSecretaria similar to _interfaceClientes for managing 'Secretaria' entities.
+            }
+            if (usuarioSistemaClinica.Role.ToLower() == "veterinario")
+            {
+                var veterinario = new Veterinario
+                {
+                    Nome = usuarioSistemaClinica.Nome,
+                    Email = usuarioSistemaClinica.Email,
+                    ID_Usuario = usuarioSistemaClinica.ID_Usuario,
+                    Especializacao = "",
+                    Telefone= ""
+
+                    // You may need to provide values for other properties like Endereco and Telefone too
+                };
+                await _interfaceVeterinario.Add(veterinario);
             }
             return CreatedAtAction(nameof(AdicionarUsuarioClinica), new { id = usuarioSistemaClinica.ID_Usuario }, usuarioSistemaClinica);
         }

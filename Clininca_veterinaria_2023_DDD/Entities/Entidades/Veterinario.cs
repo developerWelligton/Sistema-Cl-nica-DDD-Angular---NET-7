@@ -18,24 +18,21 @@ namespace Entities.Entidades
 
             [Required]
             [StringLength(100)]
-            public string Nome { get; set; }
-
-            [Required]
+            public string? Nome { get; set; }
+         
             [StringLength(100)]
-            public string Especializacao { get; set; }
+            public string? Especializacao { get; set; }
 
-            [Required]
+            
             [StringLength(100)]
-            public string Email { get; set; }
-
-            [Required]
+            public string? Email { get; set; }
+         
             [StringLength(20)]
-            public string Telefone { get; set; }
-
-            [Required]
+            public string? Telefone { get; set; }
+         
             public int ID_Usuario { get; set; }
 
             [ForeignKey("ID_Usuario")]
-            public UsuarioSistemaClinica UsuarioSistemaClinica { get; set; }
+            public UsuarioSistemaClinica? UsuarioSistemaClinica { get; set; }
         } 
 }
