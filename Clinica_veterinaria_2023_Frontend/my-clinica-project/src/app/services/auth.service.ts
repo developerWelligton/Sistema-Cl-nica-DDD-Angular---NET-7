@@ -28,7 +28,7 @@ export class AuthService {
         this.usuarioAutenticadoPortal = localStorage.getItem('usuarioAutenticadoPortal') == 'true';
         return Promise.resolve(this.usuarioAutenticadoPortal);
     }
-
+//SALVAR TOKEN
     setToken(token: string) {
         localStorage.setItem('token', token);
         this.token = token;
@@ -57,6 +57,8 @@ export class AuthService {
         sessionStorage.clear();
     }
 
-
+    excluiToken() {
+      localStorage.removeItem(this.token);
+    }
 
 }
