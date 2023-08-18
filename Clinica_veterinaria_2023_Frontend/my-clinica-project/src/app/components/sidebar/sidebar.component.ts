@@ -62,4 +62,20 @@ export class SidebarComponent implements OnInit {
     }
     this.menuService.menuSelecionado = menu;
   }
+
+  navigateToDashboard() {
+    this.router.navigate(['/dashboard']);
+  }
+  navigateToSecretaria() {
+    this.router.navigate(['/secretaria'])
+  }
+  navigateToVeterinario() {
+    this.router.navigate(['/veterinario'])
+  }
+  navigateToCliente() {
+    this.router.navigate(['/cliente'])
+  }
+  navigateToAdmin() {
+    this.router.navigate(['/admin'])
+  }
 }
