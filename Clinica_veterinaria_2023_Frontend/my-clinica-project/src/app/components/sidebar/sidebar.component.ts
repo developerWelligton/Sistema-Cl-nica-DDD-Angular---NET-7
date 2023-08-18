@@ -2,6 +2,7 @@ import { AuthService } from 'src/app/services/auth.service';
 import { MenuService } from './../../services/menu.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { PaddingService } from 'src/app/services/Padding.service';
 
 @Component({
   selector: 'sidebar',
@@ -14,7 +15,8 @@ export class SidebarComponent implements OnInit {
   constructor(
     private router: Router,
     public menuService:MenuService,
-    private authService: AuthService
+    private authService: AuthService,
+    private paddingService: PaddingService
   ) {}
 
   ngOnInit(): void {
@@ -25,7 +27,12 @@ export class SidebarComponent implements OnInit {
 
   toggleSidebar() {
     this.isExpanded = !this.isExpanded;
-    //alert(this.isExpanded)
+
+    if (this.isExpanded) {
+      this.paddingService.setGlobalPadding('88px 16px 0px 70px');
+    } else {
+      this.paddingService.setGlobalPadding('88px 16px 0px 124px');
+    }
   }
 
   selectMenu(menu:number) {

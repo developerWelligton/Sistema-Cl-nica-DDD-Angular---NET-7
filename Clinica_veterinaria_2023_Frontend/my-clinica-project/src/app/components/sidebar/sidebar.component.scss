@@ -1,3 +1,4 @@
+
 .container-sidebar {
   position: fixed;
   width: 110px;
@@ -37,6 +38,10 @@
 .container-sidebar.expanded {
   width: 55px;
   background-color: #27ae60;
+
+  .container-base {
+    padding: 88px 16px 0px 70px;
+  }
 
   .container-imput {
     .container-icone-menu {
