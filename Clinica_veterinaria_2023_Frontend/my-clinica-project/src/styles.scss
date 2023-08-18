@@ -11,7 +11,7 @@
 body {
   font-family: "Poppins";
   margin: 0;
-  background: rgb(107, 106, 106);
+  background: rgb(68, 68, 68);
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -38,7 +38,7 @@ body {
     .card-header {
       z-index: 3 !important;
       padding: 20px; /* Aumentado para mais espaço */
-      background-color: #4caf50;
+      background-color: #9e36ff;
       box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
       border-radius: 8px;
       margin-bottom: 16px;
@@ -63,7 +63,7 @@ body {
       }
 
       .card-link {
-        color: #4caf50;
+        color: #af4c4c;
         text-decoration: none;
         margin: 5px 0; /* Adiciona um pequeno espaço entre os links */
         display: inline-block; /* Permite o uso de padding */
@@ -89,7 +89,7 @@ body {
   color: #555;
 
   a {
-    color: #4caf50;
+    color: black;
     text-decoration: none;
     transition: color 0.3s;
 
