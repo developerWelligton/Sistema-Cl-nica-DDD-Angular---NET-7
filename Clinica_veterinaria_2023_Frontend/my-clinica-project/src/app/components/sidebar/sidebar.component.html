@@ -1,44 +1,74 @@
-<div class="container-sidebar">
-  <div class="grupo-menu" *ngIf="userRole === 'admin'">
+
+<div class="container-sidebar" [class.expanded]="isExpanded">
+  <div class="container-imput" *ngIf="userRole === 'admin'">
     <div class="container-icone-menu">
       <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(1)"
-      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 1, '':this.menuService.menuSelecionado !== 1}">
+      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 1, '':this.menuService.menuSelecionado !== 1}"
+      *ngIf="!isExpanded">
           Dashboard
       </div>
     </div>
+    <div class="container-imput" *ngIf="userRole === 'admin'">
+      <div class="container-icone-menu" *ngIf="isExpanded">
+       <a href="">#1</a>
+      </div>
+    </div>
 </div>
-  <div class="grupo-menu" *ngIf="userRole === 'admin' || userRole === 'secretaria'">
+  <div  class="container-imput" *ngIf="userRole === 'admin' || userRole === 'secretaria'">
     <div class="container-icone-menu">
       <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(2)"
-      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 2, '':this.menuService.menuSelecionado != 2}">
+      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 2, '':this.menuService.menuSelecionado != 2}"
+      *ngIf="!isExpanded">
           Secretária
       </div>
     </div>
+    <div class="container-imput" *ngIf="userRole === 'admin'">
+      <div class="container-icone-menu" *ngIf="isExpanded">
+       <a href="">#2</a>
+      </div>
+    </div>
   </div>
-  <div class="grupo-menu"  *ngIf="userRole === 'admin' || userRole === 'veterinario'">
+  <div class="container-imput" *ngIf="userRole === 'admin' || userRole === 'veterinario'">
     <div class="container-icone-menu">
       <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(3)"
-      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 3, '':this.menuService.menuSelecionado != 3}">
+      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 3, '':this.menuService.menuSelecionado != 3}"
+      *ngIf="!isExpanded">
           Veterinário
       </div>
     </div>
-  </div>
-  <div class="grupo-menu"  *ngIf="userRole === 'admin' || userRole === 'cliente'">
-    <div class="container-icone-menu">
-      <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(4)"
-      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 4, '':this.menuService.menuSelecionado != 4}">
-          Cliente
+    <div class="container-imput" *ngIf="userRole === 'admin'">
+      <div class="container-icone-menu" *ngIf="isExpanded">
+       <a href="">#3</a>
       </div>
     </div>
   </div>
-  <div class="grupo-menu"  *ngIf="userRole === 'admin'">
+  <div class="container-imput" *ngIf="userRole === 'admin' || userRole === 'cliente'">
     <div class="container-icone-menu">
+      <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(4)"
+      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 4, '':this.menuService.menuSelecionado != 4}"
+      *ngIf="!isExpanded">
+          Cliente
+      </div>
+    </div>
+    <div class="container-imput" *ngIf="userRole === 'admin'">
+      <div class="container-icone-menu" *ngIf="isExpanded">
+       <a href="">#4</a>
+      </div>
+    </div>
+  </div>
+  <div  class="container-imput" *ngIf="userRole === 'admin'">
+    <div class="container-icone-menu" *ngIf="!isExpanded">
       <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(5)"
-      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 5, '':this.menuService.menuSelecionado != 5}">
+      [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 5, '':this.menuService.menuSelecionado != 5}"
+       >
           Admin
       </div>
     </div>
   </div>
-
-
+  <div class="container-imput" *ngIf="userRole === 'admin'">
+    <div class="container-icone-menu" *ngIf="isExpanded">
+     <a href="">#5</a>
+    </div>
+  </div>
+  <button (click)="  toggleSidebar()">+</button>
 </div>

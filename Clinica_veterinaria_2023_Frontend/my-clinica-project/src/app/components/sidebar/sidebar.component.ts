@@ -21,6 +21,12 @@ export class SidebarComponent implements OnInit {
     this.userRole = this.authService.getRole();
     //alert(this.userRole)
   }
+  isExpanded = false;  // by default, the sidebar is collapsed
+
+  toggleSidebar() {
+    this.isExpanded = !this.isExpanded;
+    //alert(this.isExpanded)
+  }
 
   selectMenu(menu:number) {
     switch(menu){

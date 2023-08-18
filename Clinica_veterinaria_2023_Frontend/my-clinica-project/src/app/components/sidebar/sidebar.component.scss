@@ -6,28 +6,53 @@
   padding-top: 72px;
   background: #fff;
 
-  .container-icone-menu {
-    padding: 8px;
-  }
+  .container-imput {
+    .container-icone-menu {
+      padding: 8px;
+    }
 
-  .caixa-menu {
-    width: 94px;
-    height: 42px;
-    background: rgba(128, 128, 128, 0.614);
-    border-radius: 4px;
-    cursor: pointer;
-  }
+    .caixa-menu {
+      width: 94px;
+      height: 42px;
+      background: rgba(128, 128, 128, 0.614);
+      border-radius: 4px;
+      cursor: pointer;
+    }
 
-  .caixa-menu.caixa-menu-select {
-    background: #27ae60;
-  }
+    .caixa-menu.caixa-menu-select {
+      background: #27ae60;
+    }
 
-  .caixa-menu-texto {
-    font-size: 14px;
-    color: #fefefe;
-    font-weight: bold;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    .caixa-menu-texto {
+      font-size: 14px;
+      color: #fefefe;
+      font-weight: bold;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+}
+
+.container-sidebar.expanded {
+  width: 55px;
+  background-color: #27ae60;
+
+  .container-imput {
+    .container-icone-menu {
+      padding: 3px;
+    }
+
+    .caixa-menu {
+      width: 40px;
+      height: 42px;
+      background: rgba(128, 128, 128, 0.614);
+      border-radius: 4px;
+      cursor: pointer;
+    }
+
+    .caixa-menu.caixa-menu-select {
+      background: #27ae60;
+    }
   }
 }
