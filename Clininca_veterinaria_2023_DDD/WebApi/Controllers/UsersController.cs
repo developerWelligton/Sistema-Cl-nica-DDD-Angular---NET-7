@@ -1,4 +1,7 @@
-﻿using Domain.Interfaces.IUsuarioSistemaClinica;
+﻿using Domain.Interfaces.IClientes;
+using Domain.Interfaces.ISecretarias;
+using Domain.Interfaces.IUsuarioSistemaClinica;
+using Domain.Interfaces.IVeterinario;
 using Entities.Entidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
@@ -21,14 +24,27 @@ namespace WebApi.Controllers
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager; // Adicionando o RoleManager
         private readonly InterfaceUsuarioSistemaClinica _interfaceUsuarioSistemaClinica;
+        private readonly InterfaceClientes _interfaceClientes;
+        private readonly InterfaceSecretarias _interfaceSecretarias;
+        private readonly InterfaceVeterinario _interfaceVeterinario;
 
 
-        public UsersController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica) // Injetando o RoleManager no construtor
+        public UsersController(
+            UserManager<ApplicationUser> userManager, 
+            SignInManager<ApplicationUser> signInManager, 
+            RoleManager<IdentityRole> roleManager, 
+            InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica,
+            InterfaceClientes interfaceClientes,
+            InterfaceSecretarias interfaceSecretarias,
+            InterfaceVeterinario interfaceVeterinario) // Injetando o RoleManager no construtor
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager; // Atribuindo RoleManager ao campo
             _interfaceUsuarioSistemaClinica = interfaceUsuarioSistemaClinica;
+            _interfaceClientes = interfaceClientes; // Atribuir a interface
+            _interfaceSecretarias = interfaceSecretarias;
+            _interfaceVeterinario = interfaceVeterinario;
         }
         /// <summary>
         /// Adiciona um novo usuário ao sistema.
@@ -99,7 +115,50 @@ namespace WebApi.Controllers
                     Role = loginDTO.role // Assumindo que LoginDTO tem uma propriedade "role" correspondente
                 };
 
-                await _interfaceUsuarioSistemaClinica.Add(usuarioSistema);
+                await _interfaceUsuarioSistemaClinica.Add(usuarioSistema); 
+
+                if (usuarioSistema.Role.ToLower() == "cliente")
+                {
+                    var cliente = new Cliente
+                    {
+                        Nome = usuarioSistema.Nome,
+                        Email = usuarioSistema.Email,
+                        // Adicione outros campos conforme necessário.
+                        ID_Usuario = usuarioSistema.ID_Usuario
+                    };
+
+                    await _interfaceClientes.Add(cliente);
+                }
+                if (usuarioSistema.Role.ToLower() == "secretaria")
+                {
+                    var secretaria = new Secretaria
+                    {
+                        Nome = usuarioSistema.Nome,
+                        Email = usuarioSistema.Email,
+                        ID_Usuario = usuarioSistema.ID_Usuario,
+                        Endereco = "",
+                        Telefone = ""
+
+                        // You may need to provide values for other properties like Endereco and Telefone too
+                    };
+
+                    await _interfaceSecretarias.Add(secretaria);
+                    // I assumed that you might have an _interfaceSecretaria similar to _interfaceClientes for managing 'Secretaria' entities.
+                }
+                if (usuarioSistema.Role.ToLower() == "veterinario")
+                {
+                    var veterinario = new Veterinario
+                    {
+                        Nome = usuarioSistema.Nome,
+                        Email = usuarioSistema.Email,
+                        ID_Usuario = usuarioSistema.ID_Usuario,
+                        Especializacao = "",
+                        Telefone = ""
+
+                        // You may need to provide values for other properties like Endereco and Telefone too
+                    };
+                    await _interfaceVeterinario.Add(veterinario);
+                }
                 return Ok("Usuario Adicionado!");
             }
             else
