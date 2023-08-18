@@ -19,15 +19,5 @@ export class DashboardComponent {
       this.containerPadding = padding;
     });
   }
-  isExpanded = false;
 
-  toggleSidebar() {
-    this.isExpanded = !this.isExpanded;
-
-    if (this.isExpanded) {
-      this.paddingService.setGlobalPadding('88px 16px 0px 70px');
-    } else {
-      this.paddingService.setGlobalPadding('88px 16px 0px 124px');
-    }
-  }
 }

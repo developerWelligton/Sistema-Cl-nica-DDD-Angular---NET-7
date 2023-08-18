@@ -1,4 +1,3 @@
-
 .container-sidebar {
   position: fixed;
   width: 110px;
@@ -6,10 +5,12 @@
   height: -webkit-fill-available;
   padding-top: 72px;
   background: #fff;
+  transition: width 0.3s ease, background-color 0.3s ease; /* Transição para a largura e cor de fundo */
 
   .container-imput {
     .container-icone-menu {
       padding: 8px;
+      transition: padding 0.3s ease; /* Transição para o padding */
     }
 
     .caixa-menu {
@@ -18,10 +19,12 @@
       background: rgba(128, 128, 128, 0.614);
       border-radius: 4px;
       cursor: pointer;
+      transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease; /* Transição para largura, altura e cor de fundo */
     }
 
     .caixa-menu.caixa-menu-select {
       background: #27ae60;
+      /* A transição já está definida na classe anterior, então não é necessário repetir */
     }
 
     .caixa-menu-texto {
@@ -31,13 +34,14 @@
       display: flex;
       justify-content: center;
       align-items: center;
+      transition: font-size 0.3s ease, color 0.3s ease; /* Transição para o tamanho da fonte e cor */
     }
   }
 }
 
 .container-sidebar.expanded {
   width: 55px;
-  background-color: #27ae60;
+  background-color: whitesmoke;
 
   .container-base {
     padding: 88px 16px 0px 70px;
@@ -46,6 +50,7 @@
   .container-imput {
     .container-icone-menu {
       padding: 3px;
+      transition: padding 0.3s ease; /* Transição para o padding */
     }
 
     .caixa-menu {
@@ -54,10 +59,12 @@
       background: rgba(128, 128, 128, 0.614);
       border-radius: 4px;
       cursor: pointer;
+      transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease; /* Transição para largura, altura e cor de fundo */
     }
 
     .caixa-menu.caixa-menu-select {
       background: #27ae60;
+      /* A transição já está definida na classe anterior, então não é necessário repetir */
     }
   }
 }

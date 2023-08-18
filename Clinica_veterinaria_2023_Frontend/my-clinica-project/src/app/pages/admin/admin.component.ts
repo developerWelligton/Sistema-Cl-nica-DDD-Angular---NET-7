@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { PaddingService } from 'src/app/services/Padding.service';
 import { MenuService } from 'src/app/services/menu.service';
 
 @Component({
@@ -7,10 +8,15 @@ import { MenuService } from 'src/app/services/menu.service';
   styleUrls: ['./admin.component.scss']
 })
 export class AdminComponent {
-  constructor(public menuService:MenuService){
+
+  public containerPadding: string;
+  constructor(public menuService:MenuService,private paddingService: PaddingService){
 
   }
   ngOnInit(){
     this.menuService.menuSelecionado = 5;
+    this.paddingService.globalPadding$.subscribe(padding => {
+      this.containerPadding = padding;
+    });
   }
 }

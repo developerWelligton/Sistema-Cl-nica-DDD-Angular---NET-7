@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
   }
   isExpanded = false;  // by default, the sidebar is collapsed
 
-  toggleSidebar() {
+   toggleSidebar() {
     this.isExpanded = !this.isExpanded;
 
     if (this.isExpanded) {

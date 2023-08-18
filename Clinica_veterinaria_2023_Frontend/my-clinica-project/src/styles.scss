@@ -11,7 +11,7 @@
 body {
   font-family: "Poppins";
   margin: 0;
-  background: red;
+  background: rgb(107, 106, 106);
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -349,32 +349,6 @@ $text-color: #000000; // Texto preto
     }
 }
 
-.container-sidebar.expanded {
-  .container-base {
-    padding: 88px 16px 0px 70px;
-  }
-  width: 55px;
-  background-color: #27ae60;
-
-
-  .container-imput {
-    .container-icone-menu {
-      padding: 3px;
-    }
-
-    .caixa-menu {
-      width: 40px;
-      height: 42px;
-      background: rgba(128, 128, 128, 0.614);
-      border-radius: 4px;
-      cursor: pointer;
-    }
-
-    .caixa-menu.caixa-menu-select {
-      background: #27ae60;
-    }
-  }
-}
 
 
   //ANGULAR MATERIAL STYLE GLOBAL
