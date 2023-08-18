@@ -143,8 +143,7 @@ namespace WebApi.Controllers
             }
 
             userFromDb.Nome = usuarioSistemaClinicaDto.Nome;
-            userFromDb.Email = usuarioSistemaClinicaDto.Email;
-            userFromDb.Senha = usuarioSistemaClinicaDto.Senha;
+            userFromDb.Email = usuarioSistemaClinicaDto.Email; 
             // Adicione mais campos conforme necessário
 
             await _interfaceUsuarioSistemaClinica.Update(userFromDb);

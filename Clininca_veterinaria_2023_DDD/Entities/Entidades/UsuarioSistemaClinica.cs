@@ -24,11 +24,7 @@ namespace Entities.Entidades
         [Required]
         [StringLength(100)]
         public string Email { get; set; }
-
-        [Required]
-        [StringLength(100)]
-        public string Senha { get; set; }
-
+          
         [Required]
         [StringLength(50)]
         public string Role { get; set; }

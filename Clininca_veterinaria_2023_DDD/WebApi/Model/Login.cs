@@ -6,7 +6,8 @@
         public string senha { get;set; }
         public string cpf { get;set; }
         
-        public string role { get;set; } 
-        
+        public string role { get;set; }
+        public string nome { get; set; }
+
     }
 }

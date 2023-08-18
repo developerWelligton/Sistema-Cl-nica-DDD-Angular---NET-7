@@ -1,4 +1,5 @@
-﻿using Entities.Entidades;
+﻿using Domain.Interfaces.IUsuarioSistemaClinica;
+using Entities.Entidades;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -19,12 +20,15 @@ namespace WebApi.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly RoleManager<IdentityRole> _roleManager; // Adicionando o RoleManager
+        private readonly InterfaceUsuarioSistemaClinica _interfaceUsuarioSistemaClinica;
 
-        public UsersController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager) // Injetando o RoleManager no construtor
+
+        public UsersController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager, InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica) // Injetando o RoleManager no construtor
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager; // Atribuindo RoleManager ao campo
+            _interfaceUsuarioSistemaClinica = interfaceUsuarioSistemaClinica;
         }
         /// <summary>
         /// Adiciona um novo usuário ao sistema.
@@ -64,6 +68,7 @@ namespace WebApi.Controllers
                 Email = loginDTO.email,
                 UserName  = loginDTO.email,
                 CPF = loginDTO.cpf
+                
             };
 
             var result = await _userManager.CreateAsync(user, loginDTO.senha);
@@ -86,7 +91,16 @@ namespace WebApi.Controllers
 
             if (response_return.Succeeded)
             {
-                return Ok("Usuario Adicionado! ");
+                // Adicione o usuário ao sistema da clínica depois de adicionar ao sistema principal
+                var usuarioSistema = new UsuarioSistemaClinica
+                {
+                    Nome = loginDTO.nome, // Pode querer usar algo diferente para o nome
+                    Email = loginDTO.email,
+                    Role = loginDTO.role // Assumindo que LoginDTO tem uma propriedade "role" correspondente
+                };
+
+                await _interfaceUsuarioSistemaClinica.Add(usuarioSistema);
+                return Ok("Usuario Adicionado!");
             }
             else
             {
