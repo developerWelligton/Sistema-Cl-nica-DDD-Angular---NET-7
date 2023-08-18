@@ -8,6 +8,7 @@ using System.Threading.Tasks;
 using WebApi.Model;
 using Microsoft.AspNetCore.Authorization;
 using Domain.Interfaces.IClientes;
+using Domain.Interfaces.ISecretarias;
 
 namespace WebApi.Controllers
 {
@@ -21,14 +22,18 @@ namespace WebApi.Controllers
         private readonly InterfaceUsuarioSistemaClinica _interfaceUsuarioSistemaClinica;
         private readonly IUsuarioSistemaClinicaServico _isuarioSistemaClinicaServico;
         private readonly InterfaceClientes _interfaceClientes;
+        private readonly InterfaceSecretarias _interfaceSecretarias;
         public UsuarioSistemaController(
             InterfaceUsuarioSistemaClinica interfaceUsuarioSistemaClinica,
             IUsuarioSistemaClinicaServico isuarioSistemaClinicaServico,
-             InterfaceClientes interfaceClientes)
+            InterfaceClientes interfaceClientes,
+            InterfaceSecretarias interfaceSecretarias 
+             )
         {
             _interfaceUsuarioSistemaClinica = interfaceUsuarioSistemaClinica;
             _isuarioSistemaClinicaServico = isuarioSistemaClinicaServico;
             _interfaceClientes = interfaceClientes; // Atribuir a interface
+            _interfaceSecretarias = interfaceSecretarias;
         }
 
         [HttpGet("/api/BuscarPorNome")]
@@ -83,7 +88,22 @@ namespace WebApi.Controllers
 
                 await _interfaceClientes.Add(cliente);
             }
+            if (usuarioSistemaClinica.Role.ToLower() == "secretaria")
+            {
+                var secretaria = new Secretaria
+                {
+                    Nome = usuarioSistemaClinica.Nome,
+                    Email = usuarioSistemaClinica.Email,
+                    ID_Usuario = usuarioSistemaClinica.ID_Usuario,
+                    Endereco ="",
+                    Telefone =""
 
+                    // You may need to provide values for other properties like Endereco and Telefone too
+                };
+
+                await _interfaceSecretarias.Add(secretaria);
+                // I assumed that you might have an _interfaceSecretaria similar to _interfaceClientes for managing 'Secretaria' entities.
+            }
             return CreatedAtAction(nameof(AdicionarUsuarioClinica), new { id = usuarioSistemaClinica.ID_Usuario }, usuarioSistemaClinica);
         }
 

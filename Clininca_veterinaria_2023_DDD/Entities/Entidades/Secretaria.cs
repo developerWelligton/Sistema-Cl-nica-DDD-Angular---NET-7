@@ -13,24 +13,20 @@ namespace Entities.Entidades
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_Secretaria { get; set; }
-
-        [Required]
+         
         [StringLength(100)]
         public string Nome { get; set; }
-
-        [Required]
+         
         [StringLength(255)]
-        public string Endereco { get; set; }
-
-        [Required]
+        public string? Endereco { get; set; }
+         
         [StringLength(100)]
-        public string Email { get; set; }
-
-        [Required]
+        public string? Email { get; set; }
+         
         [StringLength(20)]
-        public string Telefone { get; set; }
+        public string? Telefone { get; set; }
 
-        [Required]
+        [Required] 
         public int ID_Usuario { get; set; }
 
         [ForeignKey("ID_Usuario")]
