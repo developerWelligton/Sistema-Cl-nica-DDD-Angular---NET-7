@@ -1,3 +1,5 @@
+// src/app/services/Padding.service.ts
+
 import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs';
 
@@ -5,10 +7,15 @@ import { BehaviorSubject } from 'rxjs';
   providedIn: 'root'
 })
 export class PaddingService {
-  private globalPaddingSubject: BehaviorSubject<string> = new BehaviorSubject<string>('88px 16px 0px 128px');
-  globalPadding$ = this.globalPaddingSubject.asObservable();
+
+  private _globalPadding = new BehaviorSubject<string>('88px 16px 0px 124px'); // valor inicial
+
+  // Observable que os componentes podem assinar
+  public globalPadding$ = this._globalPadding.asObservable();
+
+  constructor() { }
 
   setGlobalPadding(padding: string) {
-    this.globalPaddingSubject.next(padding);
+    this._globalPadding.next(padding);
   }
 }

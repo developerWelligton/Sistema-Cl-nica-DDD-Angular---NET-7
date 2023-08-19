@@ -3,6 +3,7 @@ import { MenuService } from './../../services/menu.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaddingService } from 'src/app/services/Padding.service';
+import { GlobalSidebarService } from 'src/app/services/globalSidebar.service';
 
 @Component({
   selector: 'sidebar',
@@ -11,24 +12,28 @@ import { PaddingService } from 'src/app/services/Padding.service';
 })
 export class SidebarComponent implements OnInit {
   userRole: string;
+  isExpanded: boolean;  // Declare a member variable for expanded state
 
   constructor(
     private router: Router,
     public menuService:MenuService,
     private authService: AuthService,
-    private paddingService: PaddingService
+    private paddingService: PaddingService,
+     private globalSidebarService: GlobalSidebarService
   ) {}
 
   ngOnInit(): void {
     this.userRole = this.authService.getRole();
-    //alert(this.userRole)
+    this.isExpanded = this.globalSidebarService.getState(); // Get the current state on initialization
   }
-  isExpanded = false;  // by default, the sidebar is collapsed
 
-   toggleSidebar() {
-    this.isExpanded = !this.isExpanded;
 
-    if (this.isExpanded) {
+  
+  toggleSidebar() {
+    const expanded = this.globalSidebarService.toggle();
+    this.isExpanded = expanded; // Update the local value
+
+    if (expanded) {
       this.paddingService.setGlobalPadding('88px 16px 0px 70px');
     } else {
       this.paddingService.setGlobalPadding('88px 16px 0px 124px');
