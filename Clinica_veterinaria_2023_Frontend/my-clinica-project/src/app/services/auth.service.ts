@@ -61,4 +61,10 @@ export class AuthService {
       localStorage.removeItem(this.token);
     }
 
+
+    logout() {
+      this.excluiToken() ;
+      this.limparDadosUsuario();
+      this.limparToken();
+    }
 }

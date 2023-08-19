@@ -35,7 +35,7 @@ export class CreateUserComponent {
   ngOnInit() {
   //ROLE
   this.userRole = this.authService.getRole();
-  alert(this.userRole)
+  //alert(this.userRole)
 
     this.createUserForm = this.fb.group({
       user_nome: [''],
