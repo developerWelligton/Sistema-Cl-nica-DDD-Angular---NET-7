@@ -16,6 +16,7 @@ import { AuthGuard } from './pages/guard/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /**/
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
 const RxJS = [LoaderInterceptor, HTTPStatus]
@@ -35,7 +36,8 @@ const RxJS = [LoaderInterceptor, HTTPStatus]
     ReactiveFormsModule,
     FormsModule,
 
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    MatProgressSpinnerModule
   ],
   providers: [
     AuthGuard,
