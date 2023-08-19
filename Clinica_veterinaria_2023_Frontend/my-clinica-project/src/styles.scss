@@ -7,6 +7,8 @@
 @import "~@angular/material/prebuilt-themes/deeppurple-amber.css";
 @import "~@ng-select/ng-select/themes/default.theme.css";
 @import '@angular/material/prebuilt-themes/indigo-pink.css';
+// Then import Bootstrap
+@import "../node_modules/bootstrap/scss/bootstrap";
 
 body {
   font-family: "Poppins";
