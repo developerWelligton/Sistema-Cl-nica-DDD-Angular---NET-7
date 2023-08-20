@@ -2,6 +2,7 @@
 
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
+import { PaddingService } from 'src/app/services/Padding.service';
 import { AnimalService } from 'src/app/services/animal.service';
 import { ConsultService } from 'src/app/services/consult.service';
 import { VeterinarioService } from 'src/app/services/veterinario.service';
@@ -34,9 +35,16 @@ export class CreateConsultComponent {
     private consultService: ConsultService,
     private animalService: AnimalService,
     private vetService: VeterinarioService  // Inject VeterinarioService
+    ,private paddingService: PaddingService
   ) {}
 
   ngOnInit() {
+    //padding sidebar
+    this.paddingService.globalPadding$.subscribe(padding => {
+      this.containerPadding = padding;
+      alert(this.containerPadding)
+    });
+
     this.consultaForm = this.fb.group({
       descricao: [''],
       veterinario: [''],
@@ -131,4 +139,7 @@ onSearchVet(term: string) {
       }
     );
 }
+
+
+public containerPadding: string;
 }

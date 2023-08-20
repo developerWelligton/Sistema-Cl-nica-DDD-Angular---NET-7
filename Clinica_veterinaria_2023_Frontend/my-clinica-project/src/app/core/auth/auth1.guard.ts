@@ -15,11 +15,11 @@ export class AuthGuard2 implements CanActivate{
   canActivate(
     route: ActivatedRouteSnapshot,
     state: RouterStateSnapshot): boolean | UrlTree | Observable<boolean | UrlTree> | Promise<boolean | UrlTree> {
-debugger
-    console.log('ativou guarda de rota');
+  //debugger
+    //console.log('ativou guarda de rota');
 
     const currentUser = this.userService.getCurrentUser();
-    console.log('Pegou currentUser', currentUser);
+    //console.log('Pegou currentUser', currentUser);
 
 
     const expectedRoles = route.data['roles'];

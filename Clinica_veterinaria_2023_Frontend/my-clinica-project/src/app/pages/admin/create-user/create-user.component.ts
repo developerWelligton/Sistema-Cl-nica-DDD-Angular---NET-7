@@ -6,6 +6,8 @@ import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the a
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
+import { PaddingService } from 'src/app/services/Padding.service';
+import { Subscription } from 'rxjs';
 
 
 export enum UserGroup {
@@ -23,17 +25,24 @@ export enum UserGroup {
 export class CreateUserComponent {
   createUserForm: FormGroup;
   listUserGroup: { id: string, name: string }[] = [];
-
   userRole: any;
+  //padding
+  private paddingSubscription: Subscription;
+  public containerPadding: string;
 
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
     private router: Router,
-    private userService: UserService
+    private userService: UserService,
+    private paddingService: PaddingService
   ) {}
 
   ngOnInit() {
+    //padding
+    this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
+      this.containerPadding = padding;
+    });
   //ROLE
   this.userRole = this.userService.getCurrentUser()
   //alert(this.userRole)

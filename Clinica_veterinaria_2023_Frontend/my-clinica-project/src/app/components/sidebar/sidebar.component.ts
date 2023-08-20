@@ -28,7 +28,7 @@ export class SidebarComponent implements OnInit {
   ngOnInit(): void {
     this.user=this.userService.getCurrentUser()
     this.userRole = this.user
-    debugger
+    //debugger
     //this.userService.getRole();
     //alert(this.userRole)
     this.isExpanded = this.globalSidebarService.getState(); // Get the current state on initialization
@@ -41,9 +41,9 @@ export class SidebarComponent implements OnInit {
     this.isExpanded = expanded; // Update the local value
 
     if (expanded) {
-      this.paddingService.setGlobalPadding('88px 16px 0px 70px');
+      this.paddingService.setGlobalPadding('88px 16px 0px 0px');
     } else {
-      this.paddingService.setGlobalPadding('88px 16px 0px 124px');
+      this.paddingService.setGlobalPadding('88px 16px 0px 57px');
     }
   }
 
