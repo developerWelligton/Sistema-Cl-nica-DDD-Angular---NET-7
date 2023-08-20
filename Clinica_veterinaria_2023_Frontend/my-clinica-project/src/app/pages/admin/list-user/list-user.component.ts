@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { Subscription } from 'rxjs';
+import { PaddingService } from 'src/app/services/Padding.service';
 import { AdminService } from 'src/app/services/admin.service';
 
 export enum UserGroup {
@@ -14,12 +16,18 @@ export enum UserGroup {
   styleUrls: ['./list-user.component.scss']
 })
 export class ListUserComponent {
-  constructor(private adminService: AdminService) { }
+  constructor(private adminService: AdminService,private paddingService: PaddingService) { }
 
   usersList: any[] = [];
   listUserGroup: { id: string, name: string }[] = [];
-
+  public containerPadding: string;
+   //padding
+   private paddingSubscription: Subscription;
   ngOnInit() {
+     //padding
+     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
+      this.containerPadding = padding;
+    });
     this.populateUserGroups();
     this.fetchUsersFromServiceOrUseMock();
   }

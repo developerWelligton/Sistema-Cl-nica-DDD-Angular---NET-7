@@ -1,17 +1,18 @@
 <div class="container-navbar">
   <div class="navbar">
-      <a  class="logo">Portal Clínica Petz</a>
-      <nav>
-          <ul>
-              <li><a  class="home">Home</a></li>
-              <li class="profile-dropdown">
-                  <a  class="profile">Perfil <span>&#9660;</span></a>
-                  <div class="dropdown-content">
-                      <a >Ver Perfil</a>
-                      <a   (click)="logout()"class="logout">Logout</a>
-                  </div>
-              </li>
-          </ul>
-      </nav>
+    <a class="logo">Portal Clínica Petz</a>
+    <nav>
+      <ul>
+        <li class="profile-dropdown">
+          <a class="profile">Perfil <span>&#9660;</span></a>
+          <div class="dropdown-content">
+            <a>Ver Perfil</a>
+          </div>
+        </li>
+        <li class="mobile">
+          <strong><a (click)="logout()" class="logout">Logout</a></strong>
+        </li>
+      </ul>
+    </nav>
   </div>
 </div>

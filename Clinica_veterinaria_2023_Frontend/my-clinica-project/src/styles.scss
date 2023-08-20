@@ -41,8 +41,8 @@ body {
     .card-header {
       z-index: 3 !important;
       padding: 20px; /* Aumentado para mais espaço */
-      background-color: #9e36ff;
-      box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px rgba(156, 39, 176, 0.4);
+      background-color: #212946;
+      box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #212946;
       border-radius: 8px;
       margin-bottom: 16px;
       color: #fff; /* Para melhorar a visibilidade do texto contra o fundo colorido */
@@ -54,7 +54,7 @@ body {
       }
 
       .card-description {
-        color: #333;
+        color: #ffffff;
         margin: 16px 0;
         text-align: center; /* Alinha o texto ao centro */
       }
@@ -168,7 +168,7 @@ form {
     input,
     textarea,
     button {
-      font-size: 14px;
+      font-size: 10px;
     }
   }
 }

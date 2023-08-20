@@ -68,3 +68,38 @@ nav ul li a:hover, .dropdown-content a:hover {
 .profile-dropdown:hover .dropdown-content {
   display: block;
 }
+
+
+@media screen and (max-width: 400px) {
+  /* Ajuste o tamanho das fontes para telas ainda menores */
+
+  .navbar {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 20px;
+
+
+    .logo {
+      color: #212946;
+      font-size: 20px;
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style-type: none;
+      padding: 0;
+      display: flex;
+      gap: 15px;
+      //background-color: blue;
+      margin-top: 17px;
+    }
+  }
+
+
+
+
+
+
+}

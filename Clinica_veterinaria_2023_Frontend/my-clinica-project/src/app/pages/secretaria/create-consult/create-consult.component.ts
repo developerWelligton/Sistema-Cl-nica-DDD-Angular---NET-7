@@ -42,7 +42,7 @@ export class CreateConsultComponent {
     //padding sidebar
     this.paddingService.globalPadding$.subscribe(padding => {
       this.containerPadding = padding;
-      alert(this.containerPadding)
+      //alert(this.containerPadding)
     });
 
     this.consultaForm = this.fb.group({

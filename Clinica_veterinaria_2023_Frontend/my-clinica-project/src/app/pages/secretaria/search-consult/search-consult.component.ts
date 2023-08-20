@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Subject, debounceTime, switchMap } from 'rxjs';
 import { AnimalService } from 'src/app/services/animal.service';
 import { ClienteService } from 'src/app/services/cliente.service';
+import { PaddingService } from 'src/app/services/Padding.service';
 
 @Component({
   selector: 'app-search-consult',
@@ -21,6 +22,8 @@ export class SearchConsultComponent implements OnInit {
   totalPages: number = 0; // Você deve calcular isso baseado na quantidade total de registros
   searchTerm$ = new Subject<string>();
   consultaForm: FormGroup;
+
+  public containerPadding: string;
 
 
   listAnimals = [
@@ -41,9 +44,15 @@ export class SearchConsultComponent implements OnInit {
     private formBuilder: FormBuilder,
     private animalService: AnimalService,
     private vetService: VeterinarioService,
-    private clienteService: ClienteService) { }
+    private clienteService: ClienteService,private paddingService: PaddingService) { }
 
   ngOnInit(): void {
+    //padding
+    this.paddingService.globalPadding$.subscribe(padding => {
+      this.containerPadding = padding;
+    });
+
+
     this.loadPage(this.currentPage);
     this.consultaForm = this.formBuilder.group({
       cliente: [''],

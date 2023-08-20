@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Route, Router } from '@angular/router';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { MenuService } from 'src/app/services/menu.service';
 
@@ -9,7 +10,7 @@ import { MenuService } from 'src/app/services/menu.service';
 })
 export class SecretariaComponent {
   public containerPadding: string;
-  constructor(public menuService:MenuService,private paddingService: PaddingService){
+  constructor(public menuService:MenuService,private paddingService: PaddingService, private route: Router){
 
 
   }
@@ -18,5 +19,9 @@ export class SecretariaComponent {
     this.paddingService.globalPadding$.subscribe(padding => {
       this.containerPadding = padding;
     });
+  }
+
+  navigateToSecretaria() {
+    this.route.navigate(['/secretaria'])
   }
 }
