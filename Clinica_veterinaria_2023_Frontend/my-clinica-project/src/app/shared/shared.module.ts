@@ -4,7 +4,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
-import { LoaderInterceptor, HTTPStatus } from '../interceptors/loader.interceptor';
 import { CreateConsultComponent } from './create-consult/create-consult.component';
 import { AuthGuard } from '../pages/guard/auth.guard';
 

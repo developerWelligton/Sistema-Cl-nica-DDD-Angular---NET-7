@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, UrlTree, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
-import { HTTPStatus } from 'src/app/interceptors/loader.interceptor';
-import { AuthService } from 'src/app/services/auth.service'; // Replace 'path-to-your-loader-interceptor' with the actual path to your LoaderInterceptor and HTTPStatus
+import { AuthService } from 'src/app/core/auth/auth.service'; // Replace 'path-to-your-loader-interceptor' with the actual path to your LoaderInterceptor and HTTPStatus
 @Injectable({
   providedIn: 'root'
 })
@@ -10,7 +9,6 @@ export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
     private router: Router,
-    private httpStatus: HTTPStatus
   ) {}
 
   canActivate(

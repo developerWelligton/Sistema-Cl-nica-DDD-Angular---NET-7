@@ -10,7 +10,6 @@ import { SecretariaRoutingModule } from './secretaria-routing.module';
 import { SecretariaComponent } from './secretaria.component';
 import { SharedModule } from 'src/app/shared/shared.module';
 import { AuthGuard } from '../guard/auth.guard';
-import { LoaderInterceptor } from 'src/app/interceptors/loader.interceptor';
 import { NotfoundConsultComponent } from './notfound-consult/notfound-consult.component';
 import { CreateConsultComponent } from './create-consult/create-consult.component';
 import { NgSelectModule } from '@ng-select/ng-select';

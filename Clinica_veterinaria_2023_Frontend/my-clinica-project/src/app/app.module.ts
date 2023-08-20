@@ -10,7 +10,6 @@ import { CommonModule, HashLocationStrategy,LocationStrategy } from '@angular/co
 
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HTTPStatus, LoaderInterceptor } from './interceptors/loader.interceptor';
 import { NgxSpinnerModule } from 'ngx-spinner';
 import { AuthGuard } from './pages/guard/auth.guard';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -19,7 +18,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 
-const RxJS = [LoaderInterceptor, HTTPStatus]
 @NgModule({
   declarations: [
     AppComponent,
@@ -40,10 +38,7 @@ const RxJS = [LoaderInterceptor, HTTPStatus]
     MatProgressSpinnerModule
   ],
   providers: [
-    AuthGuard,
-    RxJS,
-    { provide: HTTP_INTERCEPTORS, useClass: LoaderInterceptor, multi: true}
-
+    AuthGuard
   ],
   bootstrap: [AppComponent],
   schemas:[CUSTOM_ELEMENTS_SCHEMA]

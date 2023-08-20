@@ -10,10 +10,4 @@ export class LoginService {
   constructor(private httpClient: HttpClient) {
   }
 
-  private readonly baseUrl = environment.apiUrl; // Usando a propriedade correta
-
-  login(Email: string, Password: string) {
-    debugger
-    return this.httpClient.post<any>(`${this.baseUrl}/api/CreateToken`, { email: Email, password: Password });
-  }
 }

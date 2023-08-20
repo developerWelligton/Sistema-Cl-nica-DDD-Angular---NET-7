@@ -4,7 +4,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
-import { AuthService } from 'src/app/services/auth.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
 
 
 export enum UserGroup {

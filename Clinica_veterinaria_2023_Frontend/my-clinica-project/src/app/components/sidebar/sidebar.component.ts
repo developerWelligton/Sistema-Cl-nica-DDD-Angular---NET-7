@@ -1,9 +1,11 @@
-import { AuthService } from 'src/app/services/auth.service';
+import { UserService } from './../../core/user/user.service';
+import { AuthService } from 'src/app/core/auth/auth.service';
 import { MenuService } from './../../services/menu.service';
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { GlobalSidebarService } from 'src/app/services/globalSidebar.service';
+import { User } from 'src/app/core/user/user';
 
 @Component({
   selector: 'sidebar',
@@ -12,23 +14,28 @@ import { GlobalSidebarService } from 'src/app/services/globalSidebar.service';
 })
 export class SidebarComponent implements OnInit {
   userRole: string;
+  user:any;
   isExpanded: boolean;  // Declare a member variable for expanded state
 
   constructor(
     private router: Router,
     public menuService:MenuService,
-    private authService: AuthService,
+    private userService: UserService,
     private paddingService: PaddingService,
      private globalSidebarService: GlobalSidebarService
   ) {}
 
   ngOnInit(): void {
-    this.userRole = this.authService.getRole();
+    this.user=this.userService.getCurrentUser()
+    this.userRole = this.user
+    debugger
+    //this.userService.getRole();
+    //alert(this.userRole)
     this.isExpanded = this.globalSidebarService.getState(); // Get the current state on initialization
   }
 
 
-  
+
   toggleSidebar() {
     const expanded = this.globalSidebarService.toggle();
     this.isExpanded = expanded; // Update the local value

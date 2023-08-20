@@ -3,7 +3,7 @@ import { Injectable } from '@angular/core';
 import { Observable, catchError, delay, of, tap, throwError } from 'rxjs';
 import { Veterinario } from '../models/veterinario-model';
 import { environment } from 'src/environments/environment';
-import { AuthService } from './auth.service';
+import { AuthService } from '../core/auth/auth.service';
 
 @Injectable({
   providedIn: 'root'
