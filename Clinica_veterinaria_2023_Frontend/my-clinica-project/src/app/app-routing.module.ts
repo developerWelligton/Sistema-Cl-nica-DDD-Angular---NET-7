@@ -20,7 +20,7 @@ const routes: Routes = [
     path: 'dashboard',
     loadChildren: () => import('./pages/dashboard/dashboard.module').then(m => m.DashboardModule),
     canActivate: [AuthGuard2],
-    data: { roles: ['admin', 'secretaria'] }
+    data: { roles: ['admin', 'secretaria','cliente','veterinario'] }
   },
   {
     path: 'secretaria',

@@ -1,6 +1,6 @@
 
 <div class="container-sidebar" [class.expanded]="isExpanded">
-  <div class="container-imput" *ngIf="userRole === 'admin'">
+  <div class="container-imput" *ngIf="userRole === 'admin'|| userRole === 'cliente' || userRole === 'veterinario' || userRole === 'secretario'">
     <div class="container-icone-menu">
       <div class="caixa-menu caixa-menu-texto" (click)="selectMenu(1)"
         [ngClass]="{'caixa-menu-select': this.menuService.menuSelecionado == 1, '':this.menuService.menuSelecionado !== 1}"
@@ -110,5 +110,5 @@
         </svg>
       </a>
     </div>
-  </div> 
+  </div>
 </div>

@@ -1,3 +1,4 @@
+import { UserService } from './../../../core/user/user.service';
 // ... previous imports ...
 
 import { Component } from '@angular/core';
@@ -23,18 +24,18 @@ export class CreateUserComponent {
   createUserForm: FormGroup;
   listUserGroup: { id: string, name: string }[] = [];
 
-  userRole: string = 'secretaria';
+  userRole: any;
 
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
     private router: Router,
-    private authService: AuthService
+    private userService: UserService
   ) {}
 
   ngOnInit() {
   //ROLE
-  this.userRole = this.authService.getRole();
+  this.userRole = this.userService.getCurrentUser()
   //alert(this.userRole)
 
     this.createUserForm = this.fb.group({
