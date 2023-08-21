@@ -1,5 +1,8 @@
-import { Component, Input } from '@angular/core';
+import { userServiceAPI } from 'src/app/services/userAPI.service';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
+import { Router } from '@angular/router';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-user-table',
@@ -7,9 +10,14 @@ import { AdminService } from 'src/app/services/admin.service';
   styleUrls: ['./user-table.component.scss']
 })
 export class UserTableComponent {
-  @Input() usersList: any[] = [];
 
-  constructor(private adminService: AdminService) { }
+  @Input() usersList: any[] = [];
+  @Output() userDeleted: EventEmitter<void> = new EventEmitter<void>();
+
+  constructor(
+    private adminService: AdminService,
+    private userServiceAPI: userServiceAPI,
+    private router:Router) { }
 
   editUser(user: any) {
     // Implemente a lógica para editar o usuário aqui
@@ -22,18 +30,29 @@ export class UserTableComponent {
   }
 
   deleteUser(id: any) {
-    const confirmation = confirm('Você tem certeza que deseja excluir este usuário?');
-    if (confirmation) {
-      this.adminService.deleteUser(id).subscribe(
-        () => {
-          // Após a exclusão bem-sucedida, você pode remover o usuário da lista (se desejar)
+    Swal.fire({
+      title: 'Confirmação',
+      text: 'Você tem certeza que deseja excluir este usuário?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, excluir!',
+      cancelButtonText: 'Cancelar'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.userServiceAPI.deleteUser(id).subscribe({
+          next: () => {
+            console.log('Usuário excluído:', id);
+            Swal.fire('Excluído!', 'O usuário foi excluído.', 'success');
+            this.router.navigate(['/admin/list-user']);
 
-          console.log('Usuário excluído:', id);
-        },
-        error => {
-          console.error('Erro ao excluir o usuário:', error);
-        }
-      );
-    }
+            this.userDeleted.emit();
+          },
+          error: (error) => {
+            console.error('Erro ao excluir o usuário:', error);
+            Swal.fire('Erro!', 'Houve um erro ao excluir o usuário.', 'error');
+          }
+        });
+      }
+    });
   }
 }

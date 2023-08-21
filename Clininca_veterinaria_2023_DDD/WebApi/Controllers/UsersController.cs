@@ -46,6 +46,8 @@ namespace WebApi.Controllers
             _interfaceSecretarias = interfaceSecretarias;
             _interfaceVeterinario = interfaceVeterinario;
         }
+
+
         /// <summary>
         /// Adiciona um novo usuário ao sistema.
         /// </summary>
@@ -83,7 +85,8 @@ namespace WebApi.Controllers
             {
                 Email = loginDTO.email,
                 UserName  = loginDTO.email,
-                CPF = loginDTO.cpf
+                CPF = loginDTO.cpf,
+                Role= loginDTO.role
                 
             };
 
@@ -167,5 +170,63 @@ namespace WebApi.Controllers
             }
 
         }
+
+
+        [AllowAnonymous]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(string), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        [ProducesResponseType(typeof(string), 401)]
+        [HttpPost("/api/ExcluirUsuarioId")]
+        public async Task<IActionResult> ExcluirUsuarioId([FromBody] UserIdDTO userIdDTO)
+            {
+            // Localizar o usuário pelo ID fornecido
+            var user = await _userManager.FindByIdAsync(userIdDTO.id);
+
+            // Se o usuário não for encontrado, retornar um erro
+            if (user == null)
+            {
+                return BadRequest("Usuário não encontrado.");
+            }
+
+            // Tenta excluir o usuário
+            var result = await _userManager.DeleteAsync(user);
+
+            // Se a tentativa de exclusão não for bem-sucedida, retornar um erro
+            if (!result.Succeeded)
+            {
+                return BadRequest(result.Errors.First().Description);
+            }
+
+            // Se o usuário foi excluído com sucesso, retorna uma mensagem de confirmação
+            return Ok("Usuário excluído com sucesso!");
+        }
+
+
+
+        [HttpGet("/api/ListarUsuarios")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(IEnumerable<ApplicationUser>), 200)]
+        [ProducesResponseType(typeof(string), 400)]
+        public async Task<IActionResult> ListarUsuarios()
+        {
+            try
+            {
+                var users = _userManager.Users.ToList();  // Pode ser que você queira fazer isso de forma assíncrona dependendo da sua implementação
+
+                if (users == null || !users.Any())
+                {
+                    return NotFound("Nenhum usuário encontrado.");
+                }
+
+                return Ok(users);
+            }
+            catch (Exception ex)
+            {
+                return BadRequest($"Erro ao listar usuários: {ex.Message}");
+            }
+        }
+
+
     }
 }

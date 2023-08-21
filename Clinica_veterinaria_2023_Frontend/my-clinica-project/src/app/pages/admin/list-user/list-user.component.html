@@ -48,7 +48,7 @@
         </div>
     </div>
     <br>
-    <app-user-table [usersList]="usersList"></app-user-table>
+    <app-user-table [usersList]="usersList" (userDeleted)="fetchUsersFromServiceOrUseMockParent()"></app-user-table>
 
     </div>
   </div>

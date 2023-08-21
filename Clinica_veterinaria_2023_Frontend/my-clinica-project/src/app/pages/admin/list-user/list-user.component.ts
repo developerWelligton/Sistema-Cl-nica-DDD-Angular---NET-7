@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { UserService } from 'src/app/core/user/user.service';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { AdminService } from 'src/app/services/admin.service';
+import { userServiceAPI } from 'src/app/services/userAPI.service';
 
 export enum UserGroup {
   Cliente = 'cliente',
@@ -16,31 +18,39 @@ export enum UserGroup {
   styleUrls: ['./list-user.component.scss']
 })
 export class ListUserComponent {
-  constructor(private adminService: AdminService,private paddingService: PaddingService) { }
+  constructor(
+    private adminService: AdminService,
+    private paddingService: PaddingService,
+    private userServiceAPI: userServiceAPI ) { }
 
   usersList: any[] = [];
   listUserGroup: { id: string, name: string }[] = [];
   public containerPadding: string;
    //padding
    private paddingSubscription: Subscription;
+
+
+
   ngOnInit() {
      //padding
      this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
       this.containerPadding = padding;
     });
+
     this.populateUserGroups();
     this.fetchUsersFromServiceOrUseMock();
   }
 
   private fetchUsersFromServiceOrUseMock(): void {
-    this.adminService.getAllUsers().subscribe(
+    this.userServiceAPI.getAllUsers().subscribe(
       data => {
-        this.usersList = data;
         console.log(data);
+
+        this.usersList = data
       },
       error => {
         console.error('Error fetching users:', error);
-        this.usersList = this.MOCK_DATA; // Using the mock data below
+        //this.usersList = this.MOCK_DATA; // Using the mock data below
       }
     );
   }
@@ -70,5 +80,9 @@ export class ListUserComponent {
       user.email.toLowerCase().includes(emailFilterValue) &&
       user.role.toLowerCase().includes(roleFilterValue)
     );
+  }
+
+  public fetchUsersFromServiceOrUseMockParent(): void {
+    this.fetchUsersFromServiceOrUseMock();
   }
 }

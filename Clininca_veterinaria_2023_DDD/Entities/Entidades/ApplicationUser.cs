@@ -12,5 +12,8 @@ namespace Entities.Entidades
     {
         [Column("USR_CPF")]
         public string CPF { get;set; }
+
+        [Column("USR_ROLE")]
+        public string Role { get; set; }
     }
 }
