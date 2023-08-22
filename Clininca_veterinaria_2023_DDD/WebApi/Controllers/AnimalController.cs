@@ -33,8 +33,8 @@ namespace WebApi.Controllers
 
             var animal = new Animal
             {
-                Nome = animalDto.Nome, 
-               // ID_Cliente = animalDto.ID_Cliente
+                Nome = animalDto.Nome,
+                ID_Cliente = animalDto.ID_Cliente  // Defina o ID_Cliente aqui
             };
 
             await _InterfaceAnimal.Add(animal);

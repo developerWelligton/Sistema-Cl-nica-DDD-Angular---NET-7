@@ -61,6 +61,7 @@ namespace WebApi.Controllers
 
             var clientesDto = clientes.Select(c => new ClienteDto
             {
+                ID_Cliente = c.ID_Cliente, // Mapeie o ID_Cliente aqui
                 Nome = c.Nome,
                 Endereco = c.Endereco,
                 Email = c.Email,
