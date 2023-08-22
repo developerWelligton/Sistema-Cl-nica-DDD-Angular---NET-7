@@ -15,6 +15,7 @@ import { CreateConsultComponent } from './create-consult/create-consult.componen
 import { NgSelectModule } from '@ng-select/ng-select';
 import { SearchConsultComponent } from './search-consult/search-consult.component';
 import { AdminModule } from '../admin/admin.module';
+import { CreateAnimalComponent } from './create-animal/create-animal.component';
 
 @NgModule({
   declarations: [
@@ -22,6 +23,7 @@ import { AdminModule } from '../admin/admin.module';
     NotfoundConsultComponent,
     CreateConsultComponent,
     SearchConsultComponent,
+    CreateAnimalComponent
   ],
   imports: [
     CommonModule,

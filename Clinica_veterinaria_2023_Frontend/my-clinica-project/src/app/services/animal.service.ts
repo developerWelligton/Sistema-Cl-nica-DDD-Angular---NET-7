@@ -8,10 +8,22 @@ import { environment } from 'src/environments/environment';
   providedIn: 'root'
 })
 export class AnimalService {
-
   private baseUrl = `${environment.apiUrl}/api`;
-
   constructor(private http: HttpClient) { }
+
+
+  createAnimalByCliente(animal: { nome: string, iD_Cliente: number }): Observable<any> {
+    return this.http.post<any[]>(`${this.baseUrl}/Animal`, animal);
+  }
+
+
+  getAllClientes() {
+    throw new Error('Method not implemented.');
+  }
+
+
+
+
 
   getAllAnimals() {
     return this.http.get(`${this.baseUrl}/Animal`);

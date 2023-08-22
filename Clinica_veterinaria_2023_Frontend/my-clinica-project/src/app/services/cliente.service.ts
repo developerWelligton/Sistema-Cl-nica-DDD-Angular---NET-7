@@ -1,8 +1,7 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, delay, of } from 'rxjs';
-import { Veterinario } from '../models/veterinario-model';
-import { Cliente } from '../models/cliente-model';
+import { Cliente } from '../models/cliente.model';
 import { environment } from 'src/environments/environment';
 //FAZER environment
 
@@ -17,6 +16,7 @@ export class ClienteService {
   constructor(private http: HttpClient) { }
 
   getAllCliente() {
+    debugger
     return this.http.get(`${this.baseUrl}/Clientes`);
   }
 

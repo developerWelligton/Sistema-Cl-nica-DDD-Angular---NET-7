@@ -6,6 +6,7 @@ import { CreateConsultComponent } from './create-consult/create-consult.componen
 import { SearchConsultComponent } from './search-consult/search-consult.component';
 import { CreateUserComponent } from '../admin/create-user/create-user.component';
 import { ListUserComponent } from '../admin/list-user/list-user.component';
+import { CreateAnimalComponent } from './create-animal/create-animal.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path:'list-user',
     component:ListUserComponent
+  },
+  {
+    path:'create-animal',
+    component: CreateAnimalComponent
   },
   // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
   {
