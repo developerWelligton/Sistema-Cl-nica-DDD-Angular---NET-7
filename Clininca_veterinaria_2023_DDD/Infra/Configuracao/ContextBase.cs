@@ -64,6 +64,14 @@ namespace Infra.Configuracao
          .HasForeignKey(e => e.ClienteId)
          .OnDelete(DeleteBehavior.Cascade);  // Ou DeleteBehavior.Restrict, dependendo de suas necessidades
 
+            //cliente ter varios animais
+            builder.Entity<Cliente>()
+             .HasMany(c => c.Animais)  // Supondo que 'Animais' seja o nome da ICollection em 'Cliente'
+             .WithOne(a => a.Cliente)
+             .HasForeignKey(a => a.ID_Cliente)
+             .OnDelete(DeleteBehavior.Cascade);  // Deletando o cliente deletará todos os seus animais
+
+
 
 
             base.OnModelCreating(builder);

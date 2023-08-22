@@ -41,16 +41,39 @@ namespace WebApi.Controllers
                 ID_Usuario = clienteDto.ID_Usuario
             };
 
+            // Mapear os animais, se fornecidos
+            if (clienteDto.Animais != null && clienteDto.Animais.Any())
+            {
+                cliente.Animais = clienteDto.Animais.Select(a => new Animal { Nome = a.Nome }).ToList();
+            }
+
             await _interfaceClientes.Add(cliente);
 
             return CreatedAtAction(nameof(AdicionarCliente), new { id = cliente.ID_Cliente }, clienteDto);
         }
 
+        //GET ALL CLIENTE E SEUS ANIMAIS
         [HttpGet("/api/Clientes")]
         [Produces("application/json")]
-        public async Task<ActionResult<IEnumerable<Cliente>>> ListarClientes()
+        public async Task<ActionResult<IEnumerable<ClienteDto>>> ListarClientes()
         {
-            return Ok(await _interfaceClientes.List());
+            var clientes = await _interfaceClientes.ListarClientesComAnimais();
+
+            var clientesDto = clientes.Select(c => new ClienteDto
+            {
+                Nome = c.Nome,
+                Endereco = c.Endereco,
+                Email = c.Email,
+                Telefone = c.Telefone,
+                ID_Usuario = c.ID_Usuario,
+                Animais = c.Animais.Select(a => new AnimalDto
+                {
+                    Nome = a.Nome
+                    // Mapeie outras propriedades do Animal aqui, se necessário.
+                }).ToList()
+            }).ToList();
+
+            return Ok(clientesDto);
         }
 
         [HttpPut("{id}")]

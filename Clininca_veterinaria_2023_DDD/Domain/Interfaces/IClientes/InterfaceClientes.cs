@@ -1,4 +1,5 @@
-﻿using Domain.Interfaces.Generics;
+﻿
+using Domain.Interfaces.Generics;
 using Entities;
 using Entities.Entidades;
 using System;
@@ -33,5 +34,6 @@ namespace Domain.Interfaces.IClientes
         Task<IEnumerable<Cliente>> SearchByName(string term);
          
         Task<Cliente> BuscarClientePorIdUsuarioSistema(int idUsuarioSistema);
+        Task<IEnumerable<Cliente>> ListarClientesComAnimais();
     }
 }

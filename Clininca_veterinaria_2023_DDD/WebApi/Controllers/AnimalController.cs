@@ -34,7 +34,7 @@ namespace WebApi.Controllers
             var animal = new Animal
             {
                 Nome = animalDto.Nome, 
-                ID_Cliente = animalDto.ID_Cliente
+               // ID_Cliente = animalDto.ID_Cliente
             };
 
             await _InterfaceAnimal.Add(animal);
@@ -73,7 +73,7 @@ namespace WebApi.Controllers
             }
 
             animal.Nome = animalDto.Nome; 
-            animal.ID_Cliente = animalDto.ID_Cliente;
+            //animal.ID_Cliente = animalDto.ID_Cliente;
 
             await _InterfaceAnimal.Update(animal);
 

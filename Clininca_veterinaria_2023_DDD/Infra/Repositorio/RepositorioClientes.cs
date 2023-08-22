@@ -110,5 +110,16 @@ namespace Infra.Repositorio
             }
         }
 
+        public async Task<IEnumerable<Cliente>> ListarClientesComAnimais()
+        {
+            using (var context = new ContextBase(_optionsBuilder))
+            {
+                return await context.Clientes
+                    .Include(c => c.Animais)  // Aqui você faz o Eager Loading dos animais
+                    .AsNoTracking()
+                    .ToListAsync();
+            }
+        }
+
     }
 }
