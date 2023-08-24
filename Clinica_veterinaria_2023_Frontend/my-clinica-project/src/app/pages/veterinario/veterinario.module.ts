@@ -8,10 +8,14 @@ import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
 import { VeterinarioRoutingModule } from './veterinario-routing.module';
 import { VeterinarioComponent } from './veterinario.component';
+import { TableConsultComponent } from './list-consult/table-consult/table-consult.component';
+import { ListConsultComponent } from './list-consult/list-consult.component';
 
 @NgModule({
   declarations: [
-   VeterinarioComponent
+   VeterinarioComponent,
+   TableConsultComponent,
+   ListConsultComponent
   ],
   imports: [
     CommonModule,
