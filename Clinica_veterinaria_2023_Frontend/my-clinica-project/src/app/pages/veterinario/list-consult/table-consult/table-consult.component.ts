@@ -12,28 +12,6 @@ import Swal from 'sweetalert2';
 export class TableConsultComponent {
 
   @Input() consultList: any[] = [];
- // Lista Mockada
- mockConsultas = [
-  {
-    id: 1,
-    cliente: 'João',
-    animal: 'Fido',
-    data: '2023-08-24',
-    horaInicio: '10:00',
-    horaFim: '11:00',
-    status: 'Pendente'
-  },
-  {
-    id: 2,
-    cliente: 'Maria',
-    animal: 'Buddy',
-    data: '2023-08-25',
-    horaInicio: '14:00',
-    horaFim: '15:00',
-    status: 'Concluído'
-  },
-  // ... outros registros
-];
   constructor(
     private adminService: AdminService,
     private userServiceAPI: userServiceAPI,
