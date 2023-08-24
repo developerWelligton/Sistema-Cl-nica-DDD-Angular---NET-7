@@ -44,12 +44,20 @@
       (search)="onSearchAni($event.term)"
       [clearable]="true"></ng-select>
 
-      <label for="data_consulta">Data da Consulta</label>
-      <input type="date" formControlName="dataConsulta">
+      <label for="dataMarcacao">Data de Marcação</label>
+      <input type="datetime-local" formControlName="dataMarcacao">
+
+      <label for="inicioConsulta">Início da Consulta</label>
+      <input type="datetime-local" formControlName="inicioConsulta">
+
+      <label for="fimConsulta">Fim da Consulta</label>
+      <input type="datetime-local" formControlName="fimConsulta">
+
 
       <button type="submit">Enviar</button>
 
     </form>
+
 
 
   </div>

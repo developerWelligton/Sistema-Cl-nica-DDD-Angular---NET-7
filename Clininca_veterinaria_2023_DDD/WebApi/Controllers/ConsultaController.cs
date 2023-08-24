@@ -54,7 +54,7 @@ namespace WebApi.Controllers
                 Descricao = consultaDto.Descricao,
                 ID_Veterinario = consultaDto.ID_Veterinario,
                 ID_Animal = consultaDto.ID_Animal,
-                Status = (StatusConsulta)consultaDto.Status // Fazendo cast do enum
+                Status = 0  
             };
 
             await _interfaceConsulta.Add(consulta);

@@ -17,6 +17,10 @@ interface Veterinario {
 })
 export class CreateConsultComponent {
   consultaForm: FormGroup;
+
+  // Assume you have a listStatus array like this:
+
+
   listVeterinarios = [
     { id: 1, name: 'Dr. Smith' },
     { id: 2, name: 'Dr. Jane' },
@@ -49,7 +53,11 @@ export class CreateConsultComponent {
       descricao: [''],
       veterinario: [''],
       animal: [''],
-      dataConsulta: ['']
+      dataConsulta: [''],  // This field is now optional
+      dataMarcacao: [''],
+      inicioConsulta: [''],
+      fimConsulta: [''],
+      status: ['']
     });
 
     this.animalService.getAllAnimals().subscribe(
@@ -115,30 +123,35 @@ onSearchVet(term: string) {
 }
 
 
-  submitForm() {
-    const formData = this.consultaForm.value;
+submitForm() {
+  debugger
+  const formData = this.consultaForm.value;
 
-    const payload = {
-      dataConsulta: formData.dataConsulta,
-      descricao: formData.descricao,
-      iD_Veterinario: formData.veterinario.id,
-      iD_Animal: formData.animal.id
-    };
+  const payload = {
+    dataMarcacao: formData.dataMarcacao,
+    inicioConsulta: formData.inicioConsulta,
+    fimConsulta: formData.fimConsulta,
+    descricao: formData.descricao,
+    iD_Veterinario: formData.veterinario.id,
+    iD_Animal: formData.animal.id,
+    status: formData.status.id  // Assuming status is an object with an 'id' property
+  };
 
-    this.consultService.createConsulta(payload).subscribe(
-      response => {
-        console.log('Consulta created:', response);
-        alert('Consulta successfully created!');
+  this.consultService.createConsulta(payload).subscribe(
+    response => {
+      console.log('Consulta created:', response);
+      alert('Consulta successfully created!');
 
-        // Reset the form after successful submission
-        this.consultaForm.reset();
-      },
-      error => {
-        console.error('There was an error:', error);
-        alert('Error creating consulta!');
-      }
-    );
+      // Reset the form after successful submission
+      this.consultaForm.reset();
+    },
+    error => {
+      console.error('There was an error:', error);
+      alert('Error creating consulta!');
+    }
+  );
 }
+
 
 
 public containerPadding: string;
