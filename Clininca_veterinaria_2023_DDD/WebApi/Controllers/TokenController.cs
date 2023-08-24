@@ -6,6 +6,9 @@ using Microsoft.AspNetCore.Mvc;
 using WebApi.Token;
 using WebApi.Models;
 using System.Security.Claims;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Text;
 
 namespace WebApi.Controllers
 {
@@ -84,6 +87,10 @@ namespace WebApi.Controllers
                     tokenBuilder.AddClaim(ClaimTypes.Role, role);
                 }
 
+                // Add UserId as a claim
+                tokenBuilder.AddClaim("UserId", user.Id);  // Adicionando UserId como um claim
+
+
                 var token = tokenBuilder.Builder();
 
                 return Ok(token.value);
@@ -92,6 +99,44 @@ namespace WebApi.Controllers
             {
                 return Unauthorized();
             }
+        }
+        [HttpGet("/api/GetCurrentUser")]
+        [Produces("application/json")]
+        [ProducesResponseType(typeof(ApplicationUser), 200)]
+        [ProducesResponseType(401)]
+        [ProducesResponseType(404)]
+        public Task<IActionResult> GetCurrentUser(string token)
+        {
+            // Chave secreta usada para assinar o token. 
+            // Deve ser a mesma que você usou para criar o token.
+            var key = "Secret_Key-12345678";
+
+            var tokenHandler = new JwtSecurityTokenHandler();
+            var validationParameters = new TokenValidationParameters
+            {
+                ValidateLifetime = true,
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(key)),
+                ValidateIssuer = false,
+                ValidateAudience = false,
+            };
+
+            SecurityToken validatedToken;
+            try
+            {
+                tokenHandler.ValidateToken(token, validationParameters, out validatedToken);
+            }
+            catch
+            {
+                return Task.FromResult((IActionResult)Unauthorized());
+            }
+
+            var jwtToken = (JwtSecurityToken)validatedToken;
+            var userId = jwtToken.Claims.First(x => x.Type == "UserId").Value;
+
+            // Agora você tem o UserId e pode buscar o usuário pelo UserId, etc...
+
+            return Task.FromResult((IActionResult)Ok(userId));
         }
     }
 }
