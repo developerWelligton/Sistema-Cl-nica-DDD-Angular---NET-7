@@ -48,16 +48,21 @@ namespace WebApi.Controllers
 
             var consulta = new Consulta
             {
-                DataConsulta = consultaDto.DataConsulta,
+                DataMarcacao = DateTime.Now, // Ou você poderia adicionar este campo ao DTO e pegar de consultaDto.DataMarcacao
+                InicioConsulta = consultaDto.InicioConsulta,
+                FimConsulta = consultaDto.FimConsulta,
                 Descricao = consultaDto.Descricao,
                 ID_Veterinario = consultaDto.ID_Veterinario,
-                ID_Animal = consultaDto.ID_Animal
+                ID_Animal = consultaDto.ID_Animal,
+                Status = (StatusConsulta)consultaDto.Status // Fazendo cast do enum
             };
 
             await _interfaceConsulta.Add(consulta);
 
             return CreatedAtAction(nameof(AdicionarConsulta), new { id = consulta.ID_Consulta }, consultaDto);
         }
+
+
 
         [HttpGet("/api/Consultas")]
         [Produces("application/json")]
@@ -66,6 +71,7 @@ namespace WebApi.Controllers
             return Ok(await _interfaceConsulta.List());
         }
 
+        /*
         [HttpPut("{id}")]
         [Produces("application/json")]
         public async Task<IActionResult> AtualizarConsulta(int id, [FromBody] ConsultaDto consultaDto)
@@ -100,7 +106,9 @@ namespace WebApi.Controllers
 
             return NoContent();
         }
+        */
 
+        /*
         [HttpGet("/api/Consultas/Detalhadas")]
         [Produces("application/json")]
         public async Task<ActionResult<object>> ListarConsultasDetalhadas(
@@ -148,7 +156,7 @@ namespace WebApi.Controllers
                 Total = totalConsultas,
                 Consultas = consultaDetalhada
             });
-        }
+        }*/
 
          
     }

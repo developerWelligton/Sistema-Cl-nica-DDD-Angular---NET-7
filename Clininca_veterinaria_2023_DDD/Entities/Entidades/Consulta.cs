@@ -1,13 +1,15 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace Entities.Entidades
 {
+    public enum StatusConsulta
+    {
+        Pendente,
+        Concluido
+    }
+
     [Table("Consulta")]
     public class Consulta
     {
@@ -16,7 +18,13 @@ namespace Entities.Entidades
         public int ID_Consulta { get; set; }
 
         [Required]
-        public DateTime DataConsulta { get; set; }
+        public DateTime DataMarcacao { get; set; } // Data em que a consulta foi marcada
+
+        [Required]
+        public DateTime InicioConsulta { get; set; }
+
+        [Required]
+        public DateTime FimConsulta { get; set; }
 
         [Required]
         [StringLength(255)]
@@ -33,5 +41,8 @@ namespace Entities.Entidades
 
         [ForeignKey("ID_Animal")]
         public Animal Animal { get; set; }
+
+        [Required]
+        public StatusConsulta Status { get; set; }
     }
 }

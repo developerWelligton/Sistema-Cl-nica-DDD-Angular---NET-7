@@ -43,6 +43,12 @@ namespace Infra.Repositorio
             }
         }
 
+        public Task<IList<Consulta>> BuscarConsultasPorData(DateTime dataConsulta)
+        {
+            throw new NotImplementedException();
+        }
+
+        /*
         public async Task<IList<Consulta>> BuscarConsultasPorData(DateTime dataConsulta)
         {
             using (var banco = new ContextBase(_optionsBuilder))
@@ -51,7 +57,7 @@ namespace Infra.Repositorio
                             .Where(c => c.DataConsulta.Date == dataConsulta.Date)
                             .ToListAsync();
             }
-        }
+        }*/
 
         public async Task<IList<Consulta>> BuscarConsultasPorVeterinario(int idVeterinario)
         {
@@ -83,8 +89,13 @@ namespace Infra.Repositorio
             }
         }
 
+        public Task<IList<Consulta>> ListWithFilters(string clienteNome = null, string animalNome = null, string veterinarioNome = null, DateTime? dataConsulta = null)
+        {
+            throw new NotImplementedException();
+        }
 
 
+        /*
         public async Task<IList<Consulta>> ListWithFilters(
      string clienteNome = null,
      string animalNome = null,
@@ -116,7 +127,7 @@ namespace Infra.Repositorio
 
                 return await consultas.ToListAsync();
             }
-        }
-         
+        }*/
+
     }
 } 
