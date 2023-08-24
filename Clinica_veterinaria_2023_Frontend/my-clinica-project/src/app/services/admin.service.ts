@@ -42,7 +42,7 @@ export class AdminService {
                 const transformedData = {
                   email: data.user_email,
                   senha: data.user_senha,
-                  cpf:"XXXXX",
+                  cpf:data.user_cpf,
                   role: data.user_group,
                   nome: data.user_nome,
 

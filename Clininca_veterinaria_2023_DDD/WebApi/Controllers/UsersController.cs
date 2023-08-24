@@ -115,7 +115,8 @@ namespace WebApi.Controllers
                 {
                     Nome = loginDTO.nome, // Pode querer usar algo diferente para o nome
                     Email = loginDTO.email,
-                    Role = loginDTO.role // Assumindo que LoginDTO tem uma propriedade "role" correspondente
+                    Role = loginDTO.role, // Assumindo que LoginDTO tem uma propriedade "role" correspondente
+                    CPF = loginDTO.cpf
                 };
 
                 await _interfaceUsuarioSistemaClinica.Add(usuarioSistema); 

@@ -46,9 +46,10 @@ export class CreateUserComponent {
   //ROLE
   this.userRole = this.userService.getCurrentUser()
   //alert(this.userRole)
-
+debugger
     this.createUserForm = this.fb.group({
       user_nome: [''],
+      user_cpf:[''],
       user_email: [''],
       user_senha: [''],
       user_group:['']
