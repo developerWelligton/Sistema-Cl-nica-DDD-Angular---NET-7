@@ -2,24 +2,32 @@
   <table class="table-erp">
     <thead>
       <tr>
-        <th>Email</th>
-        <th>Role</th>
-        <th>CPF</th>
-        <th>Ações</th>
+        <th>ID</th>
+        <th>CLIENTE</th>
+        <th>ANIMAL</th>
+        <th>DATA</th>
+        <th>HORA INÍCIO</th>
+        <th>HORA FIM</th>
+        <th>STATUS</th>
+        <th>AÇÕES</th>
       </tr>
     </thead>
     <tbody>
-      <!-- <tr *ngFor="let user of usersList">
-        <td>{{ user.email }}</td>
-        <td>{{ user.role }}</td>
-        <td>{{ user.cpf }}</td>
+      <!-- Iterando através da lista mockada -->
+      <tr *ngFor="let consulta of mockConsultas">
+        <td>{{ consulta.id }}</td>
+        <td>{{ consulta.cliente }}</td>
+        <td>{{ consulta.animal }}</td>
+        <td>{{ consulta.data }}</td>
+        <td>{{ consulta.horaInicio }}</td>
+        <td>{{ consulta.horaFim }}</td>
+        <td>{{ consulta.status }}</td>
         <td>
-          <a href="#" (click)="editUser(user)">Editar</a> |
-          <a href="#" (click)="viewUser(user)">Visualizar</a> |
-          <button type="button" class="btn btn-warning" (click)="deleteUser(user.id)" >Excluir</button>
-
+          <!-- Aqui você pode adicionar botões para ações como editar, excluir, etc. -->
+          <button>Editar</button>
+          <button>Excluir</button>
         </td>
-      </tr> -->
+      </tr>
     </tbody>
   </table>
 </div>

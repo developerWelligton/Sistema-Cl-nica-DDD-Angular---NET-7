@@ -22,6 +22,28 @@ export class ListConsultComponent {
     private adminService: AdminService,
     private paddingService: PaddingService,
     private userServiceAPI: userServiceAPI ) { }
+     // Lista Mockada
+ mockConsultas = [
+  {
+    id: 1,
+    cliente: 'João',
+    animal: 'Fido',
+    data: '2023-08-24',
+    horaInicio: '10:00',
+    horaFim: '11:00',
+    status: 'Pendente'
+  },
+  {
+    id: 2,
+    cliente: 'Maria',
+    animal: 'Buddy',
+    data: '2023-08-25',
+    horaInicio: '14:00',
+    horaFim: '15:00',
+    status: 'Concluído'
+  },
+  // ... outros registros
+];
 
   usersList: any[] = [];
   listUserGroup: { id: string, name: string }[] = [];
