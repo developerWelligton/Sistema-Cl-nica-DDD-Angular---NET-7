@@ -105,11 +105,9 @@ namespace WebApi.Controllers
         [ProducesResponseType(typeof(ApplicationUser), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
-        public Task<IActionResult> GetCurrentUser(string token)
+        public async Task<IActionResult> GetCurrentUser(string token)
         {
-            // Chave secreta usada para assinar o token. 
-            // Deve ser a mesma que você usou para criar o token.
-            var key = "Secret_Key-12345678";
+            var key = "Secret_Key-12345678";  // A mesma chave usada para gerar o token
 
             var tokenHandler = new JwtSecurityTokenHandler();
             var validationParameters = new TokenValidationParameters
@@ -128,15 +126,23 @@ namespace WebApi.Controllers
             }
             catch
             {
-                return Task.FromResult((IActionResult)Unauthorized());
+                return Unauthorized();
             }
 
             var jwtToken = (JwtSecurityToken)validatedToken;
             var userId = jwtToken.Claims.First(x => x.Type == "UserId").Value;
 
-            // Agora você tem o UserId e pode buscar o usuário pelo UserId, etc...
+            // Usando UserManager para buscar o ApplicationUser pelo UserId
+            var user = await _userManager.FindByIdAsync(userId);
+            if (user == null)
+            {
+                return NotFound("User not found");
+            }
 
-            return Task.FromResult((IActionResult)Ok(userId));
+            // Agora você pode acessar o CPF ou qualquer outra propriedade do ApplicationUser
+            var cpf = user.CPF;
+
+            return Ok(new { UserId = userId, CPF = cpf });
         }
     }
 }
