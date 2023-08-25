@@ -28,6 +28,8 @@ namespace Domain.Servicos
             if (valido)
                 await _interfaceUsuarioSistemaClinica.Add(usuarioSistemaClinica);
         }
+
+
     }
 
 }

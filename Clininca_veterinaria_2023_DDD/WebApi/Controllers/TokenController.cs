@@ -9,6 +9,8 @@ using System.Security.Claims;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
+using Microsoft.EntityFrameworkCore;
+using Domain.Interfaces.IUsuarioSistemaClinica;
 
 namespace WebApi.Controllers
 {
@@ -21,13 +23,17 @@ namespace WebApi.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly RoleManager<IdentityRole> _roleManager; 
+        private readonly InterfaceUsuarioSistemaClinica _usuarioSistemaClinica;
 
-        public TokenController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, RoleManager<IdentityRole> roleManager)
+
+        public TokenController(UserManager<ApplicationUser> userManager, SignInManager<ApplicationUser> signInManager, 
+            RoleManager<IdentityRole> roleManager, InterfaceUsuarioSistemaClinica usuarioSistemaClinica)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _roleManager = roleManager;
+            _usuarioSistemaClinica = usuarioSistemaClinica;
         }
 
         /// <summary>
@@ -102,7 +108,7 @@ namespace WebApi.Controllers
         }
         [HttpGet("/api/GetCurrentUser")]
         [Produces("application/json")]
-        [ProducesResponseType(typeof(ApplicationUser), 200)]
+        [ProducesResponseType(typeof(UsuarioSistemaClinica), 200)]
         [ProducesResponseType(401)]
         [ProducesResponseType(404)]
         public async Task<IActionResult> GetCurrentUser(string token)
@@ -131,18 +137,24 @@ namespace WebApi.Controllers
 
             var jwtToken = (JwtSecurityToken)validatedToken;
             var userId = jwtToken.Claims.First(x => x.Type == "UserId").Value;
-
-            // Usando UserManager para buscar o ApplicationUser pelo UserId
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
+              // Supondo que userId aqui é o CPF, ajuste conforme sua lógica
+                                                                             // Usando a interface para buscar o ApplicationUser pelo UserId.
+            ApplicationUser applicationUser = await _userManager.FindByIdAsync(userId);
+            if (applicationUser == null)
             {
                 return NotFound("User not found");
             }
 
-            // Agora você pode acessar o CPF ou qualquer outra propriedade do ApplicationUser
-            var cpf = user.CPF;
+            // Agora usando a interface para buscar o UsuarioSistemaClinica pelo CPF.
+            var usuarioSistemaClinica = await _usuarioSistemaClinica.GetUserByCPFAsync(applicationUser.CPF);
+            if (usuarioSistemaClinica == null)
+            {
+                return NotFound("User not found in UsuarioSistemaClinica");
+            }
 
-            return Ok(new { UserId = userId, CPF = cpf });
+            return Ok(new { UserId = userId, ID_Usuario = usuarioSistemaClinica.ID_Usuario });
+
         }
+
     }
 }

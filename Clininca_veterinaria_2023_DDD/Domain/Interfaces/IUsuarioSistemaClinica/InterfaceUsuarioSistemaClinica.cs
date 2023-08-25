@@ -27,9 +27,9 @@ namespace Domain.Interfaces.IUsuarioSistemaClinica
         Task<UsuarioSistemaClinica> BuscarUsuarioPorIdUsuarioSistema(int id);
 
         // Outros métodos personalizados conforme as necessidades do sistema...
-
-        // Nota: Lembre-se de que você pode adicionar mais métodos aqui para ações específicas 
-        // relacionadas aos usuários do sistema da clínica na sua aplicação.
+         
+        // Método para buscar o usuário pelo CPF usando SQL nativo
+        Task<UsuarioSistemaClinica> GetUserByCPFAsync(string cpf);
 
     }
 }

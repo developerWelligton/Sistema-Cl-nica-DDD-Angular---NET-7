@@ -65,6 +65,17 @@ namespace Infra.Repositorio
             throw new NotImplementedException();
         }
 
+        public async Task<UsuarioSistemaClinica> GetUserByCPFAsync(string cpf)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                var query = "SELECT * FROM UsuarioSistemaClinica WHERE CPF = {0}";
+                var usuario = await banco.UsuarioSistemaClinicas.FromSqlRaw(query, cpf).FirstOrDefaultAsync();
+                return usuario;
+            }
+        }
+
+
         public async Task<bool> VerificarPermissao(int idUsuario, string acao)
         {
             using (var banco = new ContextBase(_optionsBuilder))
@@ -80,5 +91,7 @@ namespace Infra.Repositorio
                 return false;
             }
         }
+
+      
     }
 }

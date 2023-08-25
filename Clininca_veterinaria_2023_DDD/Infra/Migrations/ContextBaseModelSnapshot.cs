@@ -42,7 +42,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Cliente");
 
-                    b.ToTable("Animal");
+                    b.ToTable("Animal", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.ApplicationUser", b =>
@@ -152,7 +152,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Clientes", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Consulta", b =>
@@ -192,7 +192,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Veterinario");
 
-                    b.ToTable("Consulta");
+                    b.ToTable("Consulta", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Consulta_Exame", b =>
@@ -212,7 +212,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Exame");
 
-                    b.ToTable("Consulta_Exame");
+                    b.ToTable("Consulta_Exame", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Exame", b =>
@@ -242,7 +242,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ClienteId");
 
-                    b.ToTable("Exame");
+                    b.ToTable("Exame", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Secretaria", b =>
@@ -277,7 +277,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("Secretarias");
+                    b.ToTable("Secretarias", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.UsuarioSistemaClinica", b =>
@@ -310,7 +310,7 @@ namespace Infra.Migrations
 
                     b.HasKey("ID_Usuario");
 
-                    b.ToTable("UsuarioSistemaClinica");
+                    b.ToTable("UsuarioSistemaClinica", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Veterinario", b =>
@@ -345,7 +345,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("Veterinario");
+                    b.ToTable("Veterinario", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

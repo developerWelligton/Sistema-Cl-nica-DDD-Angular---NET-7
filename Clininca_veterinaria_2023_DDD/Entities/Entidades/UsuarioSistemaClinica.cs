@@ -29,6 +29,7 @@ namespace Entities.Entidades
         [StringLength(50)]
         public string Role { get; set; }
 
+        [Column("CPF")]
         [Required]
         [StringLength(14)]
         public string CPF { get; set; }
