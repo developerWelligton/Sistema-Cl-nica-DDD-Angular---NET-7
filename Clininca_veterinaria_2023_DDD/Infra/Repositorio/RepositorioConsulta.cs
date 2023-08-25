@@ -48,6 +48,16 @@ namespace Infra.Repositorio
             throw new NotImplementedException();
         }
 
+        public async Task<IList<Consulta>> BuscarConsultasPorUsuario(int idUsuario)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                return await banco.Consultas
+                            .Where(c => c.ID_Usuario == idUsuario)
+                            .ToListAsync();
+            }
+        }
+
         /*
         public async Task<IList<Consulta>> BuscarConsultasPorData(DateTime dataConsulta)
         {

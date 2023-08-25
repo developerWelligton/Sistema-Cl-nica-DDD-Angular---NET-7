@@ -2,6 +2,7 @@
 
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
+import { UserService } from 'src/app/core/user/user.service';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { AnimalService } from 'src/app/services/animal.service';
 import { ConsultService } from 'src/app/services/consult.service';
@@ -39,7 +40,8 @@ export class CreateConsultComponent {
     private consultService: ConsultService,
     private animalService: AnimalService,
     private vetService: VeterinarioService  // Inject VeterinarioService
-    ,private paddingService: PaddingService
+    ,private paddingService: PaddingService,
+    private userService:UserService
   ) {}
 
   ngOnInit() {
@@ -49,6 +51,13 @@ export class CreateConsultComponent {
       //alert(this.containerPadding)
     });
 
+    const currentUser = this.userService.getUserId();
+    if (currentUser) {
+      console.log('User ID:', currentUser)
+    } else {
+      console.log('User not logged in');
+    }
+
     this.consultaForm = this.fb.group({
       descricao: [''],
       veterinario: [''],
@@ -57,7 +66,8 @@ export class CreateConsultComponent {
       dataMarcacao: [''],
       inicioConsulta: [''],
       fimConsulta: [''],
-      status: ['']
+      status: [''],
+      id_Usuario:[currentUser.iD_Usuario]
     });
 
     this.animalService.getAllAnimals().subscribe(
@@ -134,7 +144,8 @@ submitForm() {
     descricao: formData.descricao,
     iD_Veterinario: formData.veterinario.id,
     iD_Animal: formData.animal.id,
-    status: formData.status.id  // Assuming status is an object with an 'id' property
+    status: 0,
+    id_Usuario:formData.id_Usuario
   };
 
   this.consultService.createConsulta(payload).subscribe(

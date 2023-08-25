@@ -40,5 +40,9 @@ namespace Domain.Interfaces.IConsulta
          string veterinarioNome = null,
          DateTime? dataConsulta = null);
 
+        //buscar consulta por IdUsuario 
+        Task<IList<Consulta>> BuscarConsultasPorUsuario(int idUsuario);
+
+
     }
 }

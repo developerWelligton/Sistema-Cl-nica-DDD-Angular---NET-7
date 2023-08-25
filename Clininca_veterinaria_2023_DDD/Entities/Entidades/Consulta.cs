@@ -17,6 +17,12 @@ namespace Entities.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int ID_Consulta { get; set; }
 
+        public int ID_Usuario { get; set; }
+
+        [ForeignKey("ID_Usuario")]
+        public UsuarioSistemaClinica? UsuarioSistemaClinica { get; set; }
+
+
         [Required]
         public DateTime DataMarcacao { get; set; } // Data em que a consulta foi marcada
 

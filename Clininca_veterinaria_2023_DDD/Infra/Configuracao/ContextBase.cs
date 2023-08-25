@@ -71,6 +71,12 @@ namespace Infra.Configuracao
              .HasForeignKey(a => a.ID_Cliente)
              .OnDelete(DeleteBehavior.Cascade);  // Deletando o cliente deletará todos os seus animais
 
+            //cadastrar consulta com UsuarioId
+            builder.Entity<Consulta>()
+            .HasOne(c => c.UsuarioSistemaClinica)
+            .WithMany() // or .WithMany(u => u.Consultas) if UsuarioSistemaClinica has a list of Consultas
+            .HasForeignKey(c => c.ID_Usuario)
+            .OnDelete(DeleteBehavior.NoAction);  // Specify no action on delete
 
 
 

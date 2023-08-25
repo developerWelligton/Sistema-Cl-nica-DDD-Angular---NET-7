@@ -54,7 +54,8 @@ namespace WebApi.Controllers
                 Descricao = consultaDto.Descricao,
                 ID_Veterinario = consultaDto.ID_Veterinario,
                 ID_Animal = consultaDto.ID_Animal,
-                Status = 0  
+                Status = 0,
+                ID_Usuario= consultaDto.ID_Usuario
             };
 
             await _interfaceConsulta.Add(consulta);
@@ -69,6 +70,13 @@ namespace WebApi.Controllers
         public async Task<ActionResult<IEnumerable<Consulta>>> ListarConsultas()
         {
             return Ok(await _interfaceConsulta.List());
+        }
+
+        [HttpGet("/api/Consultas/Usuario/{idUsuario}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<Consulta>>> ListarConsultasPorUsuario(int idUsuario)
+        {
+            return Ok(await _interfaceConsulta.BuscarConsultasPorUsuario(idUsuario));
         }
 
         /*
@@ -158,6 +166,6 @@ namespace WebApi.Controllers
             });
         }*/
 
-         
+
     }
 }
