@@ -74,10 +74,18 @@ namespace WebApi.Controllers
 
         [HttpGet("/api/Consultas/Usuario/{idUsuario}")]
         [Produces("application/json")]
-        public async Task<ActionResult<IEnumerable<Consulta>>> ListarConsultasPorUsuario(int idUsuario)
+        public async Task<ActionResult<IEnumerable<Consulta>>> BuscarConsultasPorVeterinarioUsingIdUsuario(int idUsuario)
         {
-            return Ok(await _interfaceConsulta.BuscarConsultasPorUsuario(idUsuario));
+            var veterinario = await _interfaceVeterinario.GetVeterinarioByUserId(idUsuario);
+            if (veterinario == null)
+            {
+                return NotFound("Veterinário não encontrado para o ID de usuário fornecido");
+            }
+
+            int idVeterinario = veterinario.ID_Veterinario;
+            return Ok(await _interfaceConsulta.BuscarConsultasPorVeterinario(idVeterinario));
         }
+
 
         /*
         [HttpPut("{id}")]

@@ -31,5 +31,8 @@
         // relacionadas aos veterinários na sua aplicação.
 
         Task<IEnumerable<Veterinario>> SearchByName(string term);
+
+        //buscar veterinario por usuario Id
+        Task<Veterinario> GetVeterinarioByUserId(int userId);
     }
 }

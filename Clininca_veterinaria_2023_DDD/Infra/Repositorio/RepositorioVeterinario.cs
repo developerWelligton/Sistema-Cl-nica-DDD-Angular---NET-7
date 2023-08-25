@@ -56,6 +56,14 @@ namespace Infra.Repositorio
             throw new NotImplementedException();
         }
 
+        public async Task<Veterinario> GetVeterinarioByUserId(int userId)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                return await banco.Veterinarios.FirstOrDefaultAsync(v => v.ID_Usuario == userId);
+            }
+        }
+
         public Task<IEnumerable<Animal>> SearchByName(string term)
         {
             throw new NotImplementedException();

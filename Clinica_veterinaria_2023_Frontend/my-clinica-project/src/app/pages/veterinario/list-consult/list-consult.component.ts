@@ -67,14 +67,14 @@ export class ListConsultComponent {
 
     this.populateUserGroups();
    // this.fetchUsersFromServiceOrUseMock();
-
+debugger
     const id_usuario = this.userService.getUserId();
     this.GetConsultIdUsuario(id_usuario);
 
   }
 
   private GetConsultIdUsuario(id_usuario: number) {
-    this.consultService.getConsultasByUsuarioId(id_usuario).subscribe(data => {
+    this.consultService.BuscarConsultasPorVeterinarioUsingIdUsuario(id_usuario).subscribe(data => {
       console.log(data);
       this.usersList = data;  // Store the fetched consultas in a variable
     });

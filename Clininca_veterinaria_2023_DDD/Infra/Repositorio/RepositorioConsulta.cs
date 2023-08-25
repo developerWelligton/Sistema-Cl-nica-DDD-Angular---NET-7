@@ -47,14 +47,14 @@ namespace Infra.Repositorio
         {
             throw new NotImplementedException();
         }
-
-        public async Task<IList<Consulta>> BuscarConsultasPorUsuario(int idUsuario)
+    //trash?
+        public async Task<IList<Consulta>> ListarConsultasPorIdVeterinario(int idVeterinario)
         {
             using (var banco = new ContextBase(_optionsBuilder))
             {
                 return await banco.Consultas
                             .Include(c => c.Animal)  // Incluir detalhes do Animal 
-                            .Where(c => c.ID_Usuario == idUsuario)
+                            .Where(c => c.ID_Veterinario == idVeterinario) // Aqui, foi modificado para filtrar pelo ID do veterinário
                             .ToListAsync();
             }
         }
@@ -70,14 +70,14 @@ namespace Infra.Repositorio
                             .Where(c => c.DataConsulta.Date == dataConsulta.Date)
                             .ToListAsync();
             }
-        }*/
-
+        }*/ 
         public async Task<IList<Consulta>> BuscarConsultasPorVeterinario(int idVeterinario)
         {
             using (var banco = new ContextBase(_optionsBuilder))
             {
                 return await banco.Consultas
-                            .Where(c => c.ID_Veterinario == idVeterinario)
+                            .Include(c => c.Animal)  // Incluir detalhes do Animal 
+                            .Where(c => c.ID_Veterinario == idVeterinario) // Aqui, foi modificado para filtrar pelo ID do veterinário
                             .ToListAsync();
             }
         }
@@ -103,6 +103,11 @@ namespace Infra.Repositorio
         }
 
         public Task<IList<Consulta>> ListWithFilters(string clienteNome = null, string animalNome = null, string veterinarioNome = null, DateTime? dataConsulta = null)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<IList<Consulta>> ListarConsultasPorIdVeterionario(int idUsuario)
         {
             throw new NotImplementedException();
         }

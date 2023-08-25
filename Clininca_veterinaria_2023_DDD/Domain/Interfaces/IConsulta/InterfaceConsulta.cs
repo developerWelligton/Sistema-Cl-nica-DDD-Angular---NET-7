@@ -41,7 +41,7 @@ namespace Domain.Interfaces.IConsulta
          DateTime? dataConsulta = null);
 
         //buscar consulta por IdUsuario 
-        Task<IList<Consulta>> BuscarConsultasPorUsuario(int idUsuario);
+        Task<IList<Consulta>> ListarConsultasPorIdVeterionario(int idUsuario);
 
 
     }

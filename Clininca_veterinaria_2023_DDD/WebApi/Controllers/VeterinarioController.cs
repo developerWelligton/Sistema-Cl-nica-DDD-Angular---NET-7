@@ -101,5 +101,19 @@ namespace WebApi.Controllers
 
             return Ok(vets);
         }
+
+        [HttpGet("/api/VeterinarioByUserId/{userId}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<Veterinario>> GetVeterinarioByUserId(int userId)
+        {
+            var veterinario = await _InterfaceVeterinario.GetVeterinarioByUserId(userId);
+            if (veterinario == null)
+            {
+                return NotFound();
+            }
+            return Ok(veterinario);
+        }
+
+
     }
 }
