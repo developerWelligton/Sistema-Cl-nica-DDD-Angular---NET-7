@@ -16,7 +16,9 @@ export class TableConsultComponent {
   constructor(
     private adminService: AdminService,
     private userServiceAPI: userServiceAPI,
-    private router:Router) { }
+    private router:Router) {
+      console.log(this.consultList)
+    }
 
 
 

@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/user/user.service';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { AdminService } from 'src/app/services/admin.service';
+import { ConsultService } from 'src/app/services/consult.service';
 import { userServiceAPI } from 'src/app/services/userAPI.service';
 
 export enum UserGroup {
@@ -21,7 +22,11 @@ export class ListConsultComponent {
   constructor(
     private adminService: AdminService,
     private paddingService: PaddingService,
-    private userServiceAPI: userServiceAPI ) { }
+    private userServiceAPI: userServiceAPI,
+    private userService: UserService,
+    private consultService: ConsultService
+
+    ) { }
      // Lista Mockada
  mockConsultas = [
   {
@@ -48,10 +53,11 @@ export class ListConsultComponent {
   usersList: any[] = [];
   listUserGroup: { id: string, name: string }[] = [];
   public containerPadding: string;
-   //padding
-   private paddingSubscription: Subscription;
+  //padding
+  private paddingSubscription: Subscription;
 
 
+  fetchedConsultas: any[] = []; // To store fetched consultas
 
   ngOnInit() {
      //padding
@@ -60,14 +66,24 @@ export class ListConsultComponent {
     });
 
     this.populateUserGroups();
-    this.fetchUsersFromServiceOrUseMock();
+   // this.fetchUsersFromServiceOrUseMock();
+
+    const id_usuario = this.userService.getUserId();
+    this.GetConsultIdUsuario(id_usuario);
+
+  }
+
+  private GetConsultIdUsuario(id_usuario: number) {
+    this.consultService.getConsultasByUsuarioId(id_usuario).subscribe(data => {
+      console.log(data);
+      this.usersList = data;  // Store the fetched consultas in a variable
+    });
   }
 
   private fetchUsersFromServiceOrUseMock(): void {
     this.userServiceAPI.getAllUsers().subscribe(
       data => {
         console.log(data);
-
         this.usersList = data
       },
       error => {

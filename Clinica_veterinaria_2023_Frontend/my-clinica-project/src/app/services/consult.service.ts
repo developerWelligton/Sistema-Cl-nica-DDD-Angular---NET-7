@@ -47,4 +47,10 @@ import { environment } from 'src/environments/environment';
     }
 
 
+     // New method to fetch consultations by user ID
+    getConsultasByUsuarioId(id_usuario: number): Observable<Consulta[]> {
+      debugger
+      return this.http.get<Consulta[]>(`${this.baseUrl}/Consultas/Usuario/${id_usuario}`);
+    }
+
   }

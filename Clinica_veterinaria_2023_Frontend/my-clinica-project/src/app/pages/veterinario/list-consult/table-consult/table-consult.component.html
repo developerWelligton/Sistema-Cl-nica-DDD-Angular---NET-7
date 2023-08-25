@@ -2,25 +2,25 @@
   <table class="table-erp">
     <thead>
       <tr>
-        <th>ID</th>
-        <th>CLIENTE</th>
-        <th>ANIMAL</th>
-        <th>DATA</th>
-        <th>HORA INÍCIO</th>
-        <th>HORA FIM</th>
-        <th>STATUS</th>
-        <th>AÇÕES</th>
+        <th>ID Consulta</th>
+        <th>ID Cliente</th>
+        <th>Nome do animal</th>
+        <th>Data da Marcação</th>
+        <th>Hora Início</th>
+        <th>Hora Fim</th>
+        <th>Status</th>
+        <th>Ações</th>
       </tr>
     </thead>
     <tbody>
-      <!-- Iterando através da lista mockada -->
+      <!-- Iterando através da lista -->
       <tr *ngFor="let consulta of consultList">
-        <td>{{ consulta.id }}</td>
-        <td>{{ consulta.cliente }}</td>
-        <td>{{ consulta.animal }}</td>
-        <td>{{ consulta.data }}</td>
-        <td>{{ consulta.horaInicio }}</td>
-        <td>{{ consulta.horaFim }}</td>
+        <td>{{ consulta.iD_Consulta }}</td>
+        <td>{{ consulta.animal.iD_Cliente }}</td>
+        <td>{{ consulta.animal.nome }}</td>
+        <td>{{ consulta.dataMarcacao }}</td>
+        <td>{{ consulta.inicioConsulta }}</td>
+        <td>{{ consulta.fimConsulta }}</td>
         <td>{{ consulta.status }}</td>
         <td>
           <!-- Aqui você pode adicionar botões para ações como editar, excluir, etc. -->

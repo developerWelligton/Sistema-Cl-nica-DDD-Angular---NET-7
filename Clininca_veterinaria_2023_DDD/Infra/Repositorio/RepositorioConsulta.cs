@@ -53,10 +53,13 @@ namespace Infra.Repositorio
             using (var banco = new ContextBase(_optionsBuilder))
             {
                 return await banco.Consultas
+                            .Include(c => c.Animal)  // Incluir detalhes do Animal 
                             .Where(c => c.ID_Usuario == idUsuario)
                             .ToListAsync();
             }
         }
+
+
 
         /*
         public async Task<IList<Consulta>> BuscarConsultasPorData(DateTime dataConsulta)

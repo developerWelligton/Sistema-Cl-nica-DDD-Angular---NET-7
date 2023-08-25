@@ -67,7 +67,7 @@ export class CreateConsultComponent {
       inicioConsulta: [''],
       fimConsulta: [''],
       status: [''],
-      id_Usuario:[currentUser.iD_Usuario]
+      id_Usuario:[currentUser]
     });
 
     this.animalService.getAllAnimals().subscribe(

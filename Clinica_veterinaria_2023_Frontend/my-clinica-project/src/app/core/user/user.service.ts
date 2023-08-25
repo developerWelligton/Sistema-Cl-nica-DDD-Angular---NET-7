@@ -94,8 +94,9 @@ export class UserService {
 
 
    // Método Getter para acessar currentUserConsult de qualquer parte da aplicação
-   public getUserId(): UserCorrent {
-    return this.currentUserConsult;
+   public getUserId(): number {
+    return this.currentUserConsult ? this.currentUserConsult.iD_Usuario : null;
   }
+
 
 }

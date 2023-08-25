@@ -1,4 +1,6 @@
 export class Animal {
+  iD_Animal: number;
   nome: string;
-  iD_Cliente: number; // Se o iD_Cliente é sempre 0 e não usado, considere removê-lo
+  iD_Cliente: number;
+  cliente: string | null; // Use the appropriate type or interface
 }
