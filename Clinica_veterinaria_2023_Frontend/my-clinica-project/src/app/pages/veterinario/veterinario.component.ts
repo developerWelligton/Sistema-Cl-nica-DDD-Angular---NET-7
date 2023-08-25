@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Component } from '@angular/core';
 import { TokenService } from 'src/app/core/token/token.service';
+import { UserService } from 'src/app/core/user/user.service';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { MenuService } from 'src/app/services/menu.service';
 
@@ -15,7 +16,8 @@ export class VeterinarioComponent {
   constructor(public menuService:MenuService,
     private paddingService: PaddingService,
     private http: HttpClient,
-    private tokenService: TokenService){
+    private tokenService: TokenService,
+    private userService: UserService){
 
   }
   ngOnInit(){
@@ -24,22 +26,19 @@ export class VeterinarioComponent {
       this.containerPadding = padding;
     });
 
-    this.getCurrentUser();
+
+    //teste
+      // Usar o método getCurrentUser() para obter o usuário atual
+      const currentUser = this.userService.getCurrentUser();
+
+      if (currentUser) {
+        console.log('User ID:', currentUser)
+      } else {
+        console.log('User not logged in');
+      }
+
   }
 
 
-  getCurrentUser() {
-    debugger
-    const token = this.tokenService.getToken(); // Replace this with however you are storing your token
-    this.http.get(`https://localhost:7131/api/GetCurrentUser?token=${token}`)
-      .subscribe(
-        data => {
-          console.log('Current user:', data);
-        },
-        error => {
-          console.error('Error fetching current user:', error);
-        }
-      );
-  }
 
 }

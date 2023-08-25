@@ -2,13 +2,15 @@ import { Injectable } from '@angular/core';
 import { ActivatedRouteSnapshot, CanActivate, Router, UrlTree, RouterStateSnapshot } from '@angular/router';
 import { Observable } from 'rxjs';
 import { AuthService } from 'src/app/core/auth/auth.service'; // Replace 'path-to-your-loader-interceptor' with the actual path to your LoaderInterceptor and HTTPStatus
+import { TokenService } from 'src/app/core/token/token.service';
+import { userServiceAPI } from 'src/app/services/userAPI.service';
 @Injectable({
   providedIn: 'root'
 })
 export class AuthGuard implements CanActivate {
   constructor(
     private authService: AuthService,
-    private router: Router,
+    private router: Router
   ) {}
 
   canActivate(
@@ -22,7 +24,7 @@ export class AuthGuard implements CanActivate {
           let blnUnAuthorize = false;
           let requiredRoles: string[] = next.data['roles'] || [];
           const userRole: string = localStorage.getItem('userRole');
-
+          debugger
           if (status === false) {
             blnUnAuthorize = true;
           } else if (!this.isAuthorized(userRole, requiredRoles)) { // Usar a função isAuthorized para verificar se o usuário está autorizado

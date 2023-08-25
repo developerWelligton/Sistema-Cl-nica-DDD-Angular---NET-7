@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 export class TableConsultComponent {
 
   @Input() consultList: any[] = [];
+
   constructor(
     private adminService: AdminService,
     private userServiceAPI: userServiceAPI,
