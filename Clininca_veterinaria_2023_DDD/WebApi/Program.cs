@@ -52,8 +52,9 @@ var devEnvironmentDataBase = builder.Configuration.GetConnectionString("DefaultC
 //TO DEPLOY IN AZURE
 var prodEnvironmentDataBase = builder.Configuration.GetConnectionString("ProdConnection");
 
+//PRODUTION ON HERE
 builder.Services.AddDbContext<ContextBase>(options =>
-    options.UseSqlServer(devEnvironmentDataBase));
+    options.UseSqlServer(prodEnvironmentDataBase));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
