@@ -24,6 +24,7 @@ interface DecodedToken {
 
 export class UserService {
 
+  private baseUrl = `${environment.apiUrl}/api`;
 
   private userSubject = new Subject<User>();
   private currentUser: User;  // Assuming 'User' has a 'role' property
@@ -80,7 +81,8 @@ export class UserService {
 
    // Método para obter dados do usuário atual
    getCurrentUserConsult(token: string) {
-    this.http.get(`https://localhost:7131/api/GetCurrentUser?token=${token}`)
+    debugger
+    this.http.get(`${this.baseUrl}/GetCurrentUser?token=${token}`)
       .subscribe(
         (data: any) => {
           debugger
