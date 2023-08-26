@@ -30,8 +30,8 @@ namespace Infra.Configuracao
         {
             if (!optionsBuilder.IsConfigured)
             {
-                //PRODUTION ON 
-                optionsBuilder.UseSqlServer(ObterStringConexaoProductionAzure());
+                //PRODUTION OFF 
+                optionsBuilder.UseSqlServer(ObterStringConexaoDeveloperLocal());
                 base.OnConfiguring(optionsBuilder);
             }
             

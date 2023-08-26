@@ -54,7 +54,7 @@ var prodEnvironmentDataBase = builder.Configuration.GetConnectionString("ProdCon
 
 //PRODUTION ON HERE
 builder.Services.AddDbContext<ContextBase>(options =>
-    options.UseSqlServer(prodEnvironmentDataBase));
+    options.UseSqlServer(devEnvironmentDataBase));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
