@@ -25,6 +25,7 @@ using System.Reflection;
 using Domain.Interfaces.ISegmento;
 using Domain.Interfaces.IFamilia;
 using Domain.Interfaces.IClasse;
+using Domain.Interfaces.IMercadoria;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -81,6 +82,7 @@ builder.Services.AddSingleton<InterfaceUsuarioSistemaClinica, RepositorioUsuario
 builder.Services.AddSingleton<InterfaceSegmento, RepositorioSegmento>();
 builder.Services.AddSingleton<InterfaceFamilia, RepositorioFamilia>();
 builder.Services.AddSingleton<InterfaceClasse, RepositorioClasses>();
+builder.Services.AddSingleton<InterfaceMercadoria, RepositorioMercadoria>();
 
 //INTERFACE DOMINIO
 builder.Services.AddSingleton<IAnimalServico, AnimalServico>();
@@ -96,6 +98,7 @@ builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClini
 builder.Services.AddSingleton<ISegmentoServico, SegmentoServico>();
 builder.Services.AddSingleton<IFamiliaServico, FamiliaServico>();
 builder.Services.AddSingleton<IClasseServico, ClasseServico>();
+builder.Services.AddSingleton<IMercadoriaServico, MercadoriaServico>();
 
 builder.Services.AddTransient<ValidacaoServico>();
   
