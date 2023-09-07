@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 namespace Domain.Interfaces.ISegmento
 {
     public interface InterfaceSegmento : InterfaceGeneric<Segmento>
-    { 
-
-        // Novo método list segmento como seu code
+    {
+         
     }
 }

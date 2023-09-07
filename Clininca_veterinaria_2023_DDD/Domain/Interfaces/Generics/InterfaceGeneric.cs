@@ -14,7 +14,7 @@ namespace Domain.Interfaces.Generics
 
         Task Delete(T objeto);
 
-        Task<T> GetEntityById(int id);
+        Task<T> GetEntityById(long id);
 
         Task<List<T>> List(); 
     }

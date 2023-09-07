@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositorio
 {
-    public class RepositorioSegmento: RepositoryGenerics<Segmento>, InterfaceSegmento
+    public class RepositorioSegmento : RepositoryGenerics<Segmento>, InterfaceSegmento
     {
         private readonly DbContextOptions<ContextBase> _optionsBuilder;
 
@@ -23,6 +23,7 @@ namespace Infra.Repositorio
             _optionsBuilder = new DbContextOptions<ContextBase>();
 
         }
-  
+
+      
     }
 }

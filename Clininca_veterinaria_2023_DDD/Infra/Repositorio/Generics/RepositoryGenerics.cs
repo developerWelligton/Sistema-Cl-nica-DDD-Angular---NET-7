@@ -37,15 +37,21 @@ namespace Infra.Repositorio.Generics
             }
         }
 
-       
 
-        public async Task<T> GetEntityById(int id)
+
+        public async Task<T> GetEntityById(long id)
         {
             using (var data = new ContextBase(_optionsBuilder))
             {
-                return await data.Set<T>().FindAsync(id);
+                var entity = await data.Set<T>().FindAsync(id);
+                if (entity == null)
+                {
+                    throw new Exception($"Entity with ID {id} not found");
+                }
+                return entity;
             }
         }
+
 
         public async Task<List<T>> List()
         {
