@@ -26,6 +26,7 @@ using Domain.Interfaces.ISegmento;
 using Domain.Interfaces.IFamilia;
 using Domain.Interfaces.IClasse;
 using Domain.Interfaces.IMercadoria;
+using Domain.Interfaces.IUnspscCode;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -83,6 +84,9 @@ builder.Services.AddSingleton<InterfaceSegmento, RepositorioSegmento>();
 builder.Services.AddSingleton<InterfaceFamilia, RepositorioFamilia>();
 builder.Services.AddSingleton<InterfaceClasse, RepositorioClasses>();
 builder.Services.AddSingleton<InterfaceMercadoria, RepositorioMercadoria>();
+//add code Unspsc
+builder.Services.AddSingleton<InterfaceUnspscCode, RepositorioUnspscCode>();
+
 
 //INTERFACE DOMINIO
 builder.Services.AddSingleton<IAnimalServico, AnimalServico>();
@@ -99,6 +103,9 @@ builder.Services.AddSingleton<ISegmentoServico, SegmentoServico>();
 builder.Services.AddSingleton<IFamiliaServico, FamiliaServico>();
 builder.Services.AddSingleton<IClasseServico, ClasseServico>();
 builder.Services.AddSingleton<IMercadoriaServico, MercadoriaServico>();
+
+//add code Unspsc
+builder.Services.AddSingleton<IUnspscCodeServico, UnspscCodeServico>();
 
 builder.Services.AddTransient<ValidacaoServico>();
   
