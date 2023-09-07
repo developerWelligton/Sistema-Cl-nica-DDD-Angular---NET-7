@@ -75,7 +75,9 @@ builder.Services.AddSingleton<InterfaceVeterinario, RepositorioVeterinario>();
 
 builder.Services.AddSingleton<InterfaceUsuarioSistemaClinica, RepositorioUsuarioSistemaClinica>();
 
+//novos interfcaces e repositorios
 builder.Services.AddSingleton<InterfaceSegmento, RepositorioSegmento>();
+builder.Services.AddSingleton<InterfaceFamilia, RepositorioFamilia>();
 
 //INTERFACE DOMINIO
 builder.Services.AddSingleton<IAnimalServico, AnimalServico>();
@@ -87,7 +89,9 @@ builder.Services.AddSingleton<ISecretariaServico, SecretariaServico>();
 builder.Services.AddSingleton<IVeterinarioServico, VeterinarioServico>(); 
 builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClinicaServico>();
 
+//novos dominios estoque,venda,compra,produto,serviço,unspsc
 builder.Services.AddSingleton<ISegmentoServico, SegmentoServico>();
+builder.Services.AddSingleton<IFamiliaServico, FamiliaServico>();
 
 builder.Services.AddTransient<ValidacaoServico>();
   
