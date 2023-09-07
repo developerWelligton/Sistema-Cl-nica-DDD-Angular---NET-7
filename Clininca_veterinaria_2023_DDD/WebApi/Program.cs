@@ -22,6 +22,7 @@ using WebApi.Token;
 /**/
 using Microsoft.OpenApi.Models;
 using System.Reflection;
+using Domain.Interfaces.ISegmento;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -71,7 +72,10 @@ builder.Services.AddSingleton<InterfaceConsultaExame, RepositorioConsultaExame>(
 builder.Services.AddSingleton<InterfaceExame, RepositorioExame>();
 builder.Services.AddSingleton<InterfaceSecretarias, RepositorioSecretarias>();
 builder.Services.AddSingleton<InterfaceVeterinario, RepositorioVeterinario>();
+
 builder.Services.AddSingleton<InterfaceUsuarioSistemaClinica, RepositorioUsuarioSistemaClinica>();
+
+builder.Services.AddSingleton<InterfaceSegmento, RepositorioSegmento>();
 
 //INTERFACE DOMINIO
 builder.Services.AddSingleton<IAnimalServico, AnimalServico>();
@@ -82,6 +86,8 @@ builder.Services.AddSingleton<IExameServico, ExameServico>();
 builder.Services.AddSingleton<ISecretariaServico, SecretariaServico>(); 
 builder.Services.AddSingleton<IVeterinarioServico, VeterinarioServico>(); 
 builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClinicaServico>();
+
+builder.Services.AddSingleton<ISegmentoServico, SegmentoServico>();
 
 builder.Services.AddTransient<ValidacaoServico>();
   
