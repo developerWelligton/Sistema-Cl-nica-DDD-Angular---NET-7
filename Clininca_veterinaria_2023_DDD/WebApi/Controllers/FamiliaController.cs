@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Interfaces.IVeterinario;
 using Domain.Interfaces.ISegmento;
+using Domain.Interfaces.IFamilia;
 
 namespace WebApi.Controllers
 {

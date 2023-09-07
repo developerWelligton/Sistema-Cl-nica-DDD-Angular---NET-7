@@ -1,5 +1,5 @@
 ﻿using Domain.Interfaces.IAnimal;
-using Domain.Interfaces.IFamilia;
+using Domain.Interfaces.IClasse;
 using Domain.Interfaces.ISegmento;
 using Domain.Interfaces.IVeterinario;
 using Entities;
@@ -15,11 +15,11 @@ using System.Threading.Tasks;
 
 namespace Infra.Repositorio
 {
-    public class RepositorioFamilia : RepositoryGenerics<Familia>, InterfaceFamilia
+    public class RepositorioClasses : RepositoryGenerics<Classe>, InterfaceClasse
     {
         private readonly DbContextOptions<ContextBase> _optionsBuilder;
 
-        public RepositorioFamilia()
+        public RepositorioClasses()
         {
             _optionsBuilder = new DbContextOptions<ContextBase>();
 
