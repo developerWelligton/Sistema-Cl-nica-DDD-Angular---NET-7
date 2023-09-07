@@ -26,6 +26,31 @@ namespace Infra.Configuracao
         public DbSet<Exame> Exames { get; set; }
         public DbSet<Consulta_Exame> Consulta_Exames { get; set; }
 
+        //MODULO PAGAMENTO,VENDA,COMPRA,SERVIÇO
+        public DbSet<UsuarioSistemaClinica> Usuarios { get; set; }
+        public DbSet<Mercadoria> Mercadorias { get; set; }
+        public DbSet<Classe> Classes { get; set; }
+        public DbSet<Segmento> Segmentos { get; set; }
+        public DbSet<Familia> Familias { get; set; }
+        public DbSet<UnspscCode> UnspscCodes { get; set; }
+        public DbSet<Fornecedor> Fornecedores { get; set; }
+        public DbSet<Compra> Compras { get; set; }
+        public DbSet<Produto> Produtos { get; set; }
+        public DbSet<Servico> Servicos { get; set; }
+        public DbSet<PedidoServicos> PedidoServicos { get; set; }
+        public DbSet<Venda> Vendas { get; set; }
+        public DbSet<VendaServicoPagamento> VendaServicoPagamentos { get; set; }
+        public DbSet<NotaFiscal> NotasFiscais { get; set; }
+        public DbSet<Estoque> Estoques { get; set; }
+        public DbSet<ItemProdutoEstoque> ItensProdutoEstoques { get; set; } 
+        public DbSet<ItemProdutoCompra> ItensProdutoCompras { get; set; }
+        public DbSet<ItemProdutoVenda> ItensPordutoVendas { get; set; }
+        public DbSet<ItemServicoPrestado> ItemServicoPrestados { get; set; }
+        public DbSet<PedidoServicosRelacao> PedidoServicosRelacoes { get; set; }
+
+
+        //public DbSet<Cliente> Clientes { get; set; }
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
@@ -79,6 +104,146 @@ namespace Infra.Configuracao
             .HasForeignKey(c => c.ID_Usuario)
             .OnDelete(DeleteBehavior.NoAction);  // Specify no action on delete
 
+
+            // Configurar a entidade como keyless
+            builder.Entity<ItemProdutoEstoque>().HasNoKey();
+            builder.Entity<ItemProdutoCompra>().HasNoKey();
+            builder.Entity<ItemProdutoVenda>().HasNoKey(); 
+
+
+            // Configura o relacionamento entre Compra e UsuarioSistemaClinica
+            builder.Entity<Compra>()
+                .HasOne(p => p.Usuario)  // Indica que uma Compra tem um Usuario
+                .WithMany()              // Indica que um Usuario pode ter várias Compras
+                .HasForeignKey(p => p.ID_Usuario)  // Define a chave estrangeira
+                .OnDelete(DeleteBehavior.Restrict);  // Define o comportamento na exclusão para "Restrict"
+
+            // Configura o relacionamento entre Compra e Fornecedor
+            builder.Entity<Compra>()
+                .HasOne(p => p.Fornecedor)  // Indica que uma Compra tem um Fornecedor
+                .WithMany()                 // Indica que um Fornecedor pode ter várias Compras
+                .HasForeignKey(p => p.IdFornecedor)  // Define a chave estrangeira
+                .OnDelete(DeleteBehavior.Restrict);  // Define o comportamento na exclusão para "Restrict"
+
+            //
+            builder.Entity<UnspscCode>()
+                .HasOne(p => p.Familia)
+                .WithMany()
+                .HasForeignKey(p => p.IdFamilia)
+                .OnDelete(DeleteBehavior.NoAction);  // ou DeleteBehavior.Restrict
+
+            builder.Entity<UnspscCode>()
+                .HasOne(p => p.Mercadoria)
+                .WithMany()
+                .HasForeignKey(p => p.IdMercadoria)
+                .OnDelete(DeleteBehavior.NoAction);  // ou DeleteBehavior.Restrict
+
+            builder.Entity<UnspscCode>()
+                .HasOne(p => p.Classe)
+                .WithMany()
+                .HasForeignKey(p => p.IdClasse)
+                .OnDelete(DeleteBehavior.NoAction);  // ou DeleteBehavior.Restrict
+
+            builder.Entity<UnspscCode>()
+                .HasOne(p => p.Segmento)
+                .WithMany()
+                .HasForeignKey(p => p.IdSegmento)
+                .OnDelete(DeleteBehavior.NoAction);  // ou DeleteBehavior.Restrict
+            //
+            builder.Entity<Produto>()
+                .HasOne(p => p.UnspscCode)
+                .WithMany()
+                .HasForeignKey(p => p.IdUnspsc)
+                .OnDelete(DeleteBehavior.Restrict);  // ou DeleteBehavior.NoAction
+
+            builder.Entity<Produto>()
+                .HasOne(p => p.Usuario)
+                .WithMany()
+                .HasForeignKey(p => p.ID_Usuario)
+                .OnDelete(DeleteBehavior.Restrict);  // ou DeleteBehavior.NoAction
+            //
+            builder.Entity<Servico>()
+                .HasOne(s => s.UnspscCode)
+                .WithMany()
+                .HasForeignKey(s => s.IdUnspsc)
+                .OnDelete(DeleteBehavior.Restrict);  // ou DeleteBehavior.NoAction
+
+            builder.Entity<Servico>()
+                .HasOne(s => s.Usuario)
+                .WithMany()
+                .HasForeignKey(s => s.ID_Usuario)
+                .OnDelete(DeleteBehavior.Restrict);  // ou DeleteBehavior.NoAction
+            //
+            builder.Entity<ItemProdutoEstoque>()
+                .HasOne(i => i.Estoque)
+                .WithMany()
+                .HasForeignKey(i => i.IdEstoque)
+                .OnDelete(DeleteBehavior.Restrict);  // ou DeleteBehavior.NoAction
+
+            builder.Entity<ItemProdutoEstoque>()
+                .HasOne(i => i.Produto)
+                .WithMany()
+                .HasForeignKey(i => i.IdProduto)
+                .OnDelete(DeleteBehavior.Restrict);  // ou DeleteBehavior.NoAction
+
+            builder.Entity<ItemProdutoEstoque>()
+                .HasOne(i => i.Usuario)
+                .WithMany()
+                .HasForeignKey(i => i.ID_Usuario)
+                .OnDelete(DeleteBehavior.Restrict);  // ou DeleteBehavior.NoAction
+                                                     //
+            //serviço
+            builder.Entity<VendaServicoPagamento>()
+          .HasOne(v => v.Usuario)
+          .WithMany()
+          .HasForeignKey(v => v.ID_Usuario)
+          .IsRequired()
+          .OnDelete(DeleteBehavior.Restrict);
+ 
+
+            builder.Entity<VendaServicoPagamento>()
+                .HasOne(v => v.Venda)
+                .WithMany()
+                .HasForeignKey(v => v.IdVenda)
+                .IsRequired(false)
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ItemServicoPrestado>()
+                .HasOne(i => i.Usuario)
+                .WithMany()
+                .HasForeignKey(i => i.ID_Usuario)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<ItemServicoPrestado>()
+                .HasOne(i => i.Servico)
+                .WithMany()
+                .HasForeignKey(i => i.IdServico)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Servico>()
+                .HasOne(s => s.Usuario)
+                .WithMany()
+                .HasForeignKey(s => s.ID_Usuario)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            builder.Entity<Servico>()
+                .HasOne(s => s.UnspscCode) // Assume UnspscCode is the entity for UNSPSC_CODE table
+                .WithMany()
+                .HasForeignKey(s => s.IdUnspsc)
+                .IsRequired()
+                .OnDelete(DeleteBehavior.Restrict);
+
+            //
+
+         
+
+            // Configuração para PedidoServicos e PedidoServicosRelacao
+            builder.Entity<PedidoServicosRelacao>()
+                .HasKey(ps => new { ps.IdPedidoServicos, ps.IdServico });
+             
 
 
             base.OnModelCreating(builder);

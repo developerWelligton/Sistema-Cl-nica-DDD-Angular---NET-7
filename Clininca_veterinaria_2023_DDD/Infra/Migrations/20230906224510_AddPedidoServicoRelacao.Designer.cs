@@ -4,6 +4,7 @@ using Infra.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    partial class ContextBaseModelSnapshot : ModelSnapshot
+    [Migration("20230906224510_AddPedidoServicoRelacao")]
+    partial class AddPedidoServicoRelacao
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -887,7 +890,7 @@ namespace Infra.Migrations
                     b.Property<int>("ID_Usuario")
                         .HasColumnType("int");
 
-                    b.Property<long?>("IdPedidoServicos")
+                    b.Property<long?>("IdItemServicoPrestado")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("IdVenda")
@@ -905,7 +908,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.HasIndex("IdPedidoServicos");
+                    b.HasIndex("IdItemServicoPrestado");
 
                     b.HasIndex("IdVenda");
 
@@ -1366,7 +1369,7 @@ namespace Infra.Migrations
                     b.HasOne("Entities.Entidades.UsuarioSistemaClinica", "Usuario")
                         .WithMany("PedidoServicos")
                         .HasForeignKey("ID_Usuario")
-                        .OnDelete(DeleteBehavior.Cascade)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.Navigation("Usuario");
@@ -1513,16 +1516,17 @@ namespace Infra.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Entities.Entidades.PedidoServicos", "PedidoServico")
+                    b.HasOne("Entities.Entidades.PedidoServicos", "ItemServicoPrestado")
                         .WithMany()
-                        .HasForeignKey("IdPedidoServicos");
+                        .HasForeignKey("IdItemServicoPrestado")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Entities.Entidades.Venda", "Venda")
                         .WithMany()
                         .HasForeignKey("IdVenda")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.Navigation("PedidoServico");
+                    b.Navigation("ItemServicoPrestado");
 
                     b.Navigation("Usuario");
 

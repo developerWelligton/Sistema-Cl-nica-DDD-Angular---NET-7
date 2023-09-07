@@ -4,6 +4,7 @@ using Infra.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    partial class ContextBaseModelSnapshot : ModelSnapshot
+    [Migration("20230906234710_AddPedidoServicoPagamento")]
+    partial class AddPedidoServicoPagamento
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -887,7 +890,10 @@ namespace Infra.Migrations
                     b.Property<int>("ID_Usuario")
                         .HasColumnType("int");
 
-                    b.Property<long?>("IdPedidoServicos")
+                    b.Property<long?>("IdPedidoServico")
+                        .HasColumnType("bigint");
+
+                    b.Property<long>("IdPedidoServicos")
                         .HasColumnType("bigint");
 
                     b.Property<long?>("IdVenda")
@@ -1515,7 +1521,9 @@ namespace Infra.Migrations
 
                     b.HasOne("Entities.Entidades.PedidoServicos", "PedidoServico")
                         .WithMany()
-                        .HasForeignKey("IdPedidoServicos");
+                        .HasForeignKey("IdPedidoServicos")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.HasOne("Entities.Entidades.Venda", "Venda")
                         .WithMany()

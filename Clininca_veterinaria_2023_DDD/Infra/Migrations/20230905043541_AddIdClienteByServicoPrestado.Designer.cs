@@ -4,6 +4,7 @@ using Infra.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    partial class ContextBaseModelSnapshot : ModelSnapshot
+    [Migration("20230905043541_AddIdClienteByServicoPrestado")]
+    partial class AddIdClienteByServicoPrestado
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -476,8 +479,9 @@ namespace Infra.Migrations
                     b.Property<int>("ID_Usuario")
                         .HasColumnType("int");
 
-                    b.Property<long?>("IdPedidoServicos")
-                        .HasColumnType("bigint");
+                    b.Property<string>("IdCliente")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<long>("IdServico")
                         .HasColumnType("bigint");
@@ -486,18 +490,19 @@ namespace Infra.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("StatusPagamento")
-                        .IsRequired()
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<decimal?>("TotalServicoPrestado")
+                    b.Property<decimal?>("TotalServicoPrestados")
                         .HasColumnType("decimal(15, 2)");
+
+                    b.Property<string>("cpf")
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("IdItemServicoPrestado");
 
                     b.HasIndex("ID_Usuario");
-
-                    b.HasIndex("IdPedidoServicos");
 
                     b.HasIndex("IdServico");
 
@@ -571,52 +576,6 @@ namespace Infra.Migrations
                     b.HasIndex("IdVendaServicoPagamento");
 
                     b.ToTable("NOTA_FISCAL");
-                });
-
-            modelBuilder.Entity("Entities.Entidades.PedidoServicos", b =>
-                {
-                    b.Property<long>("IdPedidoServicos")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("bigint");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<long>("IdPedidoServicos"));
-
-                    b.Property<DateTime>("DataPedido")
-                        .HasColumnType("datetime");
-
-                    b.Property<int>("ID_Usuario")
-                        .HasColumnType("int");
-
-                    b.Property<string>("StatusPagamento")
-                        .IsRequired()
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
-                    b.Property<decimal?>("TotalPedido")
-                        .HasColumnType("decimal(15, 2)");
-
-                    b.HasKey("IdPedidoServicos");
-
-                    b.HasIndex("ID_Usuario");
-
-                    b.ToTable("PEDIDO_SERVICOS");
-                });
-
-            modelBuilder.Entity("Entities.Entidades.PedidoServicosRelacao", b =>
-                {
-                    b.Property<long>("IdPedidoServicos")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(0);
-
-                    b.Property<long>("IdServico")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(1);
-
-                    b.HasKey("IdPedidoServicos", "IdServico");
-
-                    b.HasIndex("IdServico");
-
-                    b.ToTable("PEDIDO_SERVICOS_RELACAO");
                 });
 
             modelBuilder.Entity("Entities.Entidades.Produto", b =>
@@ -887,10 +846,10 @@ namespace Infra.Migrations
                     b.Property<int>("ID_Usuario")
                         .HasColumnType("int");
 
-                    b.Property<long?>("IdPedidoServicos")
+                    b.Property<long>("IdItemServicoPrestado")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("IdVenda")
+                    b.Property<long>("IdVenda")
                         .HasColumnType("bigint");
 
                     b.Property<string>("Status")
@@ -905,7 +864,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.HasIndex("IdPedidoServicos");
+                    b.HasIndex("IdItemServicoPrestado");
 
                     b.HasIndex("IdVenda");
 
@@ -1224,7 +1183,7 @@ namespace Infra.Migrations
             modelBuilder.Entity("Entities.Entidades.Familia", b =>
                 {
                     b.HasOne("Entities.Entidades.UsuarioSistemaClinica", "Usuario")
-                        .WithMany()
+                        .WithMany("Familias")
                         .HasForeignKey("ID_Usuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1313,20 +1272,14 @@ namespace Infra.Migrations
                     b.HasOne("Entities.Entidades.UsuarioSistemaClinica", "Usuario")
                         .WithMany()
                         .HasForeignKey("ID_Usuario")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Entities.Entidades.PedidoServicos", "PedidoServicos")
-                        .WithMany("ItensServicoPrestado")
-                        .HasForeignKey("IdPedidoServicos");
 
                     b.HasOne("Entities.Entidades.Servico", "Servico")
                         .WithMany()
                         .HasForeignKey("IdServico")
-                        .OnDelete(DeleteBehavior.Restrict)
+                        .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("PedidoServicos");
 
                     b.Navigation("Servico");
 
@@ -1336,7 +1289,7 @@ namespace Infra.Migrations
             modelBuilder.Entity("Entities.Entidades.Mercadoria", b =>
                 {
                     b.HasOne("Entities.Entidades.UsuarioSistemaClinica", "Usuario")
-                        .WithMany()
+                        .WithMany("Mercadorias")
                         .HasForeignKey("ID_Usuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1359,36 +1312,6 @@ namespace Infra.Migrations
                     b.Navigation("Usuario");
 
                     b.Navigation("VendaServicoPagamento");
-                });
-
-            modelBuilder.Entity("Entities.Entidades.PedidoServicos", b =>
-                {
-                    b.HasOne("Entities.Entidades.UsuarioSistemaClinica", "Usuario")
-                        .WithMany("PedidoServicos")
-                        .HasForeignKey("ID_Usuario")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Usuario");
-                });
-
-            modelBuilder.Entity("Entities.Entidades.PedidoServicosRelacao", b =>
-                {
-                    b.HasOne("Entities.Entidades.PedidoServicos", "PedidoServicos")
-                        .WithMany("PedidoServicosRelacoes")
-                        .HasForeignKey("IdPedidoServicos")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("Entities.Entidades.Servico", "Servico")
-                        .WithMany()
-                        .HasForeignKey("IdServico")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("PedidoServicos");
-
-                    b.Navigation("Servico");
                 });
 
             modelBuilder.Entity("Entities.Entidades.Produto", b =>
@@ -1424,7 +1347,7 @@ namespace Infra.Migrations
             modelBuilder.Entity("Entities.Entidades.Segmento", b =>
                 {
                     b.HasOne("Entities.Entidades.UsuarioSistemaClinica", "Usuario")
-                        .WithMany()
+                        .WithMany("Segmentos")
                         .HasForeignKey("ID_Usuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1454,7 +1377,7 @@ namespace Infra.Migrations
             modelBuilder.Entity("Entities.Entidades.UnspscCode", b =>
                 {
                     b.HasOne("Entities.Entidades.UsuarioSistemaClinica", "Usuario")
-                        .WithMany()
+                        .WithMany("UnspscCodes")
                         .HasForeignKey("ID_Usuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1513,16 +1436,19 @@ namespace Infra.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Entities.Entidades.PedidoServicos", "PedidoServico")
+                    b.HasOne("Entities.Entidades.ItemServicoPrestado", "ItemServicoPrestado")
                         .WithMany()
-                        .HasForeignKey("IdPedidoServicos");
+                        .HasForeignKey("IdItemServicoPrestado")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.HasOne("Entities.Entidades.Venda", "Venda")
                         .WithMany()
                         .HasForeignKey("IdVenda")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
-                    b.Navigation("PedidoServico");
+                    b.Navigation("ItemServicoPrestado");
 
                     b.Navigation("Usuario");
 
@@ -1543,7 +1469,7 @@ namespace Infra.Migrations
             modelBuilder.Entity("Infra.Configuracao.Classe", b =>
                 {
                     b.HasOne("Entities.Entidades.UsuarioSistemaClinica", "Usuario")
-                        .WithMany()
+                        .WithMany("Classes")
                         .HasForeignKey("ID_Usuario")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1609,16 +1535,17 @@ namespace Infra.Migrations
                     b.Navigation("Exames");
                 });
 
-            modelBuilder.Entity("Entities.Entidades.PedidoServicos", b =>
-                {
-                    b.Navigation("ItensServicoPrestado");
-
-                    b.Navigation("PedidoServicosRelacoes");
-                });
-
             modelBuilder.Entity("Entities.Entidades.UsuarioSistemaClinica", b =>
                 {
-                    b.Navigation("PedidoServicos");
+                    b.Navigation("Classes");
+
+                    b.Navigation("Familias");
+
+                    b.Navigation("Mercadorias");
+
+                    b.Navigation("Segmentos");
+
+                    b.Navigation("UnspscCodes");
                 });
 #pragma warning restore 612, 618
         }

@@ -7,6 +7,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Entities.Notificacoes;
 using System.Text.Json.Serialization;
+using Infra.Configuracao;
 
 namespace Entities.Entidades
 {
@@ -32,7 +33,10 @@ namespace Entities.Entidades
         [Column("CPF")]
         [Required]
         [StringLength(14)]
-        public string CPF { get; set; }
+        public string CPF { get; set; } 
+
+        // Added relationship with PedidoServicos
+        public virtual List<PedidoServicos> PedidoServicos { get; set; }
     }
 
 } 
