@@ -245,7 +245,16 @@ namespace Infra.Configuracao
              
             //chave composta
               builder.Entity<ItemProdutoEstoque>()
-        .HasKey(ip => new { ip.IdProduto, ip.IdEstoque });
+            .HasKey(ip => new { ip.IdProduto, ip.IdEstoque });
+
+
+            //cascata, quando excluir estoque consequentemente exclue o ItemProdutoEstoque
+            builder.Entity<ItemProdutoEstoque>()
+          .HasOne(p => p.Estoque)
+          .WithMany()
+          .HasForeignKey(p => p.IdEstoque)
+          .OnDelete(DeleteBehavior.Cascade);
+
 
             base.OnModelCreating(builder);
         }

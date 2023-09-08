@@ -8,7 +8,7 @@ namespace Entities.Entidades
     public class ItemProdutoEstoque
     {
         [Key, Column(Order = 0)]
-        public long IdProduto { get; set; }
+        public long? IdProduto { get; set; }
         [ForeignKey("IdProduto")]
         public virtual Produto? Produto { get; set; }
 
