@@ -27,6 +27,7 @@ using Domain.Interfaces.IFamilia;
 using Domain.Interfaces.IClasse;
 using Domain.Interfaces.IMercadoria;
 using Domain.Interfaces.IUnspscCode;
+using Domain.Interfaces.IServico;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -75,10 +76,8 @@ builder.Services.AddSingleton<InterfaceConsulta, RepositorioConsulta>();
 builder.Services.AddSingleton<InterfaceConsultaExame, RepositorioConsultaExame>(); 
 builder.Services.AddSingleton<InterfaceExame, RepositorioExame>();
 builder.Services.AddSingleton<InterfaceSecretarias, RepositorioSecretarias>();
-builder.Services.AddSingleton<InterfaceVeterinario, RepositorioVeterinario>();
-
-builder.Services.AddSingleton<InterfaceUsuarioSistemaClinica, RepositorioUsuarioSistemaClinica>();
-
+builder.Services.AddSingleton<InterfaceVeterinario, RepositorioVeterinario>(); 
+builder.Services.AddSingleton<InterfaceUsuarioSistemaClinica, RepositorioUsuarioSistemaClinica>(); 
 //novos interfcaces e repositorios
 builder.Services.AddSingleton<InterfaceSegmento, RepositorioSegmento>();
 builder.Services.AddSingleton<InterfaceFamilia, RepositorioFamilia>();
@@ -86,6 +85,10 @@ builder.Services.AddSingleton<InterfaceClasse, RepositorioClasses>();
 builder.Services.AddSingleton<InterfaceMercadoria, RepositorioMercadoria>();
 //add code Unspsc
 builder.Services.AddSingleton<InterfaceUnspscCode, RepositorioUnspscCode>();
+//add produtos
+builder.Services.AddSingleton<InterfaceProduto, RepositorioProduto>();
+//add servico
+builder.Services.AddSingleton<InterfaceServico, RepositorioServico>();
 
 
 //INTERFACE DOMINIO
@@ -96,16 +99,20 @@ builder.Services.AddSingleton<IConsultaExameServico, ConsultaExameServico>();
 builder.Services.AddSingleton<IExameServico, ExameServico>(); 
 builder.Services.AddSingleton<ISecretariaServico, SecretariaServico>(); 
 builder.Services.AddSingleton<IVeterinarioServico, VeterinarioServico>(); 
-builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClinicaServico>();
-
+builder.Services.AddSingleton<IUsuarioSistemaClinicaServico, UsuarioSistemaClinicaServico>(); 
 //novos dominios estoque,venda,compra,produto,serviço,unspsc
 builder.Services.AddSingleton<ISegmentoServico, SegmentoServico>();
 builder.Services.AddSingleton<IFamiliaServico, FamiliaServico>();
 builder.Services.AddSingleton<IClasseServico, ClasseServico>();
-builder.Services.AddSingleton<IMercadoriaServico, MercadoriaServico>();
-
+builder.Services.AddSingleton<IMercadoriaServico, MercadoriaServico>(); 
 //add code Unspsc
 builder.Services.AddSingleton<IUnspscCodeServico, UnspscCodeServico>();
+//add produtos
+builder.Services.AddSingleton<IProdutoServico, ProdutoServico>();
+//add servico
+builder.Services.AddSingleton<IServicoServico, ServicoServico>();
+
+
 
 builder.Services.AddTransient<ValidacaoServico>();
   
