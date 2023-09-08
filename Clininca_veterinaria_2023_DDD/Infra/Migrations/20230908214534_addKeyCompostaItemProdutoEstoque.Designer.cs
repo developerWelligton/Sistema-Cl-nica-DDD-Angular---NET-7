@@ -4,6 +4,7 @@ using Infra.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    partial class ContextBaseModelSnapshot : ModelSnapshot
+    [Migration("20230908214534_addKeyCompostaItemProdutoEstoque")]
+    partial class addKeyCompostaItemProdutoEstoque
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -407,14 +410,6 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Entities.Entidades.ItemProdutoEstoque", b =>
                 {
-                    b.Property<long>("IdProduto")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(0);
-
-                    b.Property<long>("IdEstoque")
-                        .HasColumnType("bigint")
-                        .HasColumnOrder(1);
-
                     b.Property<DateTime?>("DataEntrada")
                         .HasColumnType("date");
 
@@ -424,15 +419,23 @@ namespace Infra.Migrations
                     b.Property<int>("ID_Usuario")
                         .HasColumnType("int");
 
+                    b.Property<long>("IdEstoque")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(1);
+
+                    b.Property<long>("IdProduto")
+                        .HasColumnType("bigint")
+                        .HasColumnOrder(0);
+
                     b.Property<string>("Status")
                         .HasMaxLength(50)
                         .HasColumnType("nvarchar(50)");
 
-                    b.HasKey("IdProduto", "IdEstoque");
-
                     b.HasIndex("ID_Usuario");
 
                     b.HasIndex("IdEstoque");
+
+                    b.HasIndex("IdProduto");
 
                     b.ToTable("ITENS_PRODUTO_ESTOQUES");
                 });

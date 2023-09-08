@@ -93,6 +93,9 @@ builder.Services.AddSingleton<InterfaceServico, RepositorioServico>();
 //add estoque
 builder.Services.AddSingleton<InterfaceEstoque, RepositorioEstoque>();
 
+//add produtoEstoque
+builder.Services.AddSingleton<InterfaceItemProdutoEstoque, RepositorioItemProdutosEstoques>();
+
 
 //INTERFACE DOMINIO
 builder.Services.AddSingleton<IAnimalServico, AnimalServico>();
@@ -116,6 +119,9 @@ builder.Services.AddSingleton<IProdutoServico, ProdutoServico>();
 builder.Services.AddSingleton<IServicoServico, ServicoServico>();
 //add estoque
 builder.Services.AddSingleton<IEstoqueServico,EstoqueServico>();
+
+//add produtoEstoque
+builder.Services.AddSingleton<IitemProdutoEstoqueServico, ItemProdutoEstoqueServico>();
 
 
 
@@ -155,7 +161,7 @@ builder.Services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
 builder.Services.AddCors();
 
 
-var app = builder.Build();
+    var app = builder.Build();
 
 // Configure the HTTP request pipeline.
 app.UseSwagger();

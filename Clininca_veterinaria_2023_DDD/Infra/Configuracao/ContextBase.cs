@@ -105,8 +105,7 @@ namespace Infra.Configuracao
             .OnDelete(DeleteBehavior.NoAction);  // Specify no action on delete
 
 
-            // Configurar a entidade como keyless
-            builder.Entity<ItemProdutoEstoque>().HasNoKey();
+            // Configurar a entidade como keyless 
             builder.Entity<ItemProdutoCompra>().HasNoKey();
             builder.Entity<ItemProdutoVenda>().HasNoKey(); 
 
@@ -244,7 +243,9 @@ namespace Infra.Configuracao
             builder.Entity<PedidoServicosRelacao>()
                 .HasKey(ps => new { ps.IdPedidoServicos, ps.IdServico });
              
-
+            //chave composta
+              builder.Entity<ItemProdutoEstoque>()
+        .HasKey(ip => new { ip.IdProduto, ip.IdEstoque });
 
             base.OnModelCreating(builder);
         }
