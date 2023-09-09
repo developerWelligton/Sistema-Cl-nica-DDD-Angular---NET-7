@@ -92,9 +92,13 @@ builder.Services.AddSingleton<InterfaceProduto, RepositorioProduto>();
 builder.Services.AddSingleton<InterfaceServico, RepositorioServico>();
 //add estoque
 builder.Services.AddSingleton<InterfaceEstoque, RepositorioEstoque>();
-
 //add produtoEstoque
 builder.Services.AddSingleton<InterfaceItemProdutoEstoque, RepositorioItemProdutosEstoques>();
+//add fornecedor
+builder.Services.AddSingleton<InterfaceFornecedor, RepositorioFornecedores>();
+
+
+
 
 
 //INTERFACE DOMINIO
@@ -122,6 +126,8 @@ builder.Services.AddSingleton<IEstoqueServico,EstoqueServico>();
 
 //add produtoEstoque
 builder.Services.AddSingleton<IitemProdutoEstoqueServico, ItemProdutoEstoqueServico>();
+//add fornecedor
+builder.Services.AddSingleton<IFornecedorServico, FornecedorServico>();
 
 
 
