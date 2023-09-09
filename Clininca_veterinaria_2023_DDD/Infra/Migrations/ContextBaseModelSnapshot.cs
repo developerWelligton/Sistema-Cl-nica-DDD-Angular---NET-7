@@ -42,7 +42,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Cliente");
 
-                    b.ToTable("Animal");
+                    b.ToTable("Animal", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.ApplicationUser", b =>
@@ -152,7 +152,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("Clientes");
+                    b.ToTable("Clientes", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Compra", b =>
@@ -185,7 +185,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdFornecedor");
 
-                    b.ToTable("COMPRAS");
+                    b.ToTable("COMPRAS", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Consulta", b =>
@@ -230,7 +230,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Veterinario");
 
-                    b.ToTable("Consulta");
+                    b.ToTable("Consulta", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Consulta_Exame", b =>
@@ -250,7 +250,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Exame");
 
-                    b.ToTable("Consulta_Exame");
+                    b.ToTable("Consulta_Exame", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Estoque", b =>
@@ -281,7 +281,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("ESTOQUES");
+                    b.ToTable("ESTOQUES", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Exame", b =>
@@ -311,7 +311,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ClienteId");
 
-                    b.ToTable("Exame");
+                    b.ToTable("Exame", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Familia", b =>
@@ -339,7 +339,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("Familias");
+                    b.ToTable("Familias", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Fornecedor", b =>
@@ -375,7 +375,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("FORNECEDORES");
+                    b.ToTable("FORNECEDORES", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.ItemProdutoCompra", b =>
@@ -402,7 +402,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdProduto");
 
-                    b.ToTable("ITENS_PRODUTOS_COMPRA");
+                    b.ToTable("ITENS_PRODUTOS_COMPRA", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.ItemProdutoEstoque", b =>
@@ -434,7 +434,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdEstoque");
 
-                    b.ToTable("ITENS_PRODUTO_ESTOQUES");
+                    b.ToTable("ITENS_PRODUTO_ESTOQUES", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.ItemProdutoVenda", b =>
@@ -461,7 +461,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdVenda");
 
-                    b.ToTable("ITENS_PRODUTOS_VENDAS");
+                    b.ToTable("ITENS_PRODUTOS_VENDAS", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.ItemServicoPrestado", b =>
@@ -503,7 +503,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdServico");
 
-                    b.ToTable("ITENS_SERVICOS_PRESTADO");
+                    b.ToTable("ITENS_SERVICOS_PRESTADO", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Mercadoria", b =>
@@ -531,7 +531,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("Mercadorias");
+                    b.ToTable("Mercadorias", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.NotaFiscal", b =>
@@ -572,7 +572,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdVendaServicoPagamento");
 
-                    b.ToTable("NOTA_FISCAL");
+                    b.ToTable("NOTA_FISCAL", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.PedidoServicos", b =>
@@ -601,7 +601,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("PEDIDO_SERVICOS");
+                    b.ToTable("PEDIDO_SERVICOS", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.PedidoServicosRelacao", b =>
@@ -618,7 +618,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdServico");
 
-                    b.ToTable("PEDIDO_SERVICOS_RELACAO");
+                    b.ToTable("PEDIDO_SERVICOS_RELACAO", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Produto", b =>
@@ -667,7 +667,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdUnspsc");
 
-                    b.ToTable("PRODUTOS");
+                    b.ToTable("PRODUTOS", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Secretaria", b =>
@@ -702,7 +702,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("Secretarias");
+                    b.ToTable("Secretarias", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Segmento", b =>
@@ -730,7 +730,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("Segmentos");
+                    b.ToTable("Segmentos", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Servico", b =>
@@ -765,7 +765,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdUnspsc");
 
-                    b.ToTable("SERVICOS");
+                    b.ToTable("SERVICOS", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.UnspscCode", b =>
@@ -808,7 +808,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdSegmento");
 
-                    b.ToTable("UnspscCodes");
+                    b.ToTable("UnspscCodes", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.UsuarioSistemaClinica", b =>
@@ -842,7 +842,7 @@ namespace Infra.Migrations
 
                     b.HasKey("ID_Usuario");
 
-                    b.ToTable("UsuarioSistemaClinica");
+                    b.ToTable("UsuarioSistemaClinica", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Venda", b =>
@@ -867,7 +867,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("VENDA");
+                    b.ToTable("VENDA", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.VendaServicoPagamento", b =>
@@ -911,7 +911,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("IdVenda");
 
-                    b.ToTable("VENDA_SERVICO_PAGAMENTO");
+                    b.ToTable("VENDA_SERVICO_PAGAMENTO", (string)null);
                 });
 
             modelBuilder.Entity("Entities.Entidades.Veterinario", b =>
@@ -946,7 +946,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("Veterinario");
+                    b.ToTable("Veterinario", (string)null);
                 });
 
             modelBuilder.Entity("Infra.Configuracao.Classe", b =>
@@ -974,7 +974,7 @@ namespace Infra.Migrations
 
                     b.HasIndex("ID_Usuario");
 
-                    b.ToTable("Classes");
+                    b.ToTable("Classes", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

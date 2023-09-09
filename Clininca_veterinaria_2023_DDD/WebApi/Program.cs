@@ -29,6 +29,7 @@ using Domain.Interfaces.IMercadoria;
 using Domain.Interfaces.IUnspscCode;
 using Domain.Interfaces.IServico;
 using Domain.Interfaces.IEstoque;
+using Domain.Interfaces.ICompra;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -96,6 +97,8 @@ builder.Services.AddSingleton<InterfaceEstoque, RepositorioEstoque>();
 builder.Services.AddSingleton<InterfaceItemProdutoEstoque, RepositorioItemProdutosEstoques>();
 //add fornecedor
 builder.Services.AddSingleton<InterfaceFornecedor, RepositorioFornecedores>();
+//add compra
+builder.Services.AddSingleton<InterfaceCompra, RepositorioCompra>();
 
 
 
@@ -123,11 +126,12 @@ builder.Services.AddSingleton<IProdutoServico, ProdutoServico>();
 builder.Services.AddSingleton<IServicoServico, ServicoServico>();
 //add estoque
 builder.Services.AddSingleton<IEstoqueServico,EstoqueServico>();
-
 //add produtoEstoque
 builder.Services.AddSingleton<IitemProdutoEstoqueServico, ItemProdutoEstoqueServico>();
 //add fornecedor
 builder.Services.AddSingleton<IFornecedorServico, FornecedorServico>();
+//add fornecedor
+builder.Services.AddSingleton<ICompraServico, CompraServico>();
 
 
 

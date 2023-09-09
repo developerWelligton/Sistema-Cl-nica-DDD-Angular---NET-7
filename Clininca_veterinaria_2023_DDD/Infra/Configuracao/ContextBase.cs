@@ -255,6 +255,12 @@ namespace Infra.Configuracao
           .HasForeignKey(p => p.IdEstoque)
           .OnDelete(DeleteBehavior.Cascade);
 
+            //Você não será capaz de excluir um fornecedor enquanto houver compras associadas a ele. No entanto, você pode excluir uma compra individual sem afetar o fornecedor.
+            builder.Entity<Compra>()
+            .HasOne(p => p.Fornecedor)
+            .WithMany()
+            .HasForeignKey(p => p.IdFornecedor)
+            .OnDelete(DeleteBehavior.Restrict);
 
             base.OnModelCreating(builder);
         }
