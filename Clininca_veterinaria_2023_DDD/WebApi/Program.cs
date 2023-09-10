@@ -113,6 +113,8 @@ builder.Services.AddSingleton<InterfaceItemProdutoVenda, RepositorioItemProdutos
 builder.Services.AddSingleton<InterfacePedidoServico, RepositorioPedidoServico>();
 //add Pagamento
 builder.Services.AddSingleton<InterfaceVendaServicoPagamento, RepositorioVendaServicoPagamento>();
+//add itemPedidoServico
+builder.Services.AddSingleton<InterfaceItemPedidoServico, RepositorioItemPedidoServico>();
 
 
 
@@ -156,6 +158,8 @@ builder.Services.AddSingleton<IitemProdutoVendaServico, ItemProdutoVendaServico>
 builder.Services.AddSingleton<IPedidoServicoServico, PedidoServicoServico>();
 //add pagamento
 builder.Services.AddSingleton<IVendaServicoPagamentoServico, VendaServicoPagamentoServico>();
+//add itemPedidoServico
+builder.Services.AddSingleton<IitemPedidoServicoServico, ItemPedidoServicoServico>();
 
 
 

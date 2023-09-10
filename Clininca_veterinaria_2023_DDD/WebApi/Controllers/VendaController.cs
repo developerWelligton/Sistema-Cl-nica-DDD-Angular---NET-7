@@ -46,7 +46,7 @@ namespace WebApi.Controllers
 
             // Atualizar o ID da venda no DTO para refletir o valor gerado pelo banco de dados
             vendaDto.IdVenda = venda.IdVenda;
-
+                
             return CreatedAtAction(nameof(AdicionarVenda), new { id = venda.IdVenda }, vendaDto);
         }
 
