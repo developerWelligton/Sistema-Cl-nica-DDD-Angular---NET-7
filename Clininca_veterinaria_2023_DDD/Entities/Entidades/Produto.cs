@@ -12,6 +12,8 @@ namespace Entities.Entidades
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long IdProduto { get; set; }
         public virtual ICollection<ItemProdutoCompra> ItemProdutoCompras { get; set; } = new List<ItemProdutoCompra>();
+        public virtual ICollection<ItemProdutoVenda> ItemProdutoVendas { get; set; } = new List<ItemProdutoVenda>();
+
         [Required]
         [StringLength(255)]
         public string? Nome { get; set; }
@@ -45,7 +47,6 @@ namespace Entities.Entidades
         public virtual UnspscCode? UnspscCode { get; set; }
 
 
-        // Lista de itens de compra associados a este produto
-        public virtual ICollection<ItemProdutoCompra>? Compras { get; set; }
+        
     }
 }

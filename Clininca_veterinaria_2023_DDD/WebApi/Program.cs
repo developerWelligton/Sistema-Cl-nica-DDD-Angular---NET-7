@@ -105,6 +105,8 @@ builder.Services.AddSingleton<InterfaceCompra, RepositorioCompra>();
 builder.Services.AddSingleton<InterfaceItemCompraProduto, RepositorioItemComprasProdutos>();
 //add venda
 builder.Services.AddSingleton<InterfaceVenda, RepositorioVenda>();
+//add itemCompraVenda
+builder.Services.AddSingleton<InterfaceItemProdutoVenda, RepositorioItemProdutosVendas>();
 
 
 
@@ -142,6 +144,8 @@ builder.Services.AddSingleton<ICompraServico, CompraServico>();
 builder.Services.AddSingleton<IitemProdutoCompraServico, ItemProdutoCompraServico>();
 //add venda
 builder.Services.AddSingleton<IVendaServico, VendaServico>();
+//add itemCompraVenda
+builder.Services.AddSingleton<IitemProdutoVendaServico, ItemProdutoVendaServico>();
 
 
 

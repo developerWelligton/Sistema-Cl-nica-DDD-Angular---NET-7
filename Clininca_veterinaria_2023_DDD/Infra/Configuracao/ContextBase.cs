@@ -105,9 +105,11 @@ namespace Infra.Configuracao
             .OnDelete(DeleteBehavior.NoAction);  // Specify no action on delete
 
 
-            // Configurar a entidade como keyless 
+
+            // Configurar a entidade como keyless  
+            builder.Entity<ItemProdutoVenda>().HasNoKey();
             builder.Entity<ItemProdutoCompra>().HasNoKey();
-            builder.Entity<ItemProdutoVenda>().HasNoKey(); 
+
 
 
             // Configura o relacionamento entre Compra e UsuarioSistemaClinica
@@ -234,10 +236,10 @@ namespace Infra.Configuracao
                 .HasForeignKey(s => s.IdUnspsc)
                 .IsRequired()
                 .OnDelete(DeleteBehavior.Restrict);
-
-            //
-
-         
+            
+            
+            
+            // Composite key    
 
             // Configuração para PedidoServicos e PedidoServicosRelacao
             builder.Entity<PedidoServicosRelacao>()
@@ -246,10 +248,15 @@ namespace Infra.Configuracao
             // Sua configuração de ItemProdutoEstoque
             builder.Entity<ItemProdutoEstoque>()
                 .HasKey(ip => new { ip.IdProduto, ip.IdEstoque });
-
-            // chave composta para ItemProdutoCompra
+            // Composite key for ItemProdutoVenda
+            builder.Entity<ItemProdutoVenda>()
+                .HasKey(ipv => new { ipv.IdVenda, ipv.IdProduto });
+            // Composite key for ItemProdutoCompra
             builder.Entity<ItemProdutoCompra>()
                 .HasKey(ipc => new { ipc.IdCompra, ipc.IdProduto });
+
+
+
 
 
             //cascata, quando excluir estoque consequentemente exclue o ItemProdutoEstoque
@@ -268,17 +275,34 @@ namespace Infra.Configuracao
 
 
             //itemcompraproduto
-            // Configurar relação entre Compra e ItemProdutoCompra
+            // Relationship between Compra and ItemProdutoCompra
             builder.Entity<Compra>()
-                .HasMany(c => c.ItemProdutoCompras) // Um Compra pode ter muitos ItemProdutoCompras
-                .WithOne(i => i.Compra) // Um ItemProdutoCompra tem um Compra
-                .HasForeignKey(i => i.IdCompra); // Com a chave estrangeira IdCompra
+                .HasMany(c => c.ItemProdutoCompras)
+                .WithOne(ipc => ipc.Compra)
+                .HasForeignKey(ipc => ipc.IdCompra);
 
-            // Configurar relação entre Produto e ItemProdutoCompra
+            // Relationship between Produto and ItemProdutoCompra
             builder.Entity<Produto>()
-                .HasMany(p => p.ItemProdutoCompras) // Um Produto pode ter muitos ItemProdutoCompras
-                .WithOne(i => i.Produto) // Um ItemProdutoCompra tem um Produto
-                .HasForeignKey(i => i.IdProduto); // Com a chave estrangeira IdProduto
+                .HasMany(p => p.ItemProdutoCompras)
+                .WithOne(ipc => ipc.Produto)
+                .HasForeignKey(ipc => ipc.IdProduto);
+
+
+            //itemcompravenda
+
+            // Relationship between Venda and ItemProdutoVenda
+            builder.Entity<Venda>()
+                .HasMany(v => v.ItemProdutoVendas)
+                .WithOne(ipv => ipv.Venda)
+                .HasForeignKey(ipv => ipv.IdVenda);
+
+            // Relationship between Produto and ItemProdutoVenda
+            builder.Entity<Produto>()
+                .HasMany(p => p.ItemProdutoVendas)
+                .WithOne(ipv => ipv.Produto)
+                .HasForeignKey(ipv => ipv.IdProduto);
+
+
 
 
 

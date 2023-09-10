@@ -10,7 +10,7 @@ namespace Entities.Entidades
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long IdVenda { get; set; }
-
+        public virtual ICollection<ItemProdutoVenda> ItemProdutoVendas { get; set; } = new List<ItemProdutoVenda>();
         [Column(TypeName = "date")]
         public DateTime? DataVenda { get; set; }
 
