@@ -34,6 +34,7 @@ using Domain.Interfaces.IiTemCompraProduto;
 using Domain.Interfaces.IVenda;
 using Domain.Interfaces.IPedidoServico;
 using Domain.Interfaces.IVendaServicoPagamento;
+using Domain.Interfaces.INotaFiscal;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -115,6 +116,8 @@ builder.Services.AddSingleton<InterfacePedidoServico, RepositorioPedidoServico>(
 builder.Services.AddSingleton<InterfaceVendaServicoPagamento, RepositorioVendaServicoPagamento>();
 //add itemPedidoServico
 builder.Services.AddSingleton<InterfaceItemPedidoServico, RepositorioItemPedidoServico>();
+//add nota fiscal
+builder.Services.AddSingleton<InterfaceNotaFiscal, RepositorioNotaFiscal>();
 
 
 
@@ -160,6 +163,8 @@ builder.Services.AddSingleton<IPedidoServicoServico, PedidoServicoServico>();
 builder.Services.AddSingleton<IVendaServicoPagamentoServico, VendaServicoPagamentoServico>();
 //add itemPedidoServico
 builder.Services.AddSingleton<IitemPedidoServicoServico, ItemPedidoServicoServico>();
+//add nota fiscal
+builder.Services.AddSingleton<INotaFiscalServico, NotaFiscalServico>();
 
 
 
