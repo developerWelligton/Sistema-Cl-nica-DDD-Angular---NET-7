@@ -242,10 +242,14 @@ namespace Infra.Configuracao
             // Configuração para PedidoServicos e PedidoServicosRelacao
             builder.Entity<PedidoServicosRelacao>()
                 .HasKey(ps => new { ps.IdPedidoServicos, ps.IdServico });
-             
-            //chave composta
-              builder.Entity<ItemProdutoEstoque>()
-            .HasKey(ip => new { ip.IdProduto, ip.IdEstoque });
+
+            // Sua configuração de ItemProdutoEstoque
+            builder.Entity<ItemProdutoEstoque>()
+                .HasKey(ip => new { ip.IdProduto, ip.IdEstoque });
+
+            // chave composta para ItemProdutoCompra
+            builder.Entity<ItemProdutoCompra>()
+                .HasKey(ipc => new { ipc.IdCompra, ipc.IdProduto });
 
 
             //cascata, quando excluir estoque consequentemente exclue o ItemProdutoEstoque
@@ -261,6 +265,23 @@ namespace Infra.Configuracao
             .WithMany()
             .HasForeignKey(p => p.IdFornecedor)
             .OnDelete(DeleteBehavior.Restrict);
+
+
+            //itemcompraproduto
+            // Configurar relação entre Compra e ItemProdutoCompra
+            builder.Entity<Compra>()
+                .HasMany(c => c.ItemProdutoCompras) // Um Compra pode ter muitos ItemProdutoCompras
+                .WithOne(i => i.Compra) // Um ItemProdutoCompra tem um Compra
+                .HasForeignKey(i => i.IdCompra); // Com a chave estrangeira IdCompra
+
+            // Configurar relação entre Produto e ItemProdutoCompra
+            builder.Entity<Produto>()
+                .HasMany(p => p.ItemProdutoCompras) // Um Produto pode ter muitos ItemProdutoCompras
+                .WithOne(i => i.Produto) // Um ItemProdutoCompra tem um Produto
+                .HasForeignKey(i => i.IdProduto); // Com a chave estrangeira IdProduto
+
+
+
 
             base.OnModelCreating(builder);
         }

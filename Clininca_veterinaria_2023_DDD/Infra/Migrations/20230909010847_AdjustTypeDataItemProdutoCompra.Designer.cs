@@ -4,6 +4,7 @@ using Infra.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    partial class ContextBaseModelSnapshot : ModelSnapshot
+    [Migration("20230909010847_AdjustTypeDataItemProdutoCompra")]
+    partial class AdjustTypeDataItemProdutoCompra
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -386,49 +389,19 @@ namespace Infra.Migrations
                     b.Property<long>("IdProduto")
                         .HasColumnType("bigint");
 
-                    b.Property<long?>("CompraIdCompra")
-                        .HasColumnType("bigint");
-
                     b.Property<DateTime?>("DataEntrada")
                         .HasColumnType("datetime");
-
-                    b.Property<DateTime?>("DataValidade")
-                        .HasColumnType("date");
-
-                    b.Property<decimal?>("Desconto")
-                        .HasColumnType("decimal(15, 2)");
-
-                    b.Property<decimal?>("Imposto")
-                        .HasColumnType("decimal(15, 2)");
 
                     b.Property<string>("Lote")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
 
-                    b.Property<string>("Observacoes")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<decimal?>("PrecoTotal")
-                        .HasColumnType("decimal(15, 2)");
-
-                    b.Property<long?>("ProdutoIdProduto")
-                        .HasColumnType("bigint");
-
                     b.Property<int?>("QuantidadeTotal")
                         .HasColumnType("int");
 
-                    b.Property<string>("StatusEntrega")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
-
                     b.HasKey("IdCompra", "IdProduto");
 
-                    b.HasIndex("CompraIdCompra");
-
                     b.HasIndex("IdProduto");
-
-                    b.HasIndex("ProdutoIdProduto");
 
                     b.ToTable("ITENS_PRODUTOS_COMPRA");
                 });
@@ -1275,25 +1248,17 @@ namespace Infra.Migrations
 
             modelBuilder.Entity("Entities.Entidades.ItemProdutoCompra", b =>
                 {
-                    b.HasOne("Entities.Entidades.Compra", null)
-                        .WithMany("Produtos")
-                        .HasForeignKey("CompraIdCompra");
-
                     b.HasOne("Entities.Entidades.Compra", "Compra")
-                        .WithMany("ItemProdutoCompras")
+                        .WithMany()
                         .HasForeignKey("IdCompra")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("Entities.Entidades.Produto", "Produto")
-                        .WithMany("ItemProdutoCompras")
+                        .WithMany()
                         .HasForeignKey("IdProduto")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.HasOne("Entities.Entidades.Produto", null)
-                        .WithMany("Compras")
-                        .HasForeignKey("ProdutoIdProduto");
 
                     b.Navigation("Compra");
 
@@ -1647,25 +1612,11 @@ namespace Infra.Migrations
                     b.Navigation("Exames");
                 });
 
-            modelBuilder.Entity("Entities.Entidades.Compra", b =>
-                {
-                    b.Navigation("ItemProdutoCompras");
-
-                    b.Navigation("Produtos");
-                });
-
             modelBuilder.Entity("Entities.Entidades.PedidoServicos", b =>
                 {
                     b.Navigation("ItensServicoPrestado");
 
                     b.Navigation("PedidoServicosRelacoes");
-                });
-
-            modelBuilder.Entity("Entities.Entidades.Produto", b =>
-                {
-                    b.Navigation("Compras");
-
-                    b.Navigation("ItemProdutoCompras");
                 });
 
             modelBuilder.Entity("Entities.Entidades.UsuarioSistemaClinica", b =>

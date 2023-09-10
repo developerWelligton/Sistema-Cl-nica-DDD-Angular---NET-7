@@ -4,6 +4,7 @@ using Infra.Configuracao;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Infra.Migrations
 {
     [DbContext(typeof(ContextBase))]
-    partial class ContextBaseModelSnapshot : ModelSnapshot
+    [Migration("20230910031712_AddItensProdutosNaCompra")]
+    partial class AddItensProdutosNaCompra
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -392,35 +395,15 @@ namespace Infra.Migrations
                     b.Property<DateTime?>("DataEntrada")
                         .HasColumnType("datetime");
 
-                    b.Property<DateTime?>("DataValidade")
-                        .HasColumnType("date");
-
-                    b.Property<decimal?>("Desconto")
-                        .HasColumnType("decimal(15, 2)");
-
-                    b.Property<decimal?>("Imposto")
-                        .HasColumnType("decimal(15, 2)");
-
                     b.Property<string>("Lote")
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
-
-                    b.Property<string>("Observacoes")
-                        .HasMaxLength(255)
-                        .HasColumnType("nvarchar(255)");
-
-                    b.Property<decimal?>("PrecoTotal")
-                        .HasColumnType("decimal(15, 2)");
 
                     b.Property<long?>("ProdutoIdProduto")
                         .HasColumnType("bigint");
 
                     b.Property<int?>("QuantidadeTotal")
                         .HasColumnType("int");
-
-                    b.Property<string>("StatusEntrega")
-                        .HasMaxLength(50)
-                        .HasColumnType("nvarchar(50)");
 
                     b.HasKey("IdCompra", "IdProduto");
 

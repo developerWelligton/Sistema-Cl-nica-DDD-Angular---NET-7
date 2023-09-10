@@ -30,6 +30,7 @@ using Domain.Interfaces.IUnspscCode;
 using Domain.Interfaces.IServico;
 using Domain.Interfaces.IEstoque;
 using Domain.Interfaces.ICompra;
+using Domain.Interfaces.IiTemCompraProduto;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -99,6 +100,8 @@ builder.Services.AddSingleton<InterfaceItemProdutoEstoque, RepositorioItemProdut
 builder.Services.AddSingleton<InterfaceFornecedor, RepositorioFornecedores>();
 //add compra
 builder.Services.AddSingleton<InterfaceCompra, RepositorioCompra>();
+//add itemCompraProduto
+builder.Services.AddSingleton<InterfaceItemCompraProduto, RepositorioItemComprasProdutos>();
 
 
 
@@ -132,6 +135,8 @@ builder.Services.AddSingleton<IitemProdutoEstoqueServico, ItemProdutoEstoqueServ
 builder.Services.AddSingleton<IFornecedorServico, FornecedorServico>();
 //add fornecedor
 builder.Services.AddSingleton<ICompraServico, CompraServico>();
+//add itemCompraProduto
+builder.Services.AddSingleton<IitemProdutoCompraServico, ItemProdutoCompraServico>();
 
 
 

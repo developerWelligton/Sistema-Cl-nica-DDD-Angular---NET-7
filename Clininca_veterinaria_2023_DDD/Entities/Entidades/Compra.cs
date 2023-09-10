@@ -10,6 +10,7 @@ namespace Entities.Entidades
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public long IdCompra { get; set; }
+        public virtual ICollection<ItemProdutoCompra> ItemProdutoCompras { get; set; } = new List<ItemProdutoCompra>();
 
         [Column(TypeName = "decimal(15, 2)")]
         public decimal? Total { get; set; }
@@ -29,5 +30,9 @@ namespace Entities.Entidades
         public long IdFornecedor { get; set; }
         [ForeignKey("IdFornecedor")]
         public virtual Fornecedor? Fornecedor { get; set; }
+
+
+        // Lista de produtos associados à compra
+        public virtual ICollection<ItemProdutoCompra>? Produtos { get; set; }
     }
 }
