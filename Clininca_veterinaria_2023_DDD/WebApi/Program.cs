@@ -33,6 +33,7 @@ using Domain.Interfaces.ICompra;
 using Domain.Interfaces.IiTemCompraProduto;
 using Domain.Interfaces.IVenda;
 using Domain.Interfaces.IPedidoServico;
+using Domain.Interfaces.IVendaServicoPagamento;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -110,6 +111,8 @@ builder.Services.AddSingleton<InterfaceVenda, RepositorioVenda>();
 builder.Services.AddSingleton<InterfaceItemProdutoVenda, RepositorioItemProdutosVendas>();
 //add PedidoServico
 builder.Services.AddSingleton<InterfacePedidoServico, RepositorioPedidoServico>();
+//add Pagamento
+builder.Services.AddSingleton<InterfaceVendaServicoPagamento, RepositorioVendaServicoPagamento>();
 
 
 
@@ -151,6 +154,9 @@ builder.Services.AddSingleton<IVendaServico, VendaServico>();
 builder.Services.AddSingleton<IitemProdutoVendaServico, ItemProdutoVendaServico>();
 //add PedidoServico
 builder.Services.AddSingleton<IPedidoServicoServico, PedidoServicoServico>();
+//add pagamento
+builder.Services.AddSingleton<IVendaServicoPagamentoServico, VendaServicoPagamentoServico>();
+
 
 
 
