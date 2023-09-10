@@ -32,6 +32,7 @@ using Domain.Interfaces.IEstoque;
 using Domain.Interfaces.ICompra;
 using Domain.Interfaces.IiTemCompraProduto;
 using Domain.Interfaces.IVenda;
+using Domain.Interfaces.IPedidoServico;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -107,6 +108,8 @@ builder.Services.AddSingleton<InterfaceItemCompraProduto, RepositorioItemCompras
 builder.Services.AddSingleton<InterfaceVenda, RepositorioVenda>();
 //add itemCompraVenda
 builder.Services.AddSingleton<InterfaceItemProdutoVenda, RepositorioItemProdutosVendas>();
+//add PedidoServico
+builder.Services.AddSingleton<InterfacePedidoServico, RepositorioPedidoServico>();
 
 
 
@@ -146,6 +149,8 @@ builder.Services.AddSingleton<IitemProdutoCompraServico, ItemProdutoCompraServic
 builder.Services.AddSingleton<IVendaServico, VendaServico>();
 //add itemCompraVenda
 builder.Services.AddSingleton<IitemProdutoVendaServico, ItemProdutoVendaServico>();
+//add PedidoServico
+builder.Services.AddSingleton<IPedidoServicoServico, PedidoServicoServico>();
 
 
 

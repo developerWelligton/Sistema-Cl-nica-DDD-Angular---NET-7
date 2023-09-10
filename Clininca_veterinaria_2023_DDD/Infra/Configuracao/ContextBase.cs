@@ -44,8 +44,7 @@ namespace Infra.Configuracao
         public DbSet<Estoque> Estoques { get; set; }
         public DbSet<ItemProdutoEstoque> ItensProdutoEstoques { get; set; } 
         public DbSet<ItemProdutoCompra> ItensProdutoCompras { get; set; }
-        public DbSet<ItemProdutoVenda> ItensPordutoVendas { get; set; }
-        public DbSet<ItemServicoPrestado> ItemServicoPrestados { get; set; }
+        public DbSet<ItemProdutoVenda> ItensPordutoVendas { get; set; } 
         public DbSet<PedidoServicosRelacao> PedidoServicosRelacoes { get; set; }
 
 
@@ -207,21 +206,8 @@ namespace Infra.Configuracao
                 .WithMany()
                 .HasForeignKey(v => v.IdVenda)
                 .IsRequired(false)
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<ItemServicoPrestado>()
-                .HasOne(i => i.Usuario)
-                .WithMany()
-                .HasForeignKey(i => i.ID_Usuario)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
-
-            builder.Entity<ItemServicoPrestado>()
-                .HasOne(i => i.Servico)
-                .WithMany()
-                .HasForeignKey(i => i.IdServico)
-                .IsRequired()
-                .OnDelete(DeleteBehavior.Restrict);
+                .OnDelete(DeleteBehavior.Restrict); 
+        
 
             builder.Entity<Servico>()
                 .HasOne(s => s.Usuario)

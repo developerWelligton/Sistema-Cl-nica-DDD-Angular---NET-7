@@ -25,9 +25,7 @@ namespace Entities.Entidades
         [ForeignKey("ID_Usuario")]
         public virtual UsuarioSistemaClinica Usuario { get; set; }
 
-        // Relacionamento com ItemServicoPrestado
-        public virtual ICollection<ItemServicoPrestado> ItensServicoPrestado { get; set; }
-
+        
         // Relação com PedidoServicosRelacao
         public virtual ICollection<PedidoServicosRelacao> PedidoServicosRelacoes { get; set; }
     }
