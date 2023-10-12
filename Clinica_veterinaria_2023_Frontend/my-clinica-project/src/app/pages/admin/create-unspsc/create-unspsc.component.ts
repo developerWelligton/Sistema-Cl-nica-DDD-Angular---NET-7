@@ -14,6 +14,9 @@ import Swal from 'sweetalert2';
 import { AnimalService } from 'src/app/services/animal.service';
 import { DataService } from 'src/app/services/data.service';
 import { Segmento } from 'src/app/models/segmento.model';
+import { Familia } from 'src/app/models/familia.model';
+import { Classe } from 'src/app/models/classe.model';
+import { Mercadoria } from 'src/app/models/mercadoria.model';
 
 
 export enum UserGroup {
@@ -34,9 +37,9 @@ export class CreateUnspscComponent {
 
   //fazer os tipos
   segmentos: Segmento[] = [];
-  familias: any[] = [];
-  classes: any[] = [];
-  mercadorias: any[] = [];
+  familias: Familia[] = [];
+  classes: Classe[] = [];
+  mercadorias: Mercadoria[] = [];
 
 
   public containerPadding: string;
@@ -54,6 +57,9 @@ export class CreateUnspscComponent {
     });
 
     this.loadSegmentos();
+    this.loadFamilias();
+    this.loadClasses();
+    this.loadMercadorias();
 
     this.createUnspscForm = this.fb.group({
       segmento: [''],
@@ -78,6 +84,41 @@ export class CreateUnspscComponent {
     );
   }
 
+  loadFamilias(): void {
+    this.dataService.getFamilias().subscribe(
+      (data: Familia[]) => {
+        console.log('Data received:', data);
+        this.familias = data;  // Atualiza a lista de clientes
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
+  loadClasses(): void {
+    this.dataService.getClasses().subscribe(
+      (data: Classe[]) => {
+        console.log('Data received:', data);
+        this.classes = data;  // Atualiza a lista de clientes
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
+  }
+
+  loadMercadorias(): void {
+    this.dataService.getMercadorias().subscribe(
+      (data: Mercadoria[]) => {
+        console.log('Data received:', data);
+        this.mercadorias = data;  // Atualiza a lista de clientes
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
+  }
   submitForm() {
     const formData = this.createUnspscForm.value;
   }
