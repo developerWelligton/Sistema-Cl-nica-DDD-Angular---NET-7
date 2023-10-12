@@ -4,11 +4,14 @@ import { Observable, catchError, delay, of, tap, throwError } from 'rxjs';
 import { Veterinario } from '../models/veterinario-model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../core/auth/auth.service';
+import { Unspsc } from '../models/unspsc.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class DataService {
+
+
 
   getSegmentos(): Observable<any[]> {
     // Simulando a obtenção de segmentos de uma API ou outra fonte de dados
@@ -40,6 +43,9 @@ export class DataService {
     return of(classes);
   }
 
+
+
+
   getMercadorias(): Observable<any[]> {
     // Simulando a obtenção de mercadorias de uma API ou outra fonte de dados
     const mercadorias = [
@@ -49,4 +55,41 @@ export class DataService {
     ];
     return of(mercadorias);
   }
+
+
+  private unspscData: Unspsc[] = [
+    {
+      idUnspsc: 1,
+      codigoSfcm: "50515457",
+      iD_Usuario: 1,
+      usuario: null,
+      idSegmento: 1,
+      segmento: null,
+      idFamilia: 1,
+      familia: null,
+      idClasse: 1,
+      classe: null,
+      idMercadoria: 1,
+      mercadoria: null
+    },
+    {
+      idUnspsc: 2,
+      codigoSfcm: "50515458",
+      iD_Usuario: 1,
+      usuario: null,
+      idSegmento: 1,
+      segmento: null,
+      idFamilia: 1,
+      familia: null,
+      idClasse: 1,
+      classe: null,
+      idMercadoria: 2,
+      mercadoria: null
+    },
+    // ... outros dados
+  ];
+  getUnspsc(): Observable<Unspsc[]> {
+    return of(this.unspscData);
+  }
+
 }

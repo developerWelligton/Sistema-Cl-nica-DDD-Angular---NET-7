@@ -55,7 +55,7 @@ namespace WebApi.Controllers
         [HttpDelete("{id}")]
         [Produces("application/json")]
         public async Task<ActionResult> ExcluirSegmento(int id)
-        {
+        {   
             var segmento = await _interfaceSegmentos.GetEntityById(id);
 
             if (segmento == null)

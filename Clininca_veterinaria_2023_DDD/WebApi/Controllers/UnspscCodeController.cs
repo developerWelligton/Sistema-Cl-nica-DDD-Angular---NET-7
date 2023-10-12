@@ -31,6 +31,17 @@ namespace WebApi.Controllers
             return Ok(await _interfaceUnspscCodes.List());
         }
 
+        [HttpGet("ListarComDescricao")]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<UnspscCode>>> ListUnspscWithDescription()
+        {
+            return Ok(await _interfaceUnspscCodes.GetAllUnspscCodeDetails());
+        }
+
+         
+
+
+
         [HttpPost]
         [Produces("application/json")]
         public async Task<ActionResult> CriarUnspscCode([FromBody] UnspscCodeDto unspscCodeDto)

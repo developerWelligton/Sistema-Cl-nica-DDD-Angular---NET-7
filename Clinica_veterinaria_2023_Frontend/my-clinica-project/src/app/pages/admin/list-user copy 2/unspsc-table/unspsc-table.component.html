@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table-erp">
+    <thead>
+      <tr>
+        <th>ID UNSPSC</th>
+        <th>UNSPSC_CODE</th>
+        <th>SEGMENTO</th>
+        <th>FAMILIA</th>
+        <th>CLASSE</th>
+        <th>MERCADORIA</th>
+        <th>AÇÕES</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of unspscList">
+        <td>{{ item.idUnspsc }}</td>
+        <td>{{ item.codigoSfcm }}</td>
+        <td>{{ item.segmento }}</td>
+        <td>{{ item.familia }}</td>
+        <td>{{ item.classe }}</td>
+        <td>{{ item.mercadoria }}</td>
+        <td>
+          <button (click)="editUnspsc(item)">Editar</button>
+          <button (click)="deleteUnspsc(item.idUnspsc)">Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

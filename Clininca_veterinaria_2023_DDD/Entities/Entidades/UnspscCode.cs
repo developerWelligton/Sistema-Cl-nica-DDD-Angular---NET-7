@@ -47,5 +47,19 @@ namespace Entities.Entidades
         public long IdMercadoria { get; set; }
         [ForeignKey("IdMercadoria")]
         public virtual Mercadoria? Mercadoria { get; set; }
+
+
+        //
+        [NotMapped]
+        public string DescricaoSegmento => Segmento?.Descricao;
+
+        [NotMapped]
+        public string DescricaoFamilia => Familia?.Descricao;
+
+        [NotMapped]
+        public string DescricaoClasse => Classe?.Descricao;
+
+        [NotMapped]
+        public string DescricaoMercadoria => Mercadoria?.Descricao;
     }
 }

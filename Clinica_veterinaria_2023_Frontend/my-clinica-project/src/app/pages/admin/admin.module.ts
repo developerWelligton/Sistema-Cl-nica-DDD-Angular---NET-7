@@ -20,6 +20,7 @@ import { ListProductComponent } from './list-user copy/list-product.component';
 import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
 import { ListUnspscComponent } from './list-user copy 2/list-unspsc.component';
 import { NgSelectModule } from '@ng-select/ng-select';
+import { UnspscTableComponent } from './list-user copy 2/unspsc-table/unspsc-table.component';
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     CreateProductComponent,
     ListProductComponent,
     CreateUnspscComponent,
-    ListUnspscComponent
+    ListUnspscComponent,
+    UnspscTableComponent
 
   ],
   exports:[CreateUserComponent],

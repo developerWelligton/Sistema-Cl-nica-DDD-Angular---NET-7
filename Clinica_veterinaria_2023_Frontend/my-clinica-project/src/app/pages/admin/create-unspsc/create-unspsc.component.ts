@@ -121,6 +121,7 @@ export class CreateUnspscComponent {
   }
   submitForm() {
     const formData = this.createUnspscForm.value;
+    console.log(formData)
   }
 
 }

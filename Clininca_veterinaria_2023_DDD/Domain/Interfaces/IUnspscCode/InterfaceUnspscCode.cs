@@ -11,5 +11,6 @@ namespace Domain.Interfaces.IUnspscCode
     public interface InterfaceUnspscCode : InterfaceGeneric<UnspscCode>
     {
          
+        Task<IList<UnspscCode>> GetAllUnspscCodeDetails();
     }
 }
