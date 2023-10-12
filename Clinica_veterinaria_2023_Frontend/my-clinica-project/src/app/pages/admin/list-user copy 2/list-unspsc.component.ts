@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { Unspsc } from 'src/app/models/unspsc.model';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { DataService } from './../../../services/data.service';
+import { UnspscService } from 'src/app/services/unspsc.service';
 
 @Component({
   selector: 'app-list-unspsc',
@@ -10,13 +11,14 @@ import { DataService } from './../../../services/data.service';
   styleUrls: ['./list-unspsc.component.scss']
 })
 export class ListUnspscComponent implements OnInit, OnDestroy {
-  unspscList: Unspsc[] = [];
+  public unspscList: any[] = [];
   public containerPadding: string;
   private paddingSubscription: Subscription;
 
   constructor(
     private paddingService: PaddingService,
-    private dataService: DataService
+    private dataService: DataService,
+    private unspscService: UnspscService
   ) { }
 
   ngOnInit() {
@@ -24,9 +26,9 @@ export class ListUnspscComponent implements OnInit, OnDestroy {
       this.containerPadding = padding;
     });
 
-    this.dataService.getUnspsc().subscribe(data => {
+
+    this.unspscService.getAllUnspscCodeDetails().subscribe((data: any[]) => {
       this.unspscList = data;
-      console.log(JSON.stringify(this.unspscList))
     });
   }
 

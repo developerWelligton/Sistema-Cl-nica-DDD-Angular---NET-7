@@ -15,10 +15,10 @@
       <tr *ngFor="let item of unspscList">
         <td>{{ item.idUnspsc }}</td>
         <td>{{ item.codigoSfcm }}</td>
-        <td>{{ item.segmento }}</td>
-        <td>{{ item.familia }}</td>
-        <td>{{ item.classe }}</td>
-        <td>{{ item.mercadoria }}</td>
+        <td>{{ item.segmento.descricao }}</td>
+        <td>{{ item.familia.descricao }}</td>
+        <td>{{ item.classe.descricao }}</td>
+        <td>{{ item.mercadoria.descricao }}</td>
         <td>
           <button (click)="editUnspsc(item)">Editar</button>
           <button (click)="deleteUnspsc(item.idUnspsc)">Excluir</button>

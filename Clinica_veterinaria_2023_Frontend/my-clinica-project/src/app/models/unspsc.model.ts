@@ -2,13 +2,53 @@ export interface Unspsc {
   idUnspsc: number;
   codigoSfcm: string;
   iD_Usuario: number;
-  usuario?: any;
+  usuario?: Usuario;
   idSegmento: number;
-  segmento?: any;
+  segmento: Segmento;
   idFamilia: number;
-  familia?: any;
+  familia: Familia;
   idClasse: number;
-  classe?: any;
+  classe: Classe;
   idMercadoria: number;
-  mercadoria?: any;
+  mercadoria: Mercadoria;
+  descricaoSegmento?: string;
+  descricaoFamilia?: string;
+  descricaoClasse?: string;
+  descricaoMercadoria?: string;
+}
+
+interface Usuario {
+  // Adicione propriedades conforme necessário
+}
+
+interface Segmento {
+  idSegmento: number;
+  codigo: string;
+  descricao: string;
+  iD_Usuario: number;
+  usuario?: Usuario;
+}
+
+interface Familia {
+  idFamilia: number;
+  codigo: string;
+  descricao: string;
+  iD_Usuario: number;
+  usuario?: Usuario;
+}
+
+interface Classe {
+  idClasse: number;
+  codigo: string;
+  descricao: string;
+  iD_Usuario: number;
+  usuario?: Usuario;
+}
+
+interface Mercadoria {
+  idMercadoria: number;
+  codigo: string;
+  descricao: string;
+  iD_Usuario: number;
+  usuario?: Usuario;
 }
