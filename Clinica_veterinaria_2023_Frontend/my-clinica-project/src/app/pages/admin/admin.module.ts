@@ -19,6 +19,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { ListProductComponent } from './list-user copy/list-product.component';
 import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
 import { ListUnspscComponent } from './list-user copy 2/list-unspsc.component';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   declarations: [
@@ -34,7 +35,7 @@ import { ListUnspscComponent } from './list-user copy 2/list-unspsc.component';
   ],
   exports:[CreateUserComponent],
   imports: [
-
+    NgSelectModule,
     CommonModule,
     AdminRoutingModule,
     NavbarModule,

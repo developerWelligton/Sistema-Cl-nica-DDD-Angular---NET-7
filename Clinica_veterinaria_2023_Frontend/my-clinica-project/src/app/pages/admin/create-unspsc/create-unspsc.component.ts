@@ -8,6 +8,12 @@ import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { Subscription } from 'rxjs';
+import { Cliente } from 'src/app/models/cliente.model';
+import { ClienteService } from 'src/app/services/cliente.service';
+import Swal from 'sweetalert2';
+import { AnimalService } from 'src/app/services/animal.service';
+import { DataService } from 'src/app/services/data.service';
+import { Segmento } from 'src/app/models/segmento.model';
 
 
 export enum UserGroup {
@@ -23,59 +29,57 @@ export enum UserGroup {
   styleUrls: ['./create-unspsc.component.scss']
 })
 export class CreateUnspscComponent {
-  createUserForm: FormGroup;
-  listUserGroup: { id: string, name: string }[] = [];
-  userRole: any;
-  //padding
-  private paddingSubscription: Subscription;
+
+  createUnspscForm: FormGroup;
+
+  //fazer os tipos
+  segmentos: Segmento[] = [];
+  familias: any[] = [];
+  classes: any[] = [];
+  mercadorias: any[] = [];
+
+
   public containerPadding: string;
 
   constructor(
     private fb: FormBuilder,
-    private adminService: AdminService,
-    private router: Router,
-    private userService: UserService,
-    private paddingService: PaddingService
+    private paddingService: PaddingService,
+    private dataService: DataService
   ) {}
 
   ngOnInit() {
-    //padding
-    this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
+    // Padding sidebar
+    this.paddingService.globalPadding$.subscribe(padding => {
       this.containerPadding = padding;
     });
-  //ROLE
-  this.userRole = this.userService.getCurrentUser()
-  //alert(this.userRole)
-debugger
 
-    this.populateUserGroups();
+    this.loadSegmentos();
+
+    this.createUnspscForm = this.fb.group({
+      segmento: [''],
+      familia: [''],
+      classe: [''],
+      mercadoria: [''],
+    });
   }
 
-  private populateUserGroups(): void {
-    let groupsToInclude = [];
 
-    switch (this.userRole) {
-      case 'secretaria':
-        groupsToInclude = [UserGroup.Cliente];
-        break;
-      case 'admin':
-        groupsToInclude = [
-          UserGroup.Cliente,
-          UserGroup.Veterinario,
-          UserGroup.Secretaria,
-          UserGroup.Admin
-        ];
-        break;
-      // You can add more cases as needed
-    }
 
-    this.listUserGroup = groupsToInclude.map(group => ({
-      id: group,
-      name: group
-    }));
 
-    console.log(this.listUserGroup); // Check the output
+  loadSegmentos(): void {
+    this.dataService.getSegmentos().subscribe(
+      (data: Segmento[]) => {
+        console.log('Data received:', data);
+        this.segmentos = data;  // Atualiza a lista de clientes
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
   }
 
+  submitForm() {
+    const formData = this.createUnspscForm.value;
+  }
 
 }

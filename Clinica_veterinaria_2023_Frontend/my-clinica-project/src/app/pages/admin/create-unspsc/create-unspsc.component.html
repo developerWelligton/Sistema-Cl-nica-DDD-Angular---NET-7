@@ -2,24 +2,66 @@
 <sidebar></sidebar>
 
 
-<div class="container-base" [style.padding]="containerPadding">
+<div class="container-base"  [style.padding]="containerPadding">
   <!-- Conteúdo da página -->
   <div class="content-page">
     <!-- Breadcrumbs -->
     <div class="breadcrumbs">
-      <h2>
-       <a href="/admin">Mural Admin</a>
+      <a href="/secretaria">Mural</a>
       <span class="separator">»</span>
       Página Atual
-      </h2>
     </div>
     <!-- Cabeçalho do cartão -->
     <div class="card-header">
       <!-- Título do cartão -->
-      <h3 class="card-title">Cadastro de Produto</h3>
+      <h3 class="card-title">Cadastro de Animal</h3>
 
     </div>
     <!-- Formulário -->
+    <form [formGroup]="createUnspscForm" (ngSubmit)="submitForm()">
+
+      <label>Segmento</label>
+    <ng-select class="select-padrao"
+              formControlName="segmento"
+              [items]="segmentos"
+              bindLabel="nome"
+              [multiple]="false"
+              [clearable]="true">
+    </ng-select>
+<!--
+      <label>Família</label>
+      <ng-select class="select-padrao"
+      formControlName="familia"
+      [items]="familias"
+      bindLabel="nome"
+      [multiple]="false"
+      [clearable]="false"
+      [clearable]="true"></ng-select>
+      <br>
+
+      <label>Classe</label>
+      <ng-select class="select-padrao"
+      formControlName="classe"
+      [items]="classes"
+      bindLabel="nome"
+      [multiple]="false"
+      [clearable]="false"
+      [clearable]="true"></ng-select>
+      <br>
+
+      <label>Mercadoria</label>
+      <ng-select class="select-padrao"
+      formControlName="mercadoria"
+      [items]="mercadorias"
+      bindLabel="nome"
+      [multiple]="false"
+      [clearable]="false"
+      [clearable]="true"></ng-select> -->
+      <br>
+      <button type="submit">Enviar</button>
+
+    </form>
+
 
   </div>
 </div>
