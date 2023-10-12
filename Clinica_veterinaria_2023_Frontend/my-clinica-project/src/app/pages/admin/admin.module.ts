@@ -15,13 +15,15 @@ import { MatButtonModule } from '@angular/material/button';
 import { ListUserComponent } from './list-user/list-user.component';
 import { MatTableModule } from '@angular/material/table';
 import { UserTableComponent } from './list-user/user-table/user-table.component';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 @NgModule({
   declarations: [
     AdminComponent,
     CreateUserComponent,
     ListUserComponent,
-    UserTableComponent
+    UserTableComponent,
+    CreateProductComponent
 
   ],
   exports:[CreateUserComponent],

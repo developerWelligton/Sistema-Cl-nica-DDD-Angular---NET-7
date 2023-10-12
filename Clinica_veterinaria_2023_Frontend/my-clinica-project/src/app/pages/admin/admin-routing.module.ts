@@ -3,6 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
+import { CreateProductComponent } from './create-product/create-product.component';
 
 const routes: Routes = [
   {
@@ -16,6 +17,10 @@ const routes: Routes = [
   {
     path:'list-user',
     component:ListUserComponent
+  },
+  {
+    path:'create-product',
+    component:CreateProductComponent
   },
    // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
    {
