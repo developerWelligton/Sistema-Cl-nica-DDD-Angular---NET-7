@@ -1,0 +1,52 @@
+.filter-container {
+  max-width: auto;
+  margin: 0 auto;
+  padding: 2rem;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  background-color: #ffffff;
+
+  .filter-title {
+      font-size: 24px;
+      color: black;
+      margin-bottom: 1.5rem;
+      font-weight: 500;
+  }
+
+  .input-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+
+      @media (min-width: 768px) {
+          flex-direction: row;
+      }
+  }
+
+  .input-field {
+      flex: 1; // makes sure each field takes equal width
+  }
+
+  .button-wrapper {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 1.5rem;
+
+      button {
+          padding: 12px 35px;
+          background-color: #009688;
+          color: white;
+          font-size: 18px;
+          border-radius: 5px;
+          transition: all 0.3s ease-in-out;
+
+          &:hover {
+              background-color: darken(#009688, 10%);
+          }
+      }
+  }
+}
+
+
+
+

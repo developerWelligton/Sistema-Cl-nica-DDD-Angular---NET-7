@@ -6,6 +6,7 @@ import { ListUserComponent } from './list-user/list-user.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ListProductComponent } from './list-user copy/list-product.component';
 import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
+import { ListUnspscComponent } from './list-user copy 2/list-unspsc.component';
 
 const routes: Routes = [
   {
@@ -31,6 +32,10 @@ const routes: Routes = [
   {
     path:'create-unspsc',
     component:CreateUnspscComponent
+  },
+  {
+    path:'list-unspsc',
+    component:ListUnspscComponent
   },
    // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
    {

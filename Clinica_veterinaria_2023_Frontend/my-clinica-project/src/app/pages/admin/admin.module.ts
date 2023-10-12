@@ -18,6 +18,7 @@ import { UserTableComponent } from './list-user/user-table/user-table.component'
 import { CreateProductComponent } from './create-product/create-product.component';
 import { ListProductComponent } from './list-user copy/list-product.component';
 import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
+import { ListUnspscComponent } from './list-user copy 2/list-unspsc.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +28,8 @@ import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
     UserTableComponent,
     CreateProductComponent,
     ListProductComponent,
-    CreateUnspscComponent
+    CreateUnspscComponent,
+    ListUnspscComponent
 
   ],
   exports:[CreateUserComponent],
