@@ -16,6 +16,7 @@ import { ListUserComponent } from './list-user/list-user.component';
 import { MatTableModule } from '@angular/material/table';
 import { UserTableComponent } from './list-user/user-table/user-table.component';
 import { CreateProductComponent } from './create-product/create-product.component';
+import { ListProductComponent } from './list-user copy/list-product.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { CreateProductComponent } from './create-product/create-product.componen
     CreateUserComponent,
     ListUserComponent,
     UserTableComponent,
-    CreateProductComponent
+    CreateProductComponent,
+    ListProductComponent
 
   ],
   exports:[CreateUserComponent],
