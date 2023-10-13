@@ -12,5 +12,7 @@ namespace Domain.Interfaces.IUnspscCode
     {
          
         Task<IList<UnspscCode>> GetAllUnspscCodeDetails();
+
+        Task<bool> CheckIfUnspscCodeExists(string codigoSfcm);
     }
 }

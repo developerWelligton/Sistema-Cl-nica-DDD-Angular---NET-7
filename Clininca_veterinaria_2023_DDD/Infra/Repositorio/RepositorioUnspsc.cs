@@ -27,9 +27,15 @@ namespace Infra.Repositorio
 
         }
 
-            
+        public async Task<bool> CheckIfUnspscCodeExists(string codigoSfcm)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                return await banco.UnspscCodes.AnyAsync(u => u.CodigoSfcm == codigoSfcm);
+            }
+        }
 
-           async Task<IList<UnspscCode>> InterfaceUnspscCode.GetAllUnspscCodeDetails()
+        async Task<IList<UnspscCode>> InterfaceUnspscCode.GetAllUnspscCodeDetails()
         {
             using (var banco = new ContextBase(_optionsBuilder))
             {

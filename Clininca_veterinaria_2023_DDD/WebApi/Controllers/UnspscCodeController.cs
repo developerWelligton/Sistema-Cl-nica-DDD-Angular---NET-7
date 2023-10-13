@@ -99,6 +99,14 @@ namespace WebApi.Controllers
 
             return Ok(unspscCode);
         }
-          
+
+        [HttpGet("Exists/{codigoSfcm}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<bool>> CheckIfUnspscCodeExists(string codigoSfcm)
+        {
+            bool exists = await _interfaceUnspscCodes.CheckIfUnspscCodeExists(codigoSfcm);
+            return Ok(exists);
+        }
+
     }
 }
