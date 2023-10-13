@@ -4,6 +4,7 @@ import { Unspsc } from 'src/app/models/unspsc.model';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { DataService } from './../../../services/data.service';
 import { UnspscService } from 'src/app/services/unspsc.service';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-list-unspsc',
@@ -33,7 +34,37 @@ export class ListUnspscComponent implements OnInit, OnDestroy {
   }
 
   handleUnspscDeleted(itemId: any): void {
-    // Lógica para lidar com a exclusão de um item unspsc
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Você não poderá reverter isso!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, delete isso!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.unspscService.deleteUnspscCode(itemId).subscribe(
+          () => {
+            // Caso de sucesso: você pode mostrar um alerta de sucesso ou atualizar a lista, por exemplo.
+            Swal.fire({
+              icon: 'success',
+              title: 'Deletado!',
+              text: 'O código UNSPSC foi deletado.',
+            });
+          },
+          (error) => {
+            // Caso de erro: mostrar um alerta com a mensagem de erro.
+            console.error('Falha ao deletar:', error);
+            Swal.fire({
+              icon: 'error',
+              title: 'Oops...',
+              text: 'Não foi possível deletar o código UNSPSC.',
+            });
+          }
+        );
+      }
+    });
   }
 
   handleUnspscEdited(item: any): void {

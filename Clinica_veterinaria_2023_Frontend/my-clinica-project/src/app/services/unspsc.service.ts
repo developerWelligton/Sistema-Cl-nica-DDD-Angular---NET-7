@@ -43,5 +43,11 @@ export class UnspscService {
       );
   }
 
+  deleteUnspscCode(id: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/UnspscCode/${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 }
