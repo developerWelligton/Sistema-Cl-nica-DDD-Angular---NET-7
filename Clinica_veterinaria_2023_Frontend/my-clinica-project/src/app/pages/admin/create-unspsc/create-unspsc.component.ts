@@ -44,6 +44,8 @@ export class CreateUnspscComponent {
   mercadorias: Mercadoria[] = [];
   unspscCode = '';
 
+  exists = false;
+
 
   public containerPadding: string;
 
@@ -72,9 +74,6 @@ export class CreateUnspscComponent {
       mercadoria: [''],
     });
   }
-
-
-
 
   loadSegmentos(): void {
     this.dataService.getSegmentos().subscribe(
@@ -124,6 +123,16 @@ export class CreateUnspscComponent {
     );
   }
 
+  checkIfUnspscCodeExists(): void {
+    this.unspscService.checkIfUnspscCodeExists(this.unspscCode).subscribe(
+      exists => {
+        this.exists = exists;
+      },
+      error => {
+        console.error('Error:', error);
+      }
+    );
+  }
 
   onValueChange(): void {
     const formValues = this.createUnspscForm.value;
@@ -140,50 +149,72 @@ export class CreateUnspscComponent {
       `${mercadoriaCodigo}`;
   }
 
-
-
   submitForm(): void {
-    if (this.createUnspscForm.valid) {
-      this.onValueChange();
+      if (this.createUnspscForm.valid) {
+          this.onValueChange();
 
-      const formData = this.createUnspscForm.value;
-      const payload = {
-        codigoSfcm: this.unspscCode,
-        iD_Usuario: 1,  // Ajuste conforme necessário
-        idSegmento: formData.segmento.idSegmento,
-        idFamilia: formData.familia.idFamilia,
-        idClasse: formData.classe.idClasse,
-        idMercadoria: formData.mercadoria.idMercadoria
-      };
+          const formData = this.createUnspscForm.value;
+          const payload = {
+              codigoSfcm: this.unspscCode,
+              iD_Usuario: 1,  // Ajuste conforme necessário
+              idSegmento: formData.segmento.idSegmento,
+              idFamilia: formData.familia.idFamilia,
+              idClasse: formData.classe.idClasse,
+              idMercadoria: formData.mercadoria.idMercadoria
+          };
 
-      this.unspscService.createUnspscCode(payload).subscribe(
-        response => {
-          console.log('API response:', response);
-          // Informe o usuário sobre o sucesso
+          // Verificar se o código UNSPSC já existe
+          this.unspscService.checkIfUnspscCodeExists(this.unspscCode).subscribe(
+              exists => {
+                  if (exists) {
+                      // Mostrar alerta se o código UNSPSC já existe
+                      Swal.fire({
+                          icon: 'warning',
+                          title: 'Oops...',
+                          text: 'The UNSPSC Code already exists. Please choose a different code.',
+                      });
+                  } else {
+                      // Se não existir, criar o novo código UNSPSC
+                      this.unspscService.createUnspscCode(payload).subscribe(
+                          response => {
+                              console.log('API response:', response);
+                              // Informe o usuário sobre o sucesso
+                              Swal.fire({
+                                  icon: 'success',
+                                  title: 'Success',
+                                  text: 'Data sent successfully!',
+                              });
+                          },
+                          error => {
+                              console.error('API error:', error);
+                              // Informe o usuário sobre o erro
+                              Swal.fire({
+                                  icon: 'error',
+                                  title: 'Error',
+                                  text: 'Failed to send data!',
+                              });
+                          }
+                      );
+                  }
+              },
+              error => {
+                  console.error('API error:', error);
+                  // Informe o usuário sobre o erro
+                  Swal.fire({
+                      icon: 'error',
+                      title: 'Error',
+                      text: 'Failed to check UNSPSC Code existence!',
+                  });
+              }
+          );
+      } else {
+          console.error('Form is invalid');
           Swal.fire({
-            icon: 'success',
-            title: 'Success',
-            text: 'Data sent successfully!',
+              icon: 'error',
+              title: 'Oops...',
+              text: 'The form is invalid. Please check your input and try again.',
           });
-        },
-        error => {
-          console.error('API error:', error);
-          // Informe o usuário sobre o erro
-          Swal.fire({
-            icon: 'error',
-            title: 'Error',
-            text: 'Failed to send data!',
-          });
-        }
-      );
-    } else {
-      console.error('Form is invalid');
-      Swal.fire({
-        icon: 'error',
-        title: 'Oops...',
-        text: 'The form is invalid. Please check your input and try again.',
-      });
-    }
+      }
   }
 
 }

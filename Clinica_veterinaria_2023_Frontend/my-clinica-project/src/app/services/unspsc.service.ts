@@ -35,6 +35,13 @@ export class UnspscService {
     return throwError(error);
   }
 
+   // Método para verificar se um UnspscCode existe
+   checkIfUnspscCodeExists(codigoSfcm: string): Observable<boolean> {
+    return this.http.get<boolean>(`${this.baseUrl}/UnspscCode/Exists/${codigoSfcm}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
 }
