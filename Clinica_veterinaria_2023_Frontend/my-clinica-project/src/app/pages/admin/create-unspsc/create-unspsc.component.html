@@ -24,40 +24,53 @@
     <ng-select class="select-padrao"
               formControlName="segmento"
               [items]="segmentos"
-              bindLabel="nome"
+              bindLabel="descricao"
               [multiple]="false"
-              [clearable]="true">
+              [clearable]="true"
+              (change)="onValueChange()"
+              >
     </ng-select>
 
       <label>Família</label>
       <ng-select class="select-padrao"
       formControlName="familia"
       [items]="familias"
-      bindLabel="nome"
+      bindLabel="descricao"
       [multiple]="false"
       [clearable]="false"
-      [clearable]="true"></ng-select>
+      [clearable]="true"
+      (change)="onValueChange()"
+      ></ng-select>
       <br>
 
       <label>Classe</label>
       <ng-select class="select-padrao"
       formControlName="classe"
       [items]="classes"
-      bindLabel="nome"
+      bindLabel="descricao"
       [multiple]="false"
       [clearable]="false"
-      [clearable]="true"></ng-select>
+      [clearable]="true"
+      (change)="onValueChange()"
+      ></ng-select>
       <br>
 
       <label>Mercadoria</label>
       <ng-select class="select-padrao"
       formControlName="mercadoria"
       [items]="mercadorias"
-      bindLabel="nome"
+      bindLabel="descricao"
       [multiple]="false"
       [clearable]="false"
-      [clearable]="true"></ng-select>
+      [clearable]="true"
+      (change)="onValueChange()"
+      ></ng-select>
       <br>
+      <label>Code UNSPSC</label>
+      <input type="text" [value]="unspscCode" readonly />
+
+
+
       <button type="submit">Enviar</button>
 
     </form>

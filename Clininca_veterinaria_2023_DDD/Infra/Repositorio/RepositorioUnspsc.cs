@@ -27,12 +27,7 @@ namespace Infra.Repositorio
 
         }
 
-
-
-
-       
-
-       
+            
 
            async Task<IList<UnspscCode>> InterfaceUnspscCode.GetAllUnspscCodeDetails()
         {

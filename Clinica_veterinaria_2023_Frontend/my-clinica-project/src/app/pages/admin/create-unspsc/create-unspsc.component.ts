@@ -17,6 +17,8 @@ import { Segmento } from 'src/app/models/segmento.model';
 import { Familia } from 'src/app/models/familia.model';
 import { Classe } from 'src/app/models/classe.model';
 import { Mercadoria } from 'src/app/models/mercadoria.model';
+import { HttpClient } from '@angular/common/http';
+import { UnspscService } from 'src/app/services/unspsc.service';
 
 
 export enum UserGroup {
@@ -40,6 +42,7 @@ export class CreateUnspscComponent {
   familias: Familia[] = [];
   classes: Classe[] = [];
   mercadorias: Mercadoria[] = [];
+  unspscCode = '';
 
 
   public containerPadding: string;
@@ -47,7 +50,8 @@ export class CreateUnspscComponent {
   constructor(
     private fb: FormBuilder,
     private paddingService: PaddingService,
-    private dataService: DataService
+    private dataService: DataService,
+    private unspscService: UnspscService
   ) {}
 
   ngOnInit() {
@@ -119,9 +123,67 @@ export class CreateUnspscComponent {
       }
     );
   }
-  submitForm() {
-    const formData = this.createUnspscForm.value;
-    console.log(formData)
+
+
+  onValueChange(): void {
+    const formValues = this.createUnspscForm.value;
+
+    const segmentoCodigo = formValues.segmento?.codigo ?? 'XX';
+    const familiaCodigo = formValues.familia?.codigo ?? 'XX';
+    const classeCodigo = formValues.classe?.codigo ?? 'XX';
+    const mercadoriaCodigo = formValues.mercadoria?.codigo ?? 'XX';
+
+    this.unspscCode =
+      `${segmentoCodigo}-` +
+      `${familiaCodigo}-` +
+      `${classeCodigo}-` +
+      `${mercadoriaCodigo}`;
+  }
+
+
+
+  submitForm(): void {
+    if (this.createUnspscForm.valid) {
+      this.onValueChange();
+
+      const formData = this.createUnspscForm.value;
+      const payload = {
+        codigoSfcm: this.unspscCode,
+        iD_Usuario: 1,  // Ajuste conforme necessário
+        idSegmento: formData.segmento.idSegmento,
+        idFamilia: formData.familia.idFamilia,
+        idClasse: formData.classe.idClasse,
+        idMercadoria: formData.mercadoria.idMercadoria
+      };
+
+      this.unspscService.createUnspscCode(payload).subscribe(
+        response => {
+          console.log('API response:', response);
+          // Informe o usuário sobre o sucesso
+          Swal.fire({
+            icon: 'success',
+            title: 'Success',
+            text: 'Data sent successfully!',
+          });
+        },
+        error => {
+          console.error('API error:', error);
+          // Informe o usuário sobre o erro
+          Swal.fire({
+            icon: 'error',
+            title: 'Error',
+            text: 'Failed to send data!',
+          });
+        }
+      );
+    } else {
+      console.error('Form is invalid');
+      Swal.fire({
+        icon: 'error',
+        title: 'Oops...',
+        text: 'The form is invalid. Please check your input and try again.',
+      });
+    }
   }
 
 }

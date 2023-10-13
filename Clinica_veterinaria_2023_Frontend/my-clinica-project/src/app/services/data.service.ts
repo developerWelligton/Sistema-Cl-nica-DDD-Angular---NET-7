@@ -11,49 +11,40 @@ import { Unspsc } from '../models/unspsc.model';
 })
 export class DataService {
 
+  private baseUrl = `${environment.apiUrl}/api`;
 
+  constructor(private http: HttpClient) { }
 
   getSegmentos(): Observable<any[]> {
-    // Simulando a obtenção de segmentos de uma API ou outra fonte de dados
-    const segmentos = [
-      { id: 1, nome: 'Segmento 1' },
-      { id: 2, nome: 'Segmento 2' },
-      { id: 3, nome: 'Segmento 3' },
-    ];
-    return of(segmentos);
+    return this.http.get<any[]>(`${this.baseUrl}/Segmento`).pipe(
+      catchError(this.handleError('getSegmentos', []))
+    );
   }
 
   getFamilias(): Observable<any[]> {
-    // Simulando a obtenção de famílias de uma API ou outra fonte de dados
-    const familias = [
-      { id: 1, nome: 'Família 1' },
-      { id: 2, nome: 'Família 2' },
-      { id: 3, nome: 'Família 3' },
-    ];
-    return of(familias);
+    return this.http.get<any[]>(`${this.baseUrl}/Familia`).pipe(
+      catchError(this.handleError('getFamilias', []))
+    );
   }
 
   getClasses(): Observable<any[]> {
-    // Simulando a obtenção de classes de uma API ou outra fonte de dados
-    const classes = [
-      { id: 1, nome: 'Classe 1' },
-      { id: 2, nome: 'Classe 2' },
-      { id: 3, nome: 'Classe 3' },
-    ];
-    return of(classes);
+    return this.http.get<any[]>(`${this.baseUrl}/Classe`).pipe(
+      catchError(this.handleError('getClasses', []))
+    );
   }
 
-
-
-
   getMercadorias(): Observable<any[]> {
-    // Simulando a obtenção de mercadorias de uma API ou outra fonte de dados
-    const mercadorias = [
-      { id: 1, nome: 'Mercadoria 1' },
-      { id: 2, nome: 'Mercadoria 2' },
-      { id: 3, nome: 'Mercadoria 3' },
-    ];
-    return of(mercadorias);
+    return this.http.get<any[]>(`${this.baseUrl}/Mercadoria`).pipe(
+      catchError(this.handleError('getMercadorias', []))
+    );
+  }
+
+  private handleError<T>(operation = 'operation', result?: T) {
+    return (error: any): Observable<T> => {
+      console.error(error); // log to console instead
+      console.log(`${operation} failed: ${error.message}`);
+      return of(result as T);
+    };
   }
 
 

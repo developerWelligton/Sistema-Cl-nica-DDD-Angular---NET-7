@@ -23,6 +23,17 @@ export class UnspscService {
     return this.http.get(`${this.baseUrl}/UnspscCode/ListarComDescricao`);
   }
 
+  createUnspscCode(payload: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/UnspscCode`, payload)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  private handleError(error: any): Observable<never> {
+    console.error('API error:', error);
+    return throwError(error);
+  }
 
 
 
