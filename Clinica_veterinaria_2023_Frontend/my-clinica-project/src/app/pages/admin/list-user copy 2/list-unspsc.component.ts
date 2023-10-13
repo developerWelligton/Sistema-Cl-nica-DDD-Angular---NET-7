@@ -31,6 +31,8 @@ export class ListUnspscComponent implements OnInit, OnDestroy {
     this.unspscService.getAllUnspscCodeDetails().subscribe((data: any[]) => {
       this.unspscList = data;
     });
+
+
   }
 
   handleUnspscDeleted(itemId: any): void {
