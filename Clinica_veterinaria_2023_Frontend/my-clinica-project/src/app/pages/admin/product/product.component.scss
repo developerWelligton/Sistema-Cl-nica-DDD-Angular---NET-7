@@ -75,12 +75,3 @@
 }
 
 /* Seus outros estilos permanecem os mesmos */
-
-
-.image-preview {
-  max-width: 450px; /* Máxima largura da imagem */
-  max-height: 450px; /* Máxima altura da imagem */
-  width: 100%; /* Faz a imagem ocupar 100% da largura do contêiner, até 400px */
-  height: auto; /* Mantém a proporção da imagem ao redimensionar */
-  object-fit: cover; /* Mantém as proporções da imagem enquanto a redimensiona para preencher o contêiner */
-}

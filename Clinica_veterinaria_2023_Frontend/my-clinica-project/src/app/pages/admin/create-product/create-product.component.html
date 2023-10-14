@@ -1,25 +1,108 @@
 <navbar></navbar>
 <sidebar></sidebar>
 
-
 <div class="container-base" [style.padding]="containerPadding">
-  <!-- Conteúdo da página -->
-  <div class="content-page">
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-      <h2>
-       <a href="/admin">Mural Admin</a>
-      <span class="separator">»</span>
-      Página Atual
-      </h2>
-    </div>
-    <!-- Cabeçalho do cartão -->
-    <div class="card-header">
-      <!-- Título do cartão -->
-      <h3 class="card-title">Cadastro de Produto</h3>
+    <div class="content-page-edit">
+        <div class="breadcrumbs">
+            <h2>
+                <a href="/admin">Mural Admin</a>
+                <span class="separator">»</span>
+                Página Atual
+            </h2>
+        </div>
+        <div class="card-header">
+            <h3 class="card-title">Cadastro de Produto</h3>
+        </div>
+        <form [formGroup]="createProductForm">
 
-    </div>
-    <!-- Formulário -->
+        <div class="form-content-edit row">
+          <div class="col-md-4">
+            <div class="col-md-12 mb-3" *ngIf="!preview; else previewImage">
+                <button type="button" (click)="fileInput.click()" class="btn btn-primary">
+                    <i class="fa fa-image fa-4x align-middle"></i>
+                </button>
+                <label for="productImage" class="form-label">Imagem:</label>
+                <input
+                    #fileInput
+                    type="file"
+                    id="productImage"
+                    name="productImage"
+                    class="form-control"
+                    accept="image/*"
+                    required
+                    (change)="handleFile($event)"
+                >
+            </div>
+            <div class="image-part mb-4">
+              <ng-template #previewImage>
+                  <div class="text-center image-preview">
+                      <app-product [url]="preview" title="Preview"></app-product>
+                  </div>
+              </ng-template>
+          </div>
+          </div>
 
-  </div>
+
+
+
+            <!-- Parte do formulário -->
+            <div class="col-md-8">
+              <div class="form-part">
+
+                      <!-- Primeira linha de inputs -->
+                      <div class="row">
+                          <div class="col-md-4 mb-3">
+                              <label for="productName" class="form-label">Nome do Produto:</label>
+                              <input type="text" id="productName" name="productName" class="form-control" required>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                              <label for="productBarcode" class="form-label">Código de Barra:</label>
+                              <input type="text" id="productBarcode" name="productBarcode" class="form-control" required>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                              <label for="purchasePrice" class="form-label">Preço de Compra:</label>
+                              <input type="number" id="purchasePrice" name="purchasePrice" step="0.01" class="form-control" required>
+                          </div>
+                      </div>
+
+                      <!-- Segunda linha de inputs -->
+                      <div class="row">
+                          <div class="col-md-4 mb-3">
+                              <label for="sellingPrice" class="form-label">Preço de Venda:</label>
+                              <input type="number" id="sellingPrice" name="sellingPrice" step="0.01" class="form-control" required>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                              <label for="model" class="form-label">Modelo:</label>
+                              <input type="text" id="model" name="model" class="form-control" required>
+                          </div>
+                          <div class="col-md-4 mb-3">
+                              <label for="itemType" class="form-label">Tipo de Item:</label>
+                              <input type="text" id="itemType" name="itemType" class="form-control" required>
+                          </div>
+                      </div>
+
+                      <!-- ... Você pode continuar adicionando mais linhas conforme necessário ... -->
+
+                      <!-- Campo de descrição e input de imagem numa única linha -->
+                      <div class="row">
+                          <div class="col-md-8 mb-3">
+                              <label for="productDescription" class="form-label">Descrição:</label>
+                              <textarea id="productDescription" name="productDescription" class="form-control" required></textarea>
+                          </div>
+
+                      </div>
+
+                      <button type="submit" class="btn btn-primary" (click)="submitForm()">Enviar</button>
+
+
+
+
+
+              </div>
+            </div>
+
+
+          </div>
+      </form>
+    </div>
 </div>

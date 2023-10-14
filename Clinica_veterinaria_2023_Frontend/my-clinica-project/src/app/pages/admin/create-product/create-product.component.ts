@@ -8,6 +8,7 @@ import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { Subscription } from 'rxjs';
+import Swal from 'sweetalert2';
 
 
 export enum UserGroup {
@@ -23,12 +24,16 @@ export enum UserGroup {
   styleUrls: ['./create-product.component.scss']
 })
 export class CreateProductComponent {
-  createUserForm: FormGroup;
   listUserGroup: { id: string, name: string }[] = [];
   userRole: any;
   //padding
   private paddingSubscription: Subscription;
   public containerPadding: string;
+
+
+  createProductForm: FormGroup;
+  file: File;
+  preview: string;
 
   constructor(
     private fb: FormBuilder,
@@ -39,43 +44,32 @@ export class CreateProductComponent {
   ) {}
 
   ngOnInit() {
+    this.createProductForm = this.fb.group({
+      file: ['']
+    });
     //padding
     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
       this.containerPadding = padding;
     });
-  //ROLE
-  this.userRole = this.userService.getCurrentUser()
-  //alert(this.userRole)
-debugger
-
-    this.populateUserGroups();
+    //ROLE
+    this.userRole = this.userService.getCurrentUser()
+    //alert(this.userRole)
   }
 
-  private populateUserGroups(): void {
-    let groupsToInclude = [];
 
-    switch (this.userRole) {
-      case 'secretaria':
-        groupsToInclude = [UserGroup.Cliente];
-        break;
-      case 'admin':
-        groupsToInclude = [
-          UserGroup.Cliente,
-          UserGroup.Veterinario,
-          UserGroup.Secretaria,
-          UserGroup.Admin
-        ];
-        break;
-      // You can add more cases as needed
-    }
+  handleFile(event: any): void {
+    console.log(event);  // Verifique se este log aparece no console quando um arquivo é selecionado.
+    this.file = event.target.files[0] ?? null;
 
-    this.listUserGroup = groupsToInclude.map(group => ({
-      id: group,
-      name: group
-    }));
-
-    console.log(this.listUserGroup); // Check the output
+    const reader = new FileReader();
+    reader.onload = (e: any) => this.preview = e.target.result;
+    reader.readAsDataURL(this.file);
   }
 
+  submitForm(): void {
+    const formData = this.createProductForm.value;
+
+    console.log(this.file)
+  }
 
 }
