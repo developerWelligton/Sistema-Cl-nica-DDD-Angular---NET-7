@@ -12,21 +12,27 @@ import Swal from 'sweetalert2';
 export class UserProductComponent {
 
   @Input() productList: any[] = [];
-  @Output() userDeleted: EventEmitter<void> = new EventEmitter<void>();
+  @Output() productDeleted: EventEmitter<void> = new EventEmitter<void>();
 
   constructor(
     private adminService: AdminService,
     private router:Router) { }
 
-  editUser(user: any) {
+  editProduct(user: any) {
     // Implemente a lógica para editar o usuário aqui
     console.log('Editar usuário:', user);
   }
 
-  viewUser(user: any) {
+  viewProduct(user: any) {
     // Implemente a lógica para visualizar o usuário aqui
     console.log('Visualizar usuário:', user);
   }
+
+  deleteProduct(user: any) {
+    // Implemente a lógica para visualizar o usuário aqui
+    console.log('Visualizar usuário:', user);
+  }
+
 
 
 }

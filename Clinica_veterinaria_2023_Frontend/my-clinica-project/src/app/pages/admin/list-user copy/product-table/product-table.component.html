@@ -14,15 +14,19 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let product of productList">
+      <tr *ngFor="let product of productList.slice().reverse()">
         <td>{{ product.idProduto }}</td>
-        <td>{{ product.unspscCode }}</td>
+        <td>{{ product.codigoSfcm }}</td>
         <td>{{ product.nome }}</td>
         <td>{{ product.descricao }}</td>
         <td>{{ product.precoCompra }}</td>
         <td>{{ product.precoVenda }}</td>
         <td>{{ product.status }}</td>
-
+        <td>
+          <button type="button" class="btn btn-info" (click)="editProduct(product)" >Editar</button>
+          <button type="button" class="btn btn-success" (click)="viewProduct(product)" >Visualizar</button>
+          <button type="button" class="btn btn-danger" (click)="deleteProduct(product.idProduto)" >Excluir</button>
+        </td>
       </tr>
     </tbody>
   </table>

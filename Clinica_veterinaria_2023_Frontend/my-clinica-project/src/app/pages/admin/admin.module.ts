@@ -21,6 +21,7 @@ import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
 import { ListUnspscComponent } from './list-user copy 2/list-unspsc.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { UnspscTableComponent } from './list-user copy 2/unspsc-table/unspsc-table.component';
+import { UserProductComponent } from './list-user copy/product-table/product-table.component';
 
 @NgModule({
   declarations: [
@@ -32,10 +33,11 @@ import { UnspscTableComponent } from './list-user copy 2/unspsc-table/unspsc-tab
     ListProductComponent,
     CreateUnspscComponent,
     ListUnspscComponent,
-    UnspscTableComponent
+    UnspscTableComponent,
+    UserProductComponent
 
   ],
-  exports:[CreateUserComponent],
+  exports:[CreateUserComponent,UserProductComponent],
   imports: [
     NgSelectModule,
     CommonModule,
@@ -49,6 +51,7 @@ import { UnspscTableComponent } from './list-user copy 2/unspsc-table/unspsc-tab
     MatInputModule,
     MatButtonModule,
     MatTableModule,
+
 
 
 

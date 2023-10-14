@@ -3,6 +3,7 @@ import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/user/user.service';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { AdminService } from 'src/app/services/admin.service';
+import { ProductService } from 'src/app/services/product.service';
 import { userServiceAPI } from 'src/app/services/userAPI.service';
 
 export enum UserGroup {
@@ -21,13 +22,14 @@ export class ListProductComponent {
   constructor(
     private adminService: AdminService,
     private paddingService: PaddingService,
-    private userServiceAPI: userServiceAPI ) { }
+    private productService: ProductService ) { }
 
     productList: any[] = [];
-  listUserGroup: { id: string, name: string }[] = [];
-  public containerPadding: string;
-   //padding
-   private paddingSubscription: Subscription;
+    listUserGroup: { id: string, name: string }[] = [];
+
+    public containerPadding: string;
+    //padding
+    private paddingSubscription: Subscription;
 
 
 
@@ -38,22 +40,13 @@ export class ListProductComponent {
     });
 
     this.populateUserGroups();
-    this.fetchUsersFromServiceOrUseMock();
+    this.productService.getAllProductWithUnspsc().subscribe((data: any[]) => {
+      console.log(data)
+      this.productList = data;
+    });
   }
 
-  private fetchUsersFromServiceOrUseMock(): void {
-    this.userServiceAPI.getAllUsers().subscribe(
-      data => {
-        console.log(data);
 
-        this.productList = data
-      },
-      error => {
-        console.error('Error fetching users:', error);
-        //this.usersList = this.MOCK_DATA; // Using the mock data below
-      }
-    );
-  }
 
   private populateUserGroups(): void {
     this.listUserGroup = Object.values(UserGroup).map(group => ({
@@ -83,6 +76,5 @@ export class ListProductComponent {
   }
 
   public fetchUsersFromServiceOrUseMockParent(): void {
-    this.fetchUsersFromServiceOrUseMock();
   }
 }
