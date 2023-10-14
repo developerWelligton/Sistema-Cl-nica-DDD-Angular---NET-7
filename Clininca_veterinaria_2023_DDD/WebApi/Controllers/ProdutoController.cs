@@ -90,7 +90,25 @@ namespace WebApi.Controllers
             }
 
             return Ok(produto);
-        } 
+        }
+
+        [HttpGet("WithInspsc")]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<Produto>>> ListarProdutosWithInspsc()
+        {
+            try
+            {
+                // Replace "_produtoServico" with the actual service or repository where "GetAllProductWithInspsc" is implemented.
+                var produtos = await _interfaceProdutos.GetAllProductWithInspsc();
+
+                return Ok(produtos);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception message to your logger here.
+                return StatusCode(500, "Internal server error");
+            }
+        }
 
     }
 }

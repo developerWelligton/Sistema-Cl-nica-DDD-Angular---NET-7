@@ -46,7 +46,8 @@ namespace Entities.Entidades
         [ForeignKey("IdUnspsc")]
         public virtual UnspscCode? UnspscCode { get; set; }
 
+        [NotMapped] // Evita que o EF tente mapear esta propriedade para um campo na tabela
+        public string CodigoSfcm { get; set; }
 
-        
     }
 }

@@ -25,6 +25,26 @@ namespace Infra.Repositorio
 
         }
 
-      
+        public async Task<IList<Produto>> GetAllProductWithInspsc()
+        {
+            using (var context = new ContextBase(_optionsBuilder))
+            {
+                var result = await context.Produtos
+                    .Include(p => p.UnspscCode)
+                    .Select(p => new
+                    {
+                        Produto = p,
+                        CodigoSfcm = p.UnspscCode.CodigoSfcm
+                    })
+                    .ToListAsync();
+
+                result.ForEach(r => r.Produto.CodigoSfcm = r.CodigoSfcm);
+
+                return result.Select(r => r.Produto).ToList();
+            }
+        }
+
+        
+
     }
 }

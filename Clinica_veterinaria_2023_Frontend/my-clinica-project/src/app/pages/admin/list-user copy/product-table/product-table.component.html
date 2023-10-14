@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table-erp">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>UNSPSC_CODE</th>
+        <th>NOME</th>
+        <th>DESCRICAO</th>
+        <th>PREÇO DE COMPRA</th>
+        <th>PREÇO DE VENDA</th>
+        <th>DATA DE VALIDADE</th>
+        <th>AÇÕES</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let product of productList">
+        <td>{{ product.idProduto }}</td>
+        <td>{{ product.unspscCode }}</td>
+        <td>{{ product.nome }}</td>
+        <td>{{ product.descricao }}</td>
+        <td>{{ product.precoCompra }}</td>
+        <td>{{ product.precoVenda }}</td>
+        <td>{{ product.status }}</td>
+
+      </tr>
+    </tbody>
+  </table>
+</div>

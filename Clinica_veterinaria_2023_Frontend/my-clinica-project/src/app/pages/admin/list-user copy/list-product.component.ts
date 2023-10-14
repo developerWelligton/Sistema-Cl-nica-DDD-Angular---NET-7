@@ -23,7 +23,7 @@ export class ListProductComponent {
     private paddingService: PaddingService,
     private userServiceAPI: userServiceAPI ) { }
 
-  usersList: any[] = [];
+    productList: any[] = [];
   listUserGroup: { id: string, name: string }[] = [];
   public containerPadding: string;
    //padding
@@ -46,7 +46,7 @@ export class ListProductComponent {
       data => {
         console.log(data);
 
-        this.usersList = data
+        this.productList = data
       },
       error => {
         console.error('Error fetching users:', error);
@@ -75,7 +75,7 @@ export class ListProductComponent {
     const emailFilterValue = email.trim().toLowerCase();
     const roleFilterValue = role.trim().toLowerCase();
 
-    this.usersList = this.usersList.filter(user =>
+    this.productList = this.productList.filter(user =>
       user.nome.toLowerCase().includes(nameFilterValue) &&
       user.email.toLowerCase().includes(emailFilterValue) &&
       user.role.toLowerCase().includes(roleFilterValue)
