@@ -36,7 +36,8 @@ export class ProductService {
       quantidade: product.quantidade || 0,
       status: product.status || "ativo",
       iD_Usuario: product.iD_Usuario || 1,
-      idUnspsc: product.unspsc || 0
+      idUnspsc: product.unspsc || 0,
+      ImagemBase64: product.file || null
     };
 
     return this.http.post(`${this.baseUrl}/Produto`, payload)

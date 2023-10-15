@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace Entities.Entidades
 {
@@ -49,7 +50,7 @@ namespace Entities.Entidades
         [NotMapped] // Evita que o EF tente mapear esta propriedade para um campo na tabela
         public string CodigoSfcm { get; set; }
 
-        // Propriedade para armazenar a imagem em base64
+        // Propriedade para armazenar a imagem em base64 
         [Column(TypeName = "text")] // Dependendo do tamanho da string você pode querer usar "varchar(MAX)" ou similar, dependendo do seu SGDB
         public string? ImagemBase64 { get; set; }
 

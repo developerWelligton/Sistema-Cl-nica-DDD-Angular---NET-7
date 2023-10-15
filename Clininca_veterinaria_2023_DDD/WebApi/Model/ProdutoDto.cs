@@ -12,5 +12,7 @@
         public string Status { get; set; }
         public int ID_Usuario { get; set; }
         public long IdUnspsc { get; set; }
+
+        public string ImagemBase64 { get; set; }
     }
 }

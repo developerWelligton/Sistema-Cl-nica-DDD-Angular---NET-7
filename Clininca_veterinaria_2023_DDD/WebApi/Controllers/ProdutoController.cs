@@ -51,7 +51,8 @@ namespace WebApi.Controllers
                 Quantidade = produtoDto.Quantidade,
                 Status = produtoDto.Status,
                 ID_Usuario = produtoDto.ID_Usuario,
-                IdUnspsc = produtoDto.IdUnspsc
+                IdUnspsc = produtoDto.IdUnspsc,
+                ImagemBase64 = produtoDto.ImagemBase64
             };
 
             // Aqui eu estou assumindo que você tem um serviço ou repositório para adicionar o produto

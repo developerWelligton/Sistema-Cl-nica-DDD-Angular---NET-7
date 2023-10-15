@@ -3,6 +3,7 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
+import { DomSanitizer } from '@angular/platform-browser';
 
 @Component({
   selector: 'app-user-product',
@@ -16,7 +17,8 @@ export class UserProductComponent {
 
   constructor(
     private adminService: AdminService,
-    private router:Router) { }
+    private router:Router,
+    private sanitizer: DomSanitizer) { }
 
   editProduct(user: any) {
     // Implemente a lógica para editar o usuário aqui
@@ -31,6 +33,10 @@ export class UserProductComponent {
   deleteProduct(user: any) {
     // Implemente a lógica para visualizar o usuário aqui
     console.log('Visualizar usuário:', user);
+  }
+
+  getSanitizedImage(imageBase64: string) {
+    return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + imageBase64);
   }
 
 
