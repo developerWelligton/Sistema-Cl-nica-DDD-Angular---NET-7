@@ -71,9 +71,19 @@ export class CreateProductComponent {
     this.file = event.target.files[0] ?? null;
 
     const reader = new FileReader();
-    reader.onload = (e: any) => this.preview = e.target.result;
+    reader.onload = (e: any) => {
+        this.preview = e.target.result;  // Contém o arquivo como data URI
+        // Se desejar armazenar a representação Base64 sem o prefixo MIME type,
+        // você pode dividir a string como mostrado abaixo:
+        const base64File = e.target.result.split(',')[1];
+        // Agora `base64File` contém apenas a parte Base64 do arquivo.
+
+        // Aqui você pode adicionar ao formulário ou guardá-lo em uma propriedade para uso posterior,
+        // por exemplo:
+        this.createProductForm.patchValue({file: base64File});
+    };
     reader.readAsDataURL(this.file);
-  }
+}
 
 
 
@@ -83,6 +93,7 @@ export class CreateProductComponent {
     console.log(fileControl)
     if (this.createProductForm.valid) {
       console.log('Formulário Enviado', this.createProductForm.value);
+      console.log(this.file)
     } else {
       console.log('Formulário inválido');
     }

@@ -87,39 +87,4 @@
 }
 
 
-.col-md-12.mb-3 {
-  // A div principal será centralizada e com altura/largura definidas
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  width: 450px;
-  height: 450px;
-  margin: 0 auto; // Centraliza a div
-  border: 2px solid #6e6e6e; // Cria uma borda transparente
-  border-radius: 5px;
 
-  // Estilo para o botão que vai conter a imagem
-  button.btn.btn-primary {
-    background-color: transparent; // Remove a cor de fundo do botão
-    border: none; // Remove a borda do botão
-    padding: 0; // Remove o padding do botão
-    margin: 0; // Remove a margem do botão
-
-    // Estilo para a imagem dentro do botão
-    img {
-      width: 70px;
-      height: 70px;
-    }
-  }
-
-  // A mensagem de erro será exibida abaixo do botão e centralizada
-  div {
-    width: 100%;
-    text-align: center; // Centraliza o texto
-
-    small.text-danger {
-      display: block; // Garante que a mensagem aparecerá em uma nova linha
-      margin-top: 10px; // Espaço entre a imagem e o texto
-    }
-  }
-}

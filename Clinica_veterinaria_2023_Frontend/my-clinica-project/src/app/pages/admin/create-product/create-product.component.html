@@ -18,8 +18,10 @@
         <div class="form-content-edit row">
           <div class="col-md-4">
             <div class="col-md-12 mb-3" *ngIf="!preview; else previewImage" (click)="fileInput.click()">
+              <label for="">Adicionar Imagem</label>
+              <br>
               <button type="button" (click)="fileInput.click()" class="btn btn-primary">
-                <img src="assets/icon/card-image.svg" alt="card image icon" width="100" height="100">
+                <img src="assets/icon/card-image.svg" alt="card image icon" width="25" height="25">
               </button>
               <input
                 hidden
