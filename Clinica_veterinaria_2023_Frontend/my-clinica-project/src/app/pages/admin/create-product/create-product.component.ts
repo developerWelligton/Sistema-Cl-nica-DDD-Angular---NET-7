@@ -45,7 +45,16 @@ export class CreateProductComponent {
 
   ngOnInit() {
     this.createProductForm = this.fb.group({
-      file: ['',Validators.required]
+      file: ['', Validators.required],
+      productName: ['', Validators.required],
+      productBarcode: ['', Validators.required],
+      purchasePrice: ['', [Validators.required, Validators.min(0)]],
+      sellingPrice: ['', [Validators.required, Validators.min(0.01)]],
+      model: ['', Validators.required],
+      itemType: ['', Validators.required],
+      productDescription: ['', Validators.required]
+      // Add similar form controls for all other form fields
+      // ...
     });
     //padding
     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
