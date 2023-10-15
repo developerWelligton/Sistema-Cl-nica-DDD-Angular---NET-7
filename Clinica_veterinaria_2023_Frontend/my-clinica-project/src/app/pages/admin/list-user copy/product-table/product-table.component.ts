@@ -4,6 +4,7 @@ import { AdminService } from 'src/app/services/admin.service';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
+import { ProductService } from 'src/app/services/product.service';
 
 @Component({
   selector: 'app-user-product',
@@ -14,11 +15,13 @@ export class UserProductComponent {
 
   @Input() productList: any[] = [];
   @Output() productDeleted: EventEmitter<void> = new EventEmitter<void>();
+  @Output() deleteRequest = new EventEmitter<number>();
 
   constructor(
     private adminService: AdminService,
     private router:Router,
-    private sanitizer: DomSanitizer) { }
+    private sanitizer: DomSanitizer,
+    private productService: ProductService) { }
 
   editProduct(user: any) {
     // Implemente a lógica para editar o usuário aqui
@@ -30,9 +33,8 @@ export class UserProductComponent {
     console.log('Visualizar usuário:', user);
   }
 
-  deleteProduct(user: any) {
-    // Implemente a lógica para visualizar o usuário aqui
-    console.log('Visualizar usuário:', user);
+  deleteProduct(idProduct: any) {
+    this.deleteRequest.emit(idProduct);
   }
 
   getSanitizedImage(imageBase64: string) {

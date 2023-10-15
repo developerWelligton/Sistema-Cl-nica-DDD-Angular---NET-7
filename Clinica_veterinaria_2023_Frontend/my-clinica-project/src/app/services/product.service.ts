@@ -45,6 +45,12 @@ export class ProductService {
         catchError(this.handleError)
       );
   }
+  deleteProductCode(idProduct: number): Observable<any> {
+    return this.http.delete(`${this.baseUrl}/Produto/${idProduct}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   private handleError(error: any): Observable<never> {
     console.error('Something went wrong:', error);

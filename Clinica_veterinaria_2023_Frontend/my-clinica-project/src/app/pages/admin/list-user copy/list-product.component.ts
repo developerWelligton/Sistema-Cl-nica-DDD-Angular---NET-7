@@ -5,6 +5,7 @@ import { PaddingService } from 'src/app/services/Padding.service';
 import { AdminService } from 'src/app/services/admin.service';
 import { ProductService } from 'src/app/services/product.service';
 import { userServiceAPI } from 'src/app/services/userAPI.service';
+import Swal from 'sweetalert2';
 
 export enum UserGroup {
   Cliente = 'cliente',
@@ -40,8 +41,12 @@ export class ListProductComponent {
     });
 
     this.populateUserGroups();
+    this.loadProducts();
+  }
+
+  loadProducts() {
     this.productService.getAllProductWithUnspsc().subscribe((data: any[]) => {
-      console.log(data)
+      console.log(data);
       this.productList = data;
     });
   }
@@ -75,6 +80,49 @@ export class ListProductComponent {
     );
   }
 
-  public fetchUsersFromServiceOrUseMockParent(): void {
+
+
+  onDeleteRequest(idProduct: number) {
+    // Exibe um alerta de confirmação antes de deletar
+    Swal.fire({
+      title: 'Tem certeza?',
+      text: "Você não poderá reverter isso!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Sim, deletar!',
+      cancelButtonText: 'Não, cancelar!',
+      reverseButtons: true
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Se o usuário confirmou, então deletamos o produto
+        this.productService.deleteProductCode(idProduct).subscribe(
+          response => {
+            // Produto deletado com sucesso. Podemos informar o usuário e atualizar a lista de produtos.
+            Swal.fire(
+              'Deletado!',
+              'O produto foi deletado.',
+              'success'
+            );
+             // Chame loadProducts para atualizar a lista após a deleção bem-sucedida
+             this.loadProducts();
+          },
+          error => {
+            // Erro ao deletar o produto. Informamos o usuário.
+            Swal.fire(
+              'Erro!',
+              'Ocorreu um erro ao deletar o produto.',
+              'error'
+            );
+          }
+        );
+      } else if (result.dismiss === Swal.DismissReason.cancel) {
+        // Se o usuário cancelou, podemos informá-lo também.
+        Swal.fire(
+          'Cancelado',
+          'O produto está seguro :)',
+          'error'
+        );
+      }
+    });
   }
 }
