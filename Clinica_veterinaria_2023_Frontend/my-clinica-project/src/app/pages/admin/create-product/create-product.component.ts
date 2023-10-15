@@ -11,6 +11,7 @@ import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
 import { UnspscService } from 'src/app/services/unspsc.service';
 import { Unspsc } from 'src/app/models/unspsc.model';
+import { ProductService } from 'src/app/services/product.service';
 
 
 export enum UserGroup {
@@ -45,7 +46,8 @@ export class CreateProductComponent {
     private router: Router,
     private userService: UserService,
     private paddingService: PaddingService,
-    private unspscService : UnspscService
+    private unspscService : UnspscService,
+    private productService: ProductService
   ) {}
 
   ngOnInit() {
@@ -104,19 +106,56 @@ export class CreateProductComponent {
 
 
 
-  submitForm(event?: Event): void {
-    const unspscControl = this.createProductForm.get('unspsc');
-    console.log("TESTE"+unspscControl)
-    event?.preventDefault();
-    //console.log('File Control Value: ', fileControl?.value);
-    console.log('Form Value on Submit: ', this.createProductForm.value);
-    if (this.createProductForm.valid) {
-      console.log('Formulário Enviado', this.createProductForm.value);
-      console.log(this.file)
-    } else {
-      console.log('Formulário inválido');
-    }
+submitForm(event?: Event): void {
+  debugger
+  const unspscControl = this.createProductForm.get('unspsc');
+  console.log("TESTE" + unspscControl)
+  event?.preventDefault();
+
+  if (this.createProductForm.valid) {
+    console.log('Formulário Enviado', this.createProductForm.value);
+    console.log(this.file)
+
+    this.productService.createProduct(this.createProductForm.value).subscribe(
+      (response) => {
+        console.log('Product created!', response);
+
+        // Alerta de sucesso
+        Swal.fire({
+          icon: 'success',
+          title: 'Produto Criado',
+          text: 'O produto foi criado com sucesso!',
+          confirmButtonText: 'OK'
+        });
+
+        // Resetar o formulário
+        this.createProductForm.reset();
+        this.preview = null; // ou this.preview = '';
+      },
+      (error) => {
+        console.log('Error creating product', error);
+
+        // Alerta de erro
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro',
+          text: 'Houve um erro ao criar o produto. Por favor, tente novamente.',
+          confirmButtonText: 'OK'
+        });
+      }
+    );
+  } else {
+    console.log('Formulário inválido');
+
+    // Alerta de validação
+    Swal.fire({
+      icon: 'warning',
+      title: 'Formulário Inválido',
+      text: 'Por favor, corrija os erros no formulário antes de submeter.',
+      confirmButtonText: 'OK'
+    });
   }
+}
 
 
 }

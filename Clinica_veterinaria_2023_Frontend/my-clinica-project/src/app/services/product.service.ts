@@ -24,6 +24,27 @@ export class ProductService {
       );
   }
 
+  createProduct(product: any): Observable<any> {
+    // Corrigindo/Validando o formato do produto aqui
+    debugger
+    const payload = {
+      nome: product.productName || "string",
+      descricao: product.productDescription || "string",
+      precoCompra: product.purchasePrice || 0,
+      precoVenda: product.sellingPrice || 0,
+      dataValidade: product.dataValidade || new Date().toISOString(),
+      quantidade: product.quantidade || 0,
+      status: product.status || "ativo",
+      iD_Usuario: product.iD_Usuario || 1,
+      idUnspsc: product.unspsc || 0
+    };
+
+    return this.http.post(`${this.baseUrl}/Produto`, payload)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
   private handleError(error: any): Observable<never> {
     console.error('Something went wrong:', error);
     return throwError(error);
