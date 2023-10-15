@@ -9,6 +9,8 @@ import { AuthService } from 'src/app/core/auth/auth.service';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { Subscription } from 'rxjs';
 import Swal from 'sweetalert2';
+import { UnspscService } from 'src/app/services/unspsc.service';
+import { Unspsc } from 'src/app/models/unspsc.model';
 
 
 export enum UserGroup {
@@ -35,24 +37,25 @@ export class CreateProductComponent {
   file: File;
   preview: string;
 
+  unspscCodes: Unspsc[] = [];
+
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
     private router: Router,
     private userService: UserService,
-    private paddingService: PaddingService
+    private paddingService: PaddingService,
+    private unspscService : UnspscService
   ) {}
 
   ngOnInit() {
     this.createProductForm = this.fb.group({
       file: ['', Validators.required],
       productName: ['', Validators.required],
-      productBarcode: ['', Validators.required],
       purchasePrice: ['', [Validators.required, Validators.min(0)]],
       sellingPrice: ['', [Validators.required, Validators.min(0.01)]],
-      model: ['', Validators.required],
-      itemType: ['', Validators.required],
-      productDescription: ['', Validators.required]
+      productDescription: ['', Validators.required],
+      unspsc:['',Validators.required]
       // Add similar form controls for all other form fields
       // ...
     });
@@ -63,34 +66,50 @@ export class CreateProductComponent {
     //ROLE
     this.userRole = this.userService.getCurrentUser()
     //alert(this.userRole)
+
+    this.loadUnspsc();
   }
 
 
   handleFile(event: any): void {
-    console.log(event);  // Verifique se este log aparece no console quando um arquivo é selecionado.
+    console.log(event);
     this.file = event.target.files[0] ?? null;
 
     const reader = new FileReader();
     reader.onload = (e: any) => {
-        this.preview = e.target.result;  // Contém o arquivo como data URI
-        // Se desejar armazenar a representação Base64 sem o prefixo MIME type,
-        // você pode dividir a string como mostrado abaixo:
+        this.preview = e.target.result;
         const base64File = e.target.result.split(',')[1];
-        // Agora `base64File` contém apenas a parte Base64 do arquivo.
 
-        // Aqui você pode adicionar ao formulário ou guardá-lo em uma propriedade para uso posterior,
-        // por exemplo:
+        // Adding a log to check the base64 string.
+        console.log('Base64 File: ', base64File);
+
         this.createProductForm.patchValue({file: base64File});
+
+        // Logging the form value to check if the file data is being set.
+        console.log('Form Value after File Select: ', this.createProductForm.value);
     };
     reader.readAsDataURL(this.file);
+  }
+
+
+  loadUnspsc(): void {
+    this.unspscService.getAllUnspscCodeDetails().subscribe((data: Unspsc[]) => {
+        console.log(data)
+        this.unspscCodes = data;
+    }, error => {
+        console.error('Error loading UNSPSC codes:', error);
+        // Handle error as needed
+    })
 }
 
 
 
   submitForm(event?: Event): void {
-    const fileControl = this.createProductForm.get('file');
+    const unspscControl = this.createProductForm.get('unspsc');
+    console.log("TESTE"+unspscControl)
     event?.preventDefault();
-    console.log(fileControl)
+    //console.log('File Control Value: ', fileControl?.value);
+    console.log('Form Value on Submit: ', this.createProductForm.value);
     if (this.createProductForm.valid) {
       console.log('Formulário Enviado', this.createProductForm.value);
       console.log(this.file)

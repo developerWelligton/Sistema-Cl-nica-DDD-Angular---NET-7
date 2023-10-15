@@ -66,15 +66,17 @@
                         <div class="col-md-4 mb-3">
                           <label for="productName" class="form-label">Nome do Produto:</label>
                          <input type="text" id="productName" formControlName="productName" class="form-control" required>
-                      </div>
-                      <div class="col-md-4 mb-3">
-                          <label for="productBarcode" class="form-label">Código de Barra:</label>
-                          <input type="text" id="productBarcode" formControlName="productBarcode" class="form-control" required>
-                      </div>
-                      <div class="col-md-4 mb-3">
+                        </div>
+
+                        <div class="col-md-8 mb-3">
+                          <label for="productDescription" class="form-label">Descrição:</label>
+                          <textarea id="productDescription" formControlName="productDescription" class="form-control" required></textarea>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
                           <label for="purchasePrice" class="form-label">Preço de Compra:</label>
                           <input type="number" id="purchasePrice" formControlName="purchasePrice" step="0.01" class="form-control" required>
-                      </div>
+                       </div>
                       </div>
 
                       <!-- Segunda linha de inputs -->
@@ -82,37 +84,31 @@
                         <div class="col-md-4 mb-3">
                           <label for="sellingPrice" class="form-label">Preço de Venda:</label>
                           <input type="number" id="sellingPrice" formControlName="sellingPrice" step="0.01" class="form-control" required>
-                      </div>
-                      <div class="col-md-4 mb-3">
-                          <label for="model" class="form-label">Modelo:</label>
-                          <input type="text" id="model" formControlName="model" class="form-control" required>
-                      </div>
-                      <div class="col-md-4 mb-3">
-                          <label for="itemType" class="form-label">Tipo de Item:</label>
-                          <input type="text" id="itemType" formControlName="itemType" class="form-control" required>
-                      </div>
-                      </div>
-
-                      <!-- ... Você pode continuar adicionando mais linhas conforme necessário ... -->
-
-                      <!-- Campo de descrição e input de imagem numa única linha -->
-                      <div class="row">
-                        <div class="col-md-8 mb-3">
-                          <label for="productDescription" class="form-label">Descrição:</label>
-                          <textarea id="productDescription" formControlName="productDescription" class="form-control" required></textarea>
-                      </div>
-
+                        </div>
+                        <label>CODE UNSPSC</label>
+                        <ng-select class="select-padrao"
+                        formControlName="unspsc"
+                        [items]="unspscCodes"
+                        bindLabel="codigoSfcm"
+                        bindValue="idUnspsc"
+                        [multiple]="false"
+                        [clearable]="true"
+                        ></ng-select>
 
                       </div>
-
-                      <button type="submit" class="btn btn-primary" [disabled]="createProductForm.invalid">Enviar</button>
-
+                      <br>
+                      <br>
+                      <button type="submit" class="btn btn-primary" [disabled]="createProductForm.invalid">Salvar Produto</button>
 
               </div>
             </div>
 
 
           </div>
+
       </form>
+
     </div>
+
 </div>
+
