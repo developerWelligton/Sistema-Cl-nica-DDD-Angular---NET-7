@@ -2,7 +2,7 @@ import { UserService } from '../../../core/user/user.service';
 // ... previous imports ...
 
 import { Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';   // Replace with the actual path to your service
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -45,7 +45,7 @@ export class CreateProductComponent {
 
   ngOnInit() {
     this.createProductForm = this.fb.group({
-      file: ['']
+      file: ['',Validators.required]
     });
     //padding
     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
@@ -66,10 +66,18 @@ export class CreateProductComponent {
     reader.readAsDataURL(this.file);
   }
 
-  submitForm(): void {
-    const formData = this.createProductForm.value;
 
-    console.log(this.file)
+
+  submitForm(event?: Event): void {
+    const fileControl = this.createProductForm.get('file');
+    event?.preventDefault();
+    console.log(fileControl)
+    if (this.createProductForm.valid) {
+      console.log('Formulário Enviado', this.createProductForm.value);
+    } else {
+      console.log('Formulário inválido');
+    }
   }
+
 
 }
