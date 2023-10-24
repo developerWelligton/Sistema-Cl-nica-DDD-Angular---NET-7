@@ -57,7 +57,12 @@ export class ProductService {
     return throwError(error);
   }
 
-
-
+  //buscar produto por id
+  getProductByCode(productCode: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Produto/${productCode}`)
+        .pipe(
+            catchError(this.handleError)
+        );
+  }
 
 }

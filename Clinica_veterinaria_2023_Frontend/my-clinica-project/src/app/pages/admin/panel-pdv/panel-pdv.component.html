@@ -21,7 +21,7 @@
     </div>
     <!-- Formulário -->
 
-    <form class="modern-form">
+    <div class="modern-form">
 
       <!-- Vendor and terminal details -->
       <div class="pdv-container">
@@ -31,23 +31,27 @@
            <label for="vendor">Cliente:</label>
            <input type="text" id="vendor" name="vendor" placeholder="Welligton">
 
-            <label for="vendor">Código:</label>
-            <input type="text" id="vendor" name="vendor" placeholder="541698">
-            <button>Buscar</button>
+           <label for="code">Código:</label>
+           <input type="text" id="code" name="code" [(ngModel)]="productCode" placeholder="Adicione Código do produto">
+           <br><br>
+           <button (click)="searchProduct()">Buscar</button>
             <br>
             <br>
             <br>
 
-            <label for="vendor">Quantidade:</label>
-            <input type="text" id="vendor" name="vendor" placeholder="5">
+
             <label for="description">Descrição:</label>
-            <input disabled type="text" id="description" name="description" placeholder="KEVZARA">
-            <label for="description">Valor:</label>
-            <input disabled type="text" id="description" name="description" placeholder="R$ 50,00">
-            <label for="description">Unidade do Produto:</label>
-            <input disabled type="text" id="description" name="description" placeholder="200mg/1,14ml">
+            <input disabled type="text" id="description" name="description" [(ngModel)]="product.description"  >
+            <label for="value">Valor:</label>
+            <input disabled type="text" id="value" name="value" [(ngModel)]="product.price"  >
+            <label for="unit">Unidade do Produto:</label>
+            <input disabled type="text" id="unit" name="unit" [(ngModel)]="product.unit"  >
 
 
+            <label for="quantity">Quantidade:</label>
+            <input type="text" id="quantity" name="quantity" [(ngModel)]="product.quantity" placeholder="Adicione a quantidade">
+            <br>
+            <br>
             <button>Adicionar Item</button>
             <br>
             <br>
@@ -55,8 +59,8 @@
 
         <!-- Image Display -->
         <div class="image-container">
-            <img src="../../../../assets/images/Covid-19_Anvisa_autoriza_pesquisa_com_medicamento_que_pode_diminuir_inflamação_pulmonar.jpg" width="400px" height="400px" alt="Product Image" class="product-image">
-        </div>
+          <img [src]="product.image" width="400px" height="400px" alt="Product Image" class="product-image">
+      </div>
       </div>
 
       <!-- Product details -->
@@ -123,7 +127,7 @@
           <button type="button">Cancelar Venda</button>
       </div>
 
-  </form>
+  </div>
 
 
 

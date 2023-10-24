@@ -8,6 +8,8 @@ import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { Subscription } from 'rxjs';
+import { ProductService } from 'src/app/services/product.service';
+import Swal from 'sweetalert2';
 
 
 export enum UserGroup {
@@ -17,25 +19,45 @@ export enum UserGroup {
   Admin = 'admin'
 }
 
+//OBJETO PRODUTO
+export class Product {
+  quantity: number;
+  description: string;
+  price: string;
+  unit: string;
+  image: string;
+}
+
+
 @Component({
   selector: 'app-panel-pdv',
   templateUrl: './panel-pdv.component.html',
   styleUrls: ['./panel-pdv.component.scss']
 })
 export class PanelPdvComponent {
-  createUserForm: FormGroup;
+  createSaleForm: FormGroup;
+
   listUserGroup: { id: string, name: string }[] = [];
   userRole: any;
+  //buscar
+
+  public product: Product = new Product();
+  public productCode: number;
+
+
+
   //padding
   private paddingSubscription: Subscription;
   public containerPadding: string;
+
 
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
     private router: Router,
     private userService: UserService,
-    private paddingService: PaddingService
+    private paddingService: PaddingService,
+    private productService: ProductService
   ) {}
 
   ngOnInit() {
@@ -47,12 +69,7 @@ export class PanelPdvComponent {
   this.userRole = this.userService.getCurrentUser()
   //alert(this.userRole)
 debugger
-    this.createUserForm = this.fb.group({
-      user_nome: [''],
-      user_cpf:[''],
-      user_email: [''],
-      user_senha: [''],
-      user_group:['']
+    this.createSaleForm = this.fb.group({
     });
     this.populateUserGroups();
   }
@@ -84,22 +101,38 @@ debugger
   }
 
   submitForm() {
-    const formData = this.createUserForm.value;
+    const formData = this.createSaleForm.value;
 
-    if (this.createUserForm.valid) {
-        this.adminService.createAdmin(formData).subscribe(
-            res => {
-                console.log('API Success UsuarioClinica POST:', res);
-                this.router.navigate(['/admin']);
+  }
+
+  //
+  searchProduct() {
+    this.productService.getProductByCode(this.productCode)
+        .subscribe(
+            response => {
+                console.log(response);
+
+                // Mapeando os dados retornados para o objeto 'Product'
+                this.product = {
+                    quantity: response.quantidade,
+                    description: response.descricao,
+                    price: response.precoVenda,
+                    unit: '', // Como mencionado antes, você pode ajustar conforme necessário
+                    image: 'data:image/jpeg;base64,' + response.imagemBase64
+                };
             },
             error => {
-                console.error('Error:', error.error.message);
+                console.error("Error fetching product:", error);
+
+                // Adicionado o SweetAlert2 para exibir uma notificação de erro
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Oops...',
+                    text: 'Produto não encontrado!',
+                    footer: 'Tente novamente com outro código'
+                });
             }
         );
-    } else {
-        // Handle form invalid case
-        console.error('Form is invalid.');
-        // TODO: Show a user-friendly message to the user or highlight the invalid fields
-    }
-  }
+}
+
 }
