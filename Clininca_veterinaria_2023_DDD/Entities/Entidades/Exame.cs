@@ -18,7 +18,8 @@ namespace Entities.Entidades
 
        
         public string Nome { get; set; }
-         
+        public string Altura { get; set; }
+
         public string Detalhes { get; set; }
          
         public decimal Custo { get; set; }

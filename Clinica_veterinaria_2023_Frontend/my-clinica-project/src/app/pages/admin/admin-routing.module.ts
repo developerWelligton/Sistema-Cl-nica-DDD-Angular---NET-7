@@ -7,6 +7,7 @@ import { CreateProductComponent } from './create-product/create-product.componen
 import { ListProductComponent } from './list-user copy/list-product.component';
 import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
 import { ListUnspscComponent } from './list-user copy 2/list-unspsc.component';
+import { PanelPdvComponent } from './panel-pdv/panel-pdv.component';
 
 const routes: Routes = [
   {
@@ -37,6 +38,12 @@ const routes: Routes = [
     path:'list-unspsc',
     component:ListUnspscComponent
   },
+  {
+    path:'panel-pdv',
+    component:PanelPdvComponent
+  },
+
+
    // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
    {
     path: '**',

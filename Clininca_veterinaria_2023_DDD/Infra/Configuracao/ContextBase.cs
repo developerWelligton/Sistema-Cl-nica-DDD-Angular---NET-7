@@ -300,9 +300,8 @@ namespace Infra.Configuracao
         {   //base cloud
             return "Server=tcp:serverpetzdatabase.database.windows.net,1433;Initial Catalog=db-entity-clinica;Persist Security Info=False;User ID=sa-clinica;Password=@Well32213115;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
 
-
-
-          }
+ 
+         }
 
         public string ObterStringConexaoDeveloperLocal()
         {

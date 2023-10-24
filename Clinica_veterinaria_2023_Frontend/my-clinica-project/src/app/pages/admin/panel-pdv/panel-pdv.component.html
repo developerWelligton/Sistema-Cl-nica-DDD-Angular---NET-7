@@ -1,0 +1,131 @@
+<navbar></navbar>
+<sidebar></sidebar>
+
+
+<div class="container-base" [style.padding]="containerPadding">
+  <!-- Conteúdo da página -->
+  <div class="content-page">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+      <h2>
+       <a href="/admin">Mural Admin</a>
+      <span class="separator">»</span>
+      Página Atual
+      </h2>
+    </div>
+    <!-- Cabeçalho do cartão -->
+    <div class="card-header">
+      <!-- Título do cartão -->
+      <h3 class="card-title">PONTO DE VENDA</h3>
+
+    </div>
+    <!-- Formulário -->
+
+    <form class="modern-form">
+
+      <!-- Vendor and terminal details -->
+      <div class="pdv-container">
+        <!-- Vendor and terminal details -->
+        <div class="details">
+           <!-- Client details -->
+           <label for="vendor">Cliente:</label>
+           <input type="text" id="vendor" name="vendor" placeholder="Welligton">
+
+            <label for="vendor">Código:</label>
+            <input type="text" id="vendor" name="vendor" placeholder="541698">
+            <button>Buscar</button>
+            <br>
+            <br>
+            <br>
+
+            <label for="vendor">Quantidade:</label>
+            <input type="text" id="vendor" name="vendor" placeholder="5">
+            <label for="description">Descrição:</label>
+            <input disabled type="text" id="description" name="description" placeholder="KEVZARA">
+            <label for="description">Valor:</label>
+            <input disabled type="text" id="description" name="description" placeholder="R$ 50,00">
+            <label for="description">Unidade do Produto:</label>
+            <input disabled type="text" id="description" name="description" placeholder="200mg/1,14ml">
+
+
+            <button>Adicionar Item</button>
+            <br>
+            <br>
+        </div>
+
+        <!-- Image Display -->
+        <div class="image-container">
+            <img src="../../../../assets/images/Covid-19_Anvisa_autoriza_pesquisa_com_medicamento_que_pode_diminuir_inflamação_pulmonar.jpg" width="400px" height="400px" alt="Product Image" class="product-image">
+        </div>
+      </div>
+
+      <!-- Product details -->
+      <table class="fiscal-table">
+        <thead>
+            <tr>
+                <th>Item</th>
+                <th>Código</th>
+                <th>Produto</th>
+                <th>Unidade</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Preço Total</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>1</td>
+                <td>00123</td>
+                <td>Produto A</td>
+                <td>Unid</td>
+                <td>5</td>
+                <td>R$ 10,00</td>
+                <td>R$ 50,00</td>
+            </tr>
+            <tr>
+                <td>2</td>
+                <td>00124</td>
+                <td>Produto B</td>
+                <td>Unid</td>
+                <td>3</td>
+                <td>R$ 5,00</td>
+                <td>R$ 15,00</td>
+            </tr>
+            <tr>
+                <td>3</td>
+                <td>00125</td>
+                <td>Produto C</td>
+                <td>Unid</td>
+                <td>8</td>
+                <td>R$ 2,50</td>
+                <td>R$ 20,00</td>
+            </tr>
+        </tbody>
+    </table>
+
+
+
+      <!-- Other details -->
+      <div>
+          <label for="subtotal">Subtotal:</label>
+          <input type="number" step="0.01" id="subtotal" name="subtotal">
+      </div>
+
+      <div>
+          <label for="date_time">Data/Hora:</label>
+          <input type="datetime-local" id="date_time" name="date_time">
+      </div>
+
+      <!-- Action buttons -->
+      <div>
+          <button type="submit">Consultar Produto</button>
+          <button type="reset">Fechar Venda</button>
+          <button type="button">Cancelar Venda</button>
+      </div>
+
+  </form>
+
+
+
+  </div>
+</div>

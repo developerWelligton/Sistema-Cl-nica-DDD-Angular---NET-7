@@ -24,6 +24,7 @@ import { UnspscTableComponent } from './list-user copy 2/unspsc-table/unspsc-tab
 import { UserProductComponent } from './list-user copy/product-table/product-table.component';
 import { ProductComponent } from './product/product.component';
 import { VmessageModule } from 'src/app/shared/components/vmessage/vmessage.module';
+import { PanelPdvComponent } from './panel-pdv/panel-pdv.component';
 
 @NgModule({
   declarations: [
@@ -38,6 +39,7 @@ import { VmessageModule } from 'src/app/shared/components/vmessage/vmessage.modu
     UnspscTableComponent,
     UserProductComponent,
     ProductComponent,
+    PanelPdvComponent
 
 
   ],

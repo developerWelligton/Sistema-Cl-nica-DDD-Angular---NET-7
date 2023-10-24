@@ -18,5 +18,6 @@ namespace Domain.Interfaces.Generics
 
         Task<List<T>> List();
          
+
     }
 }
