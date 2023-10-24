@@ -52,7 +52,7 @@
             <input type="text" id="quantity" name="quantity" [(ngModel)]="product.quantity" placeholder="Adicione a quantidade">
             <br>
             <br>
-            <button>Adicionar Item</button>
+            <button (click)="addItem()">Adicionar Item</button>
             <br>
             <br>
         </div>
@@ -66,54 +66,36 @@
       <!-- Product details -->
       <table class="fiscal-table">
         <thead>
-            <tr>
-                <th>Item</th>
-                <th>Código</th>
-                <th>Produto</th>
-                <th>Unidade</th>
-                <th>Quantidade</th>
-                <th>Preço</th>
-                <th>Preço Total</th>
-            </tr>
+          <tr>
+            <th>Item</th>
+            <th>Código</th>
+            <th>Produto</th>
+            <th>Unidade</th>
+            <th>Quantidade</th>
+            <th>Preço</th>
+            <th>Preço Total</th>
+          </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>00123</td>
-                <td>Produto A</td>
-                <td>Unid</td>
-                <td>5</td>
-                <td>R$ 10,00</td>
-                <td>R$ 50,00</td>
-            </tr>
-            <tr>
-                <td>2</td>
-                <td>00124</td>
-                <td>Produto B</td>
-                <td>Unid</td>
-                <td>3</td>
-                <td>R$ 5,00</td>
-                <td>R$ 15,00</td>
-            </tr>
-            <tr>
-                <td>3</td>
-                <td>00125</td>
-                <td>Produto C</td>
-                <td>Unid</td>
-                <td>8</td>
-                <td>R$ 2,50</td>
-                <td>R$ 20,00</td>
-            </tr>
+          <tr *ngFor="let item of productsList; let i = index">
+            <td>{{ i + 1 }}</td>
+            <td>{{ item.code }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.unit }}</td>
+            <td>{{ item.quantity }}</td>
+            <td>{{ item.price | currency:'BRL' }}</td>
+            <td>{{ item.price * item.quantity | currency:'BRL' }}</td>
+          </tr>
         </tbody>
-    </table>
+      </table>
 
 
 
-      <!-- Other details -->
-      <div>
-          <label for="subtotal">Subtotal:</label>
-          <input type="number" step="0.01" id="subtotal" name="subtotal">
-      </div>
+
+    <div>
+      <label for="subtotal">Subtotal:</label>
+      <span style="color: black;" id="subtotal">{{ subtotal | currency:'BRL':'symbol':'1.2-2' }}</span>
+  </div>
 
       <div>
           <label for="date_time">Data/Hora:</label>
