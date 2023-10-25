@@ -16,22 +16,21 @@ export class SaleProductService {
     private authService: AuthService
               ) { }
 
-createSale(sale: any): Observable<any> {
-  debugger
+  createSale(sale: any): Observable<any> {
+    debugger
 
-  // Construct the payload for the sale
-  const payload = {
-    dataVenda: sale.dataVenda || new Date().toISOString(),
-    status: sale.status || "Pendente",
-    iD_Usuario: sale.iD_Usuario || 1
-  };
+    // Construct the payload for the sale
+    const payload = {
+      dataVenda: sale.dataVenda || new Date().toISOString(),
+      status: sale.status || "Pendente",
+      iD_Usuario: sale.iD_Usuario || 1
+    };
 
-  return this.http.post(`${this.baseUrl}/Venda`, payload )
-    .pipe(
-      catchError(this.handleError<any>('createSale'))
-    );
-
-}
+    return this.http.post(`${this.baseUrl}/Venda`, payload )
+      .pipe(
+        catchError(this.handleError<any>('createSale'))
+      );
+  }
 
 
 

@@ -4,6 +4,7 @@ import { Observable, catchError, delay, of, tap, throwError } from 'rxjs';
 import { Veterinario } from '../models/veterinario-model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../core/auth/auth.service';
+import { Product } from '../pages/admin/panel-pdv/panel-pdv.component';
 
 @Injectable({
   providedIn: 'root'
@@ -45,6 +46,7 @@ export class ProductService {
         catchError(this.handleError)
       );
   }
+
   deleteProductCode(idProduct: number): Observable<any> {
     return this.http.delete(`${this.baseUrl}/Produto/${idProduct}`)
       .pipe(
@@ -64,5 +66,8 @@ export class ProductService {
             catchError(this.handleError)
         );
   }
+
+
+
 
 }

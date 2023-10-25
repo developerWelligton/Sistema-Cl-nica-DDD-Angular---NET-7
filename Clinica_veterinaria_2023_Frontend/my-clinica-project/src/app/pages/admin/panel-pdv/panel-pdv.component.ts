@@ -1,3 +1,4 @@
+import { ItemProductSaleService } from './../../../services/itemProductSale.service';
 import { UserService } from '../../../core/user/user.service';
 // ... previous imports ...
 
@@ -48,6 +49,7 @@ export class PanelPdvComponent {
 
 
   productsList = [];
+  allProducts: Product[] = [];
   subtotal = 0;
   saleId: number;  // To store the sale's ID
 
@@ -65,7 +67,8 @@ export class PanelPdvComponent {
     private userService: UserService,
     private paddingService: PaddingService,
     private productService: ProductService,
-    private saleProductService: SaleProductService
+    private saleProductService: SaleProductService,
+    private itemProductSaleService:ItemProductSaleService
   ) {}
 
   ngOnInit() {
@@ -145,38 +148,109 @@ debugger
     }
 
     addItem() {
-      this.productsList.push({ ...this.product });
-      // Clear the product object if necessary
-      this.product = {
-        code: '',
-        description: '',
-        price: 0,
-        unit: '',
-        quantity: 0,
-        image: ''
-      };
-       // If saleId is not set, initiate a new sale
-    if (!this.saleId) {
+      // If saleId is not set, initiate a new sale
+      if (!this.saleId) {
+        const saleData = {
+          dataVenda: new Date().toISOString(),
+          status: 'Pendente',
+          iD_Usuario: 1
+        };
 
-      const saleData = {
-        dataVenda: new Date().toISOString(),
-        status: 'Pendente',
-        iD_Usuario: 1
-      };
+        this.saleProductService.createSale(saleData).subscribe(response => {
+          this.saleId = response.idVenda;  // Assuming the response contains an 'id' field with the sale's ID
+          console.log(this.saleId)
+          // Add the product to the list only after getting the saleId
+          this.productsList.push({ ...this.product });
 
-      this.saleProductService.createSale(saleData).subscribe(response => {
-        this.saleId = response.id;  // Assuming the response contains an 'id' field with the sale's ID
-      }, error => {
-        console.error("Error initiating sale:", error);
-      });
-    }
-       // Call the calculateSubtotal method after adding an item
-      this.calculateSubtotal();
+          // Clear the product object
+          this.product = {
+            code: '',
+            description: '',
+            price: 0,
+            unit: '',
+            quantity: 0,
+            image: ''
+          };
+
+          // Call the calculateSubtotal method
+          this.calculateSubtotal();
+
+          // Show SweetAlert2 notification
+          Swal.fire({
+            icon: 'success',
+            title: 'Venda Iniciada!',
+            text: 'A venda foi iniciada com sucesso.',
+            timer: 2000,
+            showConfirmButton: false
+          });
+
+        }, error => {
+          console.error("Error initiating sale:", error);
+          Swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Houve um erro ao iniciar a venda. Tente novamente.',
+            footer: 'Se o problema persistir, contate o suporte.'
+          });
+        });
+      } else {
+        // If saleId is already set, just add the product to the list
+        this.productsList.push({ ...this.product });
+
+        // Clear the product object
+        this.product = {
+          code: '',
+          description: '',
+          price: 0,
+          unit: '',
+          quantity: 0,
+          image: ''
+        };
+
+        // Call the calculateSubtotal method
+        this.calculateSubtotal();
+      }
     }
 
     // Calculate subtotal
   calculateSubtotal() {
     this.subtotal = this.productsList.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+  }
+
+  addFecharVenda(){
+    debugger
+    console.log(this.productsList);
+
+    // Convertendo os produtos para o formato desejado antes de enviar
+    const productListToSend = this.productsList.map(product => ({
+      idProduto: product.code,
+      idVenda: this.saleId, // supondo que você tem uma saleId, senão, ajuste conforme necessário
+      totalProdutosVendas: product.price * product.quantity,
+      observacao: '', // preencha conforme necessário
+      quantidade: product.quantity
+    }));
+
+    this.itemProductSaleService.sendProductList(productListToSend).subscribe(
+      response => {
+        console.log('Lista de produtos enviada com sucesso:', response);
+
+        // Aqui você pode colocar qualquer lógica posterior que desejar.
+        Swal.fire({
+          icon: 'success',
+          title: 'Sucesso!',
+          text: 'Lista de produtos enviada com sucesso!'
+        });
+      },
+      error => {
+        console.error("Error sending product list:", error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Oops...',
+          text: 'Erro ao enviar a lista de produtos!',
+          footer: 'Por favor, tente novamente mais tarde.'
+        });
+      }
+    );
   }
 
 }

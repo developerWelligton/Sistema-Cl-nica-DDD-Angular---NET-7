@@ -37,28 +37,30 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Produces("application/json")]
-        public async Task<ActionResult> CriarProdutoVenda([FromBody] ProdutoVendaDto produtoVendaDto)
+        public async Task<ActionResult> CriarProdutosVenda([FromBody] List<ProdutoVendaDto> produtosVendaDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            // Converte o ProdutoVendaDto para a entidade ItemProdutoVenda
-            var itemProdutoVenda = new ItemProdutoVenda
+            // Convert the list of ProdutoVendaDto to a list of ItemProdutoVenda entities
+            var itemsProdutoVenda = produtosVendaDto.Select(p => new ItemProdutoVenda
             {
-                IdProduto = produtoVendaDto.IdProduto,
-                IdVenda = produtoVendaDto.IdVenda, 
-                Observacao = produtoVendaDto.Observacao, 
-            };
+                IdProduto = p.IdProduto,
+                IdVenda = p.IdVenda,
+                Observacao = p.Observacao,
+                // Add other properties here
+            }).ToList();
 
-            // Aqui estou assumindo que você tem um serviço ou repositório para adicionar o item de produto à venda
-            // O nome deste serviço é apenas um palpite; substitua pelo correto em seu código
-            await _interfaceItemProdutoVendas.Add(itemProdutoVenda);
+            // Now, you can save each item to the database
+            foreach (var item in itemsProdutoVenda)
+            {
+                await _interfaceItemProdutoVendas.Add(item);
+            }
 
-            // Aqui você pode adicionar lógica adicional, se necessário
-
-            return CreatedAtAction(nameof(CriarProdutoVenda), new { id = itemProdutoVenda.IdVenda }, itemProdutoVenda);
+            // Return a successful response (modify as needed)
+            return Ok(new { Message = "Produtos added successfully!" });
         }
 
 
