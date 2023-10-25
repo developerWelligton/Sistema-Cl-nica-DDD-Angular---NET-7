@@ -4,10 +4,10 @@ import { AdminComponent } from './admin.component';
 import { CreateUserComponent } from './create-user/create-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { CreateProductComponent } from './create-product/create-product.component';
-import { ListProductComponent } from './list-user copy/list-product.component';
 import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
-import { ListUnspscComponent } from './list-user copy 2/list-unspsc.component';
 import { PanelPdvComponent } from './panel-pdv/panel-pdv.component';
+import { ListProductComponent } from './product-table/list-product.component';
+import { ListUnspscComponent } from './unspsc-table/list-unspsc.component';
 
 const routes: Routes = [
   {
@@ -38,9 +38,10 @@ const routes: Routes = [
     path:'list-unspsc',
     component:ListUnspscComponent
   },
+
   {
-    path:'panel-pdv',
-    component:PanelPdvComponent
+    path: 'panel-pdv',
+    loadChildren: () => import('./panel-pdv/panel-pdv.module').then(m => m.PanelPdvModule)
   },
 
 

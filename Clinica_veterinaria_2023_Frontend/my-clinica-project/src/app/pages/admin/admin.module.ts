@@ -16,15 +16,16 @@ import { ListUserComponent } from './list-user/list-user.component';
 import { MatTableModule } from '@angular/material/table';
 import { UserTableComponent } from './list-user/user-table/user-table.component';
 import { CreateProductComponent } from './create-product/create-product.component';
-import { ListProductComponent } from './list-user copy/list-product.component';
 import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
-import { ListUnspscComponent } from './list-user copy 2/list-unspsc.component';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { UnspscTableComponent } from './list-user copy 2/unspsc-table/unspsc-table.component';
-import { UserProductComponent } from './list-user copy/product-table/product-table.component';
-import { ProductComponent } from './product/product.component';
 import { VmessageModule } from 'src/app/shared/components/vmessage/vmessage.module';
 import { PanelPdvComponent } from './panel-pdv/panel-pdv.component';
+import { PanelPdvModule } from './panel-pdv/panel-pdv.module';
+import { ListUnspscComponent } from './unspsc-table/list-unspsc.component';
+import { ListProductComponent } from './product-table/list-product.component';
+import { UnspscTableComponent } from './unspsc-table/unspsc-table/unspsc-table.component';
+import { UserProductComponent } from './product-table/product-table/product-table.component';
+import { ProductComponent } from './product-table/product.component';
 
 @NgModule({
   declarations: [
@@ -38,9 +39,7 @@ import { PanelPdvComponent } from './panel-pdv/panel-pdv.component';
     ListUnspscComponent,
     UnspscTableComponent,
     UserProductComponent,
-    ProductComponent,
-    PanelPdvComponent
-
+    ProductComponent
 
   ],
   exports:[CreateUserComponent,UserProductComponent],
@@ -57,7 +56,7 @@ import { PanelPdvComponent } from './panel-pdv/panel-pdv.component';
     MatInputModule,
     MatButtonModule,
     MatTableModule,
-    VmessageModule
+    VmessageModule,
   ],
   providers: []
   ,
