@@ -47,7 +47,7 @@ namespace WebApi.Controllers
 
             await _InterfaceVendaServicoPagamento.Add(vendaServicoPagamento);
 
-            return CreatedAtAction(nameof(AdicionarPagamento), new { id = vendaServicoPagamento.IdVendaServicoPagamento }, vendaServicoPagamentoDto);
+            return CreatedAtAction(nameof(AdicionarPagamento), new { id = vendaServicoPagamento.IdVendaServicoPagamento }, vendaServicoPagamento);
         }
 
         [HttpGet("/api/Pagamentos")]

@@ -32,6 +32,8 @@ export class Product {
 }
 
 
+
+
 @Component({
   selector: 'app-panel-pdv',
   templateUrl: './panel-pdv.component.html',
@@ -239,6 +241,14 @@ debugger
           icon: 'success',
           title: 'Sucesso!',
           text: 'Lista de produtos enviada com sucesso!'
+        }).then(() => {
+          this.router.navigate(['/admin/panel-pdv/payment'], {
+            state: {
+              saleId: this.saleId,
+              total: this.subtotal
+            }
+          });
+
         });
       },
       error => {
