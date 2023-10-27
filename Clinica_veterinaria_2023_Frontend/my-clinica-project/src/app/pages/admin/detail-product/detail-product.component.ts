@@ -38,7 +38,7 @@ export class DetailProductComponent {
   file: File;
   preview: string;
 
-  unspscCodes: Unspsc[] = [];
+  unspscCode:any
 
   productId: string;
   constructor(
@@ -56,26 +56,28 @@ export class DetailProductComponent {
     this.productId = this.route.snapshot.paramMap.get('id');
 
     this.productService.getProductByCode(this.productId).subscribe(res => {
-      console.log(res);
+      this.unspscService.getUnspscCodeById(res.idUnspsc).subscribe(data => {
+          this.unspscCode = data.codigoSfcm;
 
-      // Assuming 'res' has the product details directly.
-      this.createProductForm.patchValue({
-        productName: res.nome,
-        purchasePrice: res.precoCompra,
-        sellingPrice: res.precoVenda,
-        productDescription: res.descricao,
-        // for the file, since we only have base64, set it directly to preview.
-        // If you want to edit the image, you need another mechanism to handle file uploads.
-        file: res.imagemBase64
+          // Move the patchValue inside this inner subscription
+          this.createProductForm.patchValue({
+              productName: res.nome,
+              purchasePrice: res.precoCompra,
+              sellingPrice: res.precoVenda,
+              productDescription: res.descricao,
+              file: res.imagemBase64,
+              unspsc: this.unspscCode  // Now this should be populated
+          });
+
+          this.preview = 'data:image/jpeg;base64,' + res.imagemBase64; // Adjust as needed.
+      }, error => {
+          console.error('Error fetching UNSPSC code:', error);
+          // Handle error as needed.
       });
-
-      this.preview = 'data:image/jpeg;base64,' + res.imagemBase64; // if the image type is jpeg. Adjust accordingly.
-
-      // More fields can be populated as needed.
-    }, error => {
+  }, error => {
       console.error('Error fetching product:', error);
-      // Handle error as needed, maybe show an error notification.
-    });
+      // Handle error as needed.
+  });
 
     this.createProductForm = this.fb.group({
       file: ['', Validators.required],
@@ -95,7 +97,6 @@ export class DetailProductComponent {
     this.userRole = this.userService.getCurrentUser()
     //alert(this.userRole)
 
-    this.loadUnspsc();
   }
 
 
@@ -110,16 +111,9 @@ export class DetailProductComponent {
     };
     reader.readAsDataURL(this.file);
   }
+    loadUnspsc(idUnspsc:any): void {
 
 
-  loadUnspsc(): void {
-    this.unspscService.getAllUnspscCodeDetails().subscribe((data: Unspsc[]) => {
-        console.log(data)
-        this.unspscCodes = data;
-    }, error => {
-        console.error('Error loading UNSPSC codes:', error);
-        // Handle error as needed
-    })
 }
 
 
@@ -174,6 +168,9 @@ submitForm(event?: Event): void {
     });
   }
 }
+
+
+
 
 
 }

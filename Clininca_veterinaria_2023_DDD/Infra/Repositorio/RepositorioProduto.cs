@@ -44,7 +44,12 @@ namespace Infra.Repositorio
             }
         }
 
-        
-
+        public async Task<Produto> GetProductById(long productId)
+        {
+            using (var context = new ContextBase(_optionsBuilder))
+            {
+                return await context.Produtos.FindAsync(productId);
+            }
+        }
     }
 }

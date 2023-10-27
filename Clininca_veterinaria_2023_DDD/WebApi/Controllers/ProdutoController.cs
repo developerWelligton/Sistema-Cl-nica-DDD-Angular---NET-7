@@ -83,7 +83,7 @@ namespace WebApi.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<Produto>> ObterProdutoPorId(long id) // O tipo de retorno agora é Produto, em vez de Familia
         {
-            var produto = await _interfaceProdutos.GetEntityById(id); // Substitua _interfaceProdutos pelo nome real do seu serviço ou repositório para Produtos
+            var produto = await _interfaceProdutos.GetProductById(id); // Substitua _interfaceProdutos pelo nome real do seu serviço ou repositório para Produtos
 
             if (produto == null)
             {
@@ -92,6 +92,7 @@ namespace WebApi.Controllers
 
             return Ok(produto);
         }
+ 
 
         [HttpGet("WithInspsc")]
         [Produces("application/json")]

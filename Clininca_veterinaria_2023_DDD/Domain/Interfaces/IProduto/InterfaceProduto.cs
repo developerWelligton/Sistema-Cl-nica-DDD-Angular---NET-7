@@ -11,5 +11,7 @@ namespace Domain.Interfaces.IFamilia
     public interface InterfaceProduto: InterfaceGeneric<Produto>
     {
         Task<IList<Produto>> GetAllProductWithInspsc();
+
+        Task<Produto> GetProductById(long productId);
     }
 }

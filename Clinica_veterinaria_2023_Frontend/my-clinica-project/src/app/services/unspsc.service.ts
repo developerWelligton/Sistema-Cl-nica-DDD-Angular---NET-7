@@ -50,4 +50,12 @@ export class UnspscService {
       );
   }
 
+  getUnspscCodeById(id: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/UnspscCode/${id}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
 }
