@@ -8,6 +8,8 @@ using WebApi.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Interfaces.IVendaServicoPagamento;
+using System.Text.Json;
+using System.Text;
 
 namespace WebApi.Controllers
 {
@@ -118,6 +120,49 @@ namespace WebApi.Controllers
             return Ok(pagamento);
         }
 
+
+         
+
+            [HttpPost("/api/CreatePaymentLink")]
+            [Produces("application/json")]
+            public async Task<ActionResult> CreatePaymentLink()
+            {
+                var httpClient = new HttpClient();
+
+                // Adding headers
+                httpClient.DefaultRequestHeaders.Add("access_token", "$aact_YTU5YTE0M2M2N2I4MTliNzk0YTI5N2U5MzdjNWZmNDQ6OjAwMDAwMDAwMDAwMDAzMjU0NDM6OiRhYWNoX2ZhZDVmN2JjLTI1ODYtNDg2NS1hYzIxLWExNjNhNmUyYTA0Yg==");
+                httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+                httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
+
+                var payload = new
+                {
+                    billingType = "UNDEFINED",
+                    chargeType = "DETACHED",
+                    name = "Venda de livros",
+                    description = "Qualquer livro por apenas R$: 50,00",
+                    endDate = "2023-10-27",
+                    value = 50,
+                    dueDateLimitDays = 10,
+                    subscriptionCycle = (string)null,
+                    maxInstallmentCount = 1,
+                    notificationEnabled = true
+                };
+
+            var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
+
+            var response = await httpClient.PostAsync("https://api.asaas.com/v3/paymentLinks", content);
+
+                if (!response.IsSuccessStatusCode)
+                {
+                    // Handle the error
+                    return BadRequest("Failed to create the payment link.");
+                }
+
+                var responseString = await response.Content.ReadAsStringAsync();
+
+            var responseObject = JsonSerializer.Deserialize<PaymentResponse>(responseString);
+            return Ok(new { url = responseObject.url });
+        } 
 
     }
 }
