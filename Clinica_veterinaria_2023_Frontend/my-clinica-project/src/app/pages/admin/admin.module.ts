@@ -29,6 +29,8 @@ import { ProductComponent } from './product-table/product.component';
 import { ListSaleComponent } from './sale-table/sale-list.component';
 import { SaleTableComponent } from './sale-table/sale-table/sale-table.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
+import { TreeViewUnspscComponent } from './tree-view-unspsc/tree-view-unspsc.component';
+import { TreeModule } from '@circlon/angular-tree-component/lib/angular-tree-component.module';
 
 @NgModule({
   declarations: [
@@ -45,7 +47,8 @@ import { DetailProductComponent } from './detail-product/detail-product.componen
     ProductComponent,
     ListSaleComponent,
     SaleTableComponent,
-    DetailProductComponent
+    DetailProductComponent,
+    TreeViewUnspscComponent
 
   ],
   exports:[CreateUserComponent,UserProductComponent],
@@ -63,6 +66,7 @@ import { DetailProductComponent } from './detail-product/detail-product.componen
     MatButtonModule,
     MatTableModule,
     VmessageModule,
+    TreeModule
   ],
   providers: []
   ,

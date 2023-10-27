@@ -1,3 +1,4 @@
+import { TreeViewUnspscComponent } from './tree-view-unspsc/tree-view-unspsc.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
@@ -23,6 +24,11 @@ const routes: Routes = [
   {
     path:'list-user',
     component:ListUserComponent
+  },
+
+  {
+    path:'treeview-unspsc',
+    component:TreeViewUnspscComponent
   },
   {
     path:'create-product',
@@ -51,7 +57,6 @@ const routes: Routes = [
     path: 'salesMade',
     component:ListSaleComponent
   },
-
 
    // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
    {
