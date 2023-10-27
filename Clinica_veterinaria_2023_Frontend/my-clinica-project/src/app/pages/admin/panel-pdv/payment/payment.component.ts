@@ -99,12 +99,36 @@ export class PaymentComponent {
 
       this.asaasService.createAsaasPaymentLink(paymentData).subscribe(response => {
         console.log('Resposta da API do Asaas:', response);
-        // Faça o que for necessário com a resposta, por exemplo:
-        if(response && response.id) {
-          alert('Link de pagamento criado com sucesso!');
+        if(response && response.url) {
+          // Abre o link automaticamente em uma nova aba
+          window.open(response.url, '_blank');
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Link de pagamento criado com sucesso!',
+            html: `O link de pagamento foi aberto em uma nova aba. Se não abrir automaticamente, clique <a href="${response.url}" target="_blank">aqui</a>.`,
+            confirmButtonText: 'Fechar'
+          });
         } else {
-          alert('Falha ao criar o link de pagamento.');
+          Swal.fire({
+            icon: 'error',
+            title: 'Falha ao criar o link de pagamento.',
+            text: 'Por favor, tente novamente mais tarde.'
+          });
         }
+      }, error => {
+        console.error('Error:', error);
+        Swal.fire({
+          icon: 'error',
+          title: 'Erro na API',
+          text: 'Ocorreu um erro ao tentar criar o link de pagamento. Por favor, tente novamente.'
+        });
+      });
+    } else {
+      Swal.fire({
+        icon: 'error',
+        title: 'Formulário inválido',
+        text: 'Por favor, preencha todos os campos obrigatórios.'
       });
     }
 

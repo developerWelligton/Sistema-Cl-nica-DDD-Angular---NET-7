@@ -125,7 +125,7 @@ namespace WebApi.Controllers
 
             [HttpPost("/api/CreatePaymentLink")]
             [Produces("application/json")]
-            public async Task<ActionResult> CreatePaymentLink()
+            public async Task<ActionResult> CreatePaymentLink([FromBody] SaleCreateLinkPaymentDTO saleCreateLinkPaymentDTO)
             {
                 var httpClient = new HttpClient();
 
@@ -136,16 +136,16 @@ namespace WebApi.Controllers
 
                 var payload = new
                 {
-                    billingType = "UNDEFINED",
-                    chargeType = "DETACHED",
-                    name = "Venda de livros",
-                    description = "Qualquer livro por apenas R$: 50,00",
-                    endDate = "2023-10-27",
-                    value = 50,
-                    dueDateLimitDays = 10,
-                    subscriptionCycle = (string)null,
-                    maxInstallmentCount = 1,
-                    notificationEnabled = true
+                    billingType = saleCreateLinkPaymentDTO.BillingType,
+                    chargeType = saleCreateLinkPaymentDTO.ChargeType,
+                    name = saleCreateLinkPaymentDTO.Name,
+                    description = saleCreateLinkPaymentDTO.Description,
+                    endDate = saleCreateLinkPaymentDTO.EndDate,
+                    value = saleCreateLinkPaymentDTO.Value,
+                    dueDateLimitDays = saleCreateLinkPaymentDTO.DueDateLimitDays,
+                    subscriptionCycle = saleCreateLinkPaymentDTO.SubscriptionCycle,
+                    maxInstallmentCount = saleCreateLinkPaymentDTO.MaxInstallmentCount,
+                    notificationEnabled = saleCreateLinkPaymentDTO.NotificationEnabled
                 };
 
             var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
@@ -161,7 +161,7 @@ namespace WebApi.Controllers
                 var responseString = await response.Content.ReadAsStringAsync();
 
             var responseObject = JsonSerializer.Deserialize<PaymentResponse>(responseString);
-            return Ok(new { url = responseObject.url });
+            return Ok(new { url = responseObject.url });    
         } 
 
     }
