@@ -35,6 +35,21 @@ namespace Infra.Repositorio
             }
         }
 
+        public async Task<UnspscCode> GetNamesUnspscByCode(long id)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                var unspscCode = await banco.UnspscCodes
+                    .Include(u => u.Segmento)
+                    .Include(u => u.Familia)
+                    .Include(u => u.Classe)
+                    .Include(u => u.Mercadoria)
+                    .FirstOrDefaultAsync(u => u.IdUnspsc == id);
+
+                return unspscCode;
+            }
+        }
+
         async Task<IList<UnspscCode>> InterfaceUnspscCode.GetAllUnspscCodeDetails()
         {
             using (var banco = new ContextBase(_optionsBuilder))

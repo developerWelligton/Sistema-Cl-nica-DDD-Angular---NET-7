@@ -37,10 +37,12 @@ export class DetailProductComponent {
   createProductForm: FormGroup;
   file: File;
   preview: string;
-
   unspscCode:any
-
   productId: string;
+
+
+  //DESCRIÇÃO UNSPSC
+
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
@@ -57,7 +59,9 @@ export class DetailProductComponent {
 
     this.productService.getProductByCode(this.productId).subscribe(res => {
       this.unspscService.getUnspscCodeById(res.idUnspsc).subscribe(data => {
-          this.unspscCode = data.codigoSfcm;
+          this.unspscCode = data;
+          console.log(this.unspscCode)
+
 
           // Move the patchValue inside this inner subscription
           this.createProductForm.patchValue({
@@ -66,7 +70,7 @@ export class DetailProductComponent {
               sellingPrice: res.precoVenda,
               productDescription: res.descricao,
               file: res.imagemBase64,
-              unspsc: this.unspscCode  // Now this should be populated
+              unspsc: this.unspscCode.codigoSfcm // Now this should be populated
           });
 
           this.preview = 'data:image/jpeg;base64,' + res.imagemBase64; // Adjust as needed.

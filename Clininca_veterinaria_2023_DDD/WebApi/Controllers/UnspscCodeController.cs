@@ -90,7 +90,7 @@ namespace WebApi.Controllers
         [Produces("application/json")]
         public async Task<ActionResult<UnspscCode>> ObterUnspscCodePorId(long id)  // Change the return type to UnspscCode
         {
-            var unspscCode = await _interfaceUnspscCodes.GetEntityById(id);  // Replace with your actual method name
+            var unspscCode = await _interfaceUnspscCodes.GetNamesUnspscByCode(id);  // Replace with your actual method name
 
             if (unspscCode == null)
             {
@@ -99,6 +99,9 @@ namespace WebApi.Controllers
 
             return Ok(unspscCode);
         }
+         
+
+        
 
         [HttpGet("Exists/{codigoSfcm}")]
         [Produces("application/json")]
