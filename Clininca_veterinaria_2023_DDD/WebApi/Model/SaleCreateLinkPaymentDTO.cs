@@ -12,5 +12,13 @@
         public string SubscriptionCycle { get; set; }
         public int MaxInstallmentCount { get; set; }
         public bool NotificationEnabled { get; set; }
+
+        public CallbackData Callback { get; set; }
+
+        public class CallbackData
+        {
+            public string SuccessUrl { get; set; }
+            public bool AutoRedirect { get; set; }
+        }
     }
 }

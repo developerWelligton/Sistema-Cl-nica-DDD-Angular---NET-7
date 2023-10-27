@@ -7,6 +7,11 @@ import { AsaasService } from 'src/app/services/asaas.service';
 import { DataService } from 'src/app/services/data.service';
 import { SaleServicePaymentService } from 'src/app/services/saleServicePayment.service';
 import Swal from 'sweetalert2';
+interface CallbackPayload {
+  successUrl: string;
+  autoRedirect: boolean;
+}
+
 interface AsaasPaymentLinkPayload {
   billingType: string;
   chargeType: string;
@@ -15,9 +20,10 @@ interface AsaasPaymentLinkPayload {
   endDate: string;
   value: number;
   dueDateLimitDays: number;
-  subscriptionCycle: any;
+  subscriptionCycle: string;  // Use string ou uma união de strings específicas, se você souber os valores possíveis
   maxInstallmentCount: number;
   notificationEnabled: boolean;
+  callback: CallbackPayload;
 }
 @Component({
   selector: 'app-payment',
@@ -94,7 +100,11 @@ export class PaymentComponent {
         dueDateLimitDays: 10,  // Você pode ajustar conforme necessário ou adicionar um campo ao formulário
         subscriptionCycle: 'WEEKLY',  // Atualize se necessário
         maxInstallmentCount: 1,  // Atualize se necessário
-        notificationEnabled: true  // Atualize se necessário
+        notificationEnabled: true , // Atualize se necessário
+        callback: {
+          successUrl: "https://www.google.com",
+          autoRedirect: true
+      }
       };
 
       this.asaasService.createAsaasPaymentLink(paymentData).subscribe(response => {
