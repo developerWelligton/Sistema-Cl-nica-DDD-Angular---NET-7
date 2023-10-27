@@ -8,6 +8,7 @@ import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
 import { PanelPdvComponent } from './panel-pdv/panel-pdv.component';
 import { ListProductComponent } from './product-table/list-product.component';
 import { ListUnspscComponent } from './unspsc-table/list-unspsc.component';
+import { ListSaleComponent } from './sale-table/sale-list.component';
 
 const routes: Routes = [
   {
@@ -38,10 +39,12 @@ const routes: Routes = [
     path:'list-unspsc',
     component:ListUnspscComponent
   },
-
   {
     path: 'panel-pdv',
     loadChildren: () => import('./panel-pdv/panel-pdv.module').then(m => m.PanelPdvModule)
+  },{
+    path: 'salesMade',
+    component:ListSaleComponent
   },
 
 

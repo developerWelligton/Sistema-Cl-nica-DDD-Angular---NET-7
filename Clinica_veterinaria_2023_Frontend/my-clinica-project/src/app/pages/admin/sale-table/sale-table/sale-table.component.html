@@ -1,0 +1,32 @@
+<div class="table-responsive">
+  <table class="table-erp">
+    <thead>
+      <tr>
+        <th>ID Venda Serviço Pagamento</th>
+        <th>Data de Pagamento</th>
+        <th>Total</th>
+        <th>Status</th>
+        <th>Forma de Pagamento</th>
+        <th>ID Usuário</th>
+        <th>ID Pedido Serviços</th>
+        <th>ID Venda</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let item of saleList.slice().reverse()">
+        <td>{{ item.idVendaServicoPagamento }}</td>
+        <td>{{ item.dataPagamento  }}</td>
+        <td>{{ item.total  }}</td>
+        <td>{{ item.status }}</td>
+        <td>{{ item.formaPagamento }}</td>
+        <td>{{ item.iD_Usuario }}</td>
+        <td>{{ item.idPedidoServicos }}</td>
+        <td>{{ item.idVenda }}</td>
+        <td>
+          <!-- Adicione os botões ou ações que desejar aqui -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

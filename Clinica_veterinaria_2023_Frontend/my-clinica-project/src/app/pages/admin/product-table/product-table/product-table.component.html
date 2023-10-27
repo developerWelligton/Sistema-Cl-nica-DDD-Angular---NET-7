@@ -2,21 +2,19 @@
   <table class="table-erp">
     <thead>
       <tr>
-        <th>IMAGEM</th>
-        <th>ID</th>
-        <th>UNSPSC_CODE</th>
-        <th>NOME</th>
-        <th>DESCRICAO</th>
-        <th>PREÇO DE COMPRA</th>
-        <th>PREÇO DE VENDA</th>
-        <th>DATA DE VALIDADE</th>
-        <th>AÇÕES</th>
+        <th>Código Do Produto</th>
+        <th>Código UNSPSC</th>
+        <th>Nome do Produto</th>
+        <th>Descrição</th>
+        <th>Preço de Compra</th>
+        <th>Preço de Venda</th>
+        <th>Status do Estoque</th>
+        <th>Ações</th>
 
       </tr>
     </thead>
     <tbody>
       <tr *ngFor="let product of productList.slice().reverse()">
-        <td><img [src]="getSanitizedImage(product.imagemBase64)" alt="Product image" width="250" height="250" /></td>
         <td>{{ product.idProduto }}</td>
         <td>{{ product.codigoSfcm }}</td>
         <td>{{ product.nome }}</td>
@@ -25,9 +23,9 @@
         <td>{{ product.precoVenda }}</td>
         <td>{{ product.status }}</td>
         <td>
-          <button type="button" class="btn btn-info" (click)="editProduct(product)" >Editar</button>
-          <button type="button" class="btn btn-success" (click)="viewProduct(product)" >Visualizar</button>
-          <button type="button" class="btn btn-danger" (click)="deleteProduct(product.idProduto)" >Excluir</button>
+          <button type="button"   (click)="editProduct(product)" >Editar</button>
+          <button type="button"   (click)="viewProduct(product)" >Visualizar</button>
+          <button type="button"   (click)="deleteProduct(product.idProduto)" >Excluir</button>
         </td>
       </tr>
     </tbody>

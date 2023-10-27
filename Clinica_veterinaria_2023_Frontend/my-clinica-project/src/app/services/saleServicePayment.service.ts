@@ -18,7 +18,10 @@ export class SaleServicePaymentService {
    sendPayment(paymentData: any): Observable<any> {
     debugger
       return this.http.post(`${this.baseUrl}/VendaServicoPagamento`, paymentData);
-
   }
 
+   // Método para recuperar todos os pagamentos
+  getAllPayments(): Observable<any[]> {
+    return this.http.get<any[]>(`${this.baseUrl}/Pagamentos`);
+  }
 }
