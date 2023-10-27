@@ -1,0 +1,82 @@
+<navbar></navbar>
+<sidebar></sidebar>
+
+<div class="container-base" [style.padding]="containerPadding">
+    <div class="content-page-edit">
+        <div class="breadcrumbs">
+            <h2>
+                <a href="/admin">Mural Admin</a>
+                <span class="separator">»</span>
+                Página Atual
+            </h2>
+        </div>
+        <div class="card-header">
+            <h3 class="card-title">Visualizar Produto</h3>
+        </div>
+        <form [formGroup]="createProductForm" (submit)="submitForm($event)">
+
+        <div class="form-content-edit row">
+           <!-- Preview da imagem carregada -->
+           <div class="col-md-4 image-part mb-4">
+            <div class="text-center image-preview" *ngIf="preview">
+                <app-product [url]="preview" title="Preview"></app-product>
+            </div>
+        </div>
+
+
+
+
+            <!-- Parte do formulário -->
+            <div class="col-md-8">
+              <div class="form-part">
+
+                      <!-- Primeira linha de inputs -->
+                      <div class="row">
+                        <div class="col-md-4 mb-3">
+                          <label for="productName" class="form-label">Nome do Produto:</label>
+                         <input type="text" id="productName" formControlName="productName" class="form-control" required>
+                        </div>
+
+                        <div class="col-md-8 mb-3">
+                          <label for="productDescription" class="form-label">Descrição:</label>
+                          <textarea id="productDescription" formControlName="productDescription" class="form-control" required></textarea>
+                        </div>
+
+                        <div class="col-md-4 mb-3">
+                          <label for="purchasePrice" class="form-label">Preço de Compra:</label>
+                          <input type="number" id="purchasePrice" formControlName="purchasePrice" step="0.01" class="form-control" required>
+                       </div>
+                      </div>
+
+                      <!-- Segunda linha de inputs -->
+                      <div class="row">
+                        <div class="col-md-4 mb-3">
+                          <label for="sellingPrice" class="form-label">Preço de Venda:</label>
+                          <input type="number" id="sellingPrice" formControlName="sellingPrice" step="0.01" class="form-control" required>
+                        </div>
+                        <label>CODE UNSPSC</label>
+                        <ng-select class="select-padrao"
+                        formControlName="unspsc"
+                        [items]="unspscCodes"
+                        bindLabel="codigoSfcm"
+                        bindValue="idUnspsc"
+                        [multiple]="false"
+                        [clearable]="true"
+                        ></ng-select>
+
+                      </div>
+                      <br>
+                      <br>
+
+              </div>
+            </div>
+
+
+          </div>
+
+      </form>
+
+    </div>
+
+</div>
+

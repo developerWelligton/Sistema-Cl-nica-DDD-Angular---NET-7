@@ -24,7 +24,7 @@
         <td>{{ product.status }}</td>
         <td>
           <button type="button"   (click)="editProduct(product)" >Editar</button>
-          <button type="button"   (click)="viewProduct(product)" >Visualizar</button>
+          <button type="button" (click)="viewProduct(product.idProduto)">Visualizar</button>
           <button type="button"   (click)="deleteProduct(product.idProduto)" >Excluir</button>
         </td>
       </tr>

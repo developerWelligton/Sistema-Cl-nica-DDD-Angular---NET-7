@@ -28,6 +28,7 @@ import { UserProductComponent } from './product-table/product-table/product-tabl
 import { ProductComponent } from './product-table/product.component';
 import { ListSaleComponent } from './sale-table/sale-list.component';
 import { SaleTableComponent } from './sale-table/sale-table/sale-table.component';
+import { DetailProductComponent } from './detail-product/detail-product.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { SaleTableComponent } from './sale-table/sale-table/sale-table.component
     UserProductComponent,
     ProductComponent,
     ListSaleComponent,
-    SaleTableComponent
+    SaleTableComponent,
+    DetailProductComponent
 
   ],
   exports:[CreateUserComponent,UserProductComponent],

@@ -28,10 +28,7 @@ export class UserProductComponent {
     console.log('Editar usuário:', user);
   }
 
-  viewProduct(user: any) {
-    // Implemente a lógica para visualizar o usuário aqui
-    console.log('Visualizar usuário:', user);
-  }
+
 
   deleteProduct(idProduct: any) {
     this.deleteRequest.emit(idProduct);
@@ -41,6 +38,8 @@ export class UserProductComponent {
     return this.sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' + imageBase64);
   }
 
-
+  viewProduct(id: string): void {
+    this.router.navigate(['admin/detail-product', id]);
+  }
 
 }

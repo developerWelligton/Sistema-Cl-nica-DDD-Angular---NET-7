@@ -60,7 +60,7 @@ export class ProductService {
   }
 
   //buscar produto por id
-  getProductByCode(productCode: number): Observable<any> {
+  getProductByCode(productCode: any): Observable<any> {
     return this.http.get(`${this.baseUrl}/Produto/${productCode}`)
         .pipe(
             catchError(this.handleError)

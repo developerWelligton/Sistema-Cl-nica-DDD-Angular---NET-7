@@ -1,3 +1,4 @@
+import { DetailProductComponent } from './detail-product/detail-product.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AdminComponent } from './admin.component';
@@ -30,6 +31,10 @@ const routes: Routes = [
   {
     path:'list-product',
     component:ListProductComponent
+  },
+  {
+    path:'detail-product/:id',
+    component:DetailProductComponent
   },
   {
     path:'create-unspsc',

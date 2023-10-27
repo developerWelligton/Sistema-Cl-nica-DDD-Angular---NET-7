@@ -1,0 +1,90 @@
+
+
+
+.content-page-edit{
+  background: white;
+  padding: 32px; /* Aumentado para mais espaço */
+  border-radius: 10px;
+  min-height: 800px;
+  width: 95%; /* Ajustado para ser mais responsivo */
+  max-width: 4000px; /* Ajustado para ser mais responsivo */
+  box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.2); /* Sombra suavizada */
+  margin-left: 70px;
+
+  .card-header {
+    z-index: 3 !important;
+    padding: 20px; /* Aumentado para mais espaço */
+    background-color: #212946;
+    box-shadow: 0 4px 20px 0px rgba(0, 0, 0, 0.14), 0 7px 10px -5px #212946;
+    border-radius: 8px;
+    margin-bottom: 16px;
+    color: #fff; /* Para melhorar a visibilidade do texto contra o fundo colorido */
+
+    .card-title {
+      font-size: 20px; /* Aumentado para mais destaque */
+      font-weight: 600; /* Aumentado para mais destaque */
+      text-align: center; /* Alinha o texto ao centro */
+    }
+
+    .card-description {
+      color: #ffffff;
+      margin: 16px 0;
+      text-align: center; /* Alinha o texto ao centro */
+    }
+
+    .card-links {
+      list-style: none;
+      padding-left: 0;
+      text-align: center; /* Alinha os links ao centro */
+    }
+
+    .card-link {
+      color: #af4c4c;
+      text-decoration: none;
+      margin: 5px 0; /* Adiciona um pequeno espaço entre os links */
+      display: inline-block; /* Permite o uso de padding */
+      padding: 5px 0; /* Adiciona um pequeno padding para aumentar a área clicável */
+    }
+
+    .card-link:hover {
+      text-decoration: underline;
+      color: #fff; /* Muda a cor quando o link é passado com o mouse */
+    }
+  }
+}
+
+
+.form-content {
+  display: flex;
+  gap: 20px;
+}
+
+.image-part {
+  flex: 1;
+  /* Ajuste conforme necessário para obter a largura desejada para a imagem */
+}
+
+.product-image {
+  width: 100%; /* Faz a imagem ocupar toda a largura da sua div */
+  border-radius: 10px;
+}
+
+.form-part {
+  flex: 2;
+  /* Ajuste conforme necessário para obter a largura desejada para o formulário */
+}
+
+/* Seus outros estilos permanecem os mesmos */
+
+
+.image-preview {
+  max-width: 450px; /* Máxima largura da imagem */
+  max-height: 450px; /* Máxima altura da imagem */
+  width: 100%; /* Faz a imagem ocupar 100% da largura do contêiner, até 400px */
+  height: auto; /* Mantém a proporção da imagem ao redimensionar */
+  object-fit: cover; /* Mantém as proporções da imagem enquanto a redimensiona para preencher o contêiner */
+
+}
+
+
+
