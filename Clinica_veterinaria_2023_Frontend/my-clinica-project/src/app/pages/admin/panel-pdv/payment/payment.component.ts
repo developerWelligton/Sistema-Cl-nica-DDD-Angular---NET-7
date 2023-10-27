@@ -62,10 +62,10 @@ export class PaymentComponent {
     });
 
     this.paymentForm = new FormGroup({
-      paymentName: new FormControl('', Validators.required),
-      paymentDescription: new FormControl('', Validators.required),
+      paymentName: new FormControl('PORTAL-PETZ-LINK-PAGAMENTO-'+this.saleIdPayment, Validators.required),
+      paymentDescription: new FormControl('CÓDIGO DA VENDA-'+this.saleIdPayment, Validators.required),
       paymentMethod: new FormControl('', Validators.required),
-      totalValue: new FormControl(null, Validators.required),
+      totalValue: new FormControl(this.totalPayment, Validators.required),
       expiryDate: new FormControl(null, Validators.required)
     });
 
