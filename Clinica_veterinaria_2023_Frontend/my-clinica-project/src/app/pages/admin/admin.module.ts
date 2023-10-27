@@ -29,6 +29,8 @@ import { ProductComponent } from './product-table/product.component';
 import { ListSaleComponent } from './sale-table/sale-list.component';
 import { SaleTableComponent } from './sale-table/sale-table/sale-table.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
+import { jqxTreeModule } from 'jqwidgets-ng/jqxtree';
+import { jqxExpanderModule } from 'jqwidgets-ng/jqxexpander';
 import { TreeViewUnspscComponent } from './tree-view-unspsc/tree-view-unspsc.component';
 
 @NgModule({
@@ -64,7 +66,8 @@ import { TreeViewUnspscComponent } from './tree-view-unspsc/tree-view-unspsc.com
     MatInputModule,
     MatButtonModule,
     MatTableModule,
-    VmessageModule
+    VmessageModule,
+    jqxTreeModule, jqxExpanderModule
   ],
   providers: []
   ,

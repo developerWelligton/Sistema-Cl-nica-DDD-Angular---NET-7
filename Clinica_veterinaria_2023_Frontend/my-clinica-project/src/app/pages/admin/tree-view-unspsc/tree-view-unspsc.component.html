@@ -21,7 +21,26 @@
     </div>
     <!-- Formulário -->
 
+   <!-- UNSPSC Tree inside an Expander -->
+  <jqxExpander [width]="800" [height]="400" [showArrow]="false" [toggleMode]="'none'">
 
+    <!-- Header for the Expander -->
+    <div>
+      UNSPSC
+    </div>
+
+    <!-- Content of the Expander which holds the tree -->
+    <div style="overflow: hidden;">
+
+      <!-- The tree component from jqxWidgets -->
+      <jqxTree #treeReference
+          [width]="'100%'"
+          [height]="'100%'"
+          [source]="treeSource">
+      </jqxTree>
+
+    </div>
+  </jqxExpander>
 
 
 

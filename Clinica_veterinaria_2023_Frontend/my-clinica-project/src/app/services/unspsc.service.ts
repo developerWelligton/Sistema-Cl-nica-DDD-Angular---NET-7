@@ -57,5 +57,8 @@ export class UnspscService {
       );
   }
 
+  listWithDescription(): Observable<any> {
+    return this.http.get(`${this.baseUrl}/UnspscCode/ListarComDescricao`);
+  }
 
 }

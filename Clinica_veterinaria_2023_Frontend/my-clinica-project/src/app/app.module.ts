@@ -16,7 +16,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /**/
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-
+import { jqxGridModule } from 'jqwidgets-ng/jqxgrid';
 
 @NgModule({
   declarations: [
@@ -36,6 +36,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
     NgxSpinnerModule,
     MatProgressSpinnerModule,
+    jqxGridModule
 
   ],
   providers: [
