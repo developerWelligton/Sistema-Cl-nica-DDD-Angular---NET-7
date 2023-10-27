@@ -16,7 +16,6 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
 /**/
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { TreeModule } from '@circlon/angular-tree-component';
 
 
 @NgModule({
