@@ -135,7 +135,7 @@ namespace WebApi.Controllers
                 httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
 
                 var payload = new
-                {
+                { 
                     billingType = saleCreateLinkPaymentDTO.BillingType,
                     chargeType = saleCreateLinkPaymentDTO.ChargeType,
                     name = saleCreateLinkPaymentDTO.Name,
@@ -165,6 +165,8 @@ namespace WebApi.Controllers
                 }
 
                 var responseString = await response.Content.ReadAsStringAsync();
+
+
 
             var responseObject = JsonSerializer.Deserialize<PaymentResponse>(responseString);
             return Ok(new { url = responseObject.url });    
