@@ -118,7 +118,7 @@ namespace WebApi.Controllers
 
         [HttpGet("produtos-por-estoque")]
         [Produces("application/json")]
-        public async Task<ActionResult<IEnumerable<ProdutoEstoqueDto>>> GetProdutosByEstoqueId(int idEstoque)
+        public async Task<ActionResult<IEnumerable<ItemProdutoEstoque>>> GetProdutosByEstoqueId(int idEstoque)
         {
             if (idEstoque <= 0)
             {

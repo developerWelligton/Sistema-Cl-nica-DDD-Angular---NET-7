@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
+import { ItemProductStockService } from 'src/app/services/itemProductStock.service';
 
 @Component({
   selector: 'app-stock-products-table',
@@ -26,7 +27,7 @@ export class StockProductsTableComponent implements OnInit {
     // Add more mock product objects here
   ];
 
-  constructor() {
+  constructor(private itemProductStockService : ItemProductStockService) {
     // For now, we'll use the mock data
     this.productList = this.mockProducts;
   }
@@ -35,6 +36,15 @@ export class StockProductsTableComponent implements OnInit {
     // Here you would subscribe to a service that provides padding value
     // For mockup purposes, we'll set a static value
     this.containerPadding = '15px';
+    this.itemProductStockService.getAllProductListByStock(40002).subscribe(
+      data => {
+        console.log(data);
+        this.productList = data;
+      },
+      error => {
+        console.error("Error:", error);
+      }
+    );
   }
 
   ngOnDestroy() {
