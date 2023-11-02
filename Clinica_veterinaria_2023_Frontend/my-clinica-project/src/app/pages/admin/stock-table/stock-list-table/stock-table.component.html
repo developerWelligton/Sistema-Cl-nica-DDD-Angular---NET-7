@@ -1,0 +1,25 @@
+<div class="table-responsive">
+  <table class="table-erp">
+    <thead>
+      <tr>
+        <th>Código Do Estoque</th>
+        <th>Sala</th>
+        <th>Prateleira</th>
+        <th>Ações</th>
+
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let stock of stockList.slice().reverse()">
+        <td>{{ stock.idEstoque }}</td>
+        <td>{{ stock.sala }}</td>
+        <td>{{ stock.prateleira }}</td>
+        <td>
+          <button type="button"   (click)="editStock(stock)" >Editar</button>
+          <button type="button" (click)="viewStock(stock.idProduto)">Visualizar</button>
+          <button type="button"   (click)="deleteStock(stock.idProduto)" >Excluir</button>
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

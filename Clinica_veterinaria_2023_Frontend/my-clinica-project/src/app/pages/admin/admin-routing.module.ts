@@ -12,6 +12,7 @@ import { ListProductComponent } from './product-table/list-product.component';
 import { ListUnspscComponent } from './unspsc-table/list-unspsc.component';
 import { ListSaleComponent } from './sale-table/sale-list.component';
 import { CreateEstoqueComponent } from './create-estoque/create-estoque.component';
+import {  ListStockComponent } from './stock-table/list-stock.component';
 
 const routes: Routes = [
   {
@@ -62,6 +63,10 @@ const routes: Routes = [
   {
     path: 'create-estoque',
     component: CreateEstoqueComponent
+  },
+    {
+    path: 'list-stock',
+    component: ListStockComponent
   },
 
    // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada

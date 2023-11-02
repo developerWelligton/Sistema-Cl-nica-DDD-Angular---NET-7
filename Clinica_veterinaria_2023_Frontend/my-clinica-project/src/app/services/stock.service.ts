@@ -10,6 +10,7 @@ import { Product } from '../pages/admin/panel-pdv/panel-pdv.component';
   providedIn: 'root'
 })
 export class StockService {
+
   private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(
@@ -22,9 +23,8 @@ export class StockService {
     // Corrigindo/Validando o formato do produto aqui
     debugger
     const payload = {
-      sala: stock.sala || "string",
-      prateleira: stock.prateleira|| "string",
-      quantidade: 0,
+      sala: stock.sala,
+      prateleira: stock.prateleira,
       iD_Usuario: 1
     };
 
@@ -33,6 +33,14 @@ export class StockService {
         catchError(this.handleError)
       );
   }
+
+  getAllStock(): Observable<any>  {
+    return this.http.get(`${this.baseUrl}/Estoque`)
+    .pipe(
+      catchError(this.handleError)
+    );
+  }
+
 
 
   private handleError(error: any): Observable<never> {

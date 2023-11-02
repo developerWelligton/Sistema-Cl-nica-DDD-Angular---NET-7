@@ -50,8 +50,8 @@ export class CreateEstoqueComponent {
   ngOnInit() {
 
     this.createEstoqueForm = this.fb.group({
-      productName: ['', Validators.required],
-      productDescription: ['', Validators.required],
+      sala: ['', Validators.required],
+      prateleira: ['', Validators.required],
     });
     //padding
     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
