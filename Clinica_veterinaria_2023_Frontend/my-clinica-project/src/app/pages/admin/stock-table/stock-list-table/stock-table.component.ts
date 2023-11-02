@@ -39,7 +39,7 @@ export class  StockListTableComponent {
 
 
   viewStock(id: string): void {
-    this.router.navigate(['admin/detail-product', id]);
+    this.router.navigate(['admin/list-stock/detail-stock-product', id]);
   }
 
 }

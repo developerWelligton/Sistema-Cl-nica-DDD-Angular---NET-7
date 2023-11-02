@@ -19,12 +19,14 @@ import { ListStockComponent } from './list-stock.component';
 import { StockListTableComponent } from './stock-list-table/stock-table.component';
 import { StockRoutingModule } from './stock-routing.module';
 import { CreateUserComponent } from '../create-user/create-user.component';
+import { StockProductsTableComponent } from './stock-list-table copy/stock-products-table.component';
 
 @NgModule({
   declarations: [
     CreateEstoqueComponent,
     ListStockComponent,
-    StockListTableComponent
+    StockListTableComponent,
+    StockProductsTableComponent
 
   ],
   exports:[ StockRoutingModule ],

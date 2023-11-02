@@ -1,0 +1,51 @@
+<navbar></navbar>
+<sidebar></sidebar>
+<div class="container-base" [style.padding]="containerPadding">
+  <!-- Page Content -->
+  <div class="content-page">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+      <h2>
+       <a href="/admin">Mural Admin</a>
+      <span class="separator">»</span>
+      Current Page
+      </h2>
+    </div>
+    <div class="table-responsive">
+      <table class="table-erp">
+        <thead>
+          <tr>
+            <th>Código Do Produto</th>
+            <th>Código UNSPSC</th>
+            <th>Nome do Produto</th>
+            <th>Descrição</th>
+            <th>Preço de Compra</th>
+            <th>Preço de Venda</th>
+            <th>Status do Estoque</th>
+            <th>Ações</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let product of productList.slice().reverse()">
+            <td>{{ product.idProduto }}</td>
+            <td>{{ product.codigoSfcm }}</td>
+            <td>{{ product.nome }}</td>
+            <td>{{ product.descricao }}</td>
+            <td>{{ product.precoCompra }}</td>
+            <td>{{ product.precoVenda }}</td>
+            <td>{{ product.status }}</td>
+            <!-- <td>
+              <button type="button"   (click)="editProduct(product)" >Editar</button>
+              <button type="button" (click)="viewProduct(product.idProduto)">Visualizar</button>
+              <button type="button"   (click)="deleteProduct(product.idProduto)" >Excluir</button>
+            </td> -->
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    </div>
+  </div>
+
+
