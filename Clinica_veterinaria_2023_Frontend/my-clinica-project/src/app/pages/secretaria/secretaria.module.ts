@@ -32,8 +32,7 @@ import { CreateAnimalComponent } from './create-animal/create-animal.component';
     SidebarModule,
     SharedModule,
     NgSelectModule,
-    ReactiveFormsModule,
-    AdminModule
+    ReactiveFormsModule
 
   ],
   providers: [

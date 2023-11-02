@@ -33,8 +33,8 @@ import { jqxTreeModule } from 'jqwidgets-ng/jqxtree';
 import { jqxExpanderModule } from 'jqwidgets-ng/jqxexpander';
 import { TreeViewUnspscComponent } from './tree-view-unspsc/tree-view-unspsc.component';
 import { CreateEstoqueComponent } from './create-estoque/create-estoque.component';
-import {  ListStockComponent } from './stock-table/list-stock.component';
-import { StockListTableComponent } from './stock-table/stock-list-table/stock-table.component';
+import { ListStockComponent } from './stock-table/list-stock.component';
+import { StockModule } from './stock-table/stock.module';
 
 @NgModule({
   declarations: [
@@ -52,10 +52,7 @@ import { StockListTableComponent } from './stock-table/stock-list-table/stock-ta
     ListSaleComponent,
     SaleTableComponent,
     DetailProductComponent,
-    TreeViewUnspscComponent,
-    CreateEstoqueComponent,
-    ListStockComponent,
-    StockListTableComponent
+    TreeViewUnspscComponent
 
   ],
   exports:[CreateUserComponent,UserProductComponent],

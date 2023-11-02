@@ -1,3 +1,4 @@
+
 import { TreeViewUnspscComponent } from './tree-view-unspsc/tree-view-unspsc.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
 import { NgModule } from '@angular/core';
@@ -7,12 +8,9 @@ import { CreateUserComponent } from './create-user/create-user.component';
 import { ListUserComponent } from './list-user/list-user.component';
 import { CreateProductComponent } from './create-product/create-product.component';
 import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
-import { PanelPdvComponent } from './panel-pdv/panel-pdv.component';
 import { ListProductComponent } from './product-table/list-product.component';
 import { ListUnspscComponent } from './unspsc-table/list-unspsc.component';
 import { ListSaleComponent } from './sale-table/sale-list.component';
-import { CreateEstoqueComponent } from './create-estoque/create-estoque.component';
-import {  ListStockComponent } from './stock-table/list-stock.component';
 
 const routes: Routes = [
   {
@@ -61,14 +59,10 @@ const routes: Routes = [
     component:ListSaleComponent
   },
   {
-    path: 'create-estoque',
-    component: CreateEstoqueComponent
-  },
-    {
     path: 'list-stock',
-    component: ListStockComponent
-  },
-
+    loadChildren: () => import('./stock-table/stock.module').then(m => m.StockModule)
+  }
+,
    // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
    {
     path: '**',
