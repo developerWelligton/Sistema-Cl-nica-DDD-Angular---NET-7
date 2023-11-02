@@ -1,7 +1,7 @@
 ﻿namespace WebApi.Model
 {
     public class SaleCreateLinkPaymentDTO
-    {
+    { 
         public string BillingType { get; set; }
         public string ChargeType { get; set; }
         public string Name { get; set; }

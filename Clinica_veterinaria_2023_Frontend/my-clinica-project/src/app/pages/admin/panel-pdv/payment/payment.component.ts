@@ -1,3 +1,4 @@
+import { ProductService } from './../../../../services/product.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -48,7 +49,8 @@ export class PaymentComponent {
     private dataService: DataService,
     private asaasService: AsaasService,
     private saleServicePaymentService:SaleServicePaymentService,
-    private router: Router
+    private router: Router,
+    private productService: ProductService
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {saleId: number, total: number};
@@ -112,6 +114,8 @@ export class PaymentComponent {
         if(response && response.url) {
           // Abre o link automaticamente em uma nova aba
           window.open(response.url, '_blank');
+
+      this.productService.removeProductFromInventory(this.cashPaymentForm.value);
 
           Swal.fire({
             icon: 'success',

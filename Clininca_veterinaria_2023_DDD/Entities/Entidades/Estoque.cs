@@ -15,8 +15,7 @@ namespace Entities.Entidades
 
         [StringLength(50)]
         public string Prateleira { get; set; }
-
-        public int? Quantidade { get; set; }
+         
 
         // Relacionamento com UsuarioSistemaClinica
         public int ID_Usuario { get; set; }

@@ -29,5 +29,7 @@ namespace Entities.Entidades
 
         [StringLength(50)]
         public string? Status { get; set; }
+
+        public int? Quantidade_Estoque { get; set; }
     }
 }

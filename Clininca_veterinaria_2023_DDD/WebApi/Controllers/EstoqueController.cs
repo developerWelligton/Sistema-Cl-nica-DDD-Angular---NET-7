@@ -45,7 +45,7 @@ namespace WebApi.Controllers
             {
                 Sala = estoqueDto.Sala,
                 Prateleira = estoqueDto.Prateleira,
-                Quantidade = estoqueDto.Quantidade,
+                //Quantidade = estoqueDto.Quantidade,
                 ID_Usuario = estoqueDto.ID_Usuario
             };
 
