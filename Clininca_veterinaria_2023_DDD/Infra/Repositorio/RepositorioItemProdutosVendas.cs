@@ -25,6 +25,20 @@ namespace Infra.Repositorio
 
         }
 
-      
+
+
+
+        public async Task<IEnumerable<ItemProdutoVenda>> GetVendaDetailsAsync(string vendaId)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                var query = from v in banco.Vendas
+                            join ipv in banco.ItensPordutoVendas on v.IdVenda equals ipv.IdVenda
+                            where v.IdVenda.ToString() == vendaId.ToString()
+                            select ipv;
+
+                return await query.ToListAsync();
+            }
+        }
     }
 }

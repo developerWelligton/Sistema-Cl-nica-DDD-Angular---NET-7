@@ -24,6 +24,6 @@ namespace Entities.Entidades
         public string? Observacao { get; set; }
 
         [StringLength(10)]
-        public string? Quantidade { get; set; }
+        public int? Quantidade { get; set; }
     }
 }

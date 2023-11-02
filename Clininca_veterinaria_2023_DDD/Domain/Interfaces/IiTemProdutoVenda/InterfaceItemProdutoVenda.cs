@@ -10,6 +10,6 @@ namespace Domain.Interfaces.IFamilia
 {
     public interface InterfaceItemProdutoVenda: InterfaceGeneric<ItemProdutoVenda>
     {
-         
+        Task<IEnumerable<ItemProdutoVenda>> GetVendaDetailsAsync(string vendaId);
     }
 }

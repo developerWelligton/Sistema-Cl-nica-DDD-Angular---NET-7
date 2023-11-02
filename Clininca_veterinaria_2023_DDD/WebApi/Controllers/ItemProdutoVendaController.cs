@@ -50,6 +50,7 @@ namespace WebApi.Controllers
                 IdProduto = p.IdProduto,
                 IdVenda = p.IdVenda,
                 Observacao = p.Observacao,
+                Quantidade = p.Quantidade
                 // Add other properties here
             }).ToList();
 

@@ -9,7 +9,6 @@
     namespace Domain.Interfaces.IVenda
     {
         public interface InterfaceVenda : InterfaceGeneric<Venda>
-        {
-        
+        { 
     }
 }

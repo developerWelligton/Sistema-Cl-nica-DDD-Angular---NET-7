@@ -23,6 +23,8 @@ namespace Infra.Repositorio
             _optionsBuilder = new DbContextOptions<ContextBase>();
 
         }
-         
+
+      
+
     }
 }

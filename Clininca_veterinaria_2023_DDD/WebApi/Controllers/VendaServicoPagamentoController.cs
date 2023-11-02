@@ -10,6 +10,8 @@ using System.Threading.Tasks;
 using Domain.Interfaces.IVendaServicoPagamento;
 using System.Text.Json;
 using System.Text;
+using Domain.Interfaces.IVenda;
+using Domain.Interfaces.IFamilia;
 
 namespace WebApi.Controllers
 {
@@ -19,11 +21,13 @@ namespace WebApi.Controllers
     {
         private readonly InterfaceVendaServicoPagamento _InterfaceVendaServicoPagamento;
         private readonly IVendaServicoPagamentoServico _IVeterinarioServico;
+        private readonly InterfaceItemProdutoVenda _InterfaceItemProdutoVenda;
         public VendaServicoPagamentoController(InterfaceVendaServicoPagamento interfaceVendaServicoPagamento,
-            IVendaServicoPagamentoServico iVeterinarioServico)
+            IVendaServicoPagamentoServico iVeterinarioServico, InterfaceItemProdutoVenda interfaceItemProdutoVenda)
         {
             _InterfaceVendaServicoPagamento = interfaceVendaServicoPagamento;
             _IVeterinarioServico = iVeterinarioServico;
+            _InterfaceItemProdutoVenda = interfaceItemProdutoVenda;
         }
 
 
@@ -165,7 +169,17 @@ namespace WebApi.Controllers
                     return BadRequest("Failed to create the payment link.");
                 }
 
-                var responseString = await response.Content.ReadAsStringAsync();
+                // Fetch the Venda product details
+                var vendaProductDetails = await _InterfaceItemProdutoVenda.GetVendaDetailsAsync(payload.saleId);
+
+                // Store products in a stack
+                Stack<ItemProdutoVenda> productStack = new Stack<ItemProdutoVenda>();
+                foreach (var product in vendaProductDetails)
+                {
+                    productStack.Push(product);
+                }
+
+            var responseString = await response.Content.ReadAsStringAsync();
 
 
 

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using Domain.Interfaces.IVeterinario;
 using Domain.Interfaces.ISegmento;
 using Domain.Interfaces.IFamilia;
+using Domain.Interfaces.IEstoque;
 
 namespace WebApi.Controllers
 {
@@ -19,6 +20,7 @@ namespace WebApi.Controllers
     {
         private readonly InterfaceItemProdutoEstoque _interfaceItemProdutoEstoques;
         private readonly IitemProdutoEstoqueServico _iitemProdutoEstoqueServico;
+        
         public ItemProdutoEstoqueController(InterfaceItemProdutoEstoque interfaceItemProdutoEstoques, IitemProdutoEstoqueServico iitemProdutoEstoqueServico)
         {
             _interfaceItemProdutoEstoques = interfaceItemProdutoEstoques;
