@@ -11,6 +11,7 @@ import { PanelPdvComponent } from './panel-pdv/panel-pdv.component';
 import { ListProductComponent } from './product-table/list-product.component';
 import { ListUnspscComponent } from './unspsc-table/list-unspsc.component';
 import { ListSaleComponent } from './sale-table/sale-list.component';
+import { CreateEstoqueComponent } from './create-estoque/create-estoque.component';
 
 const routes: Routes = [
   {
@@ -53,9 +54,14 @@ const routes: Routes = [
   {
     path: 'panel-pdv',
     loadChildren: () => import('./panel-pdv/panel-pdv.module').then(m => m.PanelPdvModule)
-  },{
+  },
+  {
     path: 'salesMade',
     component:ListSaleComponent
+  },
+  {
+    path: 'create-estoque',
+    component: CreateEstoqueComponent
   },
 
    // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada

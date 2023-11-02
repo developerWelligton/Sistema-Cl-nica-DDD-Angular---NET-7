@@ -32,6 +32,7 @@ import { DetailProductComponent } from './detail-product/detail-product.componen
 import { jqxTreeModule } from 'jqwidgets-ng/jqxtree';
 import { jqxExpanderModule } from 'jqwidgets-ng/jqxexpander';
 import { TreeViewUnspscComponent } from './tree-view-unspsc/tree-view-unspsc.component';
+import { CreateEstoqueComponent } from './create-estoque/create-estoque.component';
 
 @NgModule({
   declarations: [
@@ -49,7 +50,8 @@ import { TreeViewUnspscComponent } from './tree-view-unspsc/tree-view-unspsc.com
     ListSaleComponent,
     SaleTableComponent,
     DetailProductComponent,
-    TreeViewUnspscComponent
+    TreeViewUnspscComponent,
+    CreateEstoqueComponent
 
   ],
   exports:[CreateUserComponent,UserProductComponent],
