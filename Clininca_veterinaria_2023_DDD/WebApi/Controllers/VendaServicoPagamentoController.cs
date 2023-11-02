@@ -145,7 +145,7 @@ namespace WebApi.Controllers
                     dueDateLimitDays = saleCreateLinkPaymentDTO.DueDateLimitDays,
                     subscriptionCycle = saleCreateLinkPaymentDTO.SubscriptionCycle,
                     maxInstallmentCount = saleCreateLinkPaymentDTO.MaxInstallmentCount,
-                    notificationEnabled = saleCreateLinkPaymentDTO.NotificationEnabled,
+                    notificationEnabled = saleCreateLinkPaymentDTO.NotificationEnabled, 
                     /*
                     callback = new
                     {

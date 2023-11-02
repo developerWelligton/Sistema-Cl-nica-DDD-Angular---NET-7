@@ -74,7 +74,8 @@ export class PaymentComponent {
       paymentDescription: new FormControl('CÓDIGO DA VENDA-'+this.saleIdPayment, Validators.required),
       paymentMethod: new FormControl('', Validators.required),
       totalValue: new FormControl(this.totalPayment, Validators.required),
-      expiryDate: new FormControl(null, Validators.required)
+      expiryDate: new FormControl(null, Validators.required),
+      idVenda: new FormControl(this.saleIdPayment, Validators.required),
     });
 
     this.cashPaymentForm = new FormGroup({
@@ -107,6 +108,7 @@ export class PaymentComponent {
           successUrl: "https://www.google.com",
           autoRedirect: true
       }
+
       };
 
       this.asaasService.createAsaasPaymentLink(paymentData).subscribe(response => {
