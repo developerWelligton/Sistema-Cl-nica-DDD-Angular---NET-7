@@ -11,6 +11,7 @@ namespace Entities.Entidades
         public long? IdProduto { get; set; }
         [ForeignKey("IdProduto")]
         public virtual Produto? Produto { get; set; }
+ 
 
         public int ID_Usuario { get; set; }
         [ForeignKey("ID_Usuario")]

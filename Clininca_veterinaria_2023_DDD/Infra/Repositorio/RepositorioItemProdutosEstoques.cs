@@ -80,16 +80,25 @@ namespace Infra.Repositorio
                                     join itemEstoque in banco.ItensProdutoEstoques
                                     on produto.IdProduto equals itemEstoque.IdProduto
                                     where itemEstoque.IdEstoque == idStock
-                                    select new ItemProdutoEstoque
+                                    select new
                                     {
-                                        IdProduto = produto.IdProduto, 
+                                        IdProduto = produto.IdProduto,
+                                        Nome = produto.Nome,  // Accessing 'Nome' using the navigation property
                                         Status = produto.Status,
                                         Quantidade_Estoque = itemEstoque.Quantidade_Estoque
                                     }).ToListAsync();
 
-                return result;
+                return result.Select(r => new ItemProdutoEstoque
+                {
+                    IdProduto = r.IdProduto,
+                    Status = r.Status,
+                    Quantidade_Estoque = r.Quantidade_Estoque,
+                    Produto = new Produto { Nome = r.Nome }  // Setting the 'Nome' value in the navigation property
+                }).ToList();
             }
         }
+
+
 
     }
 }

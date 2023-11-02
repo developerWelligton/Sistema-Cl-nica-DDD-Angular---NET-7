@@ -25,7 +25,7 @@
         <tbody>
           <tr *ngFor="let product of productList.slice().reverse()">
             <td>{{ product.idProduto }}</td>
-            <td>{{ product.produto }}</td> <!-- Supondo que o campo 'produto' seja um nome ou descrição -->
+            <td>{{ product.produto?.nome }}</td><!-- Supondo que o campo 'produto' seja um nome ou descrição -->
             <td>{{ product.status }}</td>
             <td>{{ product.quantidade_Estoque }}</td>
             <td>
