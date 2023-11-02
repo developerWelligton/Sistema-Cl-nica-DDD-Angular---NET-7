@@ -61,9 +61,29 @@ namespace WebApi.Controllers
             return CreatedAtAction(nameof(CriarProdutoEstoque), new { id = itemProdutoEstoque.IdProduto }, itemProdutoEstoque);
         }
 
+        [HttpPatch("atualizar-quantidade-estoque")] // Usando HTTP PATCH pois é uma atualização parcial 
+        public async Task<ActionResult> AtualizarQuantidadeEstoque(int idEstoque, int idProduto, int novaQuantidade)
+        {
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
 
-       
- 
+            try
+            {
+                await _interfaceItemProdutoEstoques.UpdateQuantidadeEstoque(idEstoque, idProduto, novaQuantidade);
+                return NoContent(); // Retorna um 204 No Content como resposta de sucesso.
+            }
+            catch (Exception ex)
+            {
+                // Maneira adequada de lidar com exceções e retornar uma mensagem de erro.
+                return StatusCode(500, $"Erro interno do servidor ao tentar atualizar a quantidade em estoque: {ex.Message}");
+            }
+        }
+
+
+
+
 
     }
 }

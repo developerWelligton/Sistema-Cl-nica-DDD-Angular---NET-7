@@ -25,6 +25,23 @@ namespace Infra.Repositorio
 
         }
 
-      
+
+        public async Task UpdateQuantidadeEstoque(int idEstoque, int idProduto, int novaQuantidade)
+        {
+            // Utilizando o contexto de forma adequada
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                var item = await banco.ItensProdutoEstoques.FirstOrDefaultAsync(i => i.IdEstoque == idEstoque && i.IdProduto == idProduto);
+                if (item != null)
+                {
+                    item.Quantidade_Estoque = novaQuantidade;
+                    banco.Entry(item).State = EntityState.Modified; // Aqui você deve referenciar o contexto 'banco', não '_optionsBuilder'
+                    await banco.SaveChangesAsync();
+                }
+            }
+        }
+
+
+
     }
 }

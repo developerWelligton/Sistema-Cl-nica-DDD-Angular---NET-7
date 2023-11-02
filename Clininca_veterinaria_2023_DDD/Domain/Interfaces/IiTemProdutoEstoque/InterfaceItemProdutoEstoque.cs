@@ -10,6 +10,7 @@ namespace Domain.Interfaces.IFamilia
 {
     public interface InterfaceItemProdutoEstoque: InterfaceGeneric<ItemProdutoEstoque>
     {
-         
+        Task UpdateQuantidadeEstoque(int idEstoque, int idProduto, int novaQuantidade);
+
     }
 }
