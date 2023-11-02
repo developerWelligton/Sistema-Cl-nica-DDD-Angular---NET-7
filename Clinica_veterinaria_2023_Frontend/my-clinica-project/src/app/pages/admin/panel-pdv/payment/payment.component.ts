@@ -14,6 +14,7 @@ interface CallbackPayload {
 }
 
 interface AsaasPaymentLinkPayload {
+  saleId:string;
   billingType: string;
   chargeType: string;
   name: string;
@@ -94,10 +95,11 @@ export class PaymentComponent {
       console.log(this.paymentForm.value);
 
       const paymentData: AsaasPaymentLinkPayload = {
+        saleId: `${this.saleIdPayment}`,
         billingType: "UNDEFINED",
         chargeType: "DETACHED",
         name: this.paymentForm.value.paymentName,
-        description: this.paymentForm.value.paymentDescription,
+        description: `${this.saleIdPayment}`,
         endDate: this.paymentForm.value.expiryDate,
         value: this.paymentForm.value.totalValue,
         dueDateLimitDays: 10,  // Você pode ajustar conforme necessário ou adicionar um campo ao formulário

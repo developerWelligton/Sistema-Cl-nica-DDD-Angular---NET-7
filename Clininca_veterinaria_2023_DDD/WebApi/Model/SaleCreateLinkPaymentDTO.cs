@@ -2,6 +2,7 @@
 {
     public class SaleCreateLinkPaymentDTO
     { 
+        public string SaleId { get; set; }
         public string BillingType { get; set; }
         public string ChargeType { get; set; }
         public string Name { get; set; }

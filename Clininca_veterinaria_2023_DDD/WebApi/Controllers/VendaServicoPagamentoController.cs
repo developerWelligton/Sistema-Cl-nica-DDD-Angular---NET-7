@@ -136,6 +136,7 @@ namespace WebApi.Controllers
 
                 var payload = new
                 { 
+                    saleId = saleCreateLinkPaymentDTO.SaleId,
                     billingType = saleCreateLinkPaymentDTO.BillingType,
                     chargeType = saleCreateLinkPaymentDTO.ChargeType,
                     name = saleCreateLinkPaymentDTO.Name,
