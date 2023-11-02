@@ -20,11 +20,15 @@ namespace WebApi.Controllers
     {
         private readonly InterfaceItemProdutoEstoque _interfaceItemProdutoEstoques;
         private readonly IitemProdutoEstoqueServico _iitemProdutoEstoqueServico;
-        
-        public ItemProdutoEstoqueController(InterfaceItemProdutoEstoque interfaceItemProdutoEstoques, IitemProdutoEstoqueServico iitemProdutoEstoqueServico)
+        private readonly InterfaceEstoque _interfaceEstoque;
+        public ItemProdutoEstoqueController(InterfaceItemProdutoEstoque interfaceItemProdutoEstoques, 
+            IitemProdutoEstoqueServico iitemProdutoEstoqueServico,
+             InterfaceEstoque interfaceEstoque
+            )
         {
             _interfaceItemProdutoEstoques = interfaceItemProdutoEstoques;
             _iitemProdutoEstoqueServico = iitemProdutoEstoqueServico;
+            _interfaceEstoque = interfaceEstoque;
         }
 
 
@@ -81,6 +85,35 @@ namespace WebApi.Controllers
                 // Maneira adequada de lidar com exceções e retornar uma mensagem de erro.
                 return StatusCode(500, $"Erro interno do servidor ao tentar atualizar a quantidade em estoque: {ex.Message}");
             }
+        }
+
+        [HttpGet("buscar-estoque")]
+        [Produces("application/json")]
+        public async Task<ActionResult<int>> BuscarEstoquePorProduto(int idProduto)
+        {
+            if (idProduto <= 0)
+            {
+                return BadRequest("IdProduto deve ser maior que zero.");
+            }
+
+            var itemProdutoEstoque =  _interfaceItemProdutoEstoques.GetEstoqueByProduto(idProduto);
+
+            if (itemProdutoEstoque == null)
+            {
+                return NotFound($"Não foi encontrado um estoque para o produto com ID = {idProduto}.");
+            }
+
+            /*
+            // Assumindo que você tenha a entidade Estoque e o relacionamento entre ItemProdutoEstoque e Estoque,
+            // você precisará buscar o estoque relacionado.
+            var estoque = await _interfaceEstoque.GetById(itemProdutoEstoque.IdEstoque);
+            if (estoque == null)
+            {
+                return NotFound($"Estoque com ID = {itemProdutoEstoque.IdEstoque} não encontrado.");
+            }
+            */
+
+            return await itemProdutoEstoque;
         }
 
 

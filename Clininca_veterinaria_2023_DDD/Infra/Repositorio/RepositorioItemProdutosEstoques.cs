@@ -1,17 +1,17 @@
-﻿    using Domain.Interfaces.IAnimal;
-using Domain.Interfaces.IFamilia;
-using Domain.Interfaces.ISegmento;
-using Domain.Interfaces.IVeterinario;
-using Entities;
-using Entities.Entidades;
-using Infra.Configuracao;
-using Infra.Repositorio.Generics;
-using Microsoft.EntityFrameworkCore;
+﻿        using Domain.Interfaces.IAnimal;
+    using Domain.Interfaces.IFamilia;
+    using Domain.Interfaces.ISegmento;
+    using Domain.Interfaces.IVeterinario;
+    using Entities;
+    using Entities.Entidades;
+    using Infra.Configuracao;
+    using Infra.Repositorio.Generics;
+    using Microsoft.EntityFrameworkCore;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+    using System.Collections.Generic;
+    using System.Linq;
+    using System.Text;
+    using System.Threading.Tasks;
 
 namespace Infra.Repositorio
 {
@@ -24,7 +24,7 @@ namespace Infra.Repositorio
             _optionsBuilder = new DbContextOptions<ContextBase>();
 
         }
-
+ 
 
         public async Task UpdateQuantidadeEstoque(int idEstoque, int idProduto, int quantidadeASubtrair)
         {
@@ -57,7 +57,20 @@ namespace Infra.Repositorio
             }
         }
 
+        public async Task<int> GetEstoqueByProduto(int idProduto)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                // Encontrar o item específico com base no IdProduto
+                var item = await banco.ItensProdutoEstoques
+                                      .FirstOrDefaultAsync(i => i.IdProduto == idProduto);
 
+                // Se o item for encontrado, retornar o ID_ESTOQUE, caso contrário, retornar nulo.
+                return (int)(int?)(item?.IdEstoque);
+            }
+        }
+
+      
 
     }
 }

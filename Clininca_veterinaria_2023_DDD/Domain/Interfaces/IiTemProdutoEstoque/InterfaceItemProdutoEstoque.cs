@@ -12,5 +12,6 @@ namespace Domain.Interfaces.IFamilia
     {
         Task UpdateQuantidadeEstoque(int idEstoque, int idProduto, int novaQuantidade);
 
+        Task<int>  GetEstoqueByProduto(int idProduto);
     }
 }
