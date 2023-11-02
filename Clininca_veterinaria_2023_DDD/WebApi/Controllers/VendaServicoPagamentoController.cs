@@ -146,11 +146,12 @@ namespace WebApi.Controllers
                     subscriptionCycle = saleCreateLinkPaymentDTO.SubscriptionCycle,
                     maxInstallmentCount = saleCreateLinkPaymentDTO.MaxInstallmentCount,
                     notificationEnabled = saleCreateLinkPaymentDTO.NotificationEnabled,
+                    /*
                     callback = new
                     {
                         successUrl = saleCreateLinkPaymentDTO.Callback.SuccessUrl,
                         autoRedirect = saleCreateLinkPaymentDTO.Callback.AutoRedirect
-                    }
+                    }*/
                 };
 
             var content = new StringContent(JsonSerializer.Serialize(payload), Encoding.UTF8, "application/json");
