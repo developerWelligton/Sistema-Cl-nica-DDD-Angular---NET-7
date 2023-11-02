@@ -70,7 +70,26 @@ namespace Infra.Repositorio
             }
         }
 
-      
+
+
+        public async Task<List<ItemProdutoEstoque>> GetAllProdutoByStock(int idStock)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                var result = await (from produto in banco.Produtos
+                                    join itemEstoque in banco.ItensProdutoEstoques
+                                    on produto.IdProduto equals itemEstoque.IdProduto
+                                    where itemEstoque.IdEstoque == idStock
+                                    select new ItemProdutoEstoque
+                                    {
+                                        IdProduto = produto.IdProduto, 
+                                        Status = produto.Status,
+                                        Quantidade_Estoque = itemEstoque.Quantidade_Estoque
+                                    }).ToListAsync();
+
+                return result;
+            }
+        }
 
     }
 }

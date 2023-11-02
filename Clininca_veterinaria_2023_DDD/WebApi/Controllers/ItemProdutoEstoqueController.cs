@@ -116,6 +116,32 @@ namespace WebApi.Controllers
             return await itemProdutoEstoque;
         }
 
+        [HttpGet("produtos-por-estoque")]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<ProdutoEstoqueDto>>> GetProdutosByEstoqueId(int idEstoque)
+        {
+            if (idEstoque <= 0)
+            {
+                return BadRequest("IdEstoque deve ser maior que zero.");
+            }
+
+            try
+            {
+                var produtosEstoque = await _interfaceItemProdutoEstoques.GetAllProdutoByStock(idEstoque);
+
+                if (produtosEstoque == null || !produtosEstoque.Any())
+                {
+                    return NotFound($"Nenhum produto encontrado para o estoque com ID = {idEstoque}.");
+                }
+
+                // Se você quiser, pode converter para um DTO antes de retornar. Por enquanto, retornarei a lista diretamente.
+                return Ok(produtosEstoque);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno do servidor ao tentar buscar produtos: {ex.Message}");
+            }
+        }
 
 
 
