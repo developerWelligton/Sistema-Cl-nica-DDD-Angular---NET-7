@@ -22,12 +22,15 @@ namespace WebApi.Controllers
         private readonly InterfaceVendaServicoPagamento _InterfaceVendaServicoPagamento;
         private readonly IVendaServicoPagamentoServico _IVeterinarioServico;
         private readonly InterfaceItemProdutoVenda _InterfaceItemProdutoVenda;
+        private readonly InterfaceItemProdutoEstoque _InterfaceItemProdutoEstoque;
         public VendaServicoPagamentoController(InterfaceVendaServicoPagamento interfaceVendaServicoPagamento,
-            IVendaServicoPagamentoServico iVeterinarioServico, InterfaceItemProdutoVenda interfaceItemProdutoVenda)
+            IVendaServicoPagamentoServico iVeterinarioServico, InterfaceItemProdutoVenda interfaceItemProdutoVenda,
+            InterfaceItemProdutoEstoque interfaceItemProdutoEstoque)
         {
             _InterfaceVendaServicoPagamento = interfaceVendaServicoPagamento;
             _IVeterinarioServico = iVeterinarioServico;
             _InterfaceItemProdutoVenda = interfaceItemProdutoVenda;
+            _InterfaceItemProdutoEstoque = interfaceItemProdutoEstoque;
         }
 
 
@@ -177,6 +180,25 @@ namespace WebApi.Controllers
                 foreach (var product in vendaProductDetails)
                 {
                     productStack.Push(product);
+                }
+
+                // Empty the product stack and process each product
+                while (productStack.Count > 0)
+                {
+                    var currentProduct = productStack.Pop();
+                    var stockDetails = await _InterfaceItemProdutoEstoque.GetEstoqueByProduto((int)currentProduct.IdProduto);
+                
+                    
+
+                    var stockUpdateObject = new StockUpdateObject
+                    {
+                        idEstoque = stockDetails,
+                        idProduto = (int)currentProduct.IdProduto,
+                        novaQuantidade = (int)currentProduct.Quantidade
+                    };
+                
+                    // Now call your API or method to update the stock using stockUpdateObject
+                   await _InterfaceItemProdutoEstoque.UpdateQuantidadeEstoque(stockUpdateObject.idEstoque, stockUpdateObject.idProduto, stockUpdateObject.novaQuantidade);
                 }
 
             var responseString = await response.Content.ReadAsStringAsync();
