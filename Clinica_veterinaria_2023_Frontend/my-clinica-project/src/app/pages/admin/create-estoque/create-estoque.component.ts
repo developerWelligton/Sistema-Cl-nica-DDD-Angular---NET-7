@@ -12,6 +12,7 @@ import Swal from 'sweetalert2';
 import { UnspscService } from 'src/app/services/unspsc.service';
 import { Unspsc } from 'src/app/models/unspsc.model';
 import { ProductService } from 'src/app/services/product.service';
+import { StockService } from 'src/app/services/stock.service';
 
 
 export enum UserGroup {
@@ -43,8 +44,7 @@ export class CreateEstoqueComponent {
     private router: Router,
     private userService: UserService,
     private paddingService: PaddingService,
-    private unspscService : UnspscService,
-    private productService: ProductService
+    private stockService: StockService
   ) {}
 
   ngOnInit() {
@@ -72,13 +72,17 @@ export class CreateEstoqueComponent {
 
 
   submitForm(event?: Event): void {
-  debugger
-  event?.preventDefault();
+    debugger
+    event?.preventDefault();
 
-    if (this.createEstoqueForm.valid) {
-      console.log('Formulário Enviado', this.createEstoqueForm.value);
+      if (this.createEstoqueForm.valid) {
+        console.log('Formulário Enviado', this.createEstoqueForm.value);
 
-    }
+          this.stockService.createStock(this.createEstoqueForm.value).subscribe(res=> {
+            console.log(res)
+          })
+
+      }
   }
 
 
