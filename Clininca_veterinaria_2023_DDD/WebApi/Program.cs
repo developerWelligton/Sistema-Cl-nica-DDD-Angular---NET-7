@@ -214,14 +214,14 @@ app.UseSwaggerUI(options =>
     options.SwaggerEndpoint("/swagger/v1/swagger.json", "v1");
     options.RoutePrefix = string.Empty;
 });
-//CORS      
-
+//CORS       
 var devProduction = "https://api-client-petz2.azurewebsites.net";
+var devProduction2 = "https://webapi20231102221543.azurewebsites.net"; 
 var frontendOrigin = "http://localhost:4200";
 var redirectOrigin = "https://localhost:7131";
 
 app.UseCors(policy => policy
-    .WithOrigins(frontendOrigin, redirectOrigin, devProduction)
+    .WithOrigins(frontendOrigin, redirectOrigin, devProduction, devProduction2)
     .AllowAnyMethod()
     .AllowAnyHeader());
 
