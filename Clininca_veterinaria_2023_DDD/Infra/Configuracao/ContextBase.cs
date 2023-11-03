@@ -298,7 +298,7 @@ namespace Infra.Configuracao
 
         public string ObterStringConexaoProductionAzure()
         {   //base cloud
-            return "Server=tcp:serverpetzdatabase.database.windows.net,1433;Initial Catalog=db-entity-clinica;Persist Security Info=False;User ID=sa-clinica;Password=@Well32213115;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30";
+            return "Data Source=app-client-clinica-petz2.database.windows.net;Initial Catalog=db-entity-clinica;User ID=welligtoncos;Password=@Well32213115;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
  
          }

@@ -62,12 +62,12 @@ builder.Services.AddSwaggerGen(options =>
 //TO DEVELOPER
 var devEnvironmentDataBase = builder.Configuration.GetConnectionString("DefaultConnection");
 
-//TO DEPLOY IN AZURE
-var prodEnvironmentDataBase = builder.Configuration.GetConnectionString("ProdConnection");
+//TO DEPLOY IN AZURE >>>TIPO 2
+var prodEnvironmentDataBase = builder.Configuration.GetConnectionString("ProdConnection1");
 
 //PRODUTION ON HERE
 builder.Services.AddDbContext<ContextBase>(options =>
-    options.UseSqlServer(devEnvironmentDataBase));
+    options.UseSqlServer(prodEnvironmentDataBase));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
@@ -216,7 +216,7 @@ app.UseSwaggerUI(options =>
 });
 //CORS      
 
-var devProduction = "https://app-client-clinica-petz.azurewebsites.net";
+var devProduction = "https://api-server-petz.azurewebsites.net";
 var frontendOrigin = "http://localhost:4200";
 var redirectOrigin = "https://localhost:7131";
 
