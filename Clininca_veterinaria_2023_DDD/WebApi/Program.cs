@@ -65,9 +65,9 @@ var devEnvironmentDataBase = builder.Configuration.GetConnectionString("DefaultC
 //TO DEPLOY IN AZURE >>>TIPO 2
 var prodEnvironmentDataBase = builder.Configuration.GetConnectionString("ProdConnection1");
 
-//PRODUTION ON HERE
+//PRODUTION OFF HERE
 builder.Services.AddDbContext<ContextBase>(options =>
-    options.UseSqlServer(prodEnvironmentDataBase));
+    options.UseSqlServer(devEnvironmentDataBase));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
@@ -216,7 +216,7 @@ app.UseSwaggerUI(options =>
 });
 //CORS      
 
-var devProduction = "https://api-server-petz.azurewebsites.net";
+var devProduction = "https://api-client-petz2.azurewebsites.net";
 var frontendOrigin = "http://localhost:4200";
 var redirectOrigin = "https://localhost:7131";
 
