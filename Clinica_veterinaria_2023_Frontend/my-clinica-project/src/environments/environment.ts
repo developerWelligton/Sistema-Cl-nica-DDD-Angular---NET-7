@@ -1,5 +1,4 @@
 export const environment = {
   production: false,
-  apiUrl: 'https://localhost:7131' // PORT LOCAL BACKEND REQUEST
-
+  apiUrl: 'https://webapi20231102221543.azurewebsites.net/' // PORT LOCAL BACKEND REQUEST
 };
