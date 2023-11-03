@@ -60,14 +60,14 @@ builder.Services.AddSwaggerGen(options =>
 });
 
 //TO DEVELOPER
-//var devEnvironmentDataBase = builder.Configuration.GetConnectionString("DefaultConnection");
+var devEnvironmentDataBase = builder.Configuration.GetConnectionString("DefaultConnection");
 
 //TO DEPLOY IN AZURE >>>TIPO 2
-var prodEnvironmentDataBase = builder.Configuration.GetConnectionString("ProdConnection1");
+//var prodEnvironmentDataBase = builder.Configuration.GetConnectionString("ProdConnection1");
 
 //PRODUTION OFF HERE
 builder.Services.AddDbContext<ContextBase>(options =>
-    options.UseSqlServer(prodEnvironmentDataBase));
+    options.UseSqlServer(devEnvironmentDataBase));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
