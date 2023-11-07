@@ -225,7 +225,7 @@ export class CreateUnspscComponent {
 }
 
 
-openModal() {
-  this.modalComponent.showModal = true; // Toggle the modal visibility to true
-}
+  openModal(type: number) {
+    this.modalComponent.open(type); // Call a method 'open' on the child component
+  }
 }

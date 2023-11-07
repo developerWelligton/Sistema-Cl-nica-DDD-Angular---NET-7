@@ -4,15 +4,15 @@
   <div class="modal-content">
     <div class="modal-header">
       <span class="close" (click)="onCloseModal()">&times;</span>
-      <h2>Add New Segment</h2>
+      <h2>{{ getModalTitle(modalType) }}</h2>
     </div>
     <div class="modal-body">
       <form (ngSubmit)="onSubmit()">
-        <label for="segmentName">Segment Name</label>
-        <input type="text" id="segmentName" [(ngModel)]="segmentName" name="segmentName" placeholder="Segment name..." required>
+        <label for="segmentName">{{ getModalFieldName(modalType) }}</label>
+        <input type="text" id="segmentName" [(ngModel)]="segmentName" name="segmentName" [placeholder]="getModalFieldName(modalType) + ' name...'" required>
 
-        <label for="segmentDesc">Segment Description</label>
-        <textarea id="segmentDesc" [(ngModel)]="segmentDescription" name="segmentDesc" placeholder="Segment description..." required></textarea>
+        <label for="segmentDesc">{{ getModalFieldName(modalType) }} Description</label>
+        <textarea id="segmentDesc" [(ngModel)]="segmentDescription" name="segmentDesc" placeholder="{{ getModalFieldName(modalType) }} description..." required></textarea>
 
         <button type="submit">Save</button>
         <button type="button" (click)="onCloseModal()">Cancel</button>
