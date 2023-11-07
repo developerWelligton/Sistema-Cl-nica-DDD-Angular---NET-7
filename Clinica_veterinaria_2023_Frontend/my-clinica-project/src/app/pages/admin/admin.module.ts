@@ -35,6 +35,7 @@ import { TreeViewUnspscComponent } from './tree-view-unspsc/tree-view-unspsc.com
 import { CreateEstoqueComponent } from './create-estoque/create-estoque.component';
 import { ListStockComponent } from './stock-table/list-stock.component';
 import { StockModule } from './stock-table/stock.module';
+import { modalUnspscModule } from 'src/app/components/modal-unspsc/modal-unspsc.module';
 
 @NgModule({
   declarations: [
@@ -70,7 +71,8 @@ import { StockModule } from './stock-table/stock.module';
     MatButtonModule,
     MatTableModule,
     VmessageModule,
-    jqxTreeModule, jqxExpanderModule
+    jqxTreeModule, jqxExpanderModule,
+    modalUnspscModule
   ],
   providers: []
   ,

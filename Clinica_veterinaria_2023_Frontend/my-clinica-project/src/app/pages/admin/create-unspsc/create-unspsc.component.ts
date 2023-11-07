@@ -1,7 +1,7 @@
 import { UserService } from '../../../core/user/user.service';
 // ... previous imports ...
 
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
@@ -19,6 +19,7 @@ import { Classe } from 'src/app/models/classe.model';
 import { Mercadoria } from 'src/app/models/mercadoria.model';
 import { HttpClient } from '@angular/common/http';
 import { UnspscService } from 'src/app/services/unspsc.service';
+import { ModalUnspscComponent } from 'src/app/components/modal-unspsc/modal-unspsc.component';
 
 
 export enum UserGroup {
@@ -34,6 +35,8 @@ export enum UserGroup {
   styleUrls: ['./create-unspsc.component.scss']
 })
 export class CreateUnspscComponent {
+
+  @ViewChild('modalComponent') modalComponent: ModalUnspscComponent;
 
   createUnspscForm: FormGroup;
 
@@ -221,4 +224,8 @@ export class CreateUnspscComponent {
     }
 }
 
+
+openModal() {
+  this.modalComponent.showModal = true; // Toggle the modal visibility to true
+}
 }

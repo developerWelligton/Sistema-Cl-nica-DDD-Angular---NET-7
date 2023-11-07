@@ -55,7 +55,7 @@ namespace Infra.Configuracao
             if (!optionsBuilder.IsConfigured)
             {
                 //PRODUTION OFF 
-                optionsBuilder.UseSqlServer(ObterStringConexaoProductionAzure());
+                optionsBuilder.UseSqlServer(ObterStringConexaoDeveloperLocal());
                 base.OnConfiguring(optionsBuilder);
             }
             
