@@ -66,6 +66,12 @@ export class CreateUnspscComponent {
     });
 
     this.loadSegmentos();
+
+    //RECARREGAR QUANDO MODAL FOR ADICIONADO
+    this.modalComponent.onSubmitted.subscribe(() => {
+      // Recarregar segmentos quando um novo segmento é adicionado
+      this.loadSegmentos();
+    });
     this.loadFamilias();
     this.loadClasses();
     this.loadMercadorias();
@@ -77,6 +83,15 @@ export class CreateUnspscComponent {
       mercadoria: [''],
     });
   }
+
+  ngAfterViewInit() {
+    // Assegure-se de que a visualização do modal foi inicializada
+    this.modalComponent.onSubmitted.subscribe(() => {
+      // Recarregar segmentos quando um novo segmento é adicionado
+      this.loadSegmentos();
+    });
+  }
+
 
   loadSegmentos(): void {
     this.dataService.getSegmentos().subscribe(

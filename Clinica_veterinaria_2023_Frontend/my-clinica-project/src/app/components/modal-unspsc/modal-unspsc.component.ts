@@ -66,6 +66,7 @@ export class ModalUnspscComponent implements OnInit {
         this.segmentService.addSegment(data).subscribe(
           response => {
             console.log('Segment added:', response);
+            this.onSubmitted.emit();
           },
           error => {
             console.error('Error adding segment:', error);
