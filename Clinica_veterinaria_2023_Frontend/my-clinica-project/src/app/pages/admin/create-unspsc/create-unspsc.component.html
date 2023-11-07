@@ -22,7 +22,8 @@
       <button (click)="openModal(2)">Add New Família</button>
       <button (click)="openModal(3)">Add New Classe</button>
       <button (click)="openModal(4)">Add New Mercadoria</button>
-      <modal-unspsc #modalComponent></modal-unspsc>
+      <modal-unspsc (onSubmitted)="handleSubmittedData($event)" #modalComponent></modal-unspsc>
+
 
 
       <!-- Título do cartão -->

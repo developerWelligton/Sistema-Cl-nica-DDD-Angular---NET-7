@@ -228,4 +228,26 @@ export class CreateUnspscComponent {
   openModal(type: number) {
     this.modalComponent.open(type); // Call a method 'open' on the child component
   }
+
+  handleSubmittedData(data) {
+    console.log('Submitted data:', data);
+    // Handle the data based on the type
+    switch (data.type) {
+      case 1:
+        // Handle Segment data
+        break;
+      case 2:
+        // Handle Family data
+        break;
+      case 3:
+        // Handle Class data
+        break;
+      case 4:
+        // Handle Commodity data
+        break;
+      default:
+        // Handle unknown type
+        break;
+    }
+  }
 }
