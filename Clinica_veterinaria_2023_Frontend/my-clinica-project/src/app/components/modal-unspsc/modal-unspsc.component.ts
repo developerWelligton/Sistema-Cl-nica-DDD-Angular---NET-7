@@ -41,7 +41,6 @@ export class ModalUnspscComponent implements OnInit {
 
     this.modalType = type;
     this.showModal = true;
-    alert(this.modalType)
 
     // 1 - Segmento
     // 2 - Família
@@ -78,6 +77,7 @@ export class ModalUnspscComponent implements OnInit {
         this.familyService.addFamily(data).subscribe(
           response => {
             console.log('Family added:', response);
+            this.onSubmitted.emit();
           },
           error => {
             console.error('Error adding family:', error);
@@ -89,6 +89,7 @@ export class ModalUnspscComponent implements OnInit {
         this.classService.addClass(data).subscribe(
           response => {
             console.log('Class added:', response);
+            this.onSubmitted.emit();
           },
           error => {
             console.error('Error adding class:', error);
@@ -100,6 +101,7 @@ export class ModalUnspscComponent implements OnInit {
         this.commodityService.addCommodity(data).subscribe(
           response => {
             console.log('Commodity added:', response);
+            this.onSubmitted.emit();
           },
           error => {
             console.error('Error adding commodity:', error);
@@ -131,10 +133,10 @@ export class ModalUnspscComponent implements OnInit {
 
   getModalFieldName(type: number): string {
     switch (type) {
-      case 1: return 'Segmento';
-      case 2: return 'Família';
-      case 3: return 'Classe';
-      case 4: return 'Mercadoria';
+      case 1: return 'Código Segmento';
+      case 2: return 'Código Família';
+      case 3: return 'Código Classe';
+      case 4: return 'Código Mercadoria';
       default: return 'Item';
     }
   }

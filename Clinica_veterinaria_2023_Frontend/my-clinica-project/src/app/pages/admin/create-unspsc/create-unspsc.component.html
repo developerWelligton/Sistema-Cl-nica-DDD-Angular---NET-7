@@ -35,50 +35,64 @@
     <form [formGroup]="createUnspscForm" (ngSubmit)="submitForm()">
 
       <label>Segmento</label>
-    <ng-select class="select-padrao"
-              formControlName="segmento"
-              [items]="segmentos"
-              bindLabel="descricao"
-              [multiple]="false"
-              [clearable]="true"
-              (change)="onValueChange()"
-              >
-    </ng-select>
+      <ng-select class="select-padrao"
+            formControlName="segmento"
+            [items]="segmentos"
+            bindLabel="descricao"
+            [multiple]="false"
+            [clearable]="true"
+            (change)="onValueChange()">
+          <ng-template ng-option-tmp let-item="item" let-index="index">
+              <span>{{ item.codigo }} - {{ item.descricao }}</span>
+              <button type="button" class="btn-delete" (click)="deleteSegmento(index, $event)">Excluir</button>
+          </ng-template>
+      </ng-select>
 
       <label>Família</label>
       <ng-select class="select-padrao"
-      formControlName="familia"
-      [items]="familias"
-      bindLabel="descricao"
-      [multiple]="false"
-      [clearable]="false"
-      [clearable]="true"
-      (change)="onValueChange()"
-      ></ng-select>
+                  formControlName="familia"
+                  [items]="familias"
+                  bindLabel="descricao"
+                  [multiple]="false"
+                  [clearable]="true"
+                  (change)="onValueChange()">
+          <ng-template ng-option-tmp let-item="item" let-index="index">
+              <span>{{ item.codigo }} - {{ item.descricao }}</span>
+              <button type="button" class="btn-delete" (click)="deleteFamilia(index, $event)">Excluir</button>
+          </ng-template>
+      </ng-select>
       <br>
 
       <label>Classe</label>
       <ng-select class="select-padrao"
-      formControlName="classe"
-      [items]="classes"
-      bindLabel="descricao"
-      [multiple]="false"
-      [clearable]="false"
-      [clearable]="true"
-      (change)="onValueChange()"
-      ></ng-select>
+                  formControlName="classe"
+                  [items]="classes"
+                  bindLabel="descricao"
+                  [multiple]="false"
+                  [clearable]="true"
+                  (change)="onValueChange()">
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+            <span>{{ item.codigo }} - {{ item.descricao }}</span>
+            <button type="button" class="btn-delete" (click)="deleteClasse(index, $event)">Excluir</button>
+        </ng-template>
+      </ng-select>
+
       <br>
 
       <label>Mercadoria</label>
       <ng-select class="select-padrao"
-      formControlName="mercadoria"
-      [items]="mercadorias"
-      bindLabel="descricao"
-      [multiple]="false"
-      [clearable]="false"
-      [clearable]="true"
-      (change)="onValueChange()"
-      ></ng-select>
+                  formControlName="mercadoria"
+                  [items]="mercadorias"
+                  bindLabel="descricao"
+                  [multiple]="false"
+                  [clearable]="true"
+                  (change)="onValueChange()">
+        <ng-template ng-option-tmp let-item="item" let-index="index">
+            <span>{{ item.codigo }} - {{ item.descricao }}</span>
+            <button type="button" class="btn-delete" (click)="deleteMercadoria(index, $event)">Excluir</button>
+        </ng-template>
+      </ng-select>
+
       <br>
       <label>Code UNSPSC</label>
       <input type="text" [value]="unspscCode" readonly />

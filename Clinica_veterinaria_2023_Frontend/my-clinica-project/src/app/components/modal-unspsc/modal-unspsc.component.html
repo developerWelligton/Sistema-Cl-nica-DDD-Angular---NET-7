@@ -9,7 +9,7 @@
     <div class="modal-body">
       <form (ngSubmit)="onSubmit()">
         <label for="segmentName">{{ getModalFieldName(modalType) }}</label>
-        <input type="text" id="segmentName" [(ngModel)]="segmentName" name="segmentName" [placeholder]="getModalFieldName(modalType) + ' name...'" required>
+        <input type="number" id="segmentName" [(ngModel)]="segmentName" name="segmentName" [placeholder]="getModalFieldName(modalType) + ' name...'" required>
 
         <label for="segmentDesc">{{ getModalFieldName(modalType) }} Description</label>
         <textarea id="segmentDesc" [(ngModel)]="segmentDescription" name="segmentDesc" placeholder="{{ getModalFieldName(modalType) }} description..." required></textarea>

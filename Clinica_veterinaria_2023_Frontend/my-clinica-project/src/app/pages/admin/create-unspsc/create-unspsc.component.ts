@@ -65,13 +65,10 @@ export class CreateUnspscComponent {
       this.containerPadding = padding;
     });
 
-    this.loadSegmentos();
 
-    //RECARREGAR QUANDO MODAL FOR ADICIONADO
-    this.modalComponent.onSubmitted.subscribe(() => {
-      // Recarregar segmentos quando um novo segmento é adicionado
-      this.loadSegmentos();
-    });
+
+
+    this.loadSegmentos();
     this.loadFamilias();
     this.loadClasses();
     this.loadMercadorias();
@@ -82,13 +79,24 @@ export class CreateUnspscComponent {
       classe: [''],
       mercadoria: [''],
     });
+      //RECARREGAR QUANDO MODAL FOR ADICIONADO
+      this.modalComponent.onSubmitted.subscribe(() => {
+        // Recarregar segmentos quando um novo segmento é adicionado
+        this.loadSegmentos();
+        this.loadFamilias();
+        this.loadClasses();
+        this.loadMercadorias();
+      });
   }
 
-  ngAfterViewInit() {
+    ngAfterViewInit() {
     // Assegure-se de que a visualização do modal foi inicializada
     this.modalComponent.onSubmitted.subscribe(() => {
       // Recarregar segmentos quando um novo segmento é adicionado
       this.loadSegmentos();
+      this.loadFamilias();
+      this.loadClasses();
+      this.loadMercadorias();
     });
   }
 
@@ -265,4 +273,29 @@ export class CreateUnspscComponent {
         break;
     }
   }
+
+  deleteSegmento(index: number, event: Event) {
+    event.stopPropagation(); // Impede que o ng-select altere seu valor ao clicar no botão de excluir
+
+   alert(index)
+
+    // Talvez você queira emitir algum evento ou fazer uma chamada de serviço aqui para persistir a exclusão no backend
+  }
+
+  deleteFamilia(index: number, event: Event) {
+    event.stopPropagation(); // Impede que o ng-select altere seu valor ao clicar no botão de excluir
+
+    alert(index)
+  }
+
+  deleteClasse(index: number, event: Event) {
+    event.stopPropagation();
+
+  }
+
+  deleteMercadoria(index: number, event: Event) {
+    event.stopPropagation(); // Previne que o ng-select altere seu valor ao clicar no botão de excluir
+
+  }
+
 }

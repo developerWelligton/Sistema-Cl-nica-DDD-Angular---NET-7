@@ -16,14 +16,14 @@ export class SegmentService {
 
   // Method to add a new segment
   addSegment(data:any): Observable<any> {
+    debugger
     const url = `${this.baseUrl}/Segmento`;
     // The payload should match the expected structure of your API
     const payload = {
-      codigo: data.codigo,
+      codigo: String(data.codigo),
       descricao: data.description,
       iD_Usuario: 1 // Assuming this will be handled on the backend or you will add logic to include it
     };
-    alert(JSON.stringify(payload))
     return this.http.post(url, payload);
   }
 
