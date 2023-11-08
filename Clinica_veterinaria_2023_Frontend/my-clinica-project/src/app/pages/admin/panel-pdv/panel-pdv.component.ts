@@ -127,7 +127,7 @@ debugger
 
                 // Mapeando os dados retornados para o objeto 'Product'
                 this.product = {
-                    quantity: 0,
+                    quantity: 1,
                     description: response.descricao,
                     price: response.precoVenda,
                     unit: '', // Como mencionado antes, você pode ajustar conforme necessário
