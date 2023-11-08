@@ -2,7 +2,7 @@ import { ItemProductSaleService } from './../../../services/itemProductSale.serv
 import { UserService } from '../../../core/user/user.service';
 // ... previous imports ...
 
-import { Component } from '@angular/core';
+import { ChangeDetectorRef, Component } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
@@ -70,7 +70,8 @@ export class PanelPdvComponent {
     private paddingService: PaddingService,
     private productService: ProductService,
     private saleProductService: SaleProductService,
-    private itemProductSaleService:ItemProductSaleService
+    private itemProductSaleService:ItemProductSaleService,
+    private cdr: ChangeDetectorRef
   ) {}
 
   ngOnInit() {
@@ -263,4 +264,31 @@ debugger
     );
   }
 
+
+  deleteItemProdutoPorVenda(code: string) {
+    Swal.fire({
+      title: 'Você tem certeza?',
+      text: "Você não poderá reverter isso!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Sim, exclua!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.productsList = this.productsList.filter(product => product.code !== code);
+        this.calculateSubtotal();
+        this.cdr.detectChanges(); // Atualiza a visualização manualmente
+
+        Swal.fire(
+          'Excluído!',
+          'O item do produto foi excluído.',
+          'success'
+        );
+      }
+    });
+  }
 }
+
+
+
