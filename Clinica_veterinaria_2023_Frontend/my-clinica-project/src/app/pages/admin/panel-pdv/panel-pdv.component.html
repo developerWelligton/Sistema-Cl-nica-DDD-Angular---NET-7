@@ -16,18 +16,106 @@
     <!-- Cabeçalho do cartão -->
     <div class="card-header">
       <!-- Título do cartão -->
-      <h3 class="card-title">PONTO DE VENDA</h3>
+      <h3 class="card-title">PONTO DE VENDA EM FUNCIONAMENTO</h3>
 
     </div>
     <!-- Formulário -->
 
-    <div class="modern-form">
+    <div class="container">
+      <div class="row align-items-start">
+        <div class="col-8">
 
-      <!-- Vendor and terminal details -->
-      <div class="pdv-container">
-        <!-- Vendor and terminal details -->
-        <div class="details">
-           <!-- Client details -->
+          <div class="input-group mb-3">
+            <button class="btn btn-outline-success" type="button" id="button-addon1" (click)="searchProduct()">Buscar Produto</button>
+            <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="productCode" placeholder="Adicione Código do produto">
+          </div>
+
+
+
+
+           <table class="table">
+            <thead>
+              <tr>
+                <th>Item</th>
+                <th>Código</th>
+                <th>Produto</th>
+                <th>Unidade</th>
+                <th>Quantidade</th>
+                <th>Preço</th>
+                <th>Preço Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr scope="row" *ngFor="let item of productsList; let i = index">
+                <td colspan="2" class="table-active" >{{ i + 1 }}</td>
+                <td colspan="2" class="table-active">{{ item.code }}</td>
+                <td colspan="2" class="table-active">{{ item.description }}</td>
+                <td colspan="2" class="table-active">{{ item.unit }}</td>
+                <td colspan="2" class="table-active">{{ item.quantity }}</td>
+                <td colspan="2" class="table-active">{{ item.price | currency:'BRL' }}</td>
+                <td colspan="2" class="table-active">{{ item.price * item.quantity | currency:'BRL' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <div class="col-4">
+          <div class="card" style="width: 22.8rem;">
+            <div class="card-body">
+              <h5 class="card-title">Subtotal:</h5>
+              <h6 class="card-subtitle mb-2 text-muted" style="color: black;" id="subtotal" >{{ subtotal | currency:'BRL':'symbol':'1.2-2' }}</h6>
+              <ul class="list-group list-group-flush">
+                <li class="list-group-item">
+
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Descrição</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled  id="description" name="description" [(ngModel)]="product.description">
+                  </div>
+
+                </li>
+                <li class="list-group-item">
+                  <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Valor</label>
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled  id="value" name="value" [(ngModel)]="product.price" >
+                  </div>
+                </li>
+                <li class="list-group-item">
+                    <div class="mb-3">
+                      <label for="exampleInputEmail1" class="form-label">Quantidade</label>
+                      <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp"  id="quantity" name="quantity" [(ngModel)]="product.quantity" placeholder="Adicione a quantidade">
+                    </div>
+                </li>
+                <li class="list-group-item">
+                  <div class="input-group mb-3">
+                    <button type="button" class="btn btn-outline-primary" (click)="addItem()">Adicionar Item</button>
+                  </div>
+                  <div class="input-group mb-3">
+                    <button type="button" class="btn btn-success" (click)="addFecharVenda()">Fechar Venda</button>
+                  </div>
+                </li>
+
+              </ul>
+
+            </div>
+          </div>
+
+
+
+
+
+        </div>
+      </div>
+
+    </div>
+
+
+
+
+  </div>
+</div>
+
+
+<!--
            <label for="vendor">Cliente:</label>
            <input type="text" id="vendor" name="vendor" placeholder="Welligton">
 
@@ -57,13 +145,11 @@
             <br>
         </div>
 
-        <!-- Image Display -->
         <div class="image-container">
           <img [src]="product.image" width="400px" height="400px" alt="Product Image" class="product-image">
       </div>
       </div>
 
-      <!-- Product details -->
       <table class="fiscal-table">
         <thead>
           <tr>
@@ -102,7 +188,6 @@
           <input type="datetime-local" id="date_time" name="date_time">
       </div>
 
-      <!-- Action buttons -->
       <div>
           <button type="submit">Consultar Produto</button>
           <button type="reset" (click)="addFecharVenda()">Fechar Venda</button>
@@ -111,7 +196,4 @@
 
   </div>
 
-
-
-  </div>
-</div>
+-->
