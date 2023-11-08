@@ -73,13 +73,13 @@ export class TreeViewUnspscComponent {
 
       // Get or create class node within the family
       const classKey = `${familyKey}-${item.classe.codigo}`;
-      const classNode = addOrGetNode(classMap, classKey, `${item.classe.descricao} (${item.classe.codigo})`);
+      const classNode = addOrGetNode(classMap, classKey, `${item.classe.descricao} (${item.classe.codigo}) <button>Adicionar Produto</button>`);
       if (!familyNode.items.includes(classNode)) {
         familyNode.items.push(classNode);
       }
 
       // Create and add commodity node within the class
-      const commodityLabel = `<strong> ${item.mercadoria.descricao} (${item.mercadoria.codigo})</strong>`;
+      const commodityLabel = `<strong> ${item.mercadoria.descricao} (${item.mercadoria.codigo})</strong>  `;
       classNode.items.push({ label: commodityLabel });
     });
 

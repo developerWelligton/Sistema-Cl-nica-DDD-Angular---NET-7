@@ -2,23 +2,30 @@
     <!-- Formulário -->
 
    <!-- UNSPSC Tree inside an Expander -->
-  <jqxExpander [width]="1100" [height]="500" [showArrow]="false" [toggleMode]="'none'">
+ <!-- Formulário -->
 
-    <!-- Header for the Expander -->
-    <div>
-      UNSPSC CADASTRADOS(SEGMENTO >> FAMÍLIA >> CLASSE  >> MERCADORIA)
-    </div>
+<!-- UNSPSC Tree inside an Expander with modern styling -->
+<jqxExpander [width]="1100" [height]="500" [showArrow]="false" [toggleMode]="'none'"
+style="border-radius: 8px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);">
 
-    <!-- Content of the Expander which holds the tree -->
-    <div style="overflow: hidden;">
+<!-- Header for the Expander with modern styling -->
+<div style="font-family: 'Segoe UI', sans-serif; font-size: 18px; font-weight: bold; color: #333; padding: 10px; border-bottom: 1px solid #DDD;">
+  UNSPSC CADASTRADOS (SEGMENTO >> FAMÍLIA >> CLASSE >> MERCADORIA)
+</div>
 
-      <!-- The tree component from jqxWidgets -->
-      <jqxTree #treeReference
-          [width]="'100%'"
-          [height]="'100%'"
-          [source]="treeSource">
-      </jqxTree>
+<!-- Content of the Expander which holds the tree with styled scrollbar -->
+<div style="overflow: hidden; overflow-y: auto; scrollbar-width: thin; scrollbar-color: #888 #f0f0f0;">
 
-    </div>
-  </jqxExpander>
+  <!-- The tree component from jqxWidgets with custom item styling -->
+  <jqxTree #treeReference
+      [width]="'100%'"
+      [height]="'100%'"
+      [source]="treeSource"
+      style="li.jqx-tree-item-li { border-radius: 4px; } li.jqx-tree-item-li:hover { background-color: #f5f5f5; }">
+  </jqxTree>
+
+</div>
+</jqxExpander>
+
+
 
