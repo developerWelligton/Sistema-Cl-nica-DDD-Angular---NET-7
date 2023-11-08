@@ -61,7 +61,7 @@ export class PanelPdvComponent {
   private paddingSubscription: Subscription;
   public containerPadding: string;
 
-
+  isEditing: boolean = false;
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
@@ -151,7 +151,7 @@ debugger
     }
 
     addItem() {
-      // If saleId is not set, initiate a new sale
+      // se existir venda, faça somente adição de item
       if (!this.saleId) {
         const saleData = {
           dataVenda: new Date().toISOString(),
@@ -161,32 +161,7 @@ debugger
 
         this.saleProductService.createSale(saleData).subscribe(response => {
           this.saleId = response.idVenda;  // Assuming the response contains an 'id' field with the sale's ID
-          console.log(this.saleId)
-          // Add the product to the list only after getting the saleId
-          this.productsList.push({ ...this.product });
-
-          // Clear the product object
-          this.product = {
-            code: '',
-            description: '',
-            price: 0,
-            unit: '',
-            quantity: 0,
-            image: ''
-          };
-
-          // Call the calculateSubtotal method
           this.calculateSubtotal();
-
-          // Show SweetAlert2 notification
-          Swal.fire({
-            icon: 'success',
-            title: 'Venda Iniciada!',
-            text: 'A venda foi iniciada com sucesso.',
-            timer: 2000,
-            showConfirmButton: false
-          });
-
         }, error => {
           console.error("Error initiating sale:", error);
           Swal.fire({
@@ -233,6 +208,7 @@ debugger
       quantidade: product.quantity
     }));
 
+    console.log(JSON.stringify(productListToSend))
     this.itemProductSaleService.sendProductList(productListToSend).subscribe(
       response => {
         console.log('Lista de produtos enviada com sucesso:', response);
@@ -265,7 +241,7 @@ debugger
   }
 
 
-  deleteItemProdutoPorVenda(code: string) {
+  deleteItemProdutoPorVenda(index: number) {
     Swal.fire({
       title: 'Você tem certeza?',
       text: "Você não poderá reverter isso!",
@@ -276,7 +252,7 @@ debugger
       confirmButtonText: 'Sim, exclua!'
     }).then((result) => {
       if (result.isConfirmed) {
-        this.productsList = this.productsList.filter(product => product.code !== code);
+        this.productsList.splice(index, 1);
         this.calculateSubtotal();
         this.cdr.detectChanges(); // Atualiza a visualização manualmente
 
@@ -287,6 +263,80 @@ debugger
         );
       }
     });
+  }
+
+  editingProduct: Product | null = null;
+
+
+  index: any
+  EditarItemProdutoPorVenda(index: any) {
+    this.startEdit();
+    const product = this.productsList[index];
+this.index =index;
+    this.product = {
+      quantity: product.quantity,
+      description: product.description,
+      price: product.price,
+      unit: '', // Como mencionado antes, você pode ajustar conforme necessário
+      image: 'data:image/jpeg;base64,' + product.image,
+      code:product.code
+  };
+
+  }
+
+
+  Editar( newQuantity: number ) {
+    // Find the product in the products list
+    const productIndex = this.productsList[this.index];
+
+    // Check if the product exists
+    if (productIndex !== -1) {
+      // Update the product's quantity
+      this.productsList[this.index].quantity = newQuantity;
+      this.isEditing = false;
+      this.resetProductForm();
+      // Notify the user that the quantity has been updated
+      Swal.fire({
+        title: 'Success!',
+        text: 'The quantity has been updated.',
+        icon: 'success',
+        confirmButtonText: 'OK'
+      });
+
+    } else {
+      // Notify the user that the product was not found
+      Swal.fire({
+        title: 'Error!',
+        text: 'Product not found.',
+        icon: 'error',
+        confirmButtonText: 'OK'
+      });
+    }
+  }
+
+
+
+  startEdit() {
+    this.isEditing = true;
+  }
+
+  stopEdit() {
+    this.isEditing = false;
+  }
+
+  resetProductForm() {
+    // Reset the product model to its default state
+    this.product = {
+      quantity: null, // or the default quantity value
+      description: '',
+      price: null,
+      unit: '',
+      image: '',
+      code: ''
+    };
+
+    // If you have a form reference, you might also want to reset the form directly
+    // this.yourFormReference.reset();
   }
 }
 
