@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable, catchError, delay, of, tap, throwError } from 'rxjs';
+import { BehaviorSubject, Observable, catchError, delay, of, tap, throwError } from 'rxjs';
 import { Veterinario } from '../models/veterinario-model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../core/auth/auth.service';
@@ -12,6 +12,10 @@ import { Product } from '../pages/admin/panel-pdv/panel-pdv.component';
 export class ProductService {
   private baseUrl = `${environment.apiUrl}/api`;
 
+  private productUpdateSubject = new BehaviorSubject<void>(null);
+
+  // Observable to which components can subscribe
+  productUpdate$ = this.productUpdateSubject.asObservable();
   constructor(
     private http: HttpClient,
     private authService: AuthService
@@ -93,5 +97,9 @@ export class ProductService {
       );
   }
 
+ // Method to call when products need to be updated
+ notifyProductUpdate() {
+  this.productUpdateSubject.next();
+}
 
 }

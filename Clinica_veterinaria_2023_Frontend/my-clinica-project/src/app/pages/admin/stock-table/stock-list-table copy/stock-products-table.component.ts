@@ -15,6 +15,7 @@ export class StockProductsTableComponent implements OnInit {
   paddingSubscription: Subscription;
   productList: any[] = [];
   products: any[] =[];
+  stokeId: any;
 
  //
   public showModal: boolean = false;
@@ -49,13 +50,13 @@ export class StockProductsTableComponent implements OnInit {
 
   ngOnInit() {
     // Usar 'snapshot' é OK para o valor inicial, mas se o id pode mudar sem recriar o componente, você deve se inscrever às mudanças
-    const stockId = +this.route.snapshot.paramMap.get('id');
+    this.stokeId = +this.route.snapshot.paramMap.get('id');
     // Here you would subscribe to a service that provides padding value
     // For mockup purposes, we'll set a static value
     this.containerPadding = '15px';
 
-    if (stockId) {
-        this.itemProductStockService.getAllProductListByStock(stockId).subscribe(
+    if ( this.stokeId) {
+        this.itemProductStockService.getAllProductListByStock( this.stokeId).subscribe(
           data => {
             console.log(data);
             this.productList = data;
@@ -75,7 +76,7 @@ export class StockProductsTableComponent implements OnInit {
       this.form = new FormGroup({
         products: new FormControl(), // default value can be an empty string or a specific id
         iD_Usuario: new FormControl(1), // Assuming a default user ID of 1
-        idEstoque: new FormControl(stockId), // default value can be an empty string or a specific id
+        idEstoque: new FormControl( this.stokeId), // default value can be an empty string or a specific id
         dataEntrada: new FormControl(new Date().toISOString()), // Set to current date-time by default
         dataSaida: new FormControl(new Date().toISOString()), // Set to current date-time by default
         status: new FormControl('Disponível') // Assuming 'Disponível' as a default status
@@ -112,14 +113,37 @@ export class StockProductsTableComponent implements OnInit {
   onProductSelected(product: any): void {
     this.selectedProduct = product;
   }
-
   onSubmit() {
-    console.log(this.form.value); // This will log the form's values, including the selected product and quantity
+    console.log(this.form.value); // Logs the form's values
     this.onCloseModal();
 
-    this.productService.createOrUpdateStockItem(this.form.value).subscribe(data => {
-      console.log(data)
-    })
+    this.productService.createOrUpdateStockItem(this.form.value).subscribe({
+      next: (data) => {
+        console.log(data);
+        // Assuming you want to refresh the list of products associated with a particular stock
+        const stockId = this.form.get('idEstoque').value; // Retrieve the stock ID from the form
+        if (stockId) {
+          // Only attempt to load the products if we have a valid stock ID
+          this.itemProductStockService.getAllProductListByStock(stockId).subscribe({
+            next: (productData) => {
+              this.productList = productData; // Updates the productList with the new data
+            },
+            error: (error) => {
+              console.error("Error loading product list by stock:", error);
+            }
+          });
+        }
+      },
+      error: (error) => {
+        console.error(error);
+      }
+    });
+  }
+
+  deleteProductFromStock(idProduto:any){
+    console.log(idProduto)
+    console.log( this.stokeId)
+    //this.itemProductStockService.deleteProductFromStoke()
   }
 
 }

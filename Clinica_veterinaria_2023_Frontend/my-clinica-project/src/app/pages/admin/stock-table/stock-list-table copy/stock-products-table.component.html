@@ -26,12 +26,13 @@
           </tr>
         </thead>
         <tbody>
-          <tr *ngFor="let product of productList.slice().reverse()">
+          <tr *ngFor="let product of productList.slice()">
             <td>{{ product.idProduto }}</td>
             <td>{{ product.produto?.nome }}</td><!-- Supondo que o campo 'produto' seja um nome ou descrição -->
             <td>{{ product.status }}</td>
             <td>{{ product.quantidade_Estoque }}</td>
             <td>
+              <button type="button"   (click)="deleteProductFromStock(product.idProduto)" >Excluir</button>
             </td>
           </tr>
         </tbody>
@@ -49,7 +50,6 @@
     </div>
     <div class="modal-body">
       <form [formGroup]="form" (ngSubmit)="onSubmit()">
-
         <label for="productList">Choose a product:</label>
         <ng-select class="select-padrao"
              formControlName="products"
@@ -60,7 +60,7 @@
              [clearable]="true">
         </ng-select>
 
-
+        <br>
         <button type="submit">Confirm</button>
         <button type="button" (click)="onCloseModal()">Cancel</button>
       </form>
