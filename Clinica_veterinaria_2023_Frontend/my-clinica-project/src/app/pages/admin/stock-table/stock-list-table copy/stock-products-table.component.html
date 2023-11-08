@@ -1,5 +1,6 @@
 <navbar></navbar>
 <sidebar></sidebar>
+
 <div class="container-base" [style.padding]="containerPadding">
   <!-- Page Content -->
   <div class="content-page">
@@ -11,6 +12,8 @@
       Current Page
       </h2>
     </div>
+    <button (click)="openModal()">Adicionar Produto</button>
+
     <div class="table-responsive">
       <table class="table-erp">
         <thead>
@@ -36,3 +39,32 @@
     </div>
   </div>
 </div>
+
+<div class="modal" [ngClass]="{'show-modal': showModal}">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <div class="modal-header">
+      <span class="close" (click)="onCloseModal()">&times;</span>
+      <h2>Select Product</h2>
+    </div>
+    <div class="modal-body">
+      <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <label for="productList">Choose a product:</label>
+        <ng-select class="select-padrao"
+             formControlName="products"
+             [items]="products"
+             bindLabel="nome"
+             bindValue="idProduto"
+             [multiple]="false"
+             [clearable]="true">
+        </ng-select>
+
+
+        <button type="submit">Confirm</button>
+        <button type="button" (click)="onCloseModal()">Cancel</button>
+      </form>
+    </div>
+  </div>
+</div>
+

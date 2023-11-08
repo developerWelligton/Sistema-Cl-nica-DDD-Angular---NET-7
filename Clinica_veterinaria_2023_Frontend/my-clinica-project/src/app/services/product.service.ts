@@ -75,6 +75,23 @@ export class ProductService {
     return true;
   }
 
+  createOrUpdateStockItem(stockItem: any): Observable<any> {
+    // Corrigindo/Validando o formato do item de estoque aqui
+    debugger
+    const payload = {
+      idProduto: stockItem.products || 0,
+      iD_Usuario: 1,
+      idEstoque: stockItem.idEstoque || 0,
+      dataEntrada: stockItem.dataEntrada || new Date().toISOString(),
+      dataSaida: stockItem.dataSaida || new Date().toISOString(),
+      status: stockItem.status || "Disponível"
+    };
+
+    return this.http.post(`${this.baseUrl}/ItemProdutoEstoque`, payload)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
 
 }

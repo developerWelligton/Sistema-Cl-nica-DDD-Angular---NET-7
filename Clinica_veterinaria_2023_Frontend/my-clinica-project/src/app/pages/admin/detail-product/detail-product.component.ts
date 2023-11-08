@@ -132,7 +132,7 @@ submitForm(event?: Event): void {
     console.log('Formulário Enviado', this.createProductForm.value);
     console.log(this.file)
 
-    this.productService.createProduct(this.createProductForm.value).subscribe(
+    this.productService.createOrUpdateStockItem(this.createProductForm.value).subscribe(
       (response) => {
         console.log('Product created!', response);
 

@@ -4,6 +4,16 @@ import { Observable, catchError, delay, of, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../core/auth/auth.service';
 
+
+export interface StockItem {
+  idProduto: number;
+  iD_Usuario: number;
+  idEstoque: number;
+  dataEntrada: string;
+  dataSaida: string;
+  status: string;
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -28,8 +38,22 @@ export class ItemProductStockService {
       );
   }
 
-  private handleError(error: any): Observable<never> {
-    console.error('Something went wrong:', error);
-    return throwError(error);
-  }
+    private handleError(error: any): Observable<never> {
+      console.error('Something went wrong:', error);
+      return throwError(error);
+    }
+
+    createOrUpdateStockItem(stockItem: StockItem): Observable<StockItem> {
+      const endpoint = `${this.baseUrl}/ItemProdutoEstoque`;
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+        // Include authorization header if needed
+        // 'Authorization': `Bearer ${this.authService.getToken()}`
+      });
+
+      return this.http.post<StockItem>(endpoint, stockItem, { headers })
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
 }
