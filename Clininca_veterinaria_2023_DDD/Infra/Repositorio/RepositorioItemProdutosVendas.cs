@@ -25,8 +25,18 @@ namespace Infra.Repositorio
 
         }
 
+        public async Task DeleteItemProdutoPorVendaAsync(int idProduto, int idVenda)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                var itens = await banco.Set<ItemProdutoVenda>()
+                                       .Where(ipv => ipv.IdProduto == idProduto && ipv.IdVenda == idVenda)
+                                       .ToListAsync();
 
-
+                banco.Set<ItemProdutoVenda>().RemoveRange(itens);
+                await banco.SaveChangesAsync();
+            }
+        }
 
         public async Task<IEnumerable<ItemProdutoVenda>> GetVendaDetailsAsync(string vendaId)
         {

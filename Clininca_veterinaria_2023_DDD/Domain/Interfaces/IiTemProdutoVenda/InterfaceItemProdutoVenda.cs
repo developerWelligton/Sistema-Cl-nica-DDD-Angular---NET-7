@@ -11,5 +11,8 @@ namespace Domain.Interfaces.IFamilia
     public interface InterfaceItemProdutoVenda: InterfaceGeneric<ItemProdutoVenda>
     {
         Task<IEnumerable<ItemProdutoVenda>> GetVendaDetailsAsync(string vendaId);
+
+        // Método para deletar um item de produto por venda
+        Task DeleteItemProdutoPorVendaAsync(int idProduto, int idVenda);
     }
 }

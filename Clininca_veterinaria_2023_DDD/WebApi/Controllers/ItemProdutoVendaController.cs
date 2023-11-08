@@ -65,6 +65,23 @@ namespace WebApi.Controllers
         }
 
 
-
+        [HttpDelete("{idVenda}/{idProduto}")]
+        [Produces("application/json")]
+        public async Task<ActionResult> ExcluirItemProdutoVenda(int idVenda, int idProduto)
+        {
+            try
+            {
+                await _interfaceItemProdutoVendas.DeleteItemProdutoPorVendaAsync(idProduto, idVenda);
+                return NoContent(); // Retorna um código de status 204 (No Content) se a exclusão foi bem-sucedida
+            }
+            catch (Exception ex)
+            {
+                // Tratar a exceção conforme a necessidade, logar o erro, etc.
+                // Retorna um código de status 500 (Internal Server Error) se ocorrer um erro
+                return StatusCode(StatusCodes.Status500InternalServerError, ex.Message);
+            }
+        }
     }
-}
+
+
+} 
