@@ -36,6 +36,7 @@ import { CreateEstoqueComponent } from './create-estoque/create-estoque.componen
 import { ListStockComponent } from './stock-table/list-stock.component';
 import { StockModule } from './stock-table/stock.module';
 import { modalUnspscModule } from 'src/app/components/modal-unspsc/modal-unspsc.module';
+import { CreateProviderComponent } from './create-provider/create-provider.component';
 
 @NgModule({
   declarations: [
@@ -53,7 +54,8 @@ import { modalUnspscModule } from 'src/app/components/modal-unspsc/modal-unspsc.
     ListSaleComponent,
     SaleTableComponent,
     DetailProductComponent,
-    TreeViewUnspscComponent
+    TreeViewUnspscComponent,
+    CreateProviderComponent
 
   ],
   exports:[CreateUserComponent,UserProductComponent],

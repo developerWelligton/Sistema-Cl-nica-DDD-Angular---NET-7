@@ -11,6 +11,7 @@ import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
 import { ListProductComponent } from './product-table/list-product.component';
 import { ListUnspscComponent } from './unspsc-table/list-unspsc.component';
 import { ListSaleComponent } from './sale-table/sale-list.component';
+import { CreateProviderComponent } from './create-provider/create-provider.component';
 
 const routes: Routes = [
   {
@@ -61,8 +62,11 @@ const routes: Routes = [
   {
     path: 'list-stock',
     loadChildren: () => import('./stock-table/stock.module').then(m => m.StockModule)
-  }
-,
+  },
+  {
+    path:'create-provider',
+    component:CreateProviderComponent
+  },
    // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
    {
     path: '**',
