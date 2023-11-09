@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table-erp">
+    <thead>
+      <tr>
+        <th>ID Fornecedor</th>
+        <th>Nome</th>
+        <th>Email</th>
+        <th>Endereço</th>
+        <th>CNPJ</th>
+        <th>ID Usuário</th>
+        <th>Ações</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let fornecedor of providerList">
+        <td>{{ fornecedor.idFornecedor }}</td>
+        <td>{{ fornecedor.nome }}</td>
+        <td>{{ fornecedor.email }}</td>
+        <td>{{ fornecedor.endereco }}</td>
+        <td>{{ fornecedor.cnpj }}</td>
+        <td>{{ fornecedor.iD_Usuario }}</td>
+        <td>
+          <!-- <button (click)="editFornecedor(fornecedor)">Editar</button>
+          <button (click)="deleteFornecedor(fornecedor.idFornecedor)">Excluir</button> -->
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>

@@ -1,0 +1,26 @@
+<navbar></navbar>
+<sidebar></sidebar>
+<div class="container-base" [style.padding]="containerPadding">
+  <!-- Page Content -->
+  <div class="content-page">
+    <!-- Breadcrumbs -->
+    <div class="breadcrumbs">
+      <h2>
+       <a href="/admin">Mural Admin</a>
+      <span class="separator">»</span>
+      Current Page
+      </h2>
+    </div>
+    <!-- Card Header -->
+    <div class="card-header">
+      <h3 class="card-title">Lista de Fornecedores</h3>
+    </div>
+    <!-- Angular Material Table for Users -->
+    <div class="card-content">
+    <br>
+      <app-provider-table [providerList]="providerList"
+    (providerDeleted)="handleProviderDeleted($event)"
+    (providerEdited)="handleProviderEdited($event)"></app-provider-table>
+    </div>
+  </div>
+</div>

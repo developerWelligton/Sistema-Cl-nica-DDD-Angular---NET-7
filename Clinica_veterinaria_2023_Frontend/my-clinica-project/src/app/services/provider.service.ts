@@ -5,6 +5,7 @@ import { Veterinario } from '../models/veterinario-model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../core/auth/auth.service';
 import { Product } from '../pages/admin/panel-pdv/panel-pdv.component';
+import { Provider } from '../pages/admin/unspsc-table copy/provider-table/provider-table.component';
 
 @Injectable({
   providedIn: 'root'
@@ -35,13 +36,13 @@ export class ProviderService {
     );
 }
 
-  getAllStock(): Observable<any>  {
-    return this.http.get(`${this.baseUrl}/Fornecedor`)
-    .pipe(
-      catchError(this.handleError)
-    );
-  }
+getAllProviders(): Observable<Provider[]> {
+  return this.http.get<Provider[]>(`${this.baseUrl}/Fornecedores`);
+}
 
+deleteProvider(providerId: number): Observable<any> {
+  return this.http.delete(`${this.baseUrl}/provider/${providerId}`);
+}
 
 
   private handleError(error: any): Observable<never> {
