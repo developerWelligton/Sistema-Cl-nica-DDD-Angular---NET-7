@@ -13,6 +13,7 @@ import { UnspscService } from 'src/app/services/unspsc.service';
 import { Unspsc } from 'src/app/models/unspsc.model';
 import { ProductService } from 'src/app/services/product.service';
 import { StockService } from 'src/app/services/stock.service';
+import { ProviderService } from 'src/app/services/provider.service';
 
 
 export enum UserGroup {
@@ -44,7 +45,8 @@ export class CreateProviderComponent {
     private router: Router,
     private userService: UserService,
     private paddingService: PaddingService,
-    private stockService: StockService
+    private stockService: StockService,
+    private providerService: ProviderService
   ) {}
 
   ngOnInit() {
@@ -79,7 +81,9 @@ export class CreateProviderComponent {
 
       if (this.createProviderForm.valid) {
         console.log('Formulário Enviado', this.createProviderForm.value);
-
+        this.providerService.createProvider(this.createProviderForm.value).subscribe(res=>{
+          console.log(res)
+        })
 
 
       }
