@@ -36,11 +36,29 @@ export class ListProviderComponent implements OnInit, OnDestroy {
   }
 
   handleProviderDeleted(providerId: number): void {
-    // Existing logic for deletion
+    // Confirm before deletion
+    const confirmation = confirm('Tem certeza de que deseja excluir este fornecedor?');
+    if (confirmation) {
+      this.providerService.deleteProvider(providerId).subscribe(
+        (response) => {
+          // Handle the successful deletion
+          alert('Fornecedor excluído com sucesso.');
+          // Refresh the provider list or remove the deleted provider from the view
+          this.providerList = this.providerList.filter(provider => provider.idFornecedor !== providerId);
+        },
+        (error) => {
+          // Handle any errors here
+          alert('Ocorreu um erro ao tentar excluir o fornecedor.');
+          console.error('Erro ao excluir fornecedor:', error);
+        }
+      );
+    }
   }
+
 
   handleProviderEdited(provider: Provider): void {
     // Existing logic for editing
+    alert(provider)
   }
 
   ngOnDestroy() {

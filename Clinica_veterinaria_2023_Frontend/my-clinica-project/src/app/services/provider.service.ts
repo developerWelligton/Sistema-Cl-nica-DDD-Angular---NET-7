@@ -41,7 +41,7 @@ getAllProviders(): Observable<Provider[]> {
 }
 
 deleteProvider(providerId: number): Observable<any> {
-  return this.http.delete(`${this.baseUrl}/provider/${providerId}`);
+  return this.http.delete(`${this.baseUrl}/Fornecedor/${providerId}`);
 }
 
 
