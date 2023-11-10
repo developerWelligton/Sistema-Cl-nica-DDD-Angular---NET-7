@@ -10,7 +10,7 @@ const routes: Routes = [
     component:PanelBuyComponent
   },
   {
-    path:'payment',
+    path:'payment/:id',
     component:PaymentComponent
   },
 

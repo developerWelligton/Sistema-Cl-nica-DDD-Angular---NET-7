@@ -1,7 +1,7 @@
 import { ProductService } from './../../../../services/product.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PaddingService } from 'src/app/services/Padding.service';
 import { AsaasService } from 'src/app/services/asaas.service';
@@ -51,6 +51,7 @@ export class PaymentComponent {
     private asaasService: AsaasService,
     private saleServicePaymentService:SaleServicePaymentService,
     private router: Router,
+    private routerActivate: ActivatedRoute,
     private productService: ProductService
   ) {
     const navigation = this.router.getCurrentNavigation();
@@ -62,9 +63,13 @@ export class PaymentComponent {
     }
    }
 
-
+   buyId:any
 
   ngOnInit() {
+
+    this.buyId = this.routerActivate.snapshot.paramMap.get('id');
+
+    alert(this.buyId)
     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
       this.containerPadding = padding;
 
@@ -211,4 +216,24 @@ export class PaymentComponent {
   showPaymentCard(): void {
     this.isPaymentCardVisible = true;
   }
+
+//----------------------------------TIME LINE
+events = [
+  {
+    timestamp: new Date(2023, 10, 1),
+    title: 'Evento 1',
+    content: 'Descrição do Evento 1. Algum texto adicional aqui.'
+  },
+  {
+    timestamp: new Date(2023, 10, 10),
+    title: 'Evento 2',
+    content: 'Descrição do Evento 2. Outro texto explicativo.'
+  },
+  {
+    timestamp: new Date(2023, 10, 20),
+    title: 'Evento 3',
+    content: 'Descrição do Evento 3. Mais informações sobre o evento.'
+  }
+];
+
 }

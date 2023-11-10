@@ -36,7 +36,7 @@ import { jqxGridModule } from 'jqwidgets-ng/jqxgrid';
 
     NgxSpinnerModule,
     MatProgressSpinnerModule,
-    jqxGridModule
+    jqxGridModule,
 
   ],
   providers: [

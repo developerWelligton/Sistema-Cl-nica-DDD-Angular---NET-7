@@ -9,7 +9,7 @@ import { PaymentComponent } from './payment/payment.component';
 import { PanelBuyComponent } from './panel-buy.component';
 import { PanelBuyRoutingModule } from './panel-buy-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
-
+import { NgxTimelineModule } from '@frxjs/ngx-timeline';
 @NgModule({
   imports: [
     FormsModule,
@@ -19,7 +19,8 @@ import { NgSelectModule } from '@ng-select/ng-select';
     SidebarModule,
     SharedModule,
     ReactiveFormsModule,
-    NgSelectModule
+    NgSelectModule,
+    NgxTimelineModule
 
   ],
   declarations: [

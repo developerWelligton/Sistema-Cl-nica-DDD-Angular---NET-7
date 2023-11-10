@@ -16,84 +16,18 @@
     <!-- Cabeçalho do cartão -->
     <div class="card-header">
       <!-- Título do cartão -->
-      <h3 class="card-title">SELECIONE A OPÇÃO DE PAGAMENTO</h3>
+      <h3 class="card-title">TIMELINE DE PEDIDO DE COMPRA DE PRODUTO</h3>
 
     </div>
-     <!-- Formulário -->
-     <div class="payment-options">
-      <button class="payment-btn" (click)="showPaymentCard()">Link de Pagamento</button>
-      <button class="payment-btn" (click)="processCashPayment()">Dinheiro</button>
-    </div>
-
-    <form [formGroup]="paymentForm" (ngSubmit)="submitPaymentForm()">
-
-      <div class="payment-card" *ngIf="isPaymentCardVisible">
-          <h4>Link de Pagamento</h4>
-
-          <div class="payment-details">
-              <label for="paymentName">Nome do link de pagamentos:</label>
-              <input type="text" id="paymentName" formControlName="paymentName">
-          </div>
-
-          <div class="payment-details">
-              <label for="paymentDescription">Descrição do link de pagamento:</label>
-              <input type="text" id="paymentDescription" formControlName="paymentDescription">
-          </div>
-
-          <div class="payment-details">
-              <label for="paymentMethod">Forma de pagamento permitida:</label>
-              <select id="paymentMethod" formControlName="paymentMethod">
-                  <option value="PIX">PIX</option>
-                  <option value="Boleto">Boleto</option>
-                  <option value="Cartão de Crédito">Cartão de Crédito</option>
-              </select>
-          </div>
-
-          <div class="payment-details">
-              <label for="totalValue">Valor Total:</label>
-              <input type="number" id="totalValue" formControlName="totalValue">
-          </div>
-
-          <div class="payment-details">
-              <label for="expiryDate">Data Limite do Link:</label>
-              <input type="date" id="expiryDate" formControlName="expiryDate">
-          </div>
-
-          <div class="payment-details">
-            <label for="expiryDate">id da Venda</label>
-            <input readOnly type="number" id="idVenda" formControlName="idVenda">
-        </div>
+     <div class="container">
+      <ngx-timeline [events]="events"></ngx-timeline>
 
 
-          <div class="submit-button">
-              <button type="submit">Enviar</button>
-          </div>
-      </div>
-  </form>
+
+     </div>
 
 
-  <!--DINHEIRO-->
-  <form [formGroup]="cashPaymentForm" (ngSubmit)="submitCashPaymentForm()">
 
-    <div class="cash-payment-card" *ngIf="isCashPaymentCardVisible">
-        <h4>Pagamento em Dinheiro</h4>
-
-        <div class="cash-payment-details">
-            <label for="paymentDate">Data do Pagamento:</label>
-            <input type="datetime-local" id="paymentDate" formControlName="dataPagamento" value="2023-10-26T20:24:52">
-        </div>
-
-        <div class="cash-payment-details">
-            <label for="totalCashValue">Valor Total:</label>
-            <input type="number" id="totalCashValue" formControlName="total" [value]="0">
-        </div>
-
-        <div class="submit-button">
-            <button type="submit">FINALIZAR PAGAMENTO</button>
-        </div>
-    </div>
-
-</form>
 
 
 
