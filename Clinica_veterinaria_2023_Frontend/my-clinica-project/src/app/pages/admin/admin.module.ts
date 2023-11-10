@@ -40,6 +40,8 @@ import { ListProviderComponent } from './unspsc-table copy/list-provider.compone
 import { ProviderTableComponent } from './unspsc-table copy/provider-table/provider-table.component';
 import { CreateBuyComponent } from './create-buy/create-buy.component';
 import { PanelBuyComponent } from './panel-buy/panel-buy.component';
+import { MatDialogModule } from '@angular/material/dialog';
+import { ModalStockComponent } from './panel-buy/modal-stock/modal-stock.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +63,8 @@ import { PanelBuyComponent } from './panel-buy/panel-buy.component';
     CreateProviderComponent,
     ListProviderComponent,
     ProviderTableComponent,
-    CreateBuyComponent
+    CreateBuyComponent,
+    ModalStockComponent
   ],
   exports:[CreateUserComponent,UserProductComponent],
   imports: [
@@ -79,7 +82,9 @@ import { PanelBuyComponent } from './panel-buy/panel-buy.component';
     MatTableModule,
     VmessageModule,
     jqxTreeModule, jqxExpanderModule,
-    modalUnspscModule
+    modalUnspscModule,
+    MatDialogModule
+
   ],
   providers: []
   ,

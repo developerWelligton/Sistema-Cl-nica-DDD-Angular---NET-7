@@ -8,6 +8,11 @@ import { AsaasService } from 'src/app/services/asaas.service';
 import { DataService } from 'src/app/services/data.service';
 import { SaleServicePaymentService } from 'src/app/services/saleServicePayment.service';
 import Swal from 'sweetalert2';
+
+
+import { MatDialog } from '@angular/material/dialog';
+import { ModalStockComponent } from '../modal-stock/modal-stock.component';
+
 interface CallbackPayload {
   successUrl: string;
   autoRedirect: boolean;
@@ -52,7 +57,8 @@ export class PaymentComponent {
     private saleServicePaymentService:SaleServicePaymentService,
     private router: Router,
     private routerActivate: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    public dialog: MatDialog
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {saleId: number, total: number};
@@ -236,6 +242,15 @@ events = [
   },
 ];
 
+openEstoqueModal() {
+  const dialogRef = this.dialog.open(ModalStockComponent, {
+    width: '250px',
+    // Você pode passar dados para o modal se necessário
+  });
 
+  dialogRef.afterClosed().subscribe(result => {
+    // Lógica a ser executada depois que o modal for fechado
+  });
+}
 
 }
