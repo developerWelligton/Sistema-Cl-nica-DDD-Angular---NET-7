@@ -19,9 +19,11 @@ namespace WebApi.Controllers
     public class ItemProdutoCompraController : ControllerBase
     {
         private readonly InterfaceItemCompraProduto _interfaceItemCompraProduto;
+        private readonly InterfaceItemProdutoEstoque _interfaceItemProdutoEstoque;
         private readonly IitemProdutoCompraServico _iItemProdutoCompraServico;
-        public ItemProdutoCompraController(InterfaceItemCompraProduto interfaceItemCompraProduto, IitemProdutoCompraServico iItemProdutoCompraServico)
+        public ItemProdutoCompraController(InterfaceItemProdutoEstoque interfaceItemProdutoEstoque, InterfaceItemCompraProduto interfaceItemCompraProduto, IitemProdutoCompraServico iItemProdutoCompraServico)
         {
+            _interfaceItemProdutoEstoque = interfaceItemProdutoEstoque;
             _interfaceItemCompraProduto = interfaceItemCompraProduto;
             _iItemProdutoCompraServico = iItemProdutoCompraServico;
         }
@@ -58,12 +60,19 @@ namespace WebApi.Controllers
             // Now, you can save each item to the database
             foreach (var item in itensProdutoCompra)
             {
-                await _interfaceItemCompraProduto.Add(item);
+                //await _interfaceItemCompraProduto.Add(item);
+                var produtoId = (int)item.IdProduto;
+                var novaQuantidade = 10;
+                var estoqueId = await _interfaceItemProdutoEstoque.GetEstoqueByProduto((int)item.IdProduto);
+
+                await _interfaceItemProdutoEstoque.UpdateQuantidadeEstoqueCompra(estoqueId, produtoId, novaQuantidade);
             }
 
             // Return a successful response (modify as needed)
             return Ok(new { Message = "Produtos de compra adicionados com sucesso!" });
         }
+
+   
 
 
 
