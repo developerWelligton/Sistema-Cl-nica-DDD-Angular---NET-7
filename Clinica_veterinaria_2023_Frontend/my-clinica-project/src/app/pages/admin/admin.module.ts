@@ -20,7 +20,6 @@ import { CreateUnspscComponent } from './create-unspsc/create-unspsc.component';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { VmessageModule } from 'src/app/shared/components/vmessage/vmessage.module';
 import { PanelPdvComponent } from './panel-pdv/panel-pdv.component';
-import { PanelPdvModule } from './panel-pdv/panel-pdv.module';
 import { ListUnspscComponent } from './unspsc-table/list-unspsc.component';
 import { ListProductComponent } from './product-table/list-product.component';
 import { UnspscTableComponent } from './unspsc-table/unspsc-table/unspsc-table.component';
@@ -40,6 +39,7 @@ import { CreateProviderComponent } from './create-provider/create-provider.compo
 import { ListProviderComponent } from './unspsc-table copy/list-provider.component';
 import { ProviderTableComponent } from './unspsc-table copy/provider-table/provider-table.component';
 import { CreateBuyComponent } from './create-buy/create-buy.component';
+import { PanelBuyComponent } from './panel-buy/panel-buy.component';
 
 @NgModule({
   declarations: [
@@ -62,7 +62,6 @@ import { CreateBuyComponent } from './create-buy/create-buy.component';
     ListProviderComponent,
     ProviderTableComponent,
     CreateBuyComponent
-
   ],
   exports:[CreateUserComponent,UserProductComponent],
   imports: [

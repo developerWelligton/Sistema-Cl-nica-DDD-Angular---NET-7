@@ -1,3 +1,4 @@
+import { PanelBuyModule } from './panel-buy/panel-buy.module';
 
 import { TreeViewUnspscComponent } from './tree-view-unspsc/tree-view-unspsc.component';
 import { DetailProductComponent } from './detail-product/detail-product.component';
@@ -74,8 +75,8 @@ const routes: Routes = [
     component:ListProviderComponent
   },
   {
-    path:'create-buy',
-    component:CreateBuyComponent
+    path:'panel-buy',
+    loadChildren: () => import('./panel-buy/panel-buy.module').then(m => m.PanelBuyModule)
   },
    // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
    {
