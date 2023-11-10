@@ -37,28 +37,32 @@ namespace WebApi.Controllers
 
         [HttpPost]
         [Produces("application/json")]
-        public async Task<ActionResult> CriarProdutoCompra([FromBody] ItemProdutoCompraDto itemProdutoCompraDto)
+        public async Task<ActionResult> CriarProdutoCompra([FromBody] List<ItemProdutoCompraDto> itensProdutoCompraDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            // Converte o ItemProdutoCompraDto para a entidade ItemProdutoCompra
-            var itemProdutoCompra = new ItemProdutoCompra
+            // Convert the list of ItemProdutoCompraDto to a list of ItemProdutoCompra entities
+            var itensProdutoCompra = itensProdutoCompraDto.Select(dto => new ItemProdutoCompra
             {
-                IdCompra = itemProdutoCompraDto.IdCompra,
-                IdProduto = itemProdutoCompraDto.IdProduto,
-                DataEntrada = itemProdutoCompraDto.DataEntrada,
-                QuantidadeTotal = itemProdutoCompraDto.QuantidadeTotal,
-                Lote = itemProdutoCompraDto.Lote
-            };
+                IdCompra = dto.IdCompra,
+                IdProduto = dto.IdProduto,
+                DataEntrada = dto.DataEntrada,
+                QuantidadeTotal = dto.QuantidadeTotal,
+                Lote = dto.Lote
+                // Add other properties here if needed
+            }).ToList();
 
-            // Aqui estou assumindo que você tem um serviço ou repositório para adicionar o item à compra
-            // O nome deste serviço é apenas um palpite; substitua pelo correto em seu código
-            await _interfaceItemCompraProduto.Add(itemProdutoCompra);
+            // Now, you can save each item to the database
+            foreach (var item in itensProdutoCompra)
+            {
+                await _interfaceItemCompraProduto.Add(item);
+            }
 
-            return CreatedAtAction(nameof(CriarProdutoCompra), new { id = itemProdutoCompra.IdProduto }, itemProdutoCompra);
+            // Return a successful response (modify as needed)
+            return Ok(new { Message = "Produtos de compra adicionados com sucesso!" });
         }
 
 

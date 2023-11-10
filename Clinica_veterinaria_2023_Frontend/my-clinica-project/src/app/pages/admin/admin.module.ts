@@ -39,6 +39,7 @@ import { modalUnspscModule } from 'src/app/components/modal-unspsc/modal-unspsc.
 import { CreateProviderComponent } from './create-provider/create-provider.component';
 import { ListProviderComponent } from './unspsc-table copy/list-provider.component';
 import { ProviderTableComponent } from './unspsc-table copy/provider-table/provider-table.component';
+import { CreateBuyComponent } from './create-buy/create-buy.component';
 
 @NgModule({
   declarations: [
@@ -59,7 +60,8 @@ import { ProviderTableComponent } from './unspsc-table copy/provider-table/provi
     TreeViewUnspscComponent,
     CreateProviderComponent,
     ListProviderComponent,
-    ProviderTableComponent
+    ProviderTableComponent,
+    CreateBuyComponent
 
   ],
   exports:[CreateUserComponent,UserProductComponent],
