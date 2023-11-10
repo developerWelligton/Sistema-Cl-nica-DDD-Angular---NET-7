@@ -221,19 +221,21 @@ export class PaymentComponent {
 events = [
   {
     timestamp: new Date(2023, 10, 1),
-    title: 'Evento 1',
-    content: 'Descrição do Evento 1. Algum texto adicional aqui.'
+    title: 'Pedido da Compra Foi Realizado',
+    content: 'O pedido foi recebido e está aguardando processamento.'
   },
   {
     timestamp: new Date(2023, 10, 10),
-    title: 'Evento 2',
-    content: 'Descrição do Evento 2. Outro texto explicativo.'
+    title: 'Em Trânsito',
+    content: 'O produto está em trânsito.'
   },
   {
     timestamp: new Date(2023, 10, 20),
-    title: 'Evento 3',
-    content: 'Descrição do Evento 3. Mais informações sobre o evento.'
-  }
+    title: 'Confirme a Chegada',
+    content: 'Confirme a chegada do produto.',
+  },
 ];
+
+
 
 }
