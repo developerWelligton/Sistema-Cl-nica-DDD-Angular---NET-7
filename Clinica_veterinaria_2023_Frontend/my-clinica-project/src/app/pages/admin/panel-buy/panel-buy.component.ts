@@ -3,7 +3,7 @@ import { UserService } from '../../../core/user/user.service';
 // ... previous imports ...
 
 import { ChangeDetectorRef, Component } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
+import { FormBuilder, FormControl, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -12,6 +12,12 @@ import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
 import { SaleProductService } from 'src/app/services/saleProduto.service';
+import { DataService } from 'src/app/services/data.service';
+import { Classe } from 'src/app/models/classe.model';
+import { Unspsc } from 'src/app/models/unspsc.model';
+import { UnspscService } from 'src/app/services/unspsc.service';
+import { SUPPLIERS } from 'src/app/mocks/supplier.mock';
+import { ProviderService } from 'src/app/services/provider.service';
 
 
 export enum UserGroup {
@@ -71,7 +77,9 @@ export class PanelBuyComponent {
     private productService: ProductService,
     private saleProductService: SaleProductService,
     private itemProductSaleService:ItemProductSaleService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private unspscService: UnspscService,
+    private providerService: ProviderService
   ) {}
 
   ngOnInit() {
@@ -86,6 +94,8 @@ debugger
     this.createSaleForm = this.fb.group({
     });
     this.populateUserGroups();
+
+    this.loadProviders()
   }
 
   private populateUserGroups(): void {
@@ -151,27 +161,7 @@ debugger
     }
 
     addItem() {
-      // se existir venda, faça somente adição de item
-      if (!this.saleId) {
-        const saleData = {
-          dataVenda: new Date().toISOString(),
-          status: 'Pendente',
-          iD_Usuario: 1
-        };
 
-        this.saleProductService.createSale(saleData).subscribe(response => {
-          this.saleId = response.idVenda;  // Assuming the response contains an 'id' field with the sale's ID
-          this.calculateSubtotal();
-        }, error => {
-          console.error("Error initiating sale:", error);
-          Swal.fire({
-            icon: 'error',
-            title: 'Oops...',
-            text: 'Houve um erro ao iniciar a venda. Tente novamente.',
-            footer: 'Se o problema persistir, contate o suporte.'
-          });
-        });
-      } else {
         // If saleId is already set, just add the product to the list
         this.productsList.push({ ...this.product });
 
@@ -188,7 +178,6 @@ debugger
         // Call the calculateSubtotal method
         this.calculateSubtotal();
       }
-    }
 
     // Calculate subtotal
   calculateSubtotal() {
@@ -198,46 +187,48 @@ debugger
   addFecharVenda(){
     debugger
     console.log(this.productsList);
+    alert(JSON.stringify(this.providerControl))
 
     // Convertendo os produtos para o formato desejado antes de enviar
     const productListToSend = this.productsList.map(product => ({
-      idProduto: product.code,
-      idVenda: this.saleId, // supondo que você tem uma saleId, senão, ajuste conforme necessário
-      totalProdutosVendas: product.price * product.quantity,
-      observacao: '', // preencha conforme necessário
-      quantidade: product.quantity
+      dataEntrada: product.dataEntrada, // Use the date from the product, or set the current date as needed
+      quantidadeTotal: product.quantity, // Use the quantity from the product
+      lote: product.lote, // Use the lot from the product
+      idCompra: '', // assuming you have a purchaseId, otherwise adjust as necessary
+      idProduto: product.code // assuming the product has a 'code' that corresponds to idProduto
     }));
 
+
     console.log(JSON.stringify(productListToSend))
-    this.itemProductSaleService.sendProductList(productListToSend).subscribe(
-      response => {
-        console.log('Lista de produtos enviada com sucesso:', response);
+    // this.itemProductSaleService.sendProductList(productListToSend).subscribe(
+    //   response => {
+    //     console.log('Lista de produtos enviada com sucesso:', response);
 
-        // Aqui você pode colocar qualquer lógica posterior que desejar.
-        Swal.fire({
-          icon: 'success',
-          title: 'Sucesso!',
-          text: 'Lista de produtos enviada com sucesso!'
-        }).then(() => {
-          this.router.navigate(['/admin/panel-pdv/payment'], {
-            state: {
-              saleId: this.saleId,
-              total: this.subtotal
-            }
-          });
+    //     // Aqui você pode colocar qualquer lógica posterior que desejar.
+    //     Swal.fire({
+    //       icon: 'success',
+    //       title: 'Sucesso!',
+    //       text: 'Lista de produtos enviada com sucesso!'
+    //     }).then(() => {
+    //       this.router.navigate(['/admin/panel-pdv/payment'], {
+    //         state: {
+    //           saleId: this.saleId,
+    //           total: this.subtotal
+    //         }
+    //       });
 
-        });
-      },
-      error => {
-        console.error("Error sending product list:", error);
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops...',
-          text: 'Erro ao enviar a lista de produtos!',
-          footer: 'Por favor, tente novamente mais tarde.'
-        });
-      }
-    );
+    //     });
+    //   },
+    //   error => {
+    //     console.error("Error sending product list:", error);
+    //     Swal.fire({
+    //       icon: 'error',
+    //       title: 'Oops...',
+    //       text: 'Erro ao enviar a lista de produtos!',
+    //       footer: 'Por favor, tente novamente mais tarde.'
+    //     });
+    //   }
+    // );
   }
 
 
@@ -337,6 +328,22 @@ this.index =index;
 
     // If you have a form reference, you might also want to reset the form directly
     // this.yourFormReference.reset();
+  }
+
+  providers: any;
+  providerControl: any;
+  onValueChange(): void {
+
+  }
+
+  loadProviders(): void {
+    this.providerService.getAllProviders().subscribe((data: any[]) => {
+      this.providers = data
+        console.log(data)
+    }, error => {
+        console.error('Error loading FORNECEDORES :', error);
+        // Handle error as needed
+    })
   }
 }
 

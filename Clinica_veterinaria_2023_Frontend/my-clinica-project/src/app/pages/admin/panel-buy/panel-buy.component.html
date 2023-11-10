@@ -16,7 +16,7 @@
     <!-- Cabeçalho do cartão -->
     <div class="card-header">
       <!-- Título do cartão -->
-      <h3 class="card-title">PONTO DE VENDA EM FUNCIONAMENTO</h3>
+      <h3 class="card-title">PONTO DE COMPRA</h3>
 
     </div>
     <!-- Formulário -->
@@ -83,6 +83,16 @@
               <h6 class="card-subtitle mb-2 text-muted" style="color: black;" id="subtotal" >{{ subtotal | currency:'BRL':'symbol':'1.2-2' }}</h6>
               <ul class="list-group list-group-flush">
                 <li class="list-group-item">
+
+                  <label>FORNECEDORES</label>
+                  <ng-select class="select-padrao"
+                  [(ngModel)]="providerControl"
+                              [items]="providers"
+                              bindLabel="nome"
+                              bindValue="idFornecedor"
+                              [multiple]="false"
+                              [clearable]="true">
+                  </ng-select>
 
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Descrição</label>

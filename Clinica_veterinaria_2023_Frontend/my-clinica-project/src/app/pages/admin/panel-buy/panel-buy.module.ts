@@ -8,6 +8,7 @@ import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { PaymentComponent } from './payment/payment.component';
 import { PanelBuyComponent } from './panel-buy.component';
 import { PanelBuyRoutingModule } from './panel-buy-routing.module';
+import { NgSelectModule } from '@ng-select/ng-select';
 
 @NgModule({
   imports: [
@@ -17,7 +18,8 @@ import { PanelBuyRoutingModule } from './panel-buy-routing.module';
     NavbarModule,
     SidebarModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    NgSelectModule
 
   ],
   declarations: [
