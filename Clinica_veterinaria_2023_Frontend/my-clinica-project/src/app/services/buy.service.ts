@@ -24,11 +24,11 @@ export class BuyService {
     // Corrigindo/Validando o formato do produto aqui
     debugger
     const payload = {
-      total: buy.total, // assuming stock has a 'total' property
-      dataCompra: buy.dataCompra, // assuming stock has a 'dataCompra' property
-      status: buy.status, // assuming stock has a 'status' property
+      total: 0, // assuming stock has a 'total' property
+      dataCompra: "2023-11-10T03:58:11.872Z", // assuming stock has a 'dataCompra' property
+      status: "Encomendado", // assuming stock has a 'status' property
       iD_Usuario: 1, // This is hardcoded to 1, as in your example
-      idFornecedor: buy.idFornecedor // assuming stock has a 'idFornecedor' property
+      idFornecedor: Number(buy) // assuming stock has a 'idFornecedor' property
     };
 
     return this.http.post(`${this.baseUrl}/Compra`, payload)

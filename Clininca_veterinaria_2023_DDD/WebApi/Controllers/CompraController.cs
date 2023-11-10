@@ -44,6 +44,8 @@ namespace WebApi.Controllers
 
             await _InterfaceCompra.Add(compra);
 
+            compraDto.IdCompra = compra.IdCompra;
+
             return CreatedAtAction(nameof(AdicionarCompra), new { id = compra.IdCompra }, compraDto);
         }
 

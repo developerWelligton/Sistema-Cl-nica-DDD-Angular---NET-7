@@ -41,7 +41,7 @@
                     <th scope="col" class="py-3">Código</th>
                     <th scope="col" class="py-3">Produto</th>
                     <th scope="col" class="py-3">Quantidade</th>
-                    <th scope="col" class="py-3">Preço</th>
+                    <th scope="col" class="py-3">Preço de Compra</th>
                     <th scope="col" class="py-3">Preço Total</th>
                     <th scope="col" class="py-3">Ação</th>
                   </tr>
@@ -52,8 +52,8 @@
                     <td class="py-3">{{ item.code }}</td>
                     <td class="py-3">{{ item.description }}</td>
                     <td class="py-3">{{ item.quantity }}</td>
-                    <td class="py-3">{{ item.price | currency:'BRL' }}</td>
-                    <td class="py-3">{{ (item.price * item.quantity) | currency:'BRL' }}</td>
+                    <td class="py-3">{{ item.priceBuy | currency:'BRL' }}</td>
+                    <td class="py-3">{{ (item.priceBuy * item.quantity) | currency:'BRL' }}</td>
                     <td class="py-3">
                       <button type="button" class="btn btn-outline-primary btn-sm mx-1">
                         <i class="bi bi-pencil-square"  (click)="EditarItemProdutoPorVenda(  i)">
@@ -103,7 +103,7 @@
                 <li class="list-group-item">
                   <div class="mb-3">
                     <label for="exampleInputEmail1" class="form-label">Valor</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled  id="value" name="value" [(ngModel)]="product.price" >
+                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled  id="value" name="value" [(ngModel)]="product.priceBuy" >
                   </div>
                 </li>
                 <li class="list-group-item">

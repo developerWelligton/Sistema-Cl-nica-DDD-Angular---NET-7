@@ -18,6 +18,8 @@ import { Unspsc } from 'src/app/models/unspsc.model';
 import { UnspscService } from 'src/app/services/unspsc.service';
 import { SUPPLIERS } from 'src/app/mocks/supplier.mock';
 import { ProviderService } from 'src/app/services/provider.service';
+import { BuyService } from 'src/app/services/buy.service';
+import { ItemProductBuyService } from 'src/app/services/itemProductBuy.service';
 
 
 export enum UserGroup {
@@ -35,6 +37,7 @@ export class Product {
   price: number;
   unit: string;
   image: string;
+  priceBuy: number;
 }
 
 
@@ -79,7 +82,9 @@ export class PanelBuyComponent {
     private itemProductSaleService:ItemProductSaleService,
     private cdr: ChangeDetectorRef,
     private unspscService: UnspscService,
-    private providerService: ProviderService
+    private providerService: ProviderService,
+    private buyService: BuyService,
+    private itemProductBuyService: ItemProductBuyService
   ) {}
 
   ngOnInit() {
@@ -143,7 +148,8 @@ debugger
                     price: response.precoVenda,
                     unit: '', // Como mencionado antes, você pode ajustar conforme necessário
                     image: 'data:image/jpeg;base64,' + response.imagemBase64,
-                    code:response.idProduto
+                    code:response.idProduto,
+                    priceBuy: response.precoCompra
                 };
             },
             error => {
@@ -172,7 +178,8 @@ debugger
           price: 0,
           unit: '',
           quantity: 0,
-          image: ''
+          image: '',
+          priceBuy:0
         };
 
         // Call the calculateSubtotal method
@@ -181,13 +188,32 @@ debugger
 
     // Calculate subtotal
   calculateSubtotal() {
-    this.subtotal = this.productsList.reduce((acc, item) => acc + (item.price * item.quantity), 0);
+    this.subtotal = this.productsList.reduce((acc, item) => acc + (item.precoVenda * item.quantity), 0);
   }
 
   addFecharVenda(){
-    debugger
-    console.log(this.productsList);
-    alert(JSON.stringify(this.providerControl))
+    // COMPRA
+    this.buyService.createBuy(JSON.stringify(this.providerControl)).subscribe(res=>{
+      const returnIdCompra = res.idCompra
+
+      // ITEM PRODUTO COMPRA
+      debugger
+      console.log(this.productsList);
+      const productListToSend = this.productsList.map(product => ({
+        dataEntrada: new Date().toISOString(), // Use the date from the product, or set the current date as needed
+        quantidadeTotal: product.quantity, // Use the quantity from the product
+        lote: product.lote || "", // Use the lot from the product
+        idCompra: returnIdCompra, // assuming you have a purchaseId, otherwise adjust as necessary
+        idProduto: product.code // assuming the product has a 'code' that corresponds to idProduto
+      }));
+
+      this.itemProductBuyService.createItemProductsBuy(productListToSend).subscribe(res=>{
+        alert(JSON.stringify(res))
+      })
+    })
+
+
+
 
     // Convertendo os produtos para o formato desejado antes de enviar
     const productListToSend = this.productsList.map(product => ({
@@ -270,7 +296,8 @@ this.index =index;
       price: product.price,
       unit: '', // Como mencionado antes, você pode ajustar conforme necessário
       image: 'data:image/jpeg;base64,' + product.image,
-      code:product.code
+      code:product.code,
+      priceBuy:product.precoVenda
   };
 
   }
@@ -323,7 +350,8 @@ this.index =index;
       price: null,
       unit: '',
       image: '',
-      code: ''
+      code: '',
+      priceBuy:0
     };
 
     // If you have a form reference, you might also want to reset the form directly
