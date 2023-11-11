@@ -43,7 +43,8 @@ export class PaymentComponent {
     private routerActivate: ActivatedRoute,
     private productService: ProductService,
     public dialog: MatDialog,
-    private itemProductSaleService: ItemProductSaleService
+    private itemProductSaleService: ItemProductSaleService,
+    private itemProductBuyService:ItemProductBuyService
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {saleId: number, total: number};
@@ -59,10 +60,7 @@ export class PaymentComponent {
   ngOnInit() {
 
     this.buyId = this.routerActivate.snapshot.paramMap.get('id');
-    const buyidint = parseInt(this.buyId);
-    this.itemProductSaleService.getAllProductListByBuy(buyidint).subscribe( data=>{
-      console.log(data)
-    })
+
 
     alert(this.buyId)
     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
@@ -92,7 +90,7 @@ events = [
     content: 'Confirme a chegada do produto.',
   },
 ];
-
+productsList = [];// produtos para serem finalizandos
 openEstoqueModal() {
   const dialogRef = this.dialog.open(ModalStockComponent, {
     width: '250px',
@@ -100,7 +98,45 @@ openEstoqueModal() {
   });
 
   dialogRef.afterClosed().subscribe(result => {
-    // Lógica a ser executada depois que o modal for fechado
+
+  });
+}
+atualizaEstoque(){
+  const buyidint = parseInt(this.buyId);
+  this.itemProductSaleService.getAllProductListByBuy(buyidint).subscribe(data => {
+    // Aqui está assumindo que data é um array de objetos com a estrutura desejada
+    // Transforma os dados recebidos para a nova estrutura e adiciona à lista de produtos
+    const newProducts = data.map(item => ({
+      dataEntrada: item.dataEntrada || "", // Use a data de entrada fornecida
+      quantidadeTotal: item.quantidadeTotal || "", // Use a quantidade total fornecida
+      lote: item.lote || "", // Use o lote fornecido
+      idCompra: item.idCompra  , // Use o ID de compra fornecido
+      idProduto: item.idProduto  // Use o ID do produto fornecido
+    }));
+
+    // Aqui você pode concatenar a nova lista de produtos com a lista existente
+    // ou substituir a lista antiga pela nova, dependendo do comportamento desejado
+    this.productsList = [...this.productsList, ...newProducts];
+
+    // Log para verificar se a lista foi atualizada corretamente
+    console.log(this.productsList);
+
+    //ATUALIZAR ESTOQUE
+    this.itemProductBuyService.createItemProductsBuy(this.productsList).subscribe({
+      next: (data) => {
+        if(data) {
+          console.log("Response Data:", data);
+          alert("Products updated successfully");
+        } else {
+          alert("Products updated but no content returned");
+        }
+      },
+      error: (error) => {
+        console.error("Error:", error);
+        alert("An error occurred");
+      }
+    });
+
   });
 }
 

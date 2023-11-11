@@ -30,10 +30,10 @@ export class ItemProductBuyService {
     idCompra: product.idCompra, // Use the provided idCompra
     idProduto: product.idProduto // Use the provided idProduto
   }));
-
+  console.log(JSON.stringify(payload))
   // The API endpoint should be for creating a purchase item, not a sale
   // Change the URL to match your API's endpoint for creating purchase items
-  return this.http.post(`${this.baseUrl}/ItemProdutoCompra`, payload)
+  return this.http.post(`${this.baseUrl}/ItemProdutoCompra/FinalizarProdutoCompraAsync`, payload)
     .pipe(
       catchError(this.handleError<any>('createItemProductsBuy'))
     );
