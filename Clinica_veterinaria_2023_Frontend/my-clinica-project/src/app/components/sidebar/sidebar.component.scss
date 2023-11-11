@@ -1,70 +1,16 @@
-.container-sidebar {
-  position: fixed;
-  width: 110px;
-  min-height: 700px;
-  height: -webkit-fill-available;
-  padding-top: 72px;
-  background: #fff;
-  transition: width 0.3s ease, background-color 0.3s ease; /* Transição para a largura e cor de fundo */
+// .example-container {
+//   width: 500px;
+//   height: 300px;
+//   border: 1px solid rgba(0, 0, 0, 0.5);
+// }
 
-  .container-imput {
-    .container-icone-menu {
-      padding: 8px;
-      transition: padding 0.3s ease; /* Transição para o padding */
-    }
+// .example-sidenav-content {
+//   display: flex;
+//   height: 100%;
+//   align-items: center;
+//   justify-content: center;
+// }
 
-    .caixa-menu {
-      width: 94px;
-      height: 42px;
-      background: rgba(128, 128, 128, 0.614);
-      border-radius: 4px;
-      cursor: pointer;
-      transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease; /* Transição para largura, altura e cor de fundo */
-    }
-
-    .caixa-menu.caixa-menu-select {
-      background:  #212946;
-      /* A transição já está definida na classe anterior, então não é necessário repetir */
-    }
-
-    .caixa-menu-texto {
-      font-size: 14px;
-      color: #fefefe;
-      font-weight: bold;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      transition: font-size 0.3s ease, color 0.3s ease; /* Transição para o tamanho da fonte e cor */
-    }
-  }
-}
-
-.container-sidebar.expanded {
-  width: 55px;
-  background-color: whitesmoke;
-
-  .container-base {
-    padding: 88px 16px 0px 70px;
-  }
-
-  .container-imput {
-    .container-icone-menu {
-      padding: 3px;
-      transition: padding 0.3s ease; /* Transição para o padding */
-    }
-
-    .caixa-menu {
-      width: 40px;
-      height: 42px;
-      background: rgba(128, 128, 128, 0.614);
-      border-radius: 4px;
-      cursor: pointer;
-      transition: width 0.3s ease, height 0.3s ease, background-color 0.3s ease; /* Transição para largura, altura e cor de fundo */
-    }
-
-    .caixa-menu.caixa-menu-select {
-      background:  #333f69;
-      /* A transição já está definida na classe anterior, então não é necessário repetir */
-    }
-  }
-}
+// .example-sidenav {
+//   padding: 20px;
+// }

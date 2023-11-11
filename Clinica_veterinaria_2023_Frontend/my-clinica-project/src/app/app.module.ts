@@ -17,6 +17,13 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 /**/
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { jqxGridModule } from 'jqwidgets-ng/jqxgrid';
+import { NavbarModule } from './components/navbar/navbar.module';
+import { SidebarModule } from './components/sidebar/sidebar.module';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatRadioModule } from '@angular/material/radio';
 
 
 @NgModule({
@@ -38,7 +45,13 @@ import { jqxGridModule } from 'jqwidgets-ng/jqxgrid';
     NgxSpinnerModule,
     MatProgressSpinnerModule,
     jqxGridModule,
+    NavbarModule,
 
+    MatToolbarModule, // Importe o módulo de barra de ferramentas do Angular Material
+    MatMenuModule, // Importe o módulo de menu do Angular Material
+    MatIconModule,
+    MatSidenavModule,
+    MatRadioModule
 
   ],
   providers: [
