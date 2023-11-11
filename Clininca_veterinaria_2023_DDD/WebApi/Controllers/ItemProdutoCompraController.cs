@@ -112,14 +112,13 @@ namespace WebApi.Controllers
                 return StatusCode(500, "Internal Server Error");
             }
         }
+         
 
-        [HttpPost("produtos-por-compra")]
-        [Produces("application/json")]
-        public async Task<ActionResult<IEnumerable<ItemProdutoCompra>>> ListarProdutoCompra(int idCompra)
+        [HttpGet("produtos-por-compra")] // Ensure this route matches your Angular service call
+        public async Task<ActionResult<IEnumerable<ItemProdutoCompra>>> ListarProdutoCompra([FromQuery] int idCompra)
         {
             try
             {
-                // Substitua _seuServicoDeProdutos pelo nome real do serviço injetado que fornece acesso aos dados de produtos
                 var produtos = await _interfaceItemCompraProduto.GetAllProdutoByBuy(idCompra);
 
                 if (produtos == null || !produtos.Any())
@@ -131,10 +130,10 @@ namespace WebApi.Controllers
             }
             catch (Exception ex)
             {
-                // Tratamento de exceções, log, etc.
                 return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
             }
         }
+
 
 
 

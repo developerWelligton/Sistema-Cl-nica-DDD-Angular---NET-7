@@ -38,6 +38,21 @@ export class ItemProductSaleService {
       );
   }
 
+
+  getAllProductListByBuy(idCompra: any): Observable<any> {
+    const endpoint = `${this.baseUrl}/ItemProdutoCompra/produtos-por-compra?idCompra=${idCompra}`;
+
+    const headers = new HttpHeaders({
+      'Content-Type': 'application/json',
+    });
+
+    return this.http.get(endpoint, { headers })
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+
   private handleError(error: any): Observable<never> {
     console.error('Something went wrong:', error);
     return throwError(error);

@@ -1,3 +1,4 @@
+import { ItemProductBuyService } from './../../../../services/itemProductBuy.service';
 import { ProductService } from './../../../../services/product.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
@@ -12,6 +13,7 @@ import Swal from 'sweetalert2';
 
 import { MatDialog } from '@angular/material/dialog';
 import { ModalStockComponent } from '../modal-stock/modal-stock.component';
+import { ItemProductSaleService } from 'src/app/services/itemProductSale.service';
 
 
 @Component({
@@ -40,7 +42,8 @@ export class PaymentComponent {
     private router: Router,
     private routerActivate: ActivatedRoute,
     private productService: ProductService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private itemProductSaleService: ItemProductSaleService
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {saleId: number, total: number};
@@ -56,6 +59,10 @@ export class PaymentComponent {
   ngOnInit() {
 
     this.buyId = this.routerActivate.snapshot.paramMap.get('id');
+    const buyidint = parseInt(this.buyId);
+    this.itemProductSaleService.getAllProductListByBuy(buyidint).subscribe( data=>{
+      console.log(data)
+    })
 
     alert(this.buyId)
     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
