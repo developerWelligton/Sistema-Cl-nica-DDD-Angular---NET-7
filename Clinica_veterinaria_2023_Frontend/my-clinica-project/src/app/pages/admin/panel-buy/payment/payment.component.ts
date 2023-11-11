@@ -60,7 +60,28 @@ export class PaymentComponent {
   ngOnInit() {
 
     this.buyId = this.routerActivate.snapshot.paramMap.get('id');
+    this.itemProductSaleService.getAllProductListByBuy(this.buyId).subscribe(data => {
+      debugger
+      // Aqui está assumindo que data é um array de objetos com a estrutura desejada
+      // Transforma os dados recebidos para a nova estrutura e adiciona à lista de produtos
+      const newProducts = data.map(item => ({
+        dataEntrada: item.dataEntrada || "", // Use a data de entrada fornecida
+        quantidadeTotal: item.quantidadeTotal || "", // Use a quantidade total fornecida
+        lote: item.lote || "", // Use o lote fornecido
+        idCompra: item.idCompra  , // Use o ID de compra fornecido
+        idProduto: item.idProduto  // Use o ID do produto fornecido
+      }));
 
+      // Aqui você pode concatenar a nova lista de produtos com a lista existente
+      // ou substituir a lista antiga pela nova, dependendo do comportamento desejado
+      this.productsList = [...this.productsList, ...newProducts];
+
+      // Log para verificar se a lista foi atualizada corretamente
+      console.log(this.productsList);
+
+
+
+    });
 
     alert(this.buyId)
     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
@@ -92,37 +113,12 @@ events = [
 ];
 productsList = [];// produtos para serem finalizandos
 openEstoqueModal() {
-  const dialogRef = this.dialog.open(ModalStockComponent, {
-    width: '250px',
-    // Você pode passar dados para o modal se necessário
-  });
 
-  dialogRef.afterClosed().subscribe(result => {
-
-  });
-}
-atualizaEstoque(){
   const buyidint = parseInt(this.buyId);
-  this.itemProductSaleService.getAllProductListByBuy(buyidint).subscribe(data => {
-    // Aqui está assumindo que data é um array de objetos com a estrutura desejada
-    // Transforma os dados recebidos para a nova estrutura e adiciona à lista de produtos
-    const newProducts = data.map(item => ({
-      dataEntrada: item.dataEntrada || "", // Use a data de entrada fornecida
-      quantidadeTotal: item.quantidadeTotal || "", // Use a quantidade total fornecida
-      lote: item.lote || "", // Use o lote fornecido
-      idCompra: item.idCompra  , // Use o ID de compra fornecido
-      idProduto: item.idProduto  // Use o ID do produto fornecido
-    }));
+  debugger
 
-    // Aqui você pode concatenar a nova lista de produtos com a lista existente
-    // ou substituir a lista antiga pela nova, dependendo do comportamento desejado
-    this.productsList = [...this.productsList, ...newProducts];
-
-    // Log para verificar se a lista foi atualizada corretamente
-    console.log(this.productsList);
-
-    //ATUALIZAR ESTOQUE
     this.itemProductBuyService.createItemProductsBuy(this.productsList).subscribe({
+
       next: (data) => {
         if(data) {
           console.log("Response Data:", data);
@@ -137,7 +133,17 @@ atualizaEstoque(){
       }
     });
 
+  const dialogRef = this.dialog.open(ModalStockComponent, {
+    width: '250px',
+    // Você pode passar dados para o modal se necessário
   });
+
+  dialogRef.afterClosed().subscribe(result => {
+
+  });
+}
+atualizaEstoque(){
+
 }
 
 }

@@ -38,7 +38,7 @@ export class ProductService {
       precoCompra: product.purchasePrice || 0,
       precoVenda: product.sellingPrice || 0,
       dataValidade: product.dataValidade || new Date().toISOString(),
-      quantidade: product.quantidade || 0,
+      quantidade: 0,
       status: product.status || "ativo",
       iD_Usuario: product.iD_Usuario || 1,
       idUnspsc: product.unspsc || 0,

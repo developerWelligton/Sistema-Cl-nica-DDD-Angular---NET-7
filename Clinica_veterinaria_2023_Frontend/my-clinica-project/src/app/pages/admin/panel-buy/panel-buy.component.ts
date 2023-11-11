@@ -193,11 +193,11 @@ debugger
 
   addFecharVenda(){
     // COMPRA
+
     this.buyService.createBuy(JSON.stringify(this.providerControl)).subscribe(res=>{
       const returnIdCompra = res.idCompra
-
-      // ITEM PRODUTO COMPRA
       debugger
+      // ITEM PRODUTO COMPRA
       console.log(this.productsList);
       const productListToSend = this.productsList.map(product => ({
         dataEntrada: new Date().toISOString(), // Use the date from the product, or set the current date as needed
@@ -206,55 +206,20 @@ debugger
         idCompra: returnIdCompra, // assuming you have a purchaseId, otherwise adjust as necessary
         idProduto: product.code // assuming the product has a 'code' that corresponds to idProduto
       }));
+      console.log("COMPRA ID:"+ JSON.stringify(res))
 
-      this.itemProductBuyService.createItemProductsBuy(productListToSend).subscribe(res=>{
-        alert(JSON.stringify(res))
+      this.itemProductBuyService.createItemProductsBuy(productListToSend).subscribe(data=> {
+        console.log("itemProductBuyService:"+data)
       })
+
     })
 
 
 
 
-    // Convertendo os produtos para o formato desejado antes de enviar
-    const productListToSend = this.productsList.map(product => ({
-      dataEntrada: product.dataEntrada, // Use the date from the product, or set the current date as needed
-      quantidadeTotal: product.quantity, // Use the quantity from the product
-      lote: product.lote, // Use the lot from the product
-      idCompra: '', // assuming you have a purchaseId, otherwise adjust as necessary
-      idProduto: product.code // assuming the product has a 'code' that corresponds to idProduto
-    }));
 
 
-    console.log(JSON.stringify(productListToSend))
-    // this.itemProductSaleService.sendProductList(productListToSend).subscribe(
-    //   response => {
-    //     console.log('Lista de produtos enviada com sucesso:', response);
 
-    //     // Aqui você pode colocar qualquer lógica posterior que desejar.
-    //     Swal.fire({
-    //       icon: 'success',
-    //       title: 'Sucesso!',
-    //       text: 'Lista de produtos enviada com sucesso!'
-    //     }).then(() => {
-    //       this.router.navigate(['/admin/panel-pdv/payment'], {
-    //         state: {
-    //           saleId: this.saleId,
-    //           total: this.subtotal
-    //         }
-    //       });
-
-    //     });
-    //   },
-    //   error => {
-    //     console.error("Error sending product list:", error);
-    //     Swal.fire({
-    //       icon: 'error',
-    //       title: 'Oops...',
-    //       text: 'Erro ao enviar a lista de produtos!',
-    //       footer: 'Por favor, tente novamente mais tarde.'
-    //     });
-    //   }
-    // );
   }
 
 
