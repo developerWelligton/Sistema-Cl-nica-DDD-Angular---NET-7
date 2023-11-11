@@ -24,6 +24,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatIconModule } from '@angular/material/icon';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatRadioModule } from '@angular/material/radio';
+import { MatButtonModule } from '@angular/material/button';
 
 
 @NgModule({
@@ -51,7 +52,8 @@ import { MatRadioModule } from '@angular/material/radio';
     MatMenuModule, // Importe o módulo de menu do Angular Material
     MatIconModule,
     MatSidenavModule,
-    MatRadioModule
+    MatRadioModule,
+    MatButtonModule
 
   ],
   providers: [
