@@ -93,13 +93,13 @@ namespace WebApi.Controllers
                 foreach (var item in itensProdutoCompra)
                 {
                     var produtoId = (int)item.IdProduto;
-                    var novaQuantidade = 10;
+                    var novaQuantidade = item.QuantidadeTotal;
 
                     var estoqueIdTask = await _interfaceItemProdutoEstoque.GetEstoqueByProduto(produtoId);
                     int idEstoque = estoqueIdTask;
 
                     // If estoqueId is not null, safely cast it to int and call UpdateQuantidadeEstoqueCompra
-                    await _interfaceItemProdutoEstoque.UpdateQuantidadeEstoqueCompra(((int)idEstoque), produtoId, novaQuantidade);
+                    await _interfaceItemProdutoEstoque.UpdateQuantidadeEstoqueCompra(((int)idEstoque), produtoId, (int)novaQuantidade);
                 }
 
 

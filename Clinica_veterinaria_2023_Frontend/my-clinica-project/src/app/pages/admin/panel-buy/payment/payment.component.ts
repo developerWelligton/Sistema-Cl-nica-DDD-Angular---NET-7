@@ -117,21 +117,7 @@ openEstoqueModal() {
   const buyidint = parseInt(this.buyId);
   debugger
 
-    this.itemProductBuyService.createItemProductsBuy(this.productsList).subscribe({
 
-      next: (data) => {
-        if(data) {
-          console.log("Response Data:", data);
-          alert("Products updated successfully");
-        } else {
-          alert("Products updated but no content returned");
-        }
-      },
-      error: (error) => {
-        console.error("Error:", error);
-        alert("An error occurred");
-      }
-    });
     this.itemProductBuyService.finalizarProdutoCompraAsync(this.productsList).subscribe(data=> {
       console.log(data)
     })
