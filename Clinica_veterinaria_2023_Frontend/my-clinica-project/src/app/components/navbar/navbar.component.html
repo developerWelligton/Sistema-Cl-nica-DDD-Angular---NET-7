@@ -1,18 +1,8 @@
-<div class="container-navbar">
-  <div class="navbar">
-    <a class="logo">Portal Clínica Petz</a>
-    <nav>
-      <ul>
-        <li class="profile-dropdown">
-          <a class="profile">Perfil <span>&#9660;</span></a>
-          <div class="dropdown-content">
-            <a>Ver Perfil</a>
-          </div>
-        </li>
-        <li class="mobile">
-          <strong><a (click)="logout()" class="logout">Logout</a></strong>
-        </li>
-      </ul>
-    </nav>
-  </div>
-</div>
+
+<mat-toolbar color="warn">
+  <span>Portal Solution Santos</span>
+  <!-- This fills the remaining space of the current row -->
+  <span class="example-fill-remaining-space"></span>
+  <strong><a (click)="logout()" class="logout">Logout</a></strong>
+</mat-toolbar>
+
