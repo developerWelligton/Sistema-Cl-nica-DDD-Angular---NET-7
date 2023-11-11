@@ -57,7 +57,8 @@ namespace WebApi.Controllers
                 IdEstoque = produtoEstoqueDto.IdEstoque,
                 DataEntrada = produtoEstoqueDto.DataEntrada,
                 DataSaida = produtoEstoqueDto.DataSaida,
-                Status = produtoEstoqueDto.Status
+                Status = produtoEstoqueDto.Status,
+                Quantidade_Estoque = 0
             };
 
             // Aqui estou assumindo que você tem um serviço ou repositório para adicionar o item ao estoque

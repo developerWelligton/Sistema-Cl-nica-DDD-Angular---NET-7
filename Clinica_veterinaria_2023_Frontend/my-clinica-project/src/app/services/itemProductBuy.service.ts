@@ -10,6 +10,29 @@ import { AuthService } from '../core/auth/auth.service';
 })
 export class ItemProductBuyService {
 
+
+  finalizarProdutoCompraAsync(ListProductsBuy: any[]): Observable<any> {
+    debugger
+
+  // Assuming that ListProductsBuy is an array of products to be bought,
+  // and each product item in the list has the properties dataEntrada, quantidadeTotal, lote, idCompra, and idProduto
+  // Here we create the payload array by mapping each product to the expected structure
+  const payload = ListProductsBuy.map(product => ({
+    dataEntrada: product.dataEntrada || new Date().toISOString(), // Use the provided dataEntrada or set the current timestamp
+    quantidadeTotal: product.quantidadeTotal, // Use the provided quantidadeTotal
+    lote: product.lote || "", // Use the provided lote
+    idCompra: product.idCompra, // Use the provided idCompra
+    idProduto: product.idProduto // Use the provided idProduto
+  }));
+
+  // The API endpoint should be for creating a purchase item, not a sale
+  // Change the URL to match your API's endpoint for creating purchase items
+  return this.http.post(`${this.baseUrl}/ItemProdutoCompra/FinalizarProdutoCompraAsync`, payload)
+    .pipe(
+      catchError(this.handleError<any>('createItemProductsBuy'))
+    );
+  }
+
   private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(

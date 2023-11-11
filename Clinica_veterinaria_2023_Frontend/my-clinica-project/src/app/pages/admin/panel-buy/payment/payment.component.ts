@@ -132,7 +132,9 @@ openEstoqueModal() {
         alert("An error occurred");
       }
     });
-
+    this.itemProductBuyService.finalizarProdutoCompraAsync(this.productsList).subscribe(data=> {
+      console.log(data)
+    })
   const dialogRef = this.dialog.open(ModalStockComponent, {
     width: '250px',
     // Você pode passar dados para o modal se necessário
