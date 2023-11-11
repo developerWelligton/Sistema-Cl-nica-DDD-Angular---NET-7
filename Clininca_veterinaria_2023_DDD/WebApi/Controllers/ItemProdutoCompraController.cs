@@ -37,7 +37,7 @@ namespace WebApi.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("CriarProdutosVenda")]
         [Produces("application/json")]
         public async Task<ActionResult> CriarProdutoCompra([FromBody] List<ItemProdutoCompraDto> itensProdutoCompraDto)
         {
@@ -60,21 +60,58 @@ namespace WebApi.Controllers
             // Now, you can save each item to the database
             foreach (var item in itensProdutoCompra)
             {
-                //await _interfaceItemCompraProduto.Add(item);
-                var produtoId = (int)item.IdProduto;
-                var novaQuantidade = 10;
-                var estoqueId = await _interfaceItemProdutoEstoque.GetEstoqueByProduto((int)item.IdProduto);
-
-                await _interfaceItemProdutoEstoque.UpdateQuantidadeEstoqueCompra(estoqueId, produtoId, novaQuantidade);
+                await _interfaceItemCompraProduto.Add(item);
             }
 
             // Return a successful response (modify as needed)
             return Ok(new { Message = "Produtos de compra adicionados com sucesso!" });
         }
 
-   
+        [HttpPost("FinalizarProdutoCompraAsync")]
+        [Produces("application/json")]
+        public async Task<ActionResult> FinalizarProdutoCompraAsync([FromBody] List<ItemProdutoCompraDto> itensProdutoCompraDto)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest(ModelState);
+                }
+
+                // Convert the list of ItemProdutoCompraDto to a list of ItemProdutoCompra entities
+                var itensProdutoCompra = itensProdutoCompraDto.Select(dto => new ItemProdutoCompra
+                {
+                    IdCompra = dto.IdCompra,
+                    IdProduto = dto.IdProduto,
+                    DataEntrada = dto.DataEntrada,
+                    QuantidadeTotal = dto.QuantidadeTotal,
+                    Lote = dto.Lote
+                    // Add other properties here if needed
+                }).ToList();
+
+                // Save each item to the database
+                foreach (var item in itensProdutoCompra)
+                {
+                    var produtoId = (int)item.IdProduto;
+                    var novaQuantidade = 10;
+
+                    var estoqueIdTask = await _interfaceItemProdutoEstoque.GetEstoqueByProduto(produtoId);
+                    int idEstoque = estoqueIdTask;
+
+                    // If estoqueId is not null, safely cast it to int and call UpdateQuantidadeEstoqueCompra
+                    await _interfaceItemProdutoEstoque.UpdateQuantidadeEstoqueCompra(((int)idEstoque), produtoId, novaQuantidade);
+                }
 
 
+                return Ok(new { Message = "Produtos de compra adicionados com sucesso!" });
+            }
+            catch (Exception ex)
+            { 
+
+                // Return a generic error message
+                return StatusCode(500, "Internal Server Error");
+            }
+        }
 
 
 

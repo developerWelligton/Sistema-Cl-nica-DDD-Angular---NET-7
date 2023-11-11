@@ -11,9 +11,10 @@ namespace Domain.Interfaces.IFamilia
     public interface InterfaceItemProdutoEstoque: InterfaceGeneric<ItemProdutoEstoque>
     {
         Task UpdateQuantidadeEstoque(int idEstoque, int idProduto, int novaQuantidade);
-        Task UpdateQuantidadeEstoqueCompra(int idEstoque, int idProduto, int novaQuantidade);
+
+        Task UpdateQuantidadeEstoqueCompra(int estoqueId, int produtoId, int novaQuantidade);
         Task<int>  GetEstoqueByProduto(int idProduto);
 
-        Task<List<ItemProdutoEstoque>> GetAllProdutoByStock(int idStock);
+        Task<List<ItemProdutoEstoque>> GetAllProdutoByStock(int idStock); 
     }
 }
