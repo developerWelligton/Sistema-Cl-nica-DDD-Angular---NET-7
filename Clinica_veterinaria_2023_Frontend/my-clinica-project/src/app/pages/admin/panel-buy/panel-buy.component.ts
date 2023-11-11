@@ -193,7 +193,6 @@ debugger
 
   addFecharVenda(){
     // COMPRA
-
     this.buyService.createBuy(JSON.stringify(this.providerControl)).subscribe(res=>{
       const returnIdCompra = res.idCompra
       debugger
@@ -210,14 +209,30 @@ debugger
 
       this.itemProductBuyService.createItemProductsBuy(productListToSend).subscribe(data=> {
         console.log("itemProductBuyService:"+data)
+        // Exibir um alerta de confirmação
+        Swal.fire({
+          title: 'Confirmação',
+          text: 'Compra Realizar com Sucesso, Acompanhe a timeline da sua compra!'+returnIdCompra,
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
+
+        this.itemProductBuyService.createItemProductsBuy(productListToSend).subscribe(data => {
+          console.log("itemProductBuyService:" + data);
+          // Exibir um alerta de confirmação
+          Swal.fire({
+            title: 'Confirmação',
+            text: 'Compra Realizada com Sucesso, Acompanhe a timeline da sua compra!' + returnIdCompra,
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          });
+
+          // Navegar para a rota desejada
+          this.router.navigate(['admin', 'panel-buy', 'payment', returnIdCompra]);
+        });
       })
 
     })
-
-
-
-
-
 
 
   }

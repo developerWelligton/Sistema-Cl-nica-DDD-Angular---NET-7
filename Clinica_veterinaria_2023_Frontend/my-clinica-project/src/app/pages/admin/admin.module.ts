@@ -83,7 +83,8 @@ import { ModalStockComponent } from './panel-buy/modal-stock/modal-stock.compone
     VmessageModule,
     jqxTreeModule, jqxExpanderModule,
     modalUnspscModule,
-    MatDialogModule
+    MatDialogModule,
+    MatButtonModule
 
   ],
   providers: []

@@ -1,6 +1,7 @@
 import { ProductService } from '../../../../services/product.service';
 import { Component } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { MatDialogRef } from '@angular/material/dialog';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { PaddingService } from 'src/app/services/Padding.service';
@@ -52,7 +53,8 @@ export class ModalStockComponent {
     private saleServicePaymentService:SaleServicePaymentService,
     private router: Router,
     private routerActivate: ActivatedRoute,
-    private productService: ProductService
+    private productService: ProductService,
+    public dialogRef: MatDialogRef<ModalStockComponent>
   ) {}
 
   buyId:any
@@ -89,9 +91,16 @@ events = [
     content: 'Confirme a chegada do produto.',
   },
 ];
-atualizarEstoque() {
-  // Lógica para atualizar o estoque
+
+
+confirmar() {
+  // Se o botão "Confirmar" for clicado, emitir a string 'confirmar'
+  this.dialogRef.close('confirmar');
 }
 
+cancelar() {
+  // Se o botão "Cancelar" for clicado, fechar o modal sem ação
+  this.dialogRef.close();
+}
 
 }

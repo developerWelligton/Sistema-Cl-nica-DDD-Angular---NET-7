@@ -1,8 +1,10 @@
-<h2 mat-dialog-title>Atualizar Estoque</h2>
+
 <mat-dialog-content>
   <h1>CONFIRMAÇÃO DE RECIBIMENTO</h1>
 </mat-dialog-content>
 <mat-dialog-actions align="end">
-  <button mat-button mat-dialog-close>Cancelar</button>
-  <button mat-button (click)="atualizarEstoque()">Atualizar</button>
+  <h2>Confirmação</h2>
+<p>Deseja confirmar a entrega?</p>
+<button mat-button (click)="confirmar()">Confirmar</button>
+<button mat-button (click)="cancelar()">Cancelar</button>
 </mat-dialog-actions>

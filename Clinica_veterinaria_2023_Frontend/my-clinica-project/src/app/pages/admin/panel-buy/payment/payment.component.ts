@@ -83,7 +83,6 @@ export class PaymentComponent {
 
     });
 
-    alert(this.buyId)
     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
       this.containerPadding = padding;
 
@@ -112,24 +111,36 @@ events = [
   },
 ];
 productsList = [];// produtos para serem finalizandos
+
 openEstoqueModal() {
-
-  const buyidint = parseInt(this.buyId);
   debugger
-
-
-    this.itemProductBuyService.finalizarProdutoCompraAsync(this.productsList).subscribe(data=> {
-      console.log(data)
-    })
   const dialogRef = this.dialog.open(ModalStockComponent, {
     width: '250px',
     // Você pode passar dados para o modal se necessário
   });
 
   dialogRef.afterClosed().subscribe(result => {
+    if (result === 'confirmar') {
+      // Se a confirmação for feita no modal, execute a ação
+      this.itemProductBuyService.finalizarProdutoCompraAsync(this.productsList).subscribe(data => {
+        console.log(data);
 
+        // Faça qualquer outra ação necessária após a confirmação
+        // Por exemplo, mostrar um SweetAlert (Swal) de sucesso
+        Swal.fire({
+          title: 'Sucesso',
+          text: 'Compra finalizada! Estoque foi Atualizado!',
+          icon: 'success',
+          confirmButtonText: 'Ok'
+        });
+      });
+    }
   });
 }
+
+
+
+
 atualizaEstoque(){
 
 }

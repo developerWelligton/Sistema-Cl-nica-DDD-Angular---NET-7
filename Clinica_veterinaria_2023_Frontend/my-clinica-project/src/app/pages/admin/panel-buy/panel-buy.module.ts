@@ -23,6 +23,7 @@ import { ModalStockComponent } from './modal-stock/modal-stock.component';
     NgSelectModule,
     NgxTimelineModule
 
+
   ],
   declarations: [
     PanelBuyComponent,
