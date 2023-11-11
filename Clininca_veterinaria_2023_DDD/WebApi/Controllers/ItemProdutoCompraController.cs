@@ -113,6 +113,30 @@ namespace WebApi.Controllers
             }
         }
 
+        [HttpPost("produtos-por-compra")]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<ItemProdutoCompra>>> ListarProdutoCompra(int idCompra)
+        {
+            try
+            {
+                // Substitua _seuServicoDeProdutos pelo nome real do serviço injetado que fornece acesso aos dados de produtos
+                var produtos = await _interfaceItemCompraProduto.GetAllProdutoByBuy(idCompra);
+
+                if (produtos == null || !produtos.Any())
+                {
+                    return NotFound($"Nenhum produto encontrado para a compra com ID: {idCompra}");
+                }
+
+                return Ok(produtos);
+            }
+            catch (Exception ex)
+            {
+                // Tratamento de exceções, log, etc.
+                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
+            }
+        }
+
+
 
 
     }

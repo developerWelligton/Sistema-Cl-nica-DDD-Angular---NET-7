@@ -8,8 +8,8 @@
 
     namespace Domain.Interfaces.IiTemCompraProduto
     {
-        public interface InterfaceItemCompraProduto: InterfaceGeneric<ItemProdutoCompra>
-        {
-        
-        }
+    public interface InterfaceItemCompraProduto : InterfaceGeneric<ItemProdutoCompra>
+    { 
+        Task<List<ItemProdutoCompra>> GetAllProdutoByBuy(int idCompra);
+    }
 }

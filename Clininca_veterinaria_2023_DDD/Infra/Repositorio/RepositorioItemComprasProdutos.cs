@@ -22,6 +22,20 @@ namespace Infra.Repositorio
         {
             _optionsBuilder = new DbContextOptions<ContextBase>();
 
-        } 
+        }
+
+        
+        public async Task<List<ItemProdutoCompra>> GetAllProdutoByBuy(int idCompra)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                // Realizar consulta LINQ para buscar itens de produto associados à compra
+                var query = from item in banco.ItensProdutoCompras
+                            where item.IdCompra == idCompra
+                            select item;
+
+                return await query.ToListAsync();
+            }
+        }
     }
 }
