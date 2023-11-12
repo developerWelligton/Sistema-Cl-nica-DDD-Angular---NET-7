@@ -46,7 +46,7 @@ export class AdminComponent {
       subtitle: 'Gerencie seus produtos',
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
       content: 'Descrição do card de Gerenciamento de Produto',
-      link1Url: '/gerenciar-produtos',
+      link1Url: '/admin/create-product',
       link1Text: 'Gerenciar',
       link2Url: '/produtos-info',
       link2Text: 'Informações do Produto'

@@ -74,6 +74,7 @@ export class CreateProductComponent {
 
 
   handleFile(event: any): void {
+    debugger
     console.log(event);
     this.file = event.target.files[0] ?? null;
 
