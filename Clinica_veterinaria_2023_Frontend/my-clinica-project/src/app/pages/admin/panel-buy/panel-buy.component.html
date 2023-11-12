@@ -103,11 +103,12 @@
                   <button type="button" class="btn btn-outline-primary" (click)="addItem()"  *ngIf="productSeached == true">Adicionar Item</button>
                 </div>
                 <div class="input-group mb-3"  >
-                  <button type="button" class="btn btn-success" (click)="addFecharVenda()" *ngIf="fecharCompra === true">Fechar Venda</button>
+                  <button type="button" class="btn btn-success" (click)="addFecharVenda()" *ngIf="fecharCompra === true && editarQuantidade === false;">Fechar Venda</button>
+
                 </div>
 
                 <div class="input-group mb-3"  >
-                  <button type="button" class="btn btn-success" (click)=" Editar(product.quantity)" >Atualizar Quantidade</button>
+                  <button type="button" class="btn btn-success" *ngIf="editarQuantidade ===true" (click)=" Editar(product.quantity)" >Atualizar Quantidade</button>
                 </div>
               </li>
 
@@ -124,7 +125,3 @@
 
     </div>
 
-
-    <li>
-      <button mat-raised-button (click)="openDialog()">Pick one</button>
-    </li>

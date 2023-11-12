@@ -272,7 +272,9 @@ debugger
 
 
   index: any
+  editarQuantidade:boolean=false;
   EditarItemProdutoPorVenda(index: any) {
+    this.editarQuantidade = true;
     this.startEdit();
     const product = this.productsList[index];
 this.index =index;
@@ -290,6 +292,7 @@ this.index =index;
 
 
   Editar( newQuantity: number ) {
+    this.editarQuantidade = false;
     // Find the product in the products list
     const productIndex = this.productsList[this.index];
 
