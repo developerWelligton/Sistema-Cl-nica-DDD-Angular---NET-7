@@ -42,7 +42,7 @@ import { CreateBuyComponent } from './create-buy/create-buy.component';
 import { PanelBuyComponent } from './panel-buy/panel-buy.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalStockComponent } from './panel-buy/modal-stock/modal-stock.component';
-
+import {MatCardModule} from '@angular/material/card';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -84,7 +84,8 @@ import { ModalStockComponent } from './panel-buy/modal-stock/modal-stock.compone
     jqxTreeModule, jqxExpanderModule,
     modalUnspscModule,
     MatDialogModule,
-    MatButtonModule
+    MatButtonModule,
+    MatCardModule
 
   ],
   providers: []
