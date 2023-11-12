@@ -86,7 +86,7 @@ export class PanelBuyComponent {
     private buyService: BuyService,
     private itemProductBuyService: ItemProductBuyService
   ) {}
-
+  fecharCompra:boolean=false
   ngOnInit() {
     //padding
     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
@@ -135,12 +135,13 @@ debugger
   }
 
   //
+  productSeached:boolean=false;
   searchProduct() {
     this.productService.getProductByCode(this.productCode)
         .subscribe(
             response => {
                 console.log(response);
-
+              this.productSeached=true;
                 // Mapeando os dados retornados para o objeto 'Product'
                 this.product = {
                     quantity: 1,
@@ -184,6 +185,9 @@ debugger
 
         // Call the calculateSubtotal method
         this.calculateSubtotal();
+        this.fecharCompra =true;
+        this.productSeached=false;
+
       }
 
     // Calculate subtotal
@@ -191,9 +195,11 @@ debugger
     this.subtotal = this.productsList.reduce((acc, item) => acc + (item.precoVenda * item.quantity), 0);
   }
 
+
   addFecharVenda(){
     // COMPRA
     this.buyService.createBuy(JSON.stringify(this.providerControl)).subscribe(res=>{
+
       const returnIdCompra = res.idCompra
       debugger
       // ITEM PRODUTO COMPRA
@@ -353,6 +359,9 @@ this.index =index;
         // Handle error as needed
     })
   }
+
+  //
+
 }
 
 

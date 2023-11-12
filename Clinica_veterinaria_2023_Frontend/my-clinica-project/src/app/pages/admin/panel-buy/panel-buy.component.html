@@ -1,30 +1,15 @@
-<navbar></navbar>
-<sidebar></sidebar>
 
 
-<div class="container-base" [style.padding]="containerPadding">
-  <!-- Conteúdo da página -->
-  <div class="content-page">
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-      <h2>
-       <a href="/admin">Mural Admin</a>
-      <span class="separator">»</span>
-      Página Atual
-      </h2>
-    </div>
-    <!-- Cabeçalho do cartão -->
-    <div class="card-header">
-      <!-- Título do cartão -->
-      <h3 class="card-title">PONTO DE COMPRA</h3>
-
-    </div>
-    <!-- Formulário -->
-
+ <!-- Formulário -->
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
+ <br>
     <div class="container">
+      <h1 class="text-center my-3">PONTO DE COMPRA</h1>
       <div class="row align-items-start">
-        <div class="col-8">
-
           <div class="input-group mb-3">
             <button class="btn btn-outline-success" type="button" id="button-addon1" (click)="searchProduct()">Buscar Produto</button>
             <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="productCode" placeholder="Adicione Código do produto">
@@ -32,7 +17,7 @@
 
 
 
-
+          <div class="col-12 col-md-4 order-2 order-md-2">
           <div class="table-responsive">
               <table class="table">
                 <thead>
@@ -72,19 +57,19 @@
                 </tbody>
               </table>
           </div>
-
-
         </div>
 
-        <div class="col-4">
-          <div class="card" style="width: 22.8rem;">
-            <div class="card-body">
-              <h5 class="card-title">Subtotal:</h5>
-              <h6 class="card-subtitle mb-2 text-muted" style="color: black;" id="subtotal" >{{ subtotal | currency:'BRL':'symbol':'1.2-2' }}</h6>
-              <ul class="list-group list-group-flush">
-                <li class="list-group-item">
 
-                  <label>FORNECEDORES</label>
+        <div class="col-12 col-md-8 order-1 order-md-1">
+          <div class="card-body" style="width: 100%;">
+            <h2 class="card-title" style="color: red;">Subtotal:</h2>
+            <h1 class="card-subtitle mb-2 text-muted"  id="subtotal" >{{ subtotal | currency:'BRL':'symbol':'1.2-2' }}</h1>
+            <br>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">
+
+                <div class="mb-3">
+                   <label>FORNECEDORES</label>
                   <ng-select class="select-padrao"
                   [(ngModel)]="providerControl"
                               [items]="providers"
@@ -93,42 +78,41 @@
                               [multiple]="false"
                               [clearable]="true">
                   </ng-select>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Descrição</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled  id="description" name="description" [(ngModel)]="product.description">
+                </div>
 
+              </li>
+              <li class="list-group-item">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1" class="form-label">Valor</label>
+                  <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled  id="value" name="value" [(ngModel)]="product.price" >
+                </div>
+              </li>
+              <li class="list-group-item">
                   <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Descrição</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled  id="description" name="description" [(ngModel)]="product.description">
-                  </div>
+                    <label for="productQuantity" class="form-label">Quantidade</label>
+                    <input type="number" class="form-control" id="productQuantity" aria-describedby="quantityHelp" name="quantity" [(ngModel)]="product.quantity" placeholder="Adicione a quantidade">
 
-                </li>
-                <li class="list-group-item">
-                  <div class="mb-3">
-                    <label for="exampleInputEmail1" class="form-label">Valor</label>
-                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled  id="value" name="value" [(ngModel)]="product.priceBuy" >
                   </div>
-                </li>
-                <li class="list-group-item">
-                    <div class="mb-3">
-                      <label for="productQuantity" class="form-label">Quantidade</label>
-                      <input type="number" class="form-control" id="productQuantity" aria-describedby="quantityHelp" name="quantity" [(ngModel)]="product.quantity" placeholder="Adicione a quantidade">
+              </li>
+              <li class="list-group-item">
+                <div class="input-group mb-3"  >
+                  <button type="button" class="btn btn-outline-primary" (click)="addItem()"  *ngIf="productSeached == true">Adicionar Item</button>
+                </div>
+                <div class="input-group mb-3"  >
+                  <button type="button" class="btn btn-success" (click)="addFecharVenda()" *ngIf="fecharCompra === true">Fechar Venda</button>
+                </div>
 
-                    </div>
-                </li>
-                <li class="list-group-item">
-                  <div class="input-group mb-3" *ngIf="isEditing != true">
-                    <button type="button" class="btn btn-outline-primary" (click)="addItem()">Adicionar Item</button>
-                  </div>
-                  <div class="input-group mb-3" *ngIf="isEditing != true">
-                    <button type="button" class="btn btn-success" (click)="addFecharVenda()">Fechar Venda</button>
-                  </div>
+                <div class="input-group mb-3"  >
+                  <button type="button" class="btn btn-success" (click)=" Editar(product.quantity)" >Atualizar Quantidade</button>
+                </div>
+              </li>
 
-                  <div class="input-group mb-3" *ngIf="isEditing == true">
-                    <button type="button" class="btn btn-success" (click)=" Editar(product.quantity)" >Atualizar Quantidade</button>
-                  </div>
-                </li>
+            </ul>
 
-              </ul>
-
-            </div>
           </div>
 
 
@@ -141,91 +125,6 @@
     </div>
 
 
-
-
-  </div>
-</div>
-
-
-<!--
-           <label for="vendor">Cliente:</label>
-           <input type="text" id="vendor" name="vendor" placeholder="Welligton">
-
-           <label for="code">Código:</label>
-           <input type="text" id="code" name="code" [(ngModel)]="productCode" placeholder="Adicione Código do produto">
-           <br><br>
-           <button (click)="searchProduct()">Buscar</button>
-            <br>
-            <br>
-            <br>
-
-
-            <label for="description">Descrição:</label>
-            <input disabled type="text" id="description" name="description" [(ngModel)]="product.description"  >
-            <label for="value">Valor:</label>
-            <input disabled type="text" id="value" name="value" [(ngModel)]="product.price"  >
-            <label for="unit">Unidade do Produto:</label>
-            <input disabled type="text" id="unit" name="unit" [(ngModel)]="product.unit"  >
-
-
-            <label for="quantity">Quantidade:</label>
-            <input type="text" id="quantity" name="quantity" [(ngModel)]="product.quantity" placeholder="Adicione a quantidade">
-            <br>
-            <br>
-            <button (click)="addItem()">Adicionar Item</button>
-            <br>
-            <br>
-        </div>
-
-        <div class="image-container">
-          <img [src]="product.image" width="400px" height="400px" alt="Product Image" class="product-image">
-      </div>
-      </div>
-
-      <table class="fiscal-table">
-        <thead>
-          <tr>
-            <th>Item</th>
-            <th>Código</th>
-            <th>Produto</th>
-            <th>Unidade</th>
-            <th>Quantidade</th>
-            <th>Preço</th>
-            <th>Preço Total</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let item of productsList; let i = index">
-            <td>{{ i + 1 }}</td>
-            <td>{{ item.code }}</td>
-            <td>{{ item.description }}</td>
-            <td>{{ item.unit }}</td>
-            <td>{{ item.quantity }}</td>
-            <td>{{ item.price | currency:'BRL' }}</td>
-            <td>{{ item.price * item.quantity | currency:'BRL' }}</td>
-          </tr>
-        </tbody>
-      </table>
-
-
-
-
-    <div>
-      <label for="subtotal">Subtotal:</label>
-      <span style="color: black;" id="subtotal">{{ subtotal | currency:'BRL':'symbol':'1.2-2' }}</span>
-  </div>
-
-      <div>
-          <label for="date_time">Data/Hora:</label>
-          <input type="datetime-local" id="date_time" name="date_time">
-      </div>
-
-      <div>
-          <button type="submit">Consultar Produto</button>
-          <button type="reset" (click)="addFecharVenda()">Fechar Venda</button>
-          <button type="button">Cancelar Venda</button>
-      </div>
-
-  </div>
-
--->
+    <li>
+      <button mat-raised-button (click)="openDialog()">Pick one</button>
+    </li>
