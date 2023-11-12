@@ -27,9 +27,7 @@ export class AdminComponent {
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
       content: 'Descrição do card de Compras',
       link1Url: '/admin/panel-pdv',
-      link1Text: 'Iniciar Venda',
-      link2Url: '/mais-info',
-      link2Text: 'Mais Informações'
+      link1Text: 'Iniciar Venda'
     },
     {
       title: 'Painel Compra',
@@ -37,9 +35,7 @@ export class AdminComponent {
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
       content: 'Descrição do card de Gerenciamento de Produto',
       link1Url: '/admin/panel-buy',
-      link1Text: 'Iniciar Compra',
-      link2Url: '/produtos-info',
-      link2Text: 'Informações do Produto'
+      link1Text: 'Iniciar Compra'
     },
     {
       title: 'Painel Produto',
@@ -47,9 +43,9 @@ export class AdminComponent {
       image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
       content: 'Descrição do card de Gerenciamento de Produto',
       link1Url: '/admin/create-product',
-      link1Text: 'Gerenciar',
-      link2Url: '/produtos-info',
-      link2Text: 'Informações do Produto'
+      link1Text: 'Iniciar Cadastro de Produto',
+      link2Url: '/admin/list-product',
+      link2Text: 'Ver Produtos'
     },
     {
       title: 'Painel Estoque',
@@ -59,8 +55,9 @@ export class AdminComponent {
       link1Url: '/gerenciar-produtos',
       link1Text: 'Gerenciar',
       link2Url: '/produtos-info',
-      link2Text: 'Informações do Produto'
-    },
+      link2Text: 'Informações do Produto',
+      link3Url: '/produtos-info',
+      link3Text: 'Informações do Produto'}
     // ... mais cards ...
   ];
 

@@ -1,24 +1,5 @@
-<navbar></navbar>
-<sidebar></sidebar>
-<div class="container-base" [style.padding]="containerPadding">
-  <!-- Page Content -->
-  <div class="content-page">
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-      <h2>
-       <a href="/admin">Mural Admin</a>
-      <span class="separator">»</span>
-      Current Page
-      </h2>
-    </div>
+<div class="container m-5">
     <!-- Card Header -->
-    <div class="card-header">
-      <h3 class="card-title">Registered Products</h3>
-    </div>
-    <!-- Angular Material Table for Users -->
-    <div class="card-content">
-    <br>
+    <h1 >Produtos Registrados</h1>
     <app-user-product [productList]="productList" (deleteRequest)="onDeleteRequest($event)"></app-user-product>
-    </div>
-  </div>
 </div>

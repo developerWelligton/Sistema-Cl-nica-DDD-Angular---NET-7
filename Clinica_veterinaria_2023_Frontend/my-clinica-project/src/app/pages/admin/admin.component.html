@@ -1,6 +1,7 @@
 <div class="container">
-  <div class="row" *ngFor="let row of cardRows">
-    <mat-card class="example-card" *ngFor="let card of row">
+  <div class="row">
+    <!-- Itera sobre cada card individualmente -->
+    <mat-card class="example-card" *ngFor="let card of cards">
       <mat-card-header>
         <mat-card-title>{{card.title}}</mat-card-title>
         <mat-card-subtitle>{{card.subtitle}}</mat-card-subtitle>
@@ -10,9 +11,15 @@
         <p>{{card.content}}</p>
       </mat-card-content>
       <mat-card-actions>
-        <a mat-button [routerLink]="card.link1Url">{{card.link1Text}}</a>
-        <a mat-button [routerLink]="card.link2Url">{{card.link2Text}}</a>
+        <!-- Utiliza list-group do Bootstrap para os links -->
+        <div class="list-group list-group-flush">
+          <a *ngIf="card.link1Url" class="list-group-item list-group-item-action" [routerLink]="card.link1Url">{{card.link1Text}}</a>
+          <a *ngIf="card.link2Url" class="list-group-item list-group-item-action" [routerLink]="card.link2Url">{{card.link2Text}}</a>
+          <a *ngIf="card.link3Url" class="list-group-item list-group-item-action" [routerLink]="card.link3Url">{{card.link3Text}}</a>
+          <!-- Adicione mais links condicionais conforme necessário -->
+        </div>
       </mat-card-actions>
+
     </mat-card>
   </div>
 </div>
