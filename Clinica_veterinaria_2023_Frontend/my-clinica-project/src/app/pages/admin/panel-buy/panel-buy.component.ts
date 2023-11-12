@@ -20,6 +20,8 @@ import { SUPPLIERS } from 'src/app/mocks/supplier.mock';
 import { ProviderService } from 'src/app/services/provider.service';
 import { BuyService } from 'src/app/services/buy.service';
 import { ItemProductBuyService } from 'src/app/services/itemProductBuy.service';
+import { ModalProviderComponent } from './modal-provider/modal-provider.component';
+import { MatDialog } from '@angular/material/dialog';
 
 
 export enum UserGroup {
@@ -84,7 +86,8 @@ export class PanelBuyComponent {
     private unspscService: UnspscService,
     private providerService: ProviderService,
     private buyService: BuyService,
-    private itemProductBuyService: ItemProductBuyService
+    private itemProductBuyService: ItemProductBuyService,
+    public dialog: MatDialog,
   ) {}
   fecharCompra:boolean=false
   ngOnInit() {
@@ -100,7 +103,6 @@ debugger
     });
     this.populateUserGroups();
 
-    this.loadProviders()
   }
 
   private populateUserGroups(): void {
@@ -196,9 +198,10 @@ debugger
   }
 
 
-  addFecharVenda(){
+  addFecharCompra(){
+    this.openAddProvider();
     // COMPRA
-    this.buyService.createBuy(JSON.stringify(this.providerControl)).subscribe(res=>{
+    this.buyService.createBuy(this.idFornecedor).subscribe(res=>{
 
       const returnIdCompra = res.idCompra
       debugger
@@ -347,23 +350,30 @@ this.index =index;
     // this.yourFormReference.reset();
   }
 
-  providers: any;
   providerControl: any;
   onValueChange(): void {
 
   }
 
-  loadProviders(): void {
-    this.providerService.getAllProviders().subscribe((data: any[]) => {
-      this.providers = data
-        console.log(data)
-    }, error => {
-        console.error('Error loading FORNECEDORES :', error);
-        // Handle error as needed
-    })
-  }
+
 
   //
+  idFornecedor: number
+  openAddProvider() {
+    const dialogRef = this.dialog.open(ModalProviderComponent, {
+      width: '250px',
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+
+      if (result?.confirmed) {
+        // Aqui você acessa o valor selecionado
+        const selectedProvider = result.selectedProvider;
+        console.log('Fornecedor selecionado:', selectedProvider);
+        this.idFornecedor= selectedProvider
+      }
+    });
+  }
 
 }
 

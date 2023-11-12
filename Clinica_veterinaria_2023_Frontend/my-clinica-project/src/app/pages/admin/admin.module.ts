@@ -43,6 +43,7 @@ import { PanelBuyComponent } from './panel-buy/panel-buy.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { ModalStockComponent } from './panel-buy/modal-stock/modal-stock.component';
 import {MatCardModule} from '@angular/material/card';
+import { ModalProviderComponent } from './panel-buy/modal-provider/modal-provider.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -64,7 +65,8 @@ import {MatCardModule} from '@angular/material/card';
     ListProviderComponent,
     ProviderTableComponent,
     CreateBuyComponent,
-    ModalStockComponent
+    ModalStockComponent,
+    ModalProviderComponent
   ],
   exports:[CreateUserComponent,UserProductComponent],
   imports: [

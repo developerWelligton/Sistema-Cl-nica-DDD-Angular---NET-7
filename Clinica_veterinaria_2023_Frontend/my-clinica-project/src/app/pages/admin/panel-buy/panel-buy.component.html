@@ -68,17 +68,7 @@
             <ul class="list-group list-group-flush">
               <li class="list-group-item">
 
-                <div class="mb-3">
-                   <label>FORNECEDORES</label>
-                  <ng-select class="select-padrao"
-                  [(ngModel)]="providerControl"
-                              [items]="providers"
-                              bindLabel="nome"
-                              bindValue="idFornecedor"
-                              [multiple]="false"
-                              [clearable]="true">
-                  </ng-select>
-                </div>
+
                 <div class="mb-3">
                   <label for="exampleInputEmail1" class="form-label">Descrição</label>
                   <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" disabled  id="description" name="description" [(ngModel)]="product.description">
@@ -103,7 +93,7 @@
                   <button type="button" class="btn btn-outline-primary" (click)="addItem()"  *ngIf="productSeached == true">Adicionar Item</button>
                 </div>
                 <div class="input-group mb-3"  >
-                  <button type="button" class="btn btn-success" (click)="addFecharVenda()" *ngIf="fecharCompra === true && editarQuantidade === false;">Fechar Venda</button>
+                  <button type="button" class="btn btn-success" (click)="addFecharCompra()" *ngIf="fecharCompra === true && editarQuantidade === false;">Fechar Venda</button>
 
                 </div>
 

@@ -19,7 +19,7 @@ export class BuyService {
               ) { }
 
 
-  createBuy(buy: any): Observable<any> {
+  createBuy(idFornecedor: any): Observable<any> {
     // Assuming `stock` contains `total`, `dataCompra`, `status`, and `idFornecedor`
     // Corrigindo/Validando o formato do produto aqui
     debugger
@@ -28,7 +28,7 @@ export class BuyService {
       dataCompra: "2023-11-10T03:58:11.872Z", // assuming stock has a 'dataCompra' property
       status: "Encomendado", // assuming stock has a 'status' property
       iD_Usuario: 1, // This is hardcoded to 1, as in your example
-      idFornecedor: Number(buy) // assuming stock has a 'idFornecedor' property
+      idFornecedor: Number(idFornecedor) // assuming stock has a 'idFornecedor' property
     };
 
     return this.http.post(`${this.baseUrl}/Compra`, payload)

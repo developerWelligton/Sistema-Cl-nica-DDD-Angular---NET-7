@@ -1,0 +1,24 @@
+<div class="container" style="color: black;" >
+  <div class="my-4">
+    <h1 class="text-center mb-3">FECHAMENTO DE VENDA</h1>
+    <h2 class="mb-2">Confirmação</h2>
+    <p class="mb-3">Selecione o fornecedor da compra</p>
+
+    <div class="mb-3">
+      <label for="fornecedorSelect" class="form-label">FORNECEDORES</label>
+      <ng-select id="fornecedorSelect" class="form-select"
+                 [(ngModel)]="providerControl"
+                 [items]="providers"
+                 bindLabel="nome"
+                 bindValue="idFornecedor"
+                 [multiple]="false"
+                 [clearable]="true">
+      </ng-select>
+    </div>
+
+    <div class="text-end">
+      <button type="button" class="btn btn-primary" (click)="confirmar()">Confirmar</button>
+      <button type="button" class="btn btn-secondary" (click)="cancelar()">Cancelar</button>
+    </div>
+  </div>
+</div>
