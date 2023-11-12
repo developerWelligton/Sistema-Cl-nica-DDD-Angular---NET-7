@@ -67,23 +67,36 @@ export class CreateEstoqueComponent {
 
 
 
-
-
-
-
   submitForm(event?: Event): void {
-    debugger
     event?.preventDefault();
 
-      if (this.createEstoqueForm.valid) {
-        console.log('Formulário Enviado', this.createEstoqueForm.value);
-
-          this.stockService.createStock(this.createEstoqueForm.value).subscribe(res=> {
-            console.log(res)
-          })
-
-      }
+    if (this.createEstoqueForm.valid) {
+      // Diálogo de confirmação SweetAlert2
+      Swal.fire({
+        title: 'Você tem certeza?',
+        text: "Confirme para prosseguir com o cadastro!",
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Sim, cadastre!'
+      }).then((result) => {
+        if (result.isConfirmed) {
+          // Se confirmado, prossegue com a submissão
+          this.stockService.createStock(this.createEstoqueForm.value).subscribe(res => {
+            console.log(res);
+            Swal.fire(
+              'Cadastrado!',
+              'O cadastro foi realizado com sucesso.',
+              'success'
+            );
+            this.createEstoqueForm.reset()
+          });
+        }
+      });
+    }
   }
+
 
 
 }
