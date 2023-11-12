@@ -8,7 +8,11 @@ import { SidebarModule } from 'src/app/components/sidebar/sidebar.module';
 import { NavbarModule } from 'src/app/components/navbar/navbar.module';
 import { PanelPdvRoutingModule } from './panel-pdv-routing.module';
 import { PaymentComponent } from './payment/payment.component';
-
+//
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatTableModule } from '@angular/material/table';
+import { MatCardModule } from '@angular/material/card';
 @NgModule({
   imports: [
     FormsModule,
@@ -17,7 +21,11 @@ import { PaymentComponent } from './payment/payment.component';
     NavbarModule,
     SidebarModule,
     SharedModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    MatInputModule,
+    MatButtonModule,
+    MatTableModule,
+    MatCardModule
 
   ],
   declarations: [
