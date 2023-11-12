@@ -120,7 +120,9 @@ debugger
   }
 
   //
+  productSeached:boolean=false;
   searchProduct() {
+    this.productSeached = true;
     this.productService.getProductByCode(this.productCode)
         .subscribe(
             response => {
@@ -135,6 +137,7 @@ debugger
                     image: 'data:image/jpeg;base64,' + response.imagemBase64,
                     code:response.idProduto
                 };
+
             },
             error => {
                 console.error("Error fetching product:", error);
@@ -149,7 +152,7 @@ debugger
             }
         );
     }
-
+    fecharVenda:boolean=false
     addItem() {
       // se existir venda, faça somente adição de item
       if (!this.saleId) {
@@ -162,6 +165,7 @@ debugger
         this.saleProductService.createSale(saleData).subscribe(response => {
           this.saleId = response.idVenda;  // Assuming the response contains an 'id' field with the sale's ID
           this.calculateSubtotal();
+
         }, error => {
           console.error("Error initiating sale:", error);
           Swal.fire({
@@ -171,6 +175,7 @@ debugger
             footer: 'Se o problema persistir, contate o suporte.'
           });
         });
+
       } else {
         // If saleId is already set, just add the product to the list
         this.productsList.push({ ...this.product });
@@ -187,6 +192,8 @@ debugger
 
         // Call the calculateSubtotal method
         this.calculateSubtotal();
+        this.productSeached =false;
+        this.fecharVenda = true;
       }
     }
 

@@ -64,8 +64,9 @@
 
     <div class="col-12 col-md-8 order-1 order-md-1">
         <div class="card-body" style="width: 100%;">
-          <h5 class="card-title">Subtotal:</h5>
-          <h6 class="card-subtitle mb-2 text-muted" style="color: black;" id="subtotal" >{{ subtotal | currency:'BRL':'symbol':'1.2-2' }}</h6>
+          <h2 class="card-title" style="color: red;">Subtotal:</h2>
+          <h1 class="card-subtitle mb-2 text-muted"  id="subtotal" >{{ subtotal | currency:'BRL':'symbol':'1.2-2' }}</h1>
+          <br>
           <ul class="list-group list-group-flush">
             <li class="list-group-item">
 
@@ -89,10 +90,10 @@
                 </div>
             </li>
             <li class="list-group-item">
-              <div class="input-group mb-3" *ngIf="isEditing != true">
+              <div class="input-group mb-3" *ngIf="productSeached == true">
                 <button type="button" class="btn btn-outline-primary" (click)="addItem()">Adicionar Item</button>
               </div>
-              <div class="input-group mb-3" *ngIf="isEditing != true">
+              <div class="input-group mb-3" *ngIf="fecharVenda == true">
                 <button type="button" class="btn btn-success" (click)="addFecharVenda()">Fechar Venda</button>
               </div>
 

@@ -126,7 +126,10 @@ export class PaymentComponent {
             title: 'Link de pagamento criado com sucesso!',
             html: `O link de pagamento foi aberto em uma nova aba. Se não abrir automaticamente, clique <a href="${response.url}" target="_blank">aqui</a>.`,
             confirmButtonText: 'Fechar'
+          }).then(() => {
+            this.router.navigate(['/admin/panel-pdv']);  // Redirecionamento após a confirmação no Swal
           });
+
         } else {
           Swal.fire({
             icon: 'error',
@@ -164,7 +167,7 @@ export class PaymentComponent {
 
       this.saleServicePaymentService.sendPayment(paymentData).subscribe(response => {
         console.log('Resposta:', response);
-
+debugger
         // Confirmação usando Swal.fire
         Swal.fire({
           icon: 'success',
@@ -204,11 +207,13 @@ export class PaymentComponent {
 
   processCashPayment(): void {
     this.isCashPaymentCardVisible = true;
+    this.isPaymentCardVisible = false;
   }
 
 
 
   showPaymentCard(): void {
     this.isPaymentCardVisible = true;
+    this.isCashPaymentCardVisible = false;
   }
 }
