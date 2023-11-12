@@ -1,70 +1,58 @@
-<navbar></navbar>
-<sidebar></sidebar>
+<div class="container mt-5">
+  <button type="button" class="btn btn-primary mb-3" routerLink="/admin/list-stock">Voltar</button>
+  <h1>Ver Produtos do Estoque #{{ this.stokeId }}</h1>
+  <button type="button" class="btn btn-success mb-3" (click)="openModal()">Adicionar Produto</button>
 
-<div class="container-base" [style.padding]="containerPadding">
-  <!-- Page Content -->
-  <div class="content-page">
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-      <h2>
-       <a href="/admin">Mural Admin</a>
-      <span class="separator">»</span>
-      Current Page
-      </h2>
-    </div>
-    <button (click)="openModal()">Adicionar Produto</button>
 
-    <div class="table-responsive">
-      <table class="table-erp">
-        <thead>
-          <tr>
-            <th>Código Do Produto</th>
-            <th>Nome do Produto</th>
-            <th>Status do Estoque</th>
-            <th>Quantidade</th>
-            <th>Ações</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr *ngFor="let product of productList.slice()">
-            <td>{{ product.idProduto }}</td>
-            <td>{{ product.produto?.nome }}</td><!-- Supondo que o campo 'produto' seja um nome ou descrição -->
-            <td>{{ product.status }}</td>
-            <td>{{ product.quantidade_Estoque }}</td>
-            <td>
-              <button type="button"   (click)="deleteProductFromStock(product.idProduto)" >Excluir</button>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Código Do Produto</th>
+          <th>Nome do Produto</th>
+          <th>Status do Estoque</th>
+          <th>Quantidade</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let product of productList.slice()">
+          <td>{{ product.idProduto }}</td>
+          <td>{{ product.produto?.nome }}</td>
+          <td>{{ product.status }}</td>
+          <td>{{ product.quantidade_Estoque }}</td>
+          <td>
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteProductFromStock(product.idProduto)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="modal" [ngClass]="{'show-modal': showModal}">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="btn-close" aria-label="Close" (click)="onCloseModal()"></button>
+        <h2 class="modal-title">Selecionar Produto</h2>
+      </div>
+      <div class="modal-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+          <div class="mb-3">
+            <label for="productList" class="form-label">Escolha um produto:</label>
+            <ng-select class="form-control"
+                 formControlName="products"
+                 [items]="products"
+                 bindLabel="nome"
+                 bindValue="idProduto"
+                 [multiple]="false"
+                 [clearable]="true">
+            </ng-select>
+          </div>
+          <button type="submit" class="btn btn-primary">Confirmar</button>
+          <button type="button" class="btn btn-secondary" (click)="onCloseModal()">Cancelar</button>
+        </form>
+      </div>
     </div>
   </div>
 </div>
-
-<div class="modal" [ngClass]="{'show-modal': showModal}">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <div class="modal-header">
-      <span class="close" (click)="onCloseModal()">&times;</span>
-      <h2>Select Product</h2>
-    </div>
-    <div class="modal-body">
-      <form [formGroup]="form" (ngSubmit)="onSubmit()">
-        <label for="productList">Choose a product:</label>
-        <ng-select class="select-padrao"
-             formControlName="products"
-             [items]="products"
-             bindLabel="nome"
-             bindValue="idProduto"
-             [multiple]="false"
-             [clearable]="true">
-        </ng-select>
-
-        <br>
-        <button type="submit">Confirm</button>
-        <button type="button" (click)="onCloseModal()">Cancel</button>
-      </form>
-    </div>
-  </div>
-</div>
-

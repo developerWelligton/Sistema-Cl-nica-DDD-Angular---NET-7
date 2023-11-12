@@ -24,7 +24,7 @@ export class AdminComponent {
     {
       title: 'Painel Venda',
       subtitle: 'Aqui você pode fazer compras',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+      image: 'assets/images/venda.jpg',
       content: 'Descrição do card de Compras',
       link1Url: '/admin/panel-pdv',
       link1Text: 'Iniciar Venda'
@@ -32,7 +32,7 @@ export class AdminComponent {
     {
       title: 'Painel Compra',
       subtitle: 'Gerencie seus produtos',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+      image: 'assets/images/compra2.png',
       content: 'Descrição do card de Gerenciamento de Produto',
       link1Url: '/admin/panel-buy',
       link1Text: 'Iniciar Compra'
@@ -40,7 +40,7 @@ export class AdminComponent {
     {
       title: 'Painel Produto',
       subtitle: 'Gerencie seus produtos',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+      image: 'assets/images/produto.png',
       content: 'Descrição do card de Gerenciamento de Produto',
       link1Url: '/admin/create-product',
       link1Text: 'Iniciar Cadastro de Produto',
@@ -50,14 +50,14 @@ export class AdminComponent {
     {
       title: 'Painel Estoque',
       subtitle: 'Gerencie seus produtos',
-      image: 'https://material.angular.io/assets/img/examples/shiba2.jpg',
+      image: 'assets/images/estoque.jpg',
       content: 'Descrição do card de Gerenciamento de Produto',
       link1Url: '/admin/list-stock/create-estoque',
       link1Text: 'Adicionar Novo Estoque',
-      link2Url: '/produtos-info',
-      link2Text: 'Informações do Produto',
-      link3Url: '/produtos-info',
-      link3Text: 'Informações do Produto'}
+      link2Url: '/admin/list-stock',
+      link2Text: 'Ver Estoques',
+      link3Url:  '',
+      link3Text: ''}
     // ... mais cards ...
   ];
 

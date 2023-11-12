@@ -1,25 +1,26 @@
-<div class="table-responsive">
-  <table class="table-erp">
-    <thead>
-      <tr>
-        <th>Código Do Estoque</th>
-        <th>Sala</th>
-        <th>Prateleira</th>
-        <th>Ações</th>
-
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let stock of stockList.slice().reverse()">
-        <td>{{ stock.idEstoque }}</td>
-        <td>{{ stock.sala }}</td>
-        <td>{{ stock.prateleira }}</td>
-        <td>
-          <button type="button"   (click)="editStock(stock)" >Editar</button>
-          <button type="button" (click)="viewStock(stock.idEstoque)">Visualizar</button>
-          <button type="button"   (click)="deleteStock(stock.idEstoque)" >Excluir</button>
-        </td>
-      </tr>
-    </tbody>
-  </table>
+<div class="container mt-4">
+  <div class="table-responsive">
+    <table class="table table-striped table-hover">
+      <thead class="table-dark">
+        <tr>
+          <th>Código Do Estoque</th>
+          <th>Sala</th>
+          <th>Prateleira</th>
+          <th>Ações</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let stock of stockList.slice().reverse()">
+          <td>{{ stock.idEstoque }}</td>
+          <td>{{ stock.sala }}</td>
+          <td>{{ stock.prateleira }}</td>
+          <td>
+            <button type="button" class="btn btn-primary btn-sm me-2" (click)="editStock(stock)">Editar</button>
+            <button type="button" class="btn btn-secondary btn-sm me-2" (click)="viewStock(stock.idEstoque)">Visualizar</button>
+            <button type="button" class="btn btn-danger btn-sm" (click)="deleteStock(stock.idEstoque)">Excluir</button>
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
 </div>

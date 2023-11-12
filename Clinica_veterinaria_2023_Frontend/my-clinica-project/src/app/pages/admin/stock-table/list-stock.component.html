@@ -1,24 +1,4 @@
-<navbar></navbar>
-<sidebar></sidebar>
-<div class="container-base" [style.padding]="containerPadding">
-  <!-- Page Content -->
-  <div class="content-page">
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-      <h2>
-       <a href="/admin">Mural Admin</a>
-      <span class="separator">»</span>
-      Current Page
-      </h2>
-    </div>
-    <!-- Card Header -->
-    <div class="card-header">
-      <h3 class="card-title">Registered Stocks</h3>
-    </div>
-    <!-- Angular Material Table for Users -->
-    <div class="card-content">
-    <br>
-    <app-list-table-stock [stockList]="stockList"  ></app-list-table-stock>
-    </div>
-  </div>
+<div class="container mt-5">
+  <h1>Estoques Registrados</h1>
+  <app-list-table-stock [stockList]="stockList"  ></app-list-table-stock>
 </div>
