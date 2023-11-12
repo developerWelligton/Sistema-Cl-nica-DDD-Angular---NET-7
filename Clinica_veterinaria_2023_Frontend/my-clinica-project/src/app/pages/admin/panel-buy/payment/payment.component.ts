@@ -61,7 +61,6 @@ export class PaymentComponent {
 
     this.buyId = this.routerActivate.snapshot.paramMap.get('id');
     this.itemProductSaleService.getAllProductListByBuy(this.buyId).subscribe(data => {
-      debugger
       // Aqui está assumindo que data é um array de objetos com a estrutura desejada
       // Transforma os dados recebidos para a nova estrutura e adiciona à lista de produtos
       const newProducts = data.map(item => ({
@@ -75,11 +74,6 @@ export class PaymentComponent {
       // Aqui você pode concatenar a nova lista de produtos com a lista existente
       // ou substituir a lista antiga pela nova, dependendo do comportamento desejado
       this.productsList = [...this.productsList, ...newProducts];
-
-      // Log para verificar se a lista foi atualizada corretamente
-      console.log(this.productsList);
-
-
 
     });
 
@@ -113,30 +107,41 @@ events = [
 productsList = [];// produtos para serem finalizandos
 
 openEstoqueModal() {
-  debugger
   const dialogRef = this.dialog.open(ModalStockComponent, {
     width: '250px',
-    // Você pode passar dados para o modal se necessário
   });
 
   dialogRef.afterClosed().subscribe(result => {
     if (result === 'confirmar') {
       // Se a confirmação for feita no modal, execute a ação
-      this.itemProductBuyService.finalizarProdutoCompraAsync(this.productsList).subscribe(data => {
-        console.log(data);
+      this.itemProductBuyService.finalizarProdutoCompraAsync(this.productsList).subscribe(
+        data => {
+          // Navegar para o painel de administração após a atualização do estoque
+          this.router.navigate(['admin', 'panel-buy']);
 
-        // Faça qualquer outra ação necessária após a confirmação
-        // Por exemplo, mostrar um SweetAlert (Swal) de sucesso
-        Swal.fire({
-          title: 'Sucesso',
-          text: 'Compra finalizada! Estoque foi Atualizado!',
-          icon: 'success',
-          confirmButtonText: 'Ok'
-        });
-      });
+          // Exibir Swal confirmando a atualização do estoque
+          Swal.fire({
+            title: 'Produto Recebido!',
+            text: 'O estoque foi atualizado com sucesso.',
+            icon: 'success',
+            confirmButtonText: 'Ok'
+          });
+        },
+        error => {
+          // Tratar erros aqui, se necessário
+          console.error('Erro ao atualizar o estoque:', error);
+          Swal.fire({
+            title: 'Erro!',
+            text: 'Houve um problema ao atualizar o estoque.',
+            icon: 'error',
+            confirmButtonText: 'Ok'
+          });
+        }
+      );
     }
   });
 }
+
 
 
 

@@ -1,55 +1,29 @@
-<navbar></navbar>
-<sidebar></sidebar>
+<div class="container my-4">
 
-
-<div class="container-base" [style.padding]="containerPadding">
-  <!-- Conteúdo da página -->
-  <div class="content-page">
-    <!-- Breadcrumbs -->
-    <div class="breadcrumbs">
-      <h2>
-       <a href="/admin">Mural Admin</a>
-      <span class="separator">»</span>
-      Página Atual
-      </h2>
-    </div>
-    <!-- Cabeçalho do cartão -->
-    <div class="card-header">
-      <!-- Título do cartão -->
+  <div class="card shadow-sm">
+    <div class="card-body">
       <h3 class="card-title">PEDIDO DE COMPRA #{{ this.buyId }}</h3>
-
-    </div>
-    <div class="container">
-      <div class="card">
-        <div class="table-responsive">
-          <table class="table-erp">
-            <thead>
-              <tr>
-                <th>Código Do Produto</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let product of productsList.slice().reverse()">
-                <td>{{ product.idProduto }}</td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-
-      </div>
-      <ngx-timeline [events]="events" style="color: black;"></ngx-timeline>
-      <div class="d-flex justify-content-center mt-3">
-        <button class="btn btn-primary" (click)="openEstoqueModal()">Confirmar Entrega</button>
-
+      <div class="table-responsive">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th>Código Do Produto</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let product of productsList.slice().reverse()">
+              <td>{{ product.idProduto }}</td>
+            </tr>
+          </tbody>
+        </table>
       </div>
     </div>
-
-
-
-
-
-
-
-
   </div>
+
+  <ngx-timeline [events]="events" class="my-4" style="color: black;"></ngx-timeline>
+
+  <div class="d-flex justify-content-center mt-3">
+    <button class="btn btn-primary" (click)="openEstoqueModal()">Confirmar Entrega</button>
+  </div>
+
 </div>

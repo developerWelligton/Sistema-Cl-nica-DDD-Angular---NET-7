@@ -199,14 +199,9 @@ debugger
 
 
   addFecharCompra(){
-    this.openAddProvider();
     // COMPRA
     this.buyService.createBuy(this.idFornecedor).subscribe(res=>{
-
       const returnIdCompra = res.idCompra
-      debugger
-      // ITEM PRODUTO COMPRA
-      console.log(this.productsList);
       const productListToSend = this.productsList.map(product => ({
         dataEntrada: new Date().toISOString(), // Use the date from the product, or set the current date as needed
         quantidadeTotal: product.quantity, // Use the quantity from the product
@@ -214,32 +209,19 @@ debugger
         idCompra: returnIdCompra, // assuming you have a purchaseId, otherwise adjust as necessary
         idProduto: product.code // assuming the product has a 'code' that corresponds to idProduto
       }));
-      console.log("COMPRA ID:"+ JSON.stringify(res))
 
-      this.itemProductBuyService.createItemProductsBuy(productListToSend).subscribe(data=> {
-        console.log("itemProductBuyService:"+data)
+      this.itemProductBuyService.createItemProductsBuy(productListToSend).subscribe(data => {
+        console.log("itemProductBuyService:" + data);
         // Exibir um alerta de confirmação
         Swal.fire({
           title: 'Confirmação',
-          text: 'Compra Realizar com Sucesso, Acompanhe a timeline da sua compra!'+returnIdCompra,
+          text: 'Compra Realizada com Sucesso, Acompanhe a timeline da sua compra!' + returnIdCompra,
           icon: 'success',
           confirmButtonText: 'Ok'
         });
-
-        this.itemProductBuyService.createItemProductsBuy(productListToSend).subscribe(data => {
-          console.log("itemProductBuyService:" + data);
-          // Exibir um alerta de confirmação
-          Swal.fire({
-            title: 'Confirmação',
-            text: 'Compra Realizada com Sucesso, Acompanhe a timeline da sua compra!' + returnIdCompra,
-            icon: 'success',
-            confirmButtonText: 'Ok'
-          });
-
-          // Navegar para a rota desejada
-          this.router.navigate(['admin', 'panel-buy', 'payment', returnIdCompra]);
-        });
-      })
+        // Navegar para a rota desejada
+        this.router.navigate(['admin', 'panel-buy', 'payment', returnIdCompra]);
+      });
 
     })
 
@@ -370,8 +352,10 @@ this.index =index;
         // Aqui você acessa o valor selecionado
         const selectedProvider = result.selectedProvider;
         console.log('Fornecedor selecionado:', selectedProvider);
-        this.idFornecedor= selectedProvider
+        this.idFornecedor= selectedProvider;
+        this.addFecharCompra()
       }
+
     });
   }
 

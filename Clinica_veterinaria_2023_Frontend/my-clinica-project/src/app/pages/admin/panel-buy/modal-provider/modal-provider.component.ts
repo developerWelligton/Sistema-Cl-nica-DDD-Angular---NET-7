@@ -50,13 +50,11 @@ export class ModalProviderComponent {
   constructor(
     private providerService: ProviderService,
     public dialogRef: MatDialogRef<ModalProviderComponent>
-  ) {}
+  ) { this.loadProviders()}
 
   buyId:any
   ngOnInit() {
 
-
-    this.loadProviders()
   }
 
 
