@@ -10,12 +10,13 @@
  <div class="container">
   <h1>PONTO DE VENDA</h1>
   <div class="row align-items-start">
-    <div class="col-8">
 
-      <div class="input-group mb-3">
-        <button class="btn btn-outline-success" type="button" id="button-addon1" (click)="searchProduct()">Buscar Produto</button>
-        <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="productCode" placeholder="Adicione Código do produto">
-      </div>
+    <div class="input-group mb-3">
+      <button class="btn btn-outline-success" type="button" id="button-addon1" (click)="searchProduct()">Buscar Produto</button>
+      <input type="text" class="form-control" placeholder="" aria-label="Example text with button addon" aria-describedby="button-addon1" [(ngModel)]="productCode" placeholder="Adicione Código do produto">
+    </div>
+    <div class="col-12 col-md-4 order-2 order-md-2">
+
 
 
 
@@ -59,13 +60,10 @@
             </tbody>
           </table>
       </div>
-
-
     </div>
 
-    <div class="col-4">
-      <div class="card" style="width: 22.8rem;">
-        <div class="card-body">
+    <div class="col-12 col-md-8 order-1 order-md-1">
+        <div class="card-body" style="width: 100%;">
           <h5 class="card-title">Subtotal:</h5>
           <h6 class="card-subtitle mb-2 text-muted" style="color: black;" id="subtotal" >{{ subtotal | currency:'BRL':'symbol':'1.2-2' }}</h6>
           <ul class="list-group list-group-flush">
@@ -105,7 +103,6 @@
 
           </ul>
 
-        </div>
       </div>
 
     </div>
