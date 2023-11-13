@@ -38,7 +38,7 @@ namespace WebApi.Controllers
         [HttpPost]
         [Produces("application/json")]
         public async Task<ActionResult> CriarProdutosVenda([FromBody] List<ProdutoVendaDto> produtosVendaDto)
-            {
+                {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);

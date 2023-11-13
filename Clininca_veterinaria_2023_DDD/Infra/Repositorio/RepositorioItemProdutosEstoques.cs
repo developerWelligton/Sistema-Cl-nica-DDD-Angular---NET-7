@@ -27,7 +27,7 @@ namespace Infra.Repositorio
  
 
         public async Task UpdateQuantidadeEstoque(int idEstoque, int idProduto, int quantidadeASubtrair)
-        {
+            {
             using (var banco = new ContextBase(_optionsBuilder))
             {
                 // Encontrar o item específico com base no IdEstoque e IdProduto
