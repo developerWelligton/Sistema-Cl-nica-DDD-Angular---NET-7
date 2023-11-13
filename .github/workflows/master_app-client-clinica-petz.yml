@@ -1,34 +1,21 @@
-name: Build and deploy Node.js app to Azure Web App - app-client-clinica-petz
-
-on:
-  push:
-    branches:
-      - master
-  workflow_dispatch:
-
-jobs:
-  build:
-    runs-on: windows-latest
-
-    steps:
-      - uses: actions/checkout@v2
+actions/checkout@v4
 
       - name: Set up Node.js version
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v3
         with:
-          node-version: '18.x'
+          node-version: '16.x'
 
-      - name: Install dependencies and build
-        working-directory: Clinica_veterinaria_2023_Frontend/my-clinica-project
+      - name: npm install, build, and test
         run: |
           npm install
-          npm run build
+          npm run build --if-present
+          npm run test --if-present
 
       - name: Upload artifact for deployment job
-        uses: actions/upload-artifact@v2
+        uses: actions/upload-artifact@v3
         with:
-          name: my-clinica-project
-          path: 'Clinica_veterinaria_2023_Frontend/my-clinica-project/dist/my-clinica-project' # Adjust path to build output
+          name: node-app
+          path: .
 
   deploy:
     runs-on: ubuntu-latest
@@ -39,16 +26,15 @@ jobs:
 
     steps:
       - name: Download artifact from build job
-        uses: actions/download-artifact@v2
+        uses: actions/download-artifact@v3
         with:
-          name: my-clinica-project
-          path: my-clinica-project
+          name: node-app
 
       - name: 'Deploy to Azure Web App'
         uses: azure/webapps-deploy@v2
         id: deploy-to-webapp
         with:
-          app-name: 'app-client-clinica-petz'
-          package: ./my-clinica-project
+          app-name: 'api-client-petz2'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_13BAA36506B8490189974CF198BA012F }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_5E7B287CC71640B99787EC0C346FB60D }}
+          package: .
