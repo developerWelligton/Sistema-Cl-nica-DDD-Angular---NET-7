@@ -9,7 +9,6 @@ import { PaymentComponent } from './payment/payment.component';
 import { PanelBuyComponent } from './panel-buy.component';
 import { PanelBuyRoutingModule } from './panel-buy-routing.module';
 import { NgSelectModule } from '@ng-select/ng-select';
-import { NgxTimelineModule } from '@frxjs/ngx-timeline';
 import { ModalStockComponent } from './modal-stock/modal-stock.component';
 @NgModule({
   imports: [
@@ -21,7 +20,6 @@ import { ModalStockComponent } from './modal-stock/modal-stock.component';
     SharedModule,
     ReactiveFormsModule,
     NgSelectModule,
-    NgxTimelineModule
 
 
   ],
