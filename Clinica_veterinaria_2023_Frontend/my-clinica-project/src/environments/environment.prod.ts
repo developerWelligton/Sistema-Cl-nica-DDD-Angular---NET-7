@@ -1,4 +1,4 @@
 export const environment = {
-  production: false,
+  production: true,
   apiUrl: 'https://webapi20231102221543.azurewebsites.net/' //  SUA API BACKEND
 };
