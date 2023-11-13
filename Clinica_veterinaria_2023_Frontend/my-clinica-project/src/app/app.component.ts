@@ -1,8 +1,9 @@
 import { UserService } from './core/user/user.service';
 import {MediaMatcher} from '@angular/cdk/layout';
-import {ChangeDetectorRef, Component, OnDestroy} from '@angular/core';
+import {ChangeDetectorRef, Component, OnDestroy, ViewChild} from '@angular/core';
 import { Router } from '@angular/router';
 import { AuthService } from './core/auth/auth.service';
+import { MatSidenav } from '@angular/material/sidenav';
 
 @Component({
   selector: 'app-root',
@@ -21,7 +22,7 @@ export class AppComponent {
 
   constructor(
     changeDetectorRef: ChangeDetectorRef, media: MediaMatcher,
-    private userService:UserService,
+    public userService:UserService,
     private authService:AuthService,
     private router:Router) {
     this.mobileQuery = media.matchMedia('(max-width: 600px)');
@@ -39,7 +40,11 @@ export class AppComponent {
   shouldRun = [/(^|\.)plnkr\.co$/, /(^|\.)stackblitz\.io$/].some(h => h.test(window.location.host));
 
   logout() {
+
+    this.sidenav.close();
     this.authService.logout();
     this.router.navigate(['']);
   }
+
+  @ViewChild('snav') sidenav: MatSidenav;
 }

@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ThemePalette } from '@angular/material/core';
 import { ProgressSpinnerMode } from '@angular/material/progress-spinner';
 import { Router } from '@angular/router';
+import { UserService } from 'src/app/core/user/user.service';
 import { LoginService } from 'src/app/services/login.service';
 
 @Component({
@@ -19,7 +20,8 @@ export class LoginComponent {
     private router:Router,
     private loginService:LoginService,
     public authService:AuthService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private userService: UserService
     ){
   }
 
@@ -29,12 +31,15 @@ export class LoginComponent {
 alertMessage = ''; // a mensagem do alerta
 alertType = 'primary'; // 'primary' para sucesso, 'danger' para erro
 
+
+user:any
   ngOnInit():void{
     this.loginForm = this.formBuilder.group({
       email:['',[Validators.required, Validators.email]],
       senha:['',[Validators.required]]
     })
     this.cdr.detectChanges(); // força a detecção de mudança
+
   }
 
   get dadosForm(){

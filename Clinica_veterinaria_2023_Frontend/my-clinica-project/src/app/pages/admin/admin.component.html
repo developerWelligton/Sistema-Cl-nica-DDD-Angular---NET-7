@@ -10,16 +10,13 @@
       <mat-card-content>
         <p>{{card.content}}</p>
       </mat-card-content>
-      <mat-card-actions>
-        <!-- Utiliza list-group do Bootstrap para os links -->
-        <div class="list-group list-group-flush">
-          <a *ngIf="card.link1Url" class="list-group-item list-group-item-action" [routerLink]="card.link1Url">{{card.link1Text}}</a>
-          <a *ngIf="card.link2Url" class="list-group-item list-group-item-action" [routerLink]="card.link2Url">{{card.link2Text}}</a>
-          <a *ngIf="card.link3Url" class="list-group-item list-group-item-action" [routerLink]="card.link3Url">{{card.link3Text}}</a>
-          <!-- Adicione mais links condicionais conforme necessário -->
-        </div>
+      <mat-card-actions >
+        <!-- Renderiza os links condicionalmente -->
+        <a *ngIf="card.link1Url" mat-button [routerLink]="card.link1Url">{{card.link1Text}}</a>
+        <a *ngIf="card.link2Url" mat-button [routerLink]="card.link2Url">{{card.link2Text}}</a>
+        <a *ngIf="card.link3Url" mat-button [routerLink]="card.link3Url">{{card.link3Text}}</a>
+        <!-- Adicione mais links condicionais conforme necessário -->
       </mat-card-actions>
-
     </mat-card>
   </div>
 </div>
