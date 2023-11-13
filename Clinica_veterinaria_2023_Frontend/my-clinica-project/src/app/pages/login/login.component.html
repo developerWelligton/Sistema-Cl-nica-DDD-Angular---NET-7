@@ -1,57 +1,57 @@
-<div class="container-login">
-  <div class="container-login-central">
-    <div class="container-header">
-      <div class="titulo-login">
-          Portal Petz
-      </div>
-      <div class="info-login">
-        Digite seu email e senha para se logar!
-      </div>
+<div class="container mt-5">
+  <div class="row justify-content-center">
+    <div class="col-12 col-sm-8 col-md-6">
+      <div class="card shadow-lg border-0 rounded-lg">
+        <div class="card-header bg-black text-white text-center">
+          <h1 class="card-title"><strong>Portal Solution Santos</strong> </h1>
+        </div>
+        <div class="card-body bg-light">
+          <p class="text-muted">Digite seu email e senha para se logar!</p>
 
-    </div>
+          <form  class="example-form" [formGroup]="loginForm"   >
 
-    <div class="container-form">
-      <form class="form-inputs" [formGroup]="loginForm" (submit)="loginUser()">
-          <div class="group-input">
-            <div class="text-info">
-              Email
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Entre com seu Email</mat-label>
+                <input matInput
+                       class="form-control"
+                       type="email"
+                       id="email"
+                       placeholder="E-mail"
+                       formControlName="email"
+                       required>
+                <mat-error *ngIf="email.invalid">
+                  {{ getErrorMessage() }}
+                </mat-error>
+              </mat-form-field>
+
+              <mat-form-field appearance="outline" class="example-full-width">
+                <mat-label>Entre com sua Senha</mat-label>
+                <input matInput
+                       [type]="hide ? 'password' : 'text'"
+                       class="form-control"
+                       formControlName="senha"
+                       required>
+                <button mat-icon-button matSuffix (click)="hide = !hide"
+                        [attr.aria-label]="'Hide password'"
+                        [attr.aria-pressed]="hide">
+                  <mat-icon>{{ hide ? 'visibility_off' : 'visibility' }}</mat-icon>
+                </button>
+              </mat-form-field>
+
+            <div class="d-grid gap-2">
+              <button type="type" class="btn btn-success" (click)="loginUser()">Entrar</button>
             </div>
-            <input class="input-form" type="text" nome="email" id="email" placeholder="E-mail" formControlName="email" required="">
-            <label *ngIf="loginForm.get('email')?.errors?.['required'] && loginForm.get('email')?.touched"
-            class="error-input"
-            >
-            Campo Obrigatório!
-            </label>
-          </div>
+          </form>
+        </div>
+      </div>
 
-          <div class="group-input">
-            <div class="text-info">
-              Senha
-            </div>
-            <input class="input-form" type="password" nome="senha" id="senha" placeholder="Senha" formControlName="senha" required="" >
-            <label *ngIf="loginForm.get('senha')?.errors?.['required'] && loginForm.get('senha')?.touched"
-            class="error-input"
-            >
-            Campo Obrigatório!
-            </label>
-          </div>
+      <div *ngIf="isLoading" class="text-center mt-3">
+        <div class="spinner-border text-primary" role="status"></div>
+      </div>
 
-          <div class="group-input">
-            <input type="submit" class="btn-login" value="Login"  >
-          </div>
-      </form>
-    </div>
-
-  </div>
-
-  <div *ngIf="isLoading" class="centered-spinner">
-   
-    <div class="spinner-border text-dark" role="status"> 
+      <div *ngIf="showAlert" class="alert alert-{{alertType}} mt-3" role="alert">
+        {{alertMessage}}
+      </div>
     </div>
   </div>
-
-  <div *ngIf="showAlert" class="alert alert-{{alertType}} alert-fixed" role="alert">
-    {{alertMessage}}
 </div>
- 
- 
