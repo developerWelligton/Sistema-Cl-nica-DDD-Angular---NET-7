@@ -44,7 +44,9 @@ import { StockProductsTableComponent } from './stock-list-table copy/stock-produ
     MatButtonModule,
     MatTableModule,
     VmessageModule,
-    jqxTreeModule, jqxExpanderModule
+    jqxTreeModule, jqxExpanderModule,
+    MatTableModule,
+    MatButtonModule
   ],
   providers: []
   ,

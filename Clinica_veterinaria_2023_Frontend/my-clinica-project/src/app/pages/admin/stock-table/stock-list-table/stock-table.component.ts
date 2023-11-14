@@ -13,6 +13,8 @@ import { ProductService } from 'src/app/services/product.service';
 })
 export class  StockListTableComponent {
 
+  displayedColumns: string[] = ['codigoDoEstoque', 'sala', 'prateleira', 'acoes'];
+
   @Input() stockList: any[] = [];
   @Output() productDeleted: EventEmitter<void> = new EventEmitter<void>();
   @Output() deleteRequest = new EventEmitter<number>();

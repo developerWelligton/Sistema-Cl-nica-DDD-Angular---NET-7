@@ -12,6 +12,7 @@ import { ProductService } from 'src/app/services/product.service';
   styleUrls: ['./product-table.component.scss']
 })
 export class UserProductComponent {
+  displayedColumns: string[] = ['idProduto', 'nome', 'precoCompra', 'precoVenda', 'status', 'actions'];
 
   @Input() productList: any[] = [];
   @Output() productDeleted: EventEmitter<void> = new EventEmitter<void>();

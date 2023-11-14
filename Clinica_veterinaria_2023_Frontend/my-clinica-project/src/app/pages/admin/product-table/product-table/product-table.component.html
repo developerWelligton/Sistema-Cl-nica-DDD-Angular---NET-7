@@ -1,32 +1,59 @@
-<div class="table-responsive">
-  <table class="table table-striped table-hover">
-    <thead>
-      <tr>
-        <th>Código Do Produto</th>
-        <th>Código UNSPSC</th>
-        <th>Nome do Produto</th>
-        <th>Descrição</th>
-        <th>Preço de Compra</th>
-        <th>Preço de Venda</th>
-        <th>Status do Estoque</th>
-        <th>Ações</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr *ngFor="let product of productList.slice().reverse()">
-        <td>{{ product.idProduto }}</td>
-        <td>{{ product.codigoSfcm }}</td>
-        <td>{{ product.nome }}</td>
-        <td>{{ product.descricao }}</td>
-        <td>{{ product.precoCompra }}</td>
-        <td>{{ product.precoVenda }}</td>
-        <td>{{ product.status }}</td>
-        <td>
-          <button type="button" class="btn btn-primary btn-sm" (click)="editProduct(product)">Editar</button>
-          <button type="button" class="btn btn-secondary btn-sm" (click)="viewProduct(product.idProduto)">Visualizar</button>
-          <button type="button" class="btn btn-danger btn-sm" (click)="deleteProduct(product.idProduto)">Excluir</button>
-        </td>
-      </tr>
-    </tbody>
+<h1>Produtos Registrados</h1>
+<div class="mat-elevation-z8 demo-table">
+
+  <table mat-table [dataSource]="productList" class="mat-elevation-z8 demo-table">
+    <!-- Position Column -->
+    <ng-container matColumnDef="idProduto">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.idProduto}} </td>
+    </ng-container>
+
+    <!-- Weight Column -->
+    <ng-container matColumnDef="nome">
+      <th mat-header-cell *matHeaderCellDef> Nome Produto </th>
+      <td mat-cell *matCellDef="let element"> {{element.nome}} </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="precoCompra">
+      <th mat-header-cell *matHeaderCellDef> Preço de Compra  </th>
+      <td mat-cell *matCellDef="let element"> {{element.precoCompra}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="precoVenda">
+      <th mat-header-cell *matHeaderCellDef> Preço de Venda  </th>
+      <td mat-cell *matCellDef="let element"> {{element.precoVenda}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef> Preço de Venda  </th>
+      <td mat-cell *matCellDef="let element"> {{element.status}} </td>
+    </ng-container>
+
+   <ng-container matColumnDef="actions">
+  <th mat-header-cell *matHeaderCellDef> Ações </th>
+  <td mat-cell *matCellDef="let product">
+    <!-- Botão Editar -->
+    <button type="button" class="btn edit" (click)="editProduct(product)">
+      <mat-icon>edit</mat-icon>
+    </button>
+
+    <!-- Botão Visualizar -->
+    <button type="button" class="btn view" (click)="viewProduct(product.idProduto)">
+      <mat-icon>visibility</mat-icon>
+    </button>
+
+    <!-- Botão Excluir -->
+    <button type="button" class="btn delete" (click)="deleteProduct(product.idProduto)">
+      <mat-icon>delete_outline</mat-icon>
+    </button>
+  </td>
+</ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
-</div>
+
+
+
