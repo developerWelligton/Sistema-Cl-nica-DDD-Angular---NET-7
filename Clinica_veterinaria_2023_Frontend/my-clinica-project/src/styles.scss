@@ -10,16 +10,7 @@
 // Then import Bootstrap
 @import "../node_modules/bootstrap/scss/bootstrap";
 
-body {
-  font-family: "Poppins";
-  margin: 0;
-  background: rgb(68, 68, 68);
-  font-style: normal;
-  font-weight: 400;
-  font-size: 14px;
-  line-height: 21px;
-  color: #FFF; /* Para melhorar a visibilidade do texto contra o fundo escuro */
-}
+
 
 .container-base {
   padding: 88px 16px 0px 128px;
