@@ -6,15 +6,17 @@
         <mat-card-title>{{card.title}}</mat-card-title>
         <mat-card-subtitle>{{card.subtitle}}</mat-card-subtitle>
       </mat-card-header>
-      <img mat-card-image src="{{card.image}}" alt="Card Image">
+      <img mat-card-image src="{{card.image}}" alt="Card Image" height="220px">
       <mat-card-content>
         <p>{{card.content}}</p>
       </mat-card-content>
       <mat-card-actions >
         <!-- Renderiza os links condicionalmente -->
-        <a *ngIf="card.link1Url" mat-button [routerLink]="card.link1Url">{{card.link1Text}}</a>
-        <a *ngIf="card.link2Url" mat-button [routerLink]="card.link2Url">{{card.link2Text}}</a>
-        <a *ngIf="card.link3Url" mat-button [routerLink]="card.link3Url">{{card.link3Text}}</a>
+        <button type="button" class="btn btn-outline-primary m-3" *ngIf="card.link1Url"   [routerLink]="card.link1Url">{{card.link1Text}}</button>
+
+        <button type="button" class="btn btn-outline-primary m-3" *ngIf="card.link2Url"  [routerLink]="card.link2Url">{{card.link2Text}}</button>
+
+        <button type="button" class="btn btn-outline-primary m-3" *ngIf="card.link3Url"  [routerLink]="card.link3Url">{{card.link3Text}}</button>
         <!-- Adicione mais links condicionais conforme necessário -->
       </mat-card-actions>
     </mat-card>

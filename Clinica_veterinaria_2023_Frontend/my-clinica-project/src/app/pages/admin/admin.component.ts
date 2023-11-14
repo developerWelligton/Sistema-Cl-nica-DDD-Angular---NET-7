@@ -23,25 +23,25 @@ export class AdminComponent {
   cards = [
     {
       title: 'Painel Venda',
-      subtitle: 'Aqui você pode fazer compras',
+      subtitle: 'Aqui você pode fazer suas vendas',
       image: 'assets/images/venda.jpg',
-      content: 'Descrição do card de Compras',
+      content: '',
       link1Url: '/admin/panel-pdv',
       link1Text: 'Iniciar Venda'
     },
     {
       title: 'Painel Compra',
-      subtitle: 'Gerencie seus produtos',
+      subtitle: 'Aqui você pode gerenciar suas compras',
       image: 'assets/images/compra2.png',
-      content: 'Descrição do card de Gerenciamento de Produto',
+      content: '',
       link1Url: '/admin/panel-buy',
       link1Text: 'Iniciar Compra'
     },
     {
       title: 'Painel Produto',
-      subtitle: 'Gerencie seus produtos',
+      subtitle: 'Gerencie seus produtos com praticidade',
       image: 'assets/images/produto.png',
-      content: 'Descrição do card de Gerenciamento de Produto',
+      content: '',
       link1Url: '/admin/create-product',
       link1Text: 'Iniciar Cadastro de Produto',
       link2Url: '/admin/list-product',
@@ -49,9 +49,9 @@ export class AdminComponent {
     },
     {
       title: 'Painel Estoque',
-      subtitle: 'Gerencie seus produtos',
+      subtitle: 'Aqui você pode gerenciar seus estoques',
       image: 'assets/images/estoque.jpg',
-      content: 'Descrição do card de Gerenciamento de Produto',
+      content: '',
       link1Url: '/admin/list-stock/create-estoque',
       link1Text: 'Adicionar Novo Estoque',
       link2Url: '/admin/list-stock',
