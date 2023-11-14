@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'https://dotnetapisolutionsantos.azurewebsites.net' //  SUA API BACKEND
+  apiUrl: 'https://localhost:7131' //  SUA API BACKEND
 };
