@@ -55,7 +55,7 @@ namespace Infra.Configuracao
             if (!optionsBuilder.IsConfigured)
             {
                 //PRODUTION OFF 
-                optionsBuilder.UseSqlServer(ObterStringConexaoDeveloperLocal());
+                optionsBuilder.UseSqlServer(ObterStringConexaoProductionAzure());
                 base.OnConfiguring(optionsBuilder);
             }
             
@@ -298,9 +298,10 @@ namespace Infra.Configuracao
 
         public string ObterStringConexaoProductionAzure()
         {   //base cloud
-            return "Data Source=app-client-clinica-petz2.database.windows.net;Initial Catalog=db-entity-clinica;User ID=welligtoncos;Password=@Well32213115;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
+            return "Data Source=serverdatabasesolution.database.windows.net;Initial Catalog=db-entity-clinica;User ID=welligtoncos;Password=@Well32213115;Connect Timeout=30;Encrypt=True;Trust Server Certificate=False;Application Intent=ReadWrite;Multi Subnet Failover=False";
 
- 
+
+
          }
 
         public string ObterStringConexaoDeveloperLocal()

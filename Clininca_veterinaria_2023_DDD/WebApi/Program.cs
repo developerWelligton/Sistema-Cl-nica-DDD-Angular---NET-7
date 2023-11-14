@@ -59,15 +59,15 @@ builder.Services.AddSwaggerGen(options =>
     options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFilename));
 });
 
-//TO DEVELOPER                                                         ON
-var devEnvironmentDataBase = builder.Configuration.GetConnectionString("DefaultConnection");
+//TO DEVELOPER                                                         OFF
+//var devEnvironmentDataBase = builder.Configuration.GetConnectionString("DefaultConnection");
 
-//TO DEPLOY IN AZURE                                                    OFF
-//var prodEnvironmentDataBase = builder.Configuration.GetConnectionString("ProdConnection1");
+//TO DEPLOY IN AZURE                                                    ON
+var prodEnvironmentDataBase = builder.Configuration.GetConnectionString("ProdConnection1");
 
 //PRODUTION OFF HERE
 builder.Services.AddDbContext<ContextBase>(options =>
-    options.UseSqlServer(devEnvironmentDataBase));
+    options.UseSqlServer(prodEnvironmentDataBase));
 
 builder.Services.AddDefaultIdentity<ApplicationUser>(options => options.SignIn.RequireConfirmedAccount = true)
     .AddRoles<IdentityRole>()
@@ -215,13 +215,12 @@ app.UseSwaggerUI(options =>
     options.RoutePrefix = string.Empty;
 });
 //CORS       
-var devProduction = "https://api-client-petz2.azurewebsites.net";
-var devProduction2 = "https://webapi20231102221543.azurewebsites.net"; 
+var devProduction = "https://webportalsolution.azurewebsites.net";  
 var frontendOrigin = "http://localhost:4200";
 var redirectOrigin = "https://localhost:7131";
 
 app.UseCors(policy => policy
-    .WithOrigins(frontendOrigin, redirectOrigin, devProduction, devProduction2)
+    .WithOrigins(frontendOrigin, redirectOrigin, devProduction )
     .AllowAnyMethod()
     .AllowAnyHeader());
 
