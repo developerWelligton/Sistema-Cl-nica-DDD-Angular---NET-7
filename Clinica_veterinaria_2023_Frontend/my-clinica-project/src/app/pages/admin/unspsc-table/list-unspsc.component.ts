@@ -48,6 +48,9 @@ export class ListUnspscComponent implements OnInit, OnDestroy {
         this.unspscService.deleteUnspscCode(itemId).subscribe(
           () => {
             // Caso de sucesso: você pode mostrar um alerta de sucesso ou atualizar a lista, por exemplo.
+            this.unspscService.getAllUnspscCodeDetails().subscribe((data: any[]) => {
+              this.unspscList = data;
+            });
             Swal.fire({
               icon: 'success',
               title: 'Deletado!',
