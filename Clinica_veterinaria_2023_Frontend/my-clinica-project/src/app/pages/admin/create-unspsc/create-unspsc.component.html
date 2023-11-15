@@ -9,8 +9,8 @@
         <mat-form-field style="width: 100%;">
           <mat-label>Segmento</mat-label>
           <!-- <input matInput placeholder="Entre com Segmento do produto ou serviço" formControlName="segmentoCtrl" required> -->
-          <mat-select>
-            <mat-option *ngFor="let item of segmentos" [value]="item.descricao">{{ item.descricao }}</mat-option>
+          <mat-select formControlName="segmentoCtrl" required placeholder="Entre com Segmento do produto ou serviço">
+            <mat-option *ngFor="let item of segmentos" [value]="item">{{ item.codigo+" | "+item.descricao }}</mat-option>
           </mat-select>
 
         </mat-form-field>
@@ -19,13 +19,17 @@
         </div>
       </form>
     </mat-step>
+
     <mat-step [stepControl]="familiaFormGroup">
       <form [formGroup]="familiaFormGroup">
         <ng-template matStepLabel>Família</ng-template>
         <mat-form-field style="width: 100%;">
           <mat-label>Família</mat-label>
-          <input matInput formControlName="familiaCtrl" placeholder="Entre com Familia do produto ou serviço"
-                 required>
+          <!-- <input matInput formControlName="familiaCtrl" placeholder="Entre com Familia do produto ou serviço"
+                 required> -->
+           <mat-select formControlName="familiaCtrl" required placeholder="Entre com Familia do Segmento do produto ou serviço">
+            <mat-option *ngFor="let item of familias" [value]="item">{{item.codigo+" | "+item.descricao }}</mat-option>
+          </mat-select>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -38,8 +42,11 @@
         <ng-template matStepLabel>Classe</ng-template>
         <mat-form-field style="width: 100%;">
           <mat-label>Classe</mat-label>
-          <input matInput formControlName="classeCtrl" placeholder="Entre com Classe do produto ou serviço"
-                 required>
+          <!-- <input matInput formControlName="classeCtrl" placeholder="Entre com Classe do produto ou serviço"
+                 required> -->
+          <mat-select formControlName="classeCtrl" required placeholder="Entre com Classe da Família do produto ou serviço">
+            <mat-option *ngFor="let item of classes" [value]="item">{{item.codigo+" | "+item.descricao }}</mat-option>
+          </mat-select>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -52,8 +59,11 @@
         <ng-template matStepLabel>Mercadoria</ng-template>
         <mat-form-field style="width: 100%;">
           <mat-label>Mercadoria</mat-label>
-          <input matInput formControlName="mercadoriaCtrl" placeholder="Entre com Mercadoria do produto ou serviço"
-                 required>
+          <!-- <input matInput formControlName="mercadoriaCtrl" placeholder="Entre com Mercadoria do produto ou serviço"
+                 required> -->
+          <mat-select formControlName="mercadoriaCtrl" required placeholder="Entre com Familia do Segmento do produto ou serviço">
+            <mat-option *ngFor="let item of mercadorias" [value]="item">{{item.codigo+" | "+item.descricao }}</mat-option>
+          </mat-select>
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>

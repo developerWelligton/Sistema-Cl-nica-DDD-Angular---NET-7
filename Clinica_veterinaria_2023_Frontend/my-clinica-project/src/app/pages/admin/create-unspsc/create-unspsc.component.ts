@@ -367,7 +367,6 @@ export class CreateUnspscComponent {
 
 
   finalizarCadastro() {
-
     // Verificando se todos os formulários estão válidos
     if (this.segmentoFormGroup.valid &&
         this.familiaFormGroup.valid &&
@@ -375,21 +374,79 @@ export class CreateUnspscComponent {
         this.mercadoriaFormGroup.valid) {
 
         // Coletando os valores dos formulários, já que todos estão válidos
-        const segmento = this.segmentoFormGroup.value.segmentoCtrl;
-        const familia = this.familiaFormGroup.value.familiaCtrl;
-        const classe = this.classeFormGroup.value.classeCtrl;
-        const mercadoria = this.mercadoriaFormGroup.value.mercadoriaCtrl;
+        const segmento = this.segmentoFormGroup.get('segmentoCtrl').value;
+        const familia = this.familiaFormGroup.get('familiaCtrl').value;
+        const classe = this.classeFormGroup.get('classeCtrl').value;
+        const mercadoria = this.mercadoriaFormGroup.get('mercadoriaCtrl').value;
+
+        // Construindo o código UNSPSC
+        this.unspscCode = `${segmento['codigo']}${familia['codigo']}${classe['codigo']}${mercadoria['codigo']}`;
 
         // Aqui você pode fazer o que quiser com esses valores
-        console.log(segmento, familia, classe, mercadoria);
+        alert('UNSPSC Code:'+ this.unspscCode);
 
-        alert("Cadastro Realizado!");
-        this.router.navigate(['/admin/list-unspsc']);
+      const payload = {
+          codigoSfcm: this.unspscCode,
+          iD_Usuario: 1,  // Ajuste conforme necessário
+          idSegmento: segmento['idSegmento'],
+          idFamilia: familia['idFamilia'],
+          idClasse: classe['idClasse'],
+          idMercadoria: mercadoria['idMercadoria']
+      };
 
+        // Verificar se o código UNSPSC já existe
+        this.unspscService.checkIfUnspscCodeExists(this.unspscCode).subscribe(
+          exists => {
+              if (exists) {
+                  // Mostrar alerta se o código UNSPSC já existe
+                  Swal.fire({
+                      icon: 'warning',
+                      title: 'Oops...',
+                      text: 'The UNSPSC Code already exists. Please choose a different code.',
+                  });
+              } else {
+                  // Se não existir, criar o novo código UNSPSC
+                  this.unspscService.createUnspscCode(payload).subscribe(
+                      response => {
+                          console.log('API response:', response);
+                          // Informe o usuário sobre o sucesso
+                          Swal.fire({
+                              icon: 'success',
+                              title: 'Success',
+                              text: 'Data sent successfully!',
+                          });
+                          // Resetar o formulário após o envio bem-sucedido
+                          this.createUnspscForm.reset();
+                          this.unspscCode=''
+                          this.router.navigate(['/admin/list-unspsc']);
+                      },
+                      error => {
+                          console.error('API error:', error);
+                          // Informe o usuário sobre o erro
+                          Swal.fire({
+                              icon: 'error',
+                              title: 'Error',
+                              text: 'Failed to send data!',
+                          });
+                      }
+                  );
+              }
+          },
+          error => {
+              console.error('API error:', error);
+              // Informe o usuário sobre o erro
+              Swal.fire({
+                  icon: 'error',
+                  title: 'Error',
+                  text: 'Failed to check UNSPSC Code existence!',
+              });
+          }
+      );
     } else {
         alert("Por favor, preencha todos os campos corretamente.");
     }
   }
+
 
 
 }

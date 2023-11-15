@@ -1,4 +1,5 @@
 export class Mercadoria{
-  id: number;
-  nome: string;
+  idMercadoria: number;
+  codigo: string;
+  descricao: string;
 }

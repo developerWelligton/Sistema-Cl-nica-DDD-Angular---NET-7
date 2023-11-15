@@ -1,4 +1,5 @@
 export class Familia {
-  id: number;
-  nome: string;
+  idFamilia: number;
+  codigo: string;
+  descricao: string;
 }
