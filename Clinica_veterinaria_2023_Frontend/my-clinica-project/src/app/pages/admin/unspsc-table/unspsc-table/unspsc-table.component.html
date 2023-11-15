@@ -1,4 +1,53 @@
-<div class="table-responsive">
+<button type="button" class="btn btn-primary" routerLink="/admin/create-unspsc">Adicionar UNSPSC</button>
+<br>
+<br>
+<div class="mat-elevation-z8">
+  <table mat-table [dataSource]="dataSource">
+
+    <!-- ID Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef> No. </th>
+      <td mat-cell *matCellDef="let element"> {{element.idUnspsc}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="unspscCode">
+      <th mat-header-cell *matHeaderCellDef> No. UNSPSC </th>
+      <td mat-cell *matCellDef="let element"> {{element.codigoSfcm}} </td>
+    </ng-container>
+
+
+    <ng-container matColumnDef="segment">
+      <th mat-header-cell *matHeaderCellDef> Segmento </th>
+      <td mat-cell *matCellDef="let element"> {{element.segmento}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="family">
+      <th mat-header-cell *matHeaderCellDef> Família </th>
+      <td mat-cell *matCellDef="let element"> {{element.familia}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="class">
+      <th mat-header-cell *matHeaderCellDef> Classe </th>
+      <td mat-cell *matCellDef="let element"> {{element.classe}} </td>
+    </ng-container>
+
+    <ng-container matColumnDef="commodity">
+      <th mat-header-cell *matHeaderCellDef> Mercadoria </th>
+      <td mat-cell *matCellDef="let element"> {{element.mercadoria}} </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+  </table>
+
+  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+                 showFirstLastButtons
+                 aria-label="Select page of periodic elements">
+  </mat-paginator>
+</div>
+
+<!-- <div class="table-responsive">
   <table class="table-erp">
     <thead>
       <tr>
@@ -26,4 +75,4 @@
       </tr>
     </tbody>
   </table>
-</div>
+</div> -->

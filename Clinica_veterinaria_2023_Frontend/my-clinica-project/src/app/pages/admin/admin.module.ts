@@ -46,7 +46,7 @@ import {MatCardModule} from '@angular/material/card';
 import { ModalProviderComponent } from './panel-buy/modal-provider/modal-provider.component';
 import { MatIconModule } from '@angular/material/icon';
 import {MatStepperModule} from '@angular/material/stepper';
-
+import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -92,7 +92,8 @@ import {MatStepperModule} from '@angular/material/stepper';
     MatButtonModule,
     MatCardModule,
     MatIconModule,
-    MatStepperModule
+    MatStepperModule,
+    MatPaginatorModule
 
   ],
   providers: []

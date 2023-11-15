@@ -58,6 +58,18 @@ export class AdminComponent {
       link2Text: 'Ver Estoques',
       link3Url:  '',
       link3Text: ''}
+      ,
+      {
+        title: 'Painel Unspsc',
+        subtitle: 'Aqui você gerenciar a categorização de produtos e serviços',
+        image: 'assets/images/estoque.jpg',
+        content: '',
+        link1Url: '/admin/create-unspsc',
+        link1Text: 'Adicionar unspsc',
+        link2Url: '/admin/list-unspsc',
+        link2Text: 'Ver',
+        link3Url:  '',
+        link3Text: ''}
     // ... mais cards ...
   ];
 

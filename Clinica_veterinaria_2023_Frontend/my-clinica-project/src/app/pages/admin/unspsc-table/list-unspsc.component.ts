@@ -32,7 +32,6 @@ export class ListUnspscComponent implements OnInit, OnDestroy {
       this.unspscList = data;
     });
 
-
   }
 
   handleUnspscDeleted(itemId: any): void {

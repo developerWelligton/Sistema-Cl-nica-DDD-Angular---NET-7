@@ -30,7 +30,7 @@ export enum UserGroup {
 }
 
 @Component({
-  selector: 'app-create-user',
+  selector: 'app-create-unspsc',
   templateUrl: './create-unspsc.component.html',
   styleUrls: ['./create-unspsc.component.scss']
 })
