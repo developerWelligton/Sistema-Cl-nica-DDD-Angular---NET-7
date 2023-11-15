@@ -9,6 +9,9 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Interfaces.IVeterinario;
 using Domain.Interfaces.IClasse;
+using Domain.Interfaces.IFamilia;
+using System.Text.Json;
+using System.Text;
 
 namespace WebApi.Controllers
 {
@@ -63,8 +66,52 @@ namespace WebApi.Controllers
                 EmailsAdicionais = clienteDto.EmailsAdicionais // Added property
             };
  
+             
+            //BASE ASSAS
+            // Prepare for Asaas API call
+            var asaasPayload = new
+            {
+                name = cliente.Nome,
+                email = cliente.Email,
+                phone = cliente.TelefoneFixo,
+                mobilePhone = cliente.TelefoneMovel,
+                cpfCnpj = cliente.CPF_CNPJ,
+                postalCode = cliente.CEP,
+                address = cliente.Endereco,
+                addressNumber = cliente.Complemento,
+                province = cliente.Bairro,
+                city = cliente.Cidade,
+                state = cliente.UF,
+                country = "Brazil", // Assuming Brazil, adjust as needed
+                                    // ... other properties as required by Asaas ...
+            };
+             
+            var httpClient = new HttpClient();
 
-            await _interfaceClientes.Add(cliente);
+            // Adding headers
+            httpClient.DefaultRequestHeaders.Add("access_token", "$aact_YTU5YTE0M2M2N2I4MTliNzk0YTI5N2U5MzdjNWZmNDQ6OjAwMDAwMDAwMDAwMDAzMjU0NDM6OiRhYWNoX2ZhZDVmN2JjLTI1ODYtNDg2NS1hYzIxLWExNjNhNmUyYTA0Yg==");
+            httpClient.DefaultRequestHeaders.Add("Accept-Encoding", "gzip, deflate, br");
+            httpClient.DefaultRequestHeaders.Add("Accept", "*/*");
+
+
+            var content = new StringContent(JsonSerializer.Serialize(asaasPayload), Encoding.UTF8, "application/json"); 
+
+            var response = await httpClient.PostAsync("https://sandbox.asaas.com/api/v3/customers", content);
+
+            if (!response.IsSuccessStatusCode)
+            {
+                // Handle the error
+                return BadRequest("Failed to create the customer.");
+            }
+            else
+            {
+                //BASE SOLUTION SANTOS
+                await _interfaceClientes.Add(cliente);
+
+            }
+
+            //*
+
 
             return CreatedAtAction(nameof(AdicionarCliente), new { id = cliente.ID_Cliente }, clienteDto);
         }
