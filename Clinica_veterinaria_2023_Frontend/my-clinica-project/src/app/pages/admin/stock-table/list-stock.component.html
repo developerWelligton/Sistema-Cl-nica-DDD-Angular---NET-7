@@ -1,4 +1,22 @@
-<div class="container mt-5  ">
-  <h1>Estoques Registrados</h1>
-  <app-list-table-stock [stockList]="stockList"  ></app-list-table-stock>
+<div class="container mt-5">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/admin">Portal do Administrador</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Estoques</li>
+    </ol>
+  </nav>
+
+  <!-- Barra de Botões com Flexbox -->
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Estoques Registrados</h1>
+    <div class="d-flex">
+      <button type="button" class="btn btn-primary flex-fill me-2" routerLink="/admin/list-stock/create-estoque">Adicionar Estoque</button>
+      <button type="button" class="btn btn-secondary flex-fill" routerLink="/admin">Voltar</button>
+    </div>
+  </div>
+
+  <!-- Tabela de Estoques -->
+  <app-list-table-stock [stockList]="stockList"></app-list-table-stock>
+
 </div>

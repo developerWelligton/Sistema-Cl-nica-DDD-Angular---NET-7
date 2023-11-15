@@ -1,7 +1,7 @@
-<h1>Produtos Registrados</h1>
+
 <div class="mat-elevation-z8 demo-table">
 
-  <table mat-table [dataSource]="productList" class="mat-elevation-z8 demo-table">
+  <table mat-table [dataSource]="productList.slice().reverse()" class="mat-elevation-z8 demo-table">
     <!-- Position Column -->
     <ng-container matColumnDef="idProduto">
       <th mat-header-cell *matHeaderCellDef> No. </th>

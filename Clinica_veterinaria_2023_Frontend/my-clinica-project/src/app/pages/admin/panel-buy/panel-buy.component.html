@@ -1,6 +1,17 @@
 
     <div class="container mt-5">
-      <h1 class="text-center my-3">PONTO DE COMPRA</h1>
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a routerLink="/admin">Portal do Administrador</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Ponto de Compra</li>
+        </ol>
+      </nav>
+      <div class="d-flex justify-content-between align-items-center mb-3">
+        <h1>Produtos Registrados</h1>
+        <div class="d-flex">
+          <button type="button" class="btn btn-secondary flex-fill " routerLink="/admin">Voltar</button>
+        </div>
+      </div>
       <div class="row align-items-start">
           <div class="input-group mb-3">
             <button class="btn btn-outline-success" type="button" id="button-addon1" (click)="searchProduct()">Buscar Produto</button>

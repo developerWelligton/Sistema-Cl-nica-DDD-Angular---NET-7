@@ -1,10 +1,22 @@
+<div class="container mt-5">
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/admin">Portal do Administrador</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Lista de UNSPSC</li>
+    </ol>
+  </nav>
 
-  <div class="container mt-5">
-
+  <div class="d-flex justify-content-between align-items-center mb-3">
     <h1>Lista de UNSPSC</h1>
-    <!-- Angular Material Table for Users -->
-    <app-unspsc-table [unspscList]="unspscList" (unspscDeleted)="handleUnspscDeleted($event)"
-    (unspscEdited)="handleUnspscEdited($event)" ></app-unspsc-table>
-
+    <div class="d-flex">
+      <button type="button" class="btn btn-primary flex-fill me-2" routerLink="/admin/create-unspsc">Adicionar UNSPSC</button>
+      <button type="button" class="btn btn-secondary flex-fill" routerLink="/admin">Voltar</button>
+      <!-- Espaçador para equilibrar o layout -->
+      <div class="flex-fill"></div>
+    </div>
   </div>
 
+  <!-- Angular Material Table for UNSPSC -->
+  <app-unspsc-table [unspscList]="unspscList" (unspscDeleted)="handleUnspscDeleted($event)"
+  (unspscEdited)="handleUnspscEdited($event)"></app-unspsc-table>
+</div>

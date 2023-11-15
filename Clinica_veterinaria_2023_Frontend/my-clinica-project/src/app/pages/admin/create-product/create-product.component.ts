@@ -132,6 +132,7 @@ submitForm(event?: Event): void {
         // Resetar o formulário
         this.createProductForm.reset();
         this.preview = null; // ou this.preview = '';
+        this.router.navigate(['/admin/list-product'])
       },
       (error) => {
         console.log('Error creating product', error);

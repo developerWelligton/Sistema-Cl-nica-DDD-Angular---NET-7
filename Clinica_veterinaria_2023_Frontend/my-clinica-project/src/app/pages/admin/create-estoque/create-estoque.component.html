@@ -1,7 +1,18 @@
 <div class="container mt-5">
-  <h1 class="mb-4 text-center"><strong>Cadastro de Estoque</strong></h1>
+  <!-- Cabeçalho e Navegação -->
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/admin">Portal do Administrador</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Estoque</li>
+    </ol>
+  </nav>
+
+  <h1 class="mb-4"><strong>Cadastro de Estoque</strong></h1>
+
+  <!-- Formulário -->
   <form [formGroup]="createEstoqueForm" (submit)="submitForm($event)">
-    <div class="form-content-edit row justify-content-center">
+    <div class="row">
+      <!-- Campos do Formulário -->
       <div class="col-md-6">
         <div class="form-group mb-3">
           <label for="productName" class="form-label">Sala:</label>
@@ -11,10 +22,14 @@
           <label for="productDescription" class="form-label">Prateleira:</label>
           <textarea id="productDescription" formControlName="prateleira" class="form-control" required></textarea>
         </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary" [disabled]="createEstoqueForm.invalid">Salvar Estoque</button>
-        </div>
       </div>
+
+
+    </div>
+    <!-- Botões de Ação -->
+    <div class="col-md-6 d-flex align-items-end justify-content-start">
+      <button type="submit" class="btn btn-primary me-2" [disabled]="createEstoqueForm.invalid">Salvar Estoque</button>
+      <a class="btn btn-secondary" routerLink="/admin">Voltar</a>
     </div>
   </form>
 </div>

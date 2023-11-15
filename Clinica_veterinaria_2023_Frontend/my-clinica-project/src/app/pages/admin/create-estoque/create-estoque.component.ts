@@ -91,6 +91,7 @@ export class CreateEstoqueComponent {
               'success'
             );
             this.createEstoqueForm.reset()
+            this.router.navigate(['/admin/list-stock'])
           });
         }
       });

@@ -1,3 +1,19 @@
 <div class="container mt-5">
-    <app-user-product [productList]="productList" (deleteRequest)="onDeleteRequest($event)"></app-user-product>
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a routerLink="/admin">Portal do Administrador</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Produtos</li>
+    </ol>
+  </nav>
+
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Produtos Registrados</h1>
+    <div class="d-flex">
+
+      <button type="button" class="btn btn-primary flex-fill me-2" routerLink="/admin/create-product">Adicionar Produto</button>
+      <button type="button" class="btn btn-secondary flex-fill " routerLink="/admin">Voltar</button>
+    </div>
+  </div>
+
+  <app-user-product [productList]="productList" (deleteRequest)="onDeleteRequest($event)"></app-user-product>
 </div>

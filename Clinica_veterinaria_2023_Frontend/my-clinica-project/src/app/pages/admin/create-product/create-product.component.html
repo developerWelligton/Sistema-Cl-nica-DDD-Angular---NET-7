@@ -1,7 +1,14 @@
 
 <div class="container  mt-5">
+
+  <nav aria-label="breadcrumb">
+    <ol class="breadcrumb">
+      <li class="breadcrumb-item"><a href="#">Portal do Administrador</a></li>
+      <li class="breadcrumb-item active" aria-current="page">Adicionar Produto</li>
+    </ol>
+  </nav>
   <h1  >Cadastro de Produto</h1>
-  <form [formGroup]="createProductForm" (submit)="submitForm($event)">
+  <form [formGroup]="createProductForm" (submit)="submitForm($event)" class="form-product">
 
   <div class="form-content-edit row">
     <div class="col-md-4">
@@ -44,11 +51,9 @@
 
 
 
-      <!-- Parte do formulário -->
       <div class="col-md-8">
         <div class="form-part">
 
-                <!-- Primeira linha de inputs -->
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <label for="productName" class="form-label">Nome do Produto:</label>
@@ -66,7 +71,6 @@
                  </div>
                 </div>
 
-                <!-- Segunda linha de inputs -->
                 <div class="row">
                   <div class="col-md-4 mb-3">
                     <label for="sellingPrice" class="form-label">Preço de Venda:</label>
@@ -85,9 +89,17 @@
                 </div>
                 <br>
                 <br>
-                <button type="submit" class="btn btn-primary" [disabled]="createProductForm.invalid">Salvar Produto</button>
+
 
         </div>
+
+      </div>
+
+      <div class="col-4">
+        <button type="submit" class="btn btn-outline-danger" routerLink="/admin/list-product">Voltar</button>
+      </div>
+      <div class="col-8">
+        <button type="submit" class="btn btn-success"[disabled]="createProductForm.invalid">Salvar Produto</button>
       </div>
 
 

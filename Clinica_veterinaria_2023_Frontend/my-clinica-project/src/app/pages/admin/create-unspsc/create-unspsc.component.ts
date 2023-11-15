@@ -383,7 +383,7 @@ export class CreateUnspscComponent {
         this.unspscCode = `${segmento['codigo']}${familia['codigo']}${classe['codigo']}${mercadoria['codigo']}`;
 
         // Aqui você pode fazer o que quiser com esses valores
-        alert('UNSPSC Code:'+ this.unspscCode);
+        //alert('UNSPSC Code:'+ this.unspscCode);
 
       const payload = {
           codigoSfcm: this.unspscCode,
