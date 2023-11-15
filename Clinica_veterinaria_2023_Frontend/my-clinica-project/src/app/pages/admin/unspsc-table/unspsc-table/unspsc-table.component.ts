@@ -1,17 +1,17 @@
 
-import { Component, EventEmitter, Input, Output, ViewChild } from '@angular/core';
+import { Component, EventEmitter, Input, Output, SimpleChanges, ViewChild } from '@angular/core';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatTableDataSource } from '@angular/material/table';
 import { Router } from '@angular/router';
 import { Unspsc } from 'src/app/models/unspsc.model';
 
- const ELEMENT_DATA: PeriodicElement[] = [
-  { idUnspsc: 1, codigoSfcm: '10101501', segmento: 'Live animals', familia: 'Livestock', classe: 'Cattle', mercadoria: 'Dairy cattle' },
-  { idUnspsc: 2, codigoSfcm: '10101502', segmento: 'Live animals', familia: 'Livestock', classe: 'Cattle', mercadoria: 'Beef cattle' },
-  { idUnspsc: 3, codigoSfcm: '10101503', segmento: 'Live animals', familia: 'Livestock', classe: 'Cattle', mercadoria: 'Feeder cattle' },
-  { idUnspsc: 4, codigoSfcm: '10101601', segmento: 'Live animals', familia: 'Livestock', classe: 'Swine', mercadoria: 'Pigs' },
-  { idUnspsc: 5, codigoSfcm: '10101602', segmento: 'Live animals', familia: 'Livestock', classe: 'Swine', mercadoria: 'Hogs' }
-];
+//  const ELEMENT_DATA: PeriodicElement[] = [
+//   { idUnspsc: 1, codigoSfcm: '10101501', segmento: 'Live animals', familia: 'Livestock', classe: 'Cattle', mercadoria: 'Dairy cattle' },
+//   { idUnspsc: 2, codigoSfcm: '10101502', segmento: 'Live animals', familia: 'Livestock', classe: 'Cattle', mercadoria: 'Beef cattle' },
+//   { idUnspsc: 3, codigoSfcm: '10101503', segmento: 'Live animals', familia: 'Livestock', classe: 'Cattle', mercadoria: 'Feeder cattle' },
+//   { idUnspsc: 4, codigoSfcm: '10101601', segmento: 'Live animals', familia: 'Livestock', classe: 'Swine', mercadoria: 'Pigs' },
+//   { idUnspsc: 5, codigoSfcm: '10101602', segmento: 'Live animals', familia: 'Livestock', classe: 'Swine', mercadoria: 'Hogs' }
+// ];
 
 export interface PeriodicElement {
   idUnspsc: number;
@@ -45,9 +45,9 @@ export class UnspscTableComponent {
       this.unspscDeleted.emit(itemId);
     }
 
-    displayedColumns: string[] = ['id', 'unspscCode', 'segment', 'family', 'class', 'commodity'];
+    displayedColumns: string[] = ['idUnspsc', 'codigoSfcm', 'descricaoSegmento', 'descricaoFamilia', 'descricaoClasse', 'descricaoMercadoria','edit', 'delete'];
 
-    dataSource = new MatTableDataSource<PeriodicElement>(ELEMENT_DATA);
+    dataSource = new MatTableDataSource<Unspsc>(this.unspscList);
 
     @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -55,5 +55,12 @@ export class UnspscTableComponent {
       this.dataSource.paginator = this.paginator;
     }
 
+
+    ngOnChanges(changes: SimpleChanges) {
+      if (changes['unspscList']) {
+        this.dataSource = new MatTableDataSource<Unspsc>(this.unspscList);
+        this.dataSource.paginator = this.paginator;
+      }
+    }
 
 }

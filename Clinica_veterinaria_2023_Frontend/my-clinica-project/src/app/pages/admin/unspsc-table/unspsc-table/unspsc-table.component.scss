@@ -1,0 +1,21 @@
+.action-icon {
+  cursor: pointer;
+  margin-right: 8px; // Adds some space between icons
+
+  &:hover {
+    color: #0056b3; // Example hover color, adjust as needed
+  }
+}
+.responsive-table-container {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+}
+
+@media (max-width: 600px) {
+  .responsive-table-container {
+    overflow-x: auto;
+  }
+}

@@ -73,7 +73,8 @@ export class CreateUnspscComponent {
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
-    private unspscService: UnspscService
+    private unspscService: UnspscService,
+    private router: Router
   ) {}
 
   ngOnInit() {
@@ -327,6 +328,8 @@ export class CreateUnspscComponent {
         console.log(segmento, familia, classe, mercadoria);
 
         alert("Cadastro Realizado!");
+        this.router.navigate(['/admin/list-unspsc']);
+
     } else {
         alert("Por favor, preencha todos os campos corretamente.");
     }

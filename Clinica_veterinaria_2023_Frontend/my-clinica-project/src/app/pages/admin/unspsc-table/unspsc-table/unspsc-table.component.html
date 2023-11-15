@@ -1,51 +1,73 @@
 <button type="button" class="btn btn-primary" routerLink="/admin/create-unspsc">Adicionar UNSPSC</button>
 <br>
 <br>
-<div class="mat-elevation-z8">
+<div fxLayout="column" fxLayout.gt-sm="row" class="mat-elevation-z8 responsive-table-container">
   <table mat-table [dataSource]="dataSource">
 
     <!-- ID Column -->
-    <ng-container matColumnDef="id">
+    <ng-container matColumnDef="idUnspsc">
       <th mat-header-cell *matHeaderCellDef> No. </th>
       <td mat-cell *matCellDef="let element"> {{element.idUnspsc}} </td>
     </ng-container>
 
-
-    <ng-container matColumnDef="unspscCode">
+    <!-- UNSPSC Code Column -->
+    <ng-container matColumnDef="codigoSfcm">
       <th mat-header-cell *matHeaderCellDef> No. UNSPSC </th>
       <td mat-cell *matCellDef="let element"> {{element.codigoSfcm}} </td>
     </ng-container>
 
-
-    <ng-container matColumnDef="segment">
+    <!-- Segment Column -->
+    <ng-container matColumnDef="descricaoSegmento">
       <th mat-header-cell *matHeaderCellDef> Segmento </th>
-      <td mat-cell *matCellDef="let element"> {{element.segmento}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.descricaoSegmento}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="family">
+    <!-- Family Column -->
+    <ng-container matColumnDef="descricaoFamilia">
       <th mat-header-cell *matHeaderCellDef> Família </th>
-      <td mat-cell *matCellDef="let element"> {{element.familia}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.descricaoFamilia}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="class">
+    <!-- Class Column -->
+    <ng-container matColumnDef="descricaoClasse">
       <th mat-header-cell *matHeaderCellDef> Classe </th>
-      <td mat-cell *matCellDef="let element"> {{element.classe}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.descricaoClasse}} </td>
     </ng-container>
 
-    <ng-container matColumnDef="commodity">
+    <!-- Commodity Column -->
+    <ng-container matColumnDef="descricaoMercadoria">
       <th mat-header-cell *matHeaderCellDef> Mercadoria </th>
-      <td mat-cell *matCellDef="let element"> {{element.mercadoria}} </td>
+      <td mat-cell *matCellDef="let element"> {{element.descricaoMercadoria}} </td>
+    </ng-container>
+
+
+      <!-- Edit Action Column -->
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon class="action-icon" (click)="editUnspsc(element)">edit</mat-icon>
+      </td>
+    </ng-container>
+
+     <!-- Delete Action Column -->
+    <ng-container matColumnDef="delete">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <mat-icon class="action-icon" (click)="deleteUnspsc(element.idUnspsc)">delete</mat-icon>
+      </td>
     </ng-container>
 
     <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
     <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
   </table>
 
-  <mat-paginator [pageSizeOptions]="[5, 10, 20]"
+  <mat-paginator  [pageSizeOptions]="[5, 10, 20]"
                  showFirstLastButtons
                  aria-label="Select page of periodic elements">
   </mat-paginator>
+
 </div>
+
 
 <!-- <div class="table-responsive">
   <table class="table-erp">
