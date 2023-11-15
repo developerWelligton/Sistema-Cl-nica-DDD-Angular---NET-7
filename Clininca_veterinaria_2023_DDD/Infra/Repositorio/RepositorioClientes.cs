@@ -67,7 +67,7 @@ namespace Infra.Repositorio
         {
             using (var banco = new ContextBase(_optionsBuilder))
             {
-                return await banco.Clientes.AsNoTracking().Where(c => c.Telefone == telefone).ToListAsync();
+                return await banco.Clientes.AsNoTracking().Where(c => c.TelefoneMovel == telefone).ToListAsync();
             }
         }
 

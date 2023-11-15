@@ -22,6 +22,18 @@ export class AdminComponent {
 
   cards = [
     {
+      title: 'Meus Clientes',
+      subtitle: 'Aqui você gerenciar seus Clientes',
+      image: 'assets/images/estoque.jpg',
+      content: '',
+      link1Url: '',
+      link1Text: '',
+      link2Url: '/admin/list-unspsc',
+      link2Text: 'Ver Clientes',
+      link3Url:  '',
+      link3Text: ''
+    },
+    {
       title: 'Painel Venda',
       subtitle: 'Aqui você pode fazer suas vendas',
       image: 'assets/images/venda.jpg',
@@ -69,7 +81,9 @@ export class AdminComponent {
         link2Url: '/admin/list-unspsc',
         link2Text: 'Ver Unspsc',
         link3Url:  '',
-        link3Text: ''}
+        link3Text: ''
+      },
+
     // ... mais cards ...
   ];
 
