@@ -28,7 +28,7 @@ export class AdminComponent {
       content: '',
       link1Url: '',
       link1Text: '',
-      link2Url: '/admin/list-unspsc',
+      link2Url: '/admin/create-cliente',
       link2Text: 'Ver Clientes',
       link3Url:  '',
       link3Text: ''

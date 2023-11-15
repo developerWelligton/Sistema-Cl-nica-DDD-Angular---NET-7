@@ -15,6 +15,7 @@ import { ListSaleComponent } from './sale-table/sale-list.component';
 import { CreateProviderComponent } from './create-provider/create-provider.component';
 import { ListProviderComponent } from './unspsc-table copy/list-provider.component';
 import { CreateBuyComponent } from './create-buy/create-buy.component';
+import { CreateClienteComponent } from './create-cliente/create-cliente.component';
 
 const routes: Routes = [
   {
@@ -77,6 +78,10 @@ const routes: Routes = [
   {
     path:'panel-buy',
     loadChildren: () => import('./panel-buy/panel-buy.module').then(m => m.PanelBuyModule)
+  },
+  {
+    path:'create-cliente',
+    component:CreateClienteComponent
   },
    // Rota coringa - Redireciona para NotfoundConsultComponent quando a rota não é encontrada
    {

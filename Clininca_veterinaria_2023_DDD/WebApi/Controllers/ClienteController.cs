@@ -96,7 +96,7 @@ namespace WebApi.Controllers
 
             var content = new StringContent(JsonSerializer.Serialize(asaasPayload), Encoding.UTF8, "application/json"); 
 
-            var response = await httpClient.PostAsync("https://sandbox.asaas.com/api/v3/customers", content);
+            var response = await httpClient.PostAsync("https://api.asaas.com/v3/customers", content);
 
             if (!response.IsSuccessStatusCode)
             {

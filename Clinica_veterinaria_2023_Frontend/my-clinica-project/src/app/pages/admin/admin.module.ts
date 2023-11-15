@@ -47,6 +47,7 @@ import { ModalProviderComponent } from './panel-buy/modal-provider/modal-provide
 import { MatIconModule } from '@angular/material/icon';
 import {MatStepperModule} from '@angular/material/stepper';
 import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
+import { CreateClienteComponent } from './create-cliente/create-cliente.component';
 @NgModule({
   declarations: [
     AdminComponent,
@@ -69,7 +70,8 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
     ProviderTableComponent,
     CreateBuyComponent,
     ModalStockComponent,
-    ModalProviderComponent
+    ModalProviderComponent,
+    CreateClienteComponent
   ],
   exports:[CreateUserComponent,UserProductComponent],
   imports: [
