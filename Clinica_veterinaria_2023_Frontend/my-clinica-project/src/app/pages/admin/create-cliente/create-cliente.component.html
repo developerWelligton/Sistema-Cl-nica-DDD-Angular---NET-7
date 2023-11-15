@@ -1,18 +1,14 @@
 <div class="container mt-5">
   <button type="button" class="btn btn-primary mb-5" routerLink="/admin/list-unspsc">Voltar</button>
 
-  <h1>Cadastro UNSPSC de Produtos e Serviços</h1>
+  <h1>Cadastro de Cliente</h1>
   <mat-stepper orientation="vertical"  #stepper>
-    <mat-step [stepControl]="segmentoFormGroup">
-      <form [formGroup]="segmentoFormGroup">
-        <ng-template matStepLabel>Segmento</ng-template>
+    <mat-step [stepControl]="nomeFormGroup">
+      <form [formGroup]="nomeFormGroup">
+        <ng-template matStepLabel>Nome</ng-template>
         <mat-form-field style="width: 100%;">
-          <mat-label>Segmento</mat-label>
-          <!-- <input matInput placeholder="Entre com Segmento do produto ou serviço" formControlName="segmentoCtrl" required> -->
-          <mat-select formControlName="segmentoCtrl" required placeholder="Entre com Segmento do produto ou serviço">
-            <mat-option *ngFor="let item of segmentos" [value]="item">{{ item.codigo+" | "+item.descricao }}</mat-option>
-          </mat-select>
-
+          <mat-label>Nome</mat-label>
+            <input matInput placeholder="Entre com Segmento do produto ou serviço" formControlName="nomeCtrl" required>
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
@@ -20,16 +16,14 @@
       </form>
     </mat-step>
 
-    <mat-step [stepControl]="familiaFormGroup">
-      <form [formGroup]="familiaFormGroup">
-        <ng-template matStepLabel>Família</ng-template>
+    <mat-step [stepControl]="cnpjCpfFormGroup">
+      <form [formGroup]="cnpjCpfFormGroup">
+        <ng-template matStepLabel>CNPJ ou CFP</ng-template>
         <mat-form-field style="width: 100%;">
-          <mat-label>Família</mat-label>
-          <!-- <input matInput formControlName="familiaCtrl" placeholder="Entre com Familia do produto ou serviço"
-                 required> -->
-           <mat-select formControlName="familiaCtrl" required placeholder="Entre com Familia do Segmento do produto ou serviço">
-            <mat-option *ngFor="let item of familias" [value]="item">{{item.codigo+" | "+item.descricao }}</mat-option>
-          </mat-select>
+          <mat-label>CNPJ ou CFP</mat-label>
+            <input matInput formControlName="cnpjCpfCtrl" placeholder="Entre com CNPJ ou CPF do Cliente"
+                 required>
+
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -37,16 +31,14 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="classeFormGroup">
-      <form [formGroup]="classeFormGroup">
-        <ng-template matStepLabel>Classe</ng-template>
+    <mat-step [stepControl]="telefoneFormGroup">
+      <form [formGroup]="telefoneFormGroup">
+        <ng-template matStepLabel>Telefone Celular</ng-template>
         <mat-form-field style="width: 100%;">
-          <mat-label>Classe</mat-label>
-          <!-- <input matInput formControlName="classeCtrl" placeholder="Entre com Classe do produto ou serviço"
-                 required> -->
-          <mat-select formControlName="classeCtrl" required placeholder="Entre com Classe da Família do produto ou serviço">
-            <mat-option *ngFor="let item of classes" [value]="item">{{item.codigo+" | "+item.descricao }}</mat-option>
-          </mat-select>
+          <mat-label>Telefone Celular</mat-label>
+           <input matInput formControlName="telefoneCtrl" placeholder="Entre com Telefone do Cliente"
+                 required>
+
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -54,16 +46,14 @@
         </div>
       </form>
     </mat-step>
-    <mat-step [stepControl]="mercadoriaFormGroup">
-      <form [formGroup]="mercadoriaFormGroup">
-        <ng-template matStepLabel>Mercadoria</ng-template>
+    <mat-step [stepControl]="emailFormGroup">
+      <form [formGroup]="emailFormGroup">
+        <ng-template matStepLabel>Email</ng-template>
         <mat-form-field style="width: 100%;">
-          <mat-label>Mercadoria</mat-label>
-          <!-- <input matInput formControlName="mercadoriaCtrl" placeholder="Entre com Mercadoria do produto ou serviço"
-                 required> -->
-          <mat-select formControlName="mercadoriaCtrl" required placeholder="Entre com Familia do Segmento do produto ou serviço">
-            <mat-option *ngFor="let item of mercadorias" [value]="item">{{item.codigo+" | "+item.descricao }}</mat-option>
-          </mat-select>
+          <mat-label>E-mail</mat-label>
+           <input matInput formControlName="emailCtrl" placeholder="Entre com Email do Cliente"
+                 required>
+
         </mat-form-field>
         <div>
           <button mat-button matStepperPrevious>Back</button>
@@ -78,7 +68,7 @@
         <button mat-button matStepperPrevious>Back</button>
         <button mat-button (click)="stepper.reset()">Reset</button>
         <button mat-button
-        *ngIf="segmentoFormGroup.valid && familiaFormGroup.valid && classeFormGroup.valid && mercadoriaFormGroup.valid"
+        *ngIf="cnpjCpfFormGroup.valid && telefoneFormGroup.valid && cnpjCpfFormGroup.valid"
         (click)="finalizarCadastro()">
           Finalizar Cadastro
         </button>

@@ -1,4 +1,4 @@
 export const environment = {
-  production: true,
-  apiUrl: 'https://dotnetapisolutionsantos.azurewebsites.net' // PORT LOCAL BACKEND REQUEST
+  production: false,
+  apiUrl: 'https://localhost:7131' // PORT LOCAL BACKEND REQUEST
 };

@@ -25,4 +25,9 @@ export class ClienteService {
         return this.http.get<Cliente[]>(`${this.baseUrl}/Cliente/search/${term}`);
   }
 
+  addCliente(cliente: any): Observable<any> {
+    return this.http.post<Cliente>(`${this.baseUrl}/Cliente`, cliente, {
+      headers: { 'Content-Type': 'application/json' }
+    });
+  }
 }

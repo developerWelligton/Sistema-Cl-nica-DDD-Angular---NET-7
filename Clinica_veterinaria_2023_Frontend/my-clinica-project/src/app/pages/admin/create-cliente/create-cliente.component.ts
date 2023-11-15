@@ -38,58 +38,6 @@ export enum UserGroup {
   styleUrls: ['./create-cliente.component.scss']
 })
 export class CreateClienteComponent {
-  states: string[] = [
-    'Alabama',
-    'Alaska',
-    'Arizona',
-    'Arkansas',
-    'California',
-    'Colorado',
-    'Connecticut',
-    'Delaware',
-    'Florida',
-    'Georgia',
-    'Hawaii',
-    'Idaho',
-    'Illinois',
-    'Indiana',
-    'Iowa',
-    'Kansas',
-    'Kentucky',
-    'Louisiana',
-    'Maine',
-    'Maryland',
-    'Massachusetts',
-    'Michigan',
-    'Minnesota',
-    'Mississippi',
-    'Missouri',
-    'Montana',
-    'Nebraska',
-    'Nevada',
-    'New Hampshire',
-    'New Jersey',
-    'New Mexico',
-    'New York',
-    'North Carolina',
-    'North Dakota',
-    'Ohio',
-    'Oklahoma',
-    'Oregon',
-    'Pennsylvania',
-    'Rhode Island',
-    'South Carolina',
-    'South Dakota',
-    'Tennessee',
-    'Texas',
-    'Utah',
-    'Vermont',
-    'Virginia',
-    'Washington',
-    'West Virginia',
-    'Wisconsin',
-    'Wyoming',
-  ];
 
   @ViewChild('modalComponent') modalComponent: ModalUnspscComponent;
 
@@ -108,28 +56,29 @@ export class CreateClienteComponent {
 
 
   //
-  segmentoFormGroup = this.fb.group({
-    segmentoCtrl: ['', Validators.required],
+  nomeFormGroup = this.fb.group({
+    nomeCtrl: ['', Validators.required],
   });
 
-  familiaFormGroup = this.fb.group({
-    familiaCtrl: ['', Validators.required],
+  cnpjCpfFormGroup = this.fb.group({
+    cnpjCpfCtrl: ['', Validators.required],
   });
 
-  classeFormGroup = this.fb.group({
-    classeCtrl: ['', Validators.required],
+  telefoneFormGroup = this.fb.group({
+    telefoneCtrl: ['', Validators.required],
   });
-
-  mercadoriaFormGroup = this.fb.group({
-    mercadoriaCtrl: ['', Validators.required],
+  emailFormGroup = this.fb.group({
+    emailCtrl: ['', Validators.required],
   });
+ //
 
   isLinear = false;
   constructor(
     private fb: FormBuilder,
     private dataService: DataService,
     private unspscService: UnspscService,
-    private router: Router
+    private router: Router,
+    private clienteService: ClienteService
   ) {}
 
   ngOnInit() {
@@ -368,82 +317,71 @@ export class CreateClienteComponent {
 
   finalizarCadastro() {
     // Verificando se todos os formulários estão válidos
-    if (this.segmentoFormGroup.valid &&
-        this.familiaFormGroup.valid &&
-        this.classeFormGroup.valid &&
-        this.mercadoriaFormGroup.valid) {
+    if (this.nomeFormGroup.valid &&
+        this.cnpjCpfFormGroup.valid &&
+        this.telefoneFormGroup.valid && this.emailFormGroup.valid ) {
 
         // Coletando os valores dos formulários, já que todos estão válidos
-        const segmento = this.segmentoFormGroup.get('segmentoCtrl').value;
-        const familia = this.familiaFormGroup.get('familiaCtrl').value;
-        const classe = this.classeFormGroup.get('classeCtrl').value;
-        const mercadoria = this.mercadoriaFormGroup.get('mercadoriaCtrl').value;
+        const nome = this.nomeFormGroup.get('nomeCtrl').value;
+        const cnpjCpf = this.cnpjCpfFormGroup.get('cnpjCpfCtrl').value;
+        const telefone = this.telefoneFormGroup.get('telefoneCtrl').value;
+        const email = this.emailFormGroup.get('emailCtrl').value;
 
-        // Construindo o código UNSPSC
-        this.unspscCode = `${segmento['codigo']}${familia['codigo']}${classe['codigo']}${mercadoria['codigo']}`;
 
-        // Aqui você pode fazer o que quiser com esses valores
-        //alert('UNSPSC Code:'+ this.unspscCode);
+        const payload = {
+          nome: nome, // Assuming 'nome' is a variable containing the client's name
+          cpF_CNPJ: cnpjCpf, // Assuming 'cnpjCpf' is a variable containing the CPF or CNPJ number
+          endereco: "", // Replace with actual address or keep as a variable
+          email: email, // Assuming 'email' is a variable containing the client's email
+          telefoneFixo: "", // Replace with actual fixed telephone number or keep as a variable
+          telefoneMovel: telefone, // Assuming 'telefone' is a variable containing the mobile phone number
+          cep: "", // Replace with actual CEP or keep as a variable
+          bairro: "", // Replace with actual neighborhood or keep as a variable
+          cidade: "", // Replace with actual city or keep as a variable
+          uf: "", // Replace with actual UF or keep as a variable
+          complemento: "", // Replace with actual complement or keep as a variable
+          inscricaoMunicipal: "", // Replace with actual municipal registration or keep as a variable
+          inscricaoEstadual: "", // Replace with actual state registration or keep as a variable
+          iD_Usuario: 1, // Replace with actual user ID or keep as a variable
+          observacoes: "", // Replace with actual observations or keep as a variable
+          grupo: "", // Replace with actual group or keep as a variable
+          empresa: "", // Replace with actual company name or keep as a variable
+          notificacaoDesabilitada: true, // Replace with actual notification status or keep as a variable
+          emailsAdicionais: "" // Replace with actual additional emails or keep as a variable
+        };
 
-      const payload = {
-          codigoSfcm: this.unspscCode,
-          iD_Usuario: 1,  // Ajuste conforme necessário
-          idSegmento: segmento['idSegmento'],
-          idFamilia: familia['idFamilia'],
-          idClasse: classe['idClasse'],
-          idMercadoria: mercadoria['idMercadoria']
-      };
-
-        // Verificar se o código UNSPSC já existe
-        this.unspscService.checkIfUnspscCodeExists(this.unspscCode).subscribe(
-          exists => {
-              if (exists) {
-                  // Mostrar alerta se o código UNSPSC já existe
-                  Swal.fire({
-                      icon: 'warning',
-                      title: 'Oops...',
-                      text: 'The UNSPSC Code already exists. Please choose a different code.',
-                  });
-              } else {
-                  // Se não existir, criar o novo código UNSPSC
-                  this.unspscService.createUnspscCode(payload).subscribe(
-                      response => {
-                          console.log('API response:', response);
-                          // Informe o usuário sobre o sucesso
-                          Swal.fire({
-                              icon: 'success',
-                              title: 'Success',
-                              text: 'Data sent successfully!',
-                          });
-                          // Resetar o formulário após o envio bem-sucedido
-                          this.createUnspscForm.reset();
-                          this.unspscCode=''
-                          this.router.navigate(['/admin/list-unspsc']);
-                      },
-                      error => {
-                          console.error('API error:', error);
-                          // Informe o usuário sobre o erro
-                          Swal.fire({
-                              icon: 'error',
-                              title: 'Error',
-                              text: 'Failed to send data!',
-                          });
-                      }
-                  );
-              }
+        this.clienteService.addCliente(payload).subscribe({
+          next: (res) => {
+            // Display a success message using SweetAlert2
+            Swal.fire({
+              title: 'Success!',
+              text: 'Cadastro realizado com sucesso!',
+              icon: 'success',
+              confirmButtonText: 'Ok'
+            });
+        this.nomeFormGroup.reset();
+        this.cnpjCpfFormGroup.reset();
+        this.telefoneFormGroup.reset() ;
+        this.emailFormGroup.reset();
           },
-          error => {
-              console.error('API error:', error);
-              // Informe o usuário sobre o erro
-              Swal.fire({
-                  icon: 'error',
-                  title: 'Error',
-                  text: 'Failed to check UNSPSC Code existence!',
-              });
+          error: (err) => {
+            // Handle any errors here, maybe show a SweetAlert2 error message
+            Swal.fire({
+              title: 'Error!',
+              text: 'Houve um erro no cadastro.',
+              icon: 'error',
+              confirmButtonText: 'Ok'
+            });
+            console.error(err);
           }
-      );
+        });
     } else {
-        alert("Por favor, preencha todos os campos corretamente.");
+      Swal.fire({
+        title: 'Atenção!',
+        text: 'Por favor, preencha todos os campos corretamente.',
+        icon: 'warning',
+        confirmButtonText: 'Ok'
+      });
     }
   }
 
