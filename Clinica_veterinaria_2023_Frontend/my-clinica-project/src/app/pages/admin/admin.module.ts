@@ -93,7 +93,7 @@ import {MatPaginator, MatPaginatorModule} from '@angular/material/paginator';
     MatCardModule,
     MatIconModule,
     MatStepperModule,
-    MatPaginatorModule
+    MatPaginatorModule,
 
   ],
   providers: []

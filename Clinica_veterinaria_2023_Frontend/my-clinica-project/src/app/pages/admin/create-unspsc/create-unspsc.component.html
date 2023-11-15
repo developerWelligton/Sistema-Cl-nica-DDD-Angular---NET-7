@@ -1,13 +1,17 @@
-
 <div class="container mt-5">
+  <button type="button" class="btn btn-primary mb-5" routerLink="/admin/list-unspsc">Voltar</button>
+
   <h1>Cadastro UNSPSC de Produtos e Serviços</h1>
   <mat-stepper orientation="vertical"  #stepper>
     <mat-step [stepControl]="segmentoFormGroup">
       <form [formGroup]="segmentoFormGroup">
         <ng-template matStepLabel>Segmento</ng-template>
-        <mat-form-field>
+        <mat-form-field style="width: 100%;">
           <mat-label>Segmento</mat-label>
-          <input matInput placeholder="Entre com Segmento do produto ou serviço" formControlName="segmentoCtrl" required>
+          <!-- <input matInput placeholder="Entre com Segmento do produto ou serviço" formControlName="segmentoCtrl" required> -->
+          <mat-select>
+            <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+          </mat-select>
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>
@@ -17,7 +21,7 @@
     <mat-step [stepControl]="familiaFormGroup">
       <form [formGroup]="familiaFormGroup">
         <ng-template matStepLabel>Família</ng-template>
-        <mat-form-field>
+        <mat-form-field style="width: 100%;">
           <mat-label>Família</mat-label>
           <input matInput formControlName="familiaCtrl" placeholder="Entre com Familia do produto ou serviço"
                  required>
@@ -31,7 +35,7 @@
     <mat-step [stepControl]="classeFormGroup">
       <form [formGroup]="classeFormGroup">
         <ng-template matStepLabel>Classe</ng-template>
-        <mat-form-field>
+        <mat-form-field style="width: 100%;">
           <mat-label>Classe</mat-label>
           <input matInput formControlName="classeCtrl" placeholder="Entre com Classe do produto ou serviço"
                  required>
@@ -45,7 +49,7 @@
     <mat-step [stepControl]="mercadoriaFormGroup">
       <form [formGroup]="mercadoriaFormGroup">
         <ng-template matStepLabel>Mercadoria</ng-template>
-        <mat-form-field>
+        <mat-form-field style="width: 100%;">
           <mat-label>Mercadoria</mat-label>
           <input matInput formControlName="mercadoriaCtrl" placeholder="Entre com Mercadoria do produto ou serviço"
                  required>

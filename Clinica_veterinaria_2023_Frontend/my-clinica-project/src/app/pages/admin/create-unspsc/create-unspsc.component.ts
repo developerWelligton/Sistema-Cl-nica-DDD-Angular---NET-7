@@ -22,6 +22,7 @@ import { UnspscService } from 'src/app/services/unspsc.service';
 import { ModalUnspscComponent } from 'src/app/components/modal-unspsc/modal-unspsc.component';
 
 
+
 export enum UserGroup {
   Cliente = 'cliente',
   Veterinario = 'veterinario',
@@ -29,12 +30,66 @@ export enum UserGroup {
   Admin = 'admin'
 }
 
+
+
 @Component({
   selector: 'app-create-unspsc',
   templateUrl: './create-unspsc.component.html',
   styleUrls: ['./create-unspsc.component.scss']
 })
 export class CreateUnspscComponent {
+  states: string[] = [
+    'Alabama',
+    'Alaska',
+    'Arizona',
+    'Arkansas',
+    'California',
+    'Colorado',
+    'Connecticut',
+    'Delaware',
+    'Florida',
+    'Georgia',
+    'Hawaii',
+    'Idaho',
+    'Illinois',
+    'Indiana',
+    'Iowa',
+    'Kansas',
+    'Kentucky',
+    'Louisiana',
+    'Maine',
+    'Maryland',
+    'Massachusetts',
+    'Michigan',
+    'Minnesota',
+    'Mississippi',
+    'Missouri',
+    'Montana',
+    'Nebraska',
+    'Nevada',
+    'New Hampshire',
+    'New Jersey',
+    'New Mexico',
+    'New York',
+    'North Carolina',
+    'North Dakota',
+    'Ohio',
+    'Oklahoma',
+    'Oregon',
+    'Pennsylvania',
+    'Rhode Island',
+    'South Carolina',
+    'South Dakota',
+    'Tennessee',
+    'Texas',
+    'Utah',
+    'Vermont',
+    'Virginia',
+    'Washington',
+    'West Virginia',
+    'Wisconsin',
+    'Wyoming',
+  ];
 
   @ViewChild('modalComponent') modalComponent: ModalUnspscComponent;
 
