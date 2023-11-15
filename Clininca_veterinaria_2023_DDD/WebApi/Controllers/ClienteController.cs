@@ -8,6 +8,7 @@ using WebApi.Model;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Domain.Interfaces.IVeterinario;
+using Domain.Interfaces.IClasse;
 
 namespace WebApi.Controllers
 {
@@ -21,6 +22,13 @@ namespace WebApi.Controllers
         {
             _interfaceClientes = interfaceClientes;
             _clienteServico = clienteServico;
+        }
+
+        [HttpGet]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<ClienteDto>>> ListarClientes()
+        {
+            return Ok(await _interfaceClientes.List());
         }
 
         [HttpPost("/api/Cliente")]
@@ -54,59 +62,13 @@ namespace WebApi.Controllers
                 NotificacaoDesabilitada = clienteDto.NotificacaoDesabilitada, // Added property
                 EmailsAdicionais = clienteDto.EmailsAdicionais // Added property
             };
-
-            // Mapear os animais, se fornecidos
-            if (clienteDto.Animais != null && clienteDto.Animais.Any())
-            {
-                cliente.Animais = clienteDto.Animais.Select(a => new Animal
-                {
-                    // Map the properties of AnimalDto to Animal
-                }).ToList();
-            }
+ 
 
             await _interfaceClientes.Add(cliente);
 
             return CreatedAtAction(nameof(AdicionarCliente), new { id = cliente.ID_Cliente }, clienteDto);
         }
-
-
-        //GET ALL CLIENTE E SEUS ANIMAIS
-        [HttpGet("/api/Clientes")]
-        [Produces("application/json")]
-        public async Task<ActionResult<IEnumerable<ClienteDto>>> ListarClientes()
-        {
-            var clientes = await _interfaceClientes.ListarClientesComAnimais();
-
-            var clientesDto = clientes.Select(c => new ClienteDto
-            {
-                ID_Cliente = c.ID_Cliente,
-                Nome = c.Nome,
-                CPF_CNPJ = c.CPF_CNPJ, // Added property
-                Endereco = c.Endereco,
-                Email = c.Email,
-                TelefoneFixo = c.TelefoneFixo, // Changed to TelefoneFixo
-                TelefoneMovel = c.TelefoneMovel, // Added property
-                CEP = c.CEP, // Added property
-                Bairro = c.Bairro, // Added property
-                Cidade = c.Cidade, // Added property
-                UF = c.UF, // Added property
-                Complemento = c.Complemento, // Added property
-                InscricaoMunicipal = c.InscricaoMunicipal, // Added property
-                InscricaoEstadual = c.InscricaoEstadual, // Added property
-                ID_Usuario = c.ID_Usuario,
-                Animais = c.Animais.Select(a => new AnimalDto
-                {
-                    // Map properties of Animal to AnimalDto
-                }).ToList(),
-                Observacoes = c.Observacoes, // Added property
-                Grupo = c.Grupo, // Added property
-                Empresa = c.Empresa, // Added property
-                NotificacaoDesabilitada = c.NotificacaoDesabilitada, // Added property
-                EmailsAdicionais = c.EmailsAdicionais // Added property
-            }).ToList();
-
-            return Ok(clientesDto);
-        }
+         
 
         [HttpPut("{id}")]
         [Produces("application/json")]

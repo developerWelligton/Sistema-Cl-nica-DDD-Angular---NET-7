@@ -30,10 +30,7 @@
         public string? InscricaoEstadual { get; set; }
 
         public int ID_Usuario { get; set; } // Existing line
-
-        // Property for the list of animals associated with the client
-        public List<AnimalDto> Animais { get; set; } // Existing line
-
+          
         // Additional properties
         public string? Observacoes { get; set; }
         public string? Grupo { get; set; }

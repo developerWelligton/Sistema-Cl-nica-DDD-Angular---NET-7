@@ -36,7 +36,7 @@ namespace Entities.Entidades
         public string? TelefoneMovel { get; set; }
 
         // Assuming a postal code is a string to account for leading zeros and/or hyphens
-        [StringLength(10)]
+        [StringLength(100)]
         public string? CEP { get; set; }
 
         [StringLength(255)]
@@ -48,16 +48,16 @@ namespace Entities.Entidades
         [StringLength(100)]
         public string? Cidade { get; set; }
 
-        [StringLength(2)]
+        [StringLength(100)]
         public string? UF { get; set; } // Assuming UF stands for "Unidade Federativa" (State)
 
         [StringLength(100)]
         public string? Complemento { get; set; }
 
-        [StringLength(20)]
+        [StringLength(100)]
         public string? InscricaoMunicipal { get; set; }
 
-        [StringLength(20)]
+        [StringLength(100)]
         public string? InscricaoEstadual { get; set; }
 
 
@@ -87,9 +87,9 @@ namespace Entities.Entidades
         public UsuarioSistemaClinica UsuarioSistemaClinica { get; set; }
        
         // Lista de exames associados a este cliente.
-        public virtual ICollection<Exame> Exames { get; set; }
+        //public virtual ICollection<Exame> Exames { get; set; }
 
-        public virtual ICollection<Animal> Animais { get; set; }
+        //public virtual ICollection<Animal> Animais { get; set; }
 
     }
 }

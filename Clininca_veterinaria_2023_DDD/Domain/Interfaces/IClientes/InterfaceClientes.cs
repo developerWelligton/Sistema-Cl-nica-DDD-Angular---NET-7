@@ -34,6 +34,6 @@ namespace Domain.Interfaces.IClientes
         Task<IEnumerable<Cliente>> SearchByName(string term);
          
         Task<Cliente> BuscarClientePorIdUsuarioSistema(int idUsuarioSistema);
-        Task<IEnumerable<Cliente>> ListarClientesComAnimais();
+        //Task<IEnumerable<Cliente>> ListarClientesComAnimais();
     }
 }

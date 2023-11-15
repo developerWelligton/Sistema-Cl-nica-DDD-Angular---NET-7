@@ -109,7 +109,7 @@ namespace Infra.Repositorio
                 return cliente;
             }
         }
-
+        /*
         public async Task<IEnumerable<Cliente>> ListarClientesComAnimais()
         {
             using (var context = new ContextBase(_optionsBuilder))
@@ -119,7 +119,7 @@ namespace Infra.Repositorio
                     .AsNoTracking()
                     .ToListAsync();
             }
-        }
+        }*/
 
     }
 }
