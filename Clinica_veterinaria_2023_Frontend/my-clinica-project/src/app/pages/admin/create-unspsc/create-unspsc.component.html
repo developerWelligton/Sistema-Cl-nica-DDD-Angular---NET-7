@@ -10,8 +10,9 @@
           <mat-label>Segmento</mat-label>
           <!-- <input matInput placeholder="Entre com Segmento do produto ou serviço" formControlName="segmentoCtrl" required> -->
           <mat-select>
-            <mat-option *ngFor="let state of states" [value]="state">{{ state }}</mat-option>
+            <mat-option *ngFor="let item of segmentos" [value]="item.descricao">{{ item.descricao }}</mat-option>
           </mat-select>
+
         </mat-form-field>
         <div>
           <button mat-button matStepperNext>Next</button>

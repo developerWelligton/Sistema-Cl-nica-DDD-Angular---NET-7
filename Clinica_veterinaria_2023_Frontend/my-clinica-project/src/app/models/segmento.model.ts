@@ -1,4 +1,5 @@
 export class Segmento {
-  id: number;
-  nome: string;
+  idSegmento: number;
+  codigo: string;
+  descricao: string;
 }

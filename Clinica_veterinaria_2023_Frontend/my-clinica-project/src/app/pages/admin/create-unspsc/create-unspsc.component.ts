@@ -171,13 +171,14 @@ export class CreateUnspscComponent {
     this.dataService.getSegmentos().subscribe(
       (data: Segmento[]) => {
         console.log('Data received:', data);
-        this.segmentos = data;  // Atualiza a lista de clientes
+        this.segmentos = data; // Atualiza a lista de segmentos
       },
       error => {
         console.error('Error:', error);
       }
     );
   }
+
 
   loadFamilias(): void {
     this.dataService.getFamilias().subscribe(
