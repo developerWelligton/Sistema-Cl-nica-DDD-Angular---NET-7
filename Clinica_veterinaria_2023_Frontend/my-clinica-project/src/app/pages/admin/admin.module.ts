@@ -45,6 +45,8 @@ import { ModalStockComponent } from './panel-buy/modal-stock/modal-stock.compone
 import {MatCardModule} from '@angular/material/card';
 import { ModalProviderComponent } from './panel-buy/modal-provider/modal-provider.component';
 import { MatIconModule } from '@angular/material/icon';
+import {MatStepperModule} from '@angular/material/stepper';
+
 @NgModule({
   declarations: [
     AdminComponent,
@@ -89,7 +91,8 @@ import { MatIconModule } from '@angular/material/icon';
     MatDialogModule,
     MatButtonModule,
     MatCardModule,
-    MatIconModule
+    MatIconModule,
+    MatStepperModule
 
   ],
   providers: []

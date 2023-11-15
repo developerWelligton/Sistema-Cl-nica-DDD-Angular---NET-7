@@ -2,7 +2,7 @@ import { UserService } from '../../../core/user/user.service';
 // ... previous imports ...
 
 import { Component, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';   // Replace with the actual path to your service
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';   // Replace with the actual path to your service
 import { Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
@@ -50,23 +50,33 @@ export class CreateUnspscComponent {
   exists = false;
 
 
-  public containerPadding: string;
 
+
+  //
+  segmentoFormGroup = this.fb.group({
+    segmentoCtrl: ['', Validators.required],
+  });
+
+  familiaFormGroup = this.fb.group({
+    familiaCtrl: ['', Validators.required],
+  });
+
+  classeFormGroup = this.fb.group({
+    classeCtrl: ['', Validators.required],
+  });
+
+  mercadoriaFormGroup = this.fb.group({
+    mercadoriaCtrl: ['', Validators.required],
+  });
+
+  isLinear = false;
   constructor(
     private fb: FormBuilder,
-    private paddingService: PaddingService,
     private dataService: DataService,
     private unspscService: UnspscService
   ) {}
 
   ngOnInit() {
-    // Padding sidebar
-    this.paddingService.globalPadding$.subscribe(padding => {
-      this.containerPadding = padding;
-    });
-
-
-
 
     this.loadSegmentos();
     this.loadFamilias();
@@ -297,5 +307,30 @@ export class CreateUnspscComponent {
     event.stopPropagation(); // Previne que o ng-select altere seu valor ao clicar no botão de excluir
 
   }
+
+
+  finalizarCadastro() {
+
+    // Verificando se todos os formulários estão válidos
+    if (this.segmentoFormGroup.valid &&
+        this.familiaFormGroup.valid &&
+        this.classeFormGroup.valid &&
+        this.mercadoriaFormGroup.valid) {
+
+        // Coletando os valores dos formulários, já que todos estão válidos
+        const segmento = this.segmentoFormGroup.value.segmentoCtrl;
+        const familia = this.familiaFormGroup.value.familiaCtrl;
+        const classe = this.classeFormGroup.value.classeCtrl;
+        const mercadoria = this.mercadoriaFormGroup.value.mercadoriaCtrl;
+
+        // Aqui você pode fazer o que quiser com esses valores
+        console.log(segmento, familia, classe, mercadoria);
+
+        alert("Cadastro Realizado!");
+    } else {
+        alert("Por favor, preencha todos os campos corretamente.");
+    }
+  }
+
 
 }

@@ -1,24 +1,96 @@
-<navbar></navbar>
-<sidebar></sidebar>
+
+<div class="container mt-5">
+  <h1>Cadastro UNSPSC de Produtos e Serviços</h1>
+  <mat-stepper orientation="vertical"  #stepper>
+    <mat-step [stepControl]="segmentoFormGroup">
+      <form [formGroup]="segmentoFormGroup">
+        <ng-template matStepLabel>Segmento</ng-template>
+        <mat-form-field>
+          <mat-label>Segmento</mat-label>
+          <input matInput placeholder="Entre com Segmento do produto ou serviço" formControlName="segmentoCtrl" required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="familiaFormGroup">
+      <form [formGroup]="familiaFormGroup">
+        <ng-template matStepLabel>Família</ng-template>
+        <mat-form-field>
+          <mat-label>Família</mat-label>
+          <input matInput formControlName="familiaCtrl" placeholder="Entre com Familia do produto ou serviço"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="classeFormGroup">
+      <form [formGroup]="classeFormGroup">
+        <ng-template matStepLabel>Classe</ng-template>
+        <mat-form-field>
+          <mat-label>Classe</mat-label>
+          <input matInput formControlName="classeCtrl" placeholder="Entre com Classe do produto ou serviço"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step [stepControl]="mercadoriaFormGroup">
+      <form [formGroup]="mercadoriaFormGroup">
+        <ng-template matStepLabel>Mercadoria</ng-template>
+        <mat-form-field>
+          <mat-label>Mercadoria</mat-label>
+          <input matInput formControlName="mercadoriaCtrl" placeholder="Entre com Mercadoria do produto ou serviço"
+                 required>
+        </mat-form-field>
+        <div>
+          <button mat-button matStepperPrevious>Back</button>
+          <button mat-button matStepperNext>Next</button>
+        </div>
+      </form>
+    </mat-step>
+    <mat-step>
+      <ng-template matStepLabel>Fim</ng-template>
+      <p>You are now done.</p>
+      <div>
+        <button mat-button matStepperPrevious>Back</button>
+        <button mat-button (click)="stepper.reset()">Reset</button>
+        <button mat-button
+        *ngIf="segmentoFormGroup.valid && familiaFormGroup.valid && classeFormGroup.valid && mercadoriaFormGroup.valid"
+        (click)="finalizarCadastro()">
+          Finalizar Cadastro
+        </button>
 
 
-<div class="container-base"  [style.padding]="containerPadding">
-  <!-- Conteúdo da página -->
+
+
+      </div>
+    </mat-step>
+  </mat-stepper>
+
+</div>
+
+<!--
+<div class="container mt-5">
   <div class="content-page">
-    <!-- Breadcrumbs -->
     <div class="breadcrumbs">
-      <a href="/secretaria">Mural</a>
+      <a href="/admin">Inventário</a>
       <span class="separator">»</span>
       Página Atual
     </div>
-    <!-- Cabeçalho do cartão -->
     <div class="card-header">
-      <!-- Título do cartão -->
       <h3 class="card-title">Cadastro de UNSPSC</h3>
 
     </div>
 
-      <button (click)="openModal(1)">Add New Segmento</button>
+      <button type="button" class="btn btn-primary" (click)="openModal(1)">Add New Segmento</button>
       <button (click)="openModal(2)">Add New Família</button>
       <button (click)="openModal(3)">Add New Classe</button>
       <button (click)="openModal(4)">Add New Mercadoria</button>
@@ -26,13 +98,11 @@
 
 
 
-      <!-- Título do cartão -->
 
 <br>
 <br>
 <app-tree-view-unspsc></app-tree-view-unspsc>
 
-    <!-- Formulário -->
     <form [formGroup]="createUnspscForm" (ngSubmit)="submitForm()">
 
       <label>Segmento</label>
@@ -107,10 +177,8 @@
     <app-list-unspsc></app-list-unspsc>
   </div>
 </div>
-<!-- The Modal -->
 <div id="myModal" class="modal">
 
-  <!-- Modal content -->
   <div class="modal-content">
     <div class="modal-header">
       <span class="close">&times;</span>
@@ -130,4 +198,4 @@
     </div>
   </div>
 
-</div>
+</div> -->
