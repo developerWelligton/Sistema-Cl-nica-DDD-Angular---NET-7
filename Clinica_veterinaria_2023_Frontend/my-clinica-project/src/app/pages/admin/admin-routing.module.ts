@@ -44,6 +44,10 @@ const routes: Routes = [
     component:ListProductComponent
   },
   {
+    path:'list-product/:idUnspsc',
+    component:ListProductComponent
+  },
+  {
     path:'detail-product/:id',
     component:DetailProductComponent
   },

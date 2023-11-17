@@ -25,6 +25,18 @@ namespace Infra.Repositorio
 
         }
 
+        public async Task<IList<Produto>> GetAllProductFromInspsc(int idUnspsc)
+        {
+            using (var context = new ContextBase(_optionsBuilder))
+            {
+                // Assuming you want to get all products with a specific IdUnspsc
+                var result = await context.Produtos
+                                          .Where(p => p.IdUnspsc == idUnspsc)
+                                          .ToListAsync();
+                return result;
+            }
+        }
+
         public async Task<IList<Produto>> GetAllProductWithInspsc()
         {
             using (var context = new ContextBase(_optionsBuilder))

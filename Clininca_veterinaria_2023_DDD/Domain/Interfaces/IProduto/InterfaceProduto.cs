@@ -12,6 +12,8 @@ namespace Domain.Interfaces.IFamilia
     {
         Task<IList<Produto>> GetAllProductWithInspsc();
 
+        Task<IList<Produto>> GetAllProductFromInspsc(int idUnspsc);
+
         Task<Produto> GetProductById(long productId);
     }
 }

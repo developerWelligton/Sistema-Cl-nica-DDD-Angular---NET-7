@@ -102,4 +102,20 @@ export class ProductService {
   this.productUpdateSubject.next();
 }
 
+
+  getAllProductFromUnspsc(idUnspsc:any): Observable<any> {
+      const endpoint = `${this.baseUrl}/Produto/ByInspsc/${idUnspsc}`;
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+
+      return this.http.get(endpoint, { headers })
+        .pipe(
+          catchError(this.handleError)
+        );
+
+
+  }
+
 }

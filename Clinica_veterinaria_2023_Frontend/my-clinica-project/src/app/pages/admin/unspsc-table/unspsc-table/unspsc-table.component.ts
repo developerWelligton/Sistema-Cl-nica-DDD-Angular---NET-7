@@ -63,4 +63,8 @@ export class UnspscTableComponent {
       }
     }
 
+    viewProductsByUnspsc(itemId: any){
+      this.router.navigate([`/admin/list-product/${itemId}`])
+    }
+
 }

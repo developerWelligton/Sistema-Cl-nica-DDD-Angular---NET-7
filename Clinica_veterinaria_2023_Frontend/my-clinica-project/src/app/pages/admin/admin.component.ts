@@ -49,16 +49,16 @@ export class AdminComponent {
       link1Url: '/admin/panel-buy',
       link1Text: 'Iniciar Compra'
     },
-    {
-      title: 'Painel Produto',
-      subtitle: 'Gerencie seus produtos com praticidade',
-      image: 'assets/images/produto.png',
-      content: '',
-      link1Url: '',
-      link1Text: '',
-      link2Url: '/admin/list-product',
-      link2Text: 'Ver Produtos'
-    },
+    // {
+    //   title: 'Painel Produto',
+    //   subtitle: 'Gerencie seus produtos com praticidade',
+    //   image: 'assets/images/produto.png',
+    //   content: '',
+    //   link1Url: '',
+    //   link1Text: '',
+    //   link2Url: '/admin/list-product',
+    //   link2Text: 'Ver Produtos'
+    // },
     {
       title: 'Painel Estoque',
       subtitle: 'Aqui você pode gerenciar seus estoques',
@@ -72,14 +72,14 @@ export class AdminComponent {
       link3Text: ''}
       ,
       {
-        title: 'Painel Unspsc',
+        title: 'Painel de Produtos e Unspsc',
         subtitle: 'Aqui você gerenciar a categorização de produtos e serviços',
         image: 'assets/images/estoque.jpg',
         content: '',
         link1Url: '',
         link1Text: '',
         link2Url: '/admin/list-unspsc',
-        link2Text: 'Ver Unspsc',
+        link2Text: 'Consulte seus Produtos',
         link3Url:  '',
         link3Text: ''
       },

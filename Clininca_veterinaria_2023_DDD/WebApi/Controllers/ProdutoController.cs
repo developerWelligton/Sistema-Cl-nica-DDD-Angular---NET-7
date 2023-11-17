@@ -113,5 +113,28 @@ namespace WebApi.Controllers
             }
         }
 
+
+        [HttpGet("ByInspsc/{idUnspsc}")]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<Produto>>> GetAllProductsByInspsc(int idUnspsc)
+        {
+            try
+            {
+                var produtos = await _interfaceProdutos.GetAllProductFromInspsc(idUnspsc);
+
+                if (produtos == null || produtos.Count == 0)
+                {
+                    return NotFound($"No products found with UNSPSC ID: {idUnspsc}");
+                }
+
+                return Ok(produtos);
+            }
+            catch (Exception ex)
+            {
+                // Ideally, log the exception details here
+                return StatusCode(500, "Internal server error: " + ex.Message);
+            }
+        }
+
     }
 }

@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/user/user.service';
 import { PaddingService } from 'src/app/services/Padding.service';
@@ -23,10 +24,13 @@ export class ListProductComponent {
   constructor(
     private adminService: AdminService,
     private paddingService: PaddingService,
-    private productService: ProductService ) { }
+    private productService: ProductService,
+    private route: ActivatedRoute ) { }
 
     productList: any[] = [];
     listUserGroup: { id: string, name: string }[] = [];
+
+    unspscId:any
 
     public containerPadding: string;
     //padding
@@ -35,13 +39,21 @@ export class ListProductComponent {
 
 
   ngOnInit() {
-     //padding
-     this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
-      this.containerPadding = padding;
-    });
+    //PEGAR CÓDIGO UNSPSC
+    this.unspscId = this.route.snapshot.paramMap.get('idUnspsc');
 
     this.populateUserGroups();
-    this.loadProducts();
+    //PEGAR CÓDIGO UNSPSC
+
+    //CARREGAR PRODUTOS
+    if(!this.unspscId){
+      this.loadProducts();
+    }else{
+      this.loadProductsByUnspsc(this.unspscId)
+    }
+
+
+
   }
 
   loadProducts() {
@@ -49,6 +61,12 @@ export class ListProductComponent {
       console.log(data);
       this.productList = data;
     });
+  }
+//carregar produto por id unspsc
+  loadProductsByUnspsc(idUnspsc:any) {
+    this.productService.getAllProductFromUnspsc(idUnspsc).subscribe(data => {
+      this.productList = data;
+    })
   }
 
 
