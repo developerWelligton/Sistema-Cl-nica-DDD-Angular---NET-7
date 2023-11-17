@@ -1,7 +1,7 @@
 import { userServiceAPI } from 'src/app/services/userAPI.service';
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { AdminService } from 'src/app/services/admin.service';
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { DomSanitizer } from '@angular/platform-browser';
 import { ProductService } from 'src/app/services/product.service';
@@ -17,12 +17,16 @@ export class UserProductComponent {
   @Input() productList: any[] = [];
   @Output() productDeleted: EventEmitter<void> = new EventEmitter<void>();
   @Output() deleteRequest = new EventEmitter<number>();
-
+  unspscId:any
   constructor(
     private adminService: AdminService,
     private router:Router,
     private sanitizer: DomSanitizer,
-    private productService: ProductService) { }
+    private productService: ProductService,
+    private route: ActivatedRoute ) {
+      this.unspscId = this.route.snapshot.paramMap.get('idUnspsc');
+      alert(this.unspscId)
+    }
 
   editProduct(user: any) {
     // Implemente a lógica para editar o usuário aqui

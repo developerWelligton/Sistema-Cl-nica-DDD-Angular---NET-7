@@ -3,7 +3,7 @@ import { UserService } from '../../../core/user/user.service';
 
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';   // Replace with the actual path to your service
-import { Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AdminService } from 'src/app/services/admin.service';
 import { AuthService } from 'src/app/core/auth/auth.service';
 import { PaddingService } from 'src/app/services/Padding.service';
@@ -39,7 +39,7 @@ export class CreateProductComponent {
   preview: string;
 
   unspscCodes: Unspsc[] = [];
-
+  unspscId:any
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
@@ -47,29 +47,35 @@ export class CreateProductComponent {
     private userService: UserService,
     private paddingService: PaddingService,
     private unspscService : UnspscService,
-    private productService: ProductService
+    private productService: ProductService,
+    private route: ActivatedRoute
   ) {}
 
   ngOnInit() {
+
+      this.unspscId = this.route.snapshot.paramMap.get('idUnspsc');
+
+
+
     this.createProductForm = this.fb.group({
       file: ['', Validators.required],
       productName: ['', Validators.required],
       purchasePrice: ['', [Validators.required, Validators.min(0)]],
       sellingPrice: ['', [Validators.required, Validators.min(0.01)]],
       productDescription: ['', Validators.required],
-      unspsc:['',Validators.required]
+      unspsc:[this.unspscId ? this.unspscId : '' ]
       // Add similar form controls for all other form fields
       // ...
     });
-    //padding
-    this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
-      this.containerPadding = padding;
-    });
+
+    if (!this.unspscId) {
+      this.loadUnspsc();
+    }
     //ROLE
     this.userRole = this.userService.getCurrentUser()
     //alert(this.userRole)
 
-    this.loadUnspsc();
+
   }
 
 

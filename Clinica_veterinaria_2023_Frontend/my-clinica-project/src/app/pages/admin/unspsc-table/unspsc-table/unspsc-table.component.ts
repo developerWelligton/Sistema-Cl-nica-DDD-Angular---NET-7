@@ -45,7 +45,7 @@ export class UnspscTableComponent {
       this.unspscDeleted.emit(itemId);
     }
 
-    displayedColumns: string[] = ['idUnspsc', 'codigoSfcm', 'descricaoSegmento', 'descricaoFamilia', 'descricaoClasse', 'descricaoMercadoria','edit', 'delete'];
+    displayedColumns: string[] = ['idUnspsc', 'codigoSfcm', 'descricaoSegmento', 'descricaoFamilia', 'descricaoClasse', 'descricaoMercadoria','edit','produto', 'delete'];
 
     dataSource = new MatTableDataSource<Unspsc>(this.unspscList);
 
@@ -67,4 +67,8 @@ export class UnspscTableComponent {
       this.router.navigate([`/admin/list-product/${itemId}`])
     }
 
+
+    addProductsByUnspsc(unspscId:any){
+      this.router.navigate([`/admin/create-product/${unspscId}`])
+    }
 }

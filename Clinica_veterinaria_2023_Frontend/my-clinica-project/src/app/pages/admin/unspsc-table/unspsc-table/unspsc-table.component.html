@@ -47,6 +47,15 @@
       </td>
     </ng-container>
 
+
+    <ng-container matColumnDef="produto">
+      <th mat-header-cell *matHeaderCellDef></th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-raised-button (click)="viewProductsByUnspsc(element.idUnspsc)" color="primary">Adicionar Produto</button>
+      </td>
+    </ng-container>
+
+
      <!-- Delete Action Column -->
     <ng-container matColumnDef="delete">
       <th mat-header-cell *matHeaderCellDef></th>

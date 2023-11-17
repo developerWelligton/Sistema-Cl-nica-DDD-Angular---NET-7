@@ -40,9 +40,13 @@ const routes: Routes = [
     component:CreateProductComponent
   },
   {
-    path:'list-product',
-    component:ListProductComponent
+    path:'create-product/:idUnspsc',
+    component:CreateProductComponent
   },
+  // {
+  //   path:'list-product',
+  //   component:ListProductComponent
+  // },
   {
     path:'list-product/:idUnspsc',
     component:ListProductComponent

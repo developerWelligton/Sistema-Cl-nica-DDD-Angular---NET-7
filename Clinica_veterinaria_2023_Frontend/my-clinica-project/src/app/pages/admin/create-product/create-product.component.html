@@ -71,12 +71,12 @@
                  </div>
                 </div>
 
-                <div class="row">
+                <div class="row"  >
                   <div class="col-md-4 mb-3">
                     <label for="sellingPrice" class="form-label">Preço de Venda:</label>
                     <input type="number" id="sellingPrice" formControlName="sellingPrice" step="0.01" class="form-control" required>
                   </div>
-                  <label>CODE UNSPSC</label>
+                  <label *ngIf="!this.unspscId">CODE UNSPSC</label>
                   <ng-select class="select-padrao"
                   formControlName="unspsc"
                   [items]="unspscCodes"
@@ -84,6 +84,7 @@
                   bindValue="idUnspsc"
                   [multiple]="false"
                   [clearable]="true"
+                  *ngIf="!this.unspscId"
                   ></ng-select>
 
                 </div>

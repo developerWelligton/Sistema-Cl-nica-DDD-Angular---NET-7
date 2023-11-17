@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { UserService } from 'src/app/core/user/user.service';
 import { PaddingService } from 'src/app/services/Padding.service';
@@ -25,7 +25,8 @@ export class ListProductComponent {
     private adminService: AdminService,
     private paddingService: PaddingService,
     private productService: ProductService,
-    private route: ActivatedRoute ) { }
+    private route: ActivatedRoute,
+    private router: Router) { }
 
     productList: any[] = [];
     listUserGroup: { id: string, name: string }[] = [];
@@ -143,4 +144,9 @@ export class ListProductComponent {
       }
     });
   }
+
+  AddProductByUnspsc() {
+    this.router.navigate([`/admin/create-product/${this.unspscId}`]);
+  }
+
 }
