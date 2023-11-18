@@ -73,7 +73,7 @@ export class TreeViewUnspscComponent {
 
       // Get or create class node within the family
       const classKey = `${familyKey}-${item.classe.codigo}`;
-      const classNode = addOrGetNode(classMap, classKey, `${item.classe.descricao} (${item.classe.codigo}) <button>Adicionar Produto</button>`);
+      const classNode = addOrGetNode(classMap, classKey, `${item.classe.descricao} (${item.classe.codigo})`);
       if (!familyNode.items.includes(classNode)) {
         familyNode.items.push(classNode);
       }

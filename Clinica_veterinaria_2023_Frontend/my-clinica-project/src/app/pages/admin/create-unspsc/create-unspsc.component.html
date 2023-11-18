@@ -1,5 +1,30 @@
 <div class="container mt-5">
+
   <button type="button" class="btn btn-primary mb-5" routerLink="/admin/list-unspsc">Voltar</button>
+
+
+  <div class="row mb-5">
+    <!-- Column for the mat-card -->
+    <div class="col-md-8">
+        <mat-card class="mb-5">
+            <mat-card-content>
+                <app-tree-view-unspsc></app-tree-view-unspsc>
+            </mat-card-content>
+        </mat-card>
+    </div>
+
+    <!-- Column for the buttons aligned vertically -->
+    <div class="col-md-4">
+        <div class="button-group-vertical d-flex flex-column">
+            <button mat-raised-button color="primary" class="mb-2">Painel de Segmento</button>
+            <button mat-raised-button color="primary" class="mb-2">Painel de Família</button>
+            <button mat-raised-button color="primary" class="mb-2">Painel de Classe</button>
+            <button mat-raised-button color="primary" class="mb-2">Painel de Produto</button>
+        </div>
+    </div>
+</div>
+
+
 
   <h1>Cadastro UNSPSC de Produtos e Serviços</h1>
   <mat-stepper orientation="vertical"  #stepper>
@@ -89,6 +114,7 @@
       </div>
     </mat-step>
   </mat-stepper>
+
 
 </div>
 
