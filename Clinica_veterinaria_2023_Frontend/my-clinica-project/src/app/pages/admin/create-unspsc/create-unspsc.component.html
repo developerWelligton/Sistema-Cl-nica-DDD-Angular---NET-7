@@ -2,6 +2,7 @@
 
   <button type="button" class="btn btn-primary mb-5" routerLink="/admin/list-unspsc">Voltar</button>
 
+  <modal-unspsc (onSubmitted)="handleSubmittedData2($event)" #modalComponent></modal-unspsc>
 
   <div class="row mb-5">
     <!-- Column for the mat-card -->
@@ -16,10 +17,10 @@
     <!-- Column for the buttons aligned vertically -->
     <div class="col-md-4">
         <div class="button-group-vertical d-flex flex-column">
-            <button mat-raised-button color="primary" class="mb-2">Painel de Segmento</button>
-            <button mat-raised-button color="primary" class="mb-2">Painel de Família</button>
-            <button mat-raised-button color="primary" class="mb-2">Painel de Classe</button>
-            <button mat-raised-button color="primary" class="mb-2">Painel de Produto</button>
+          <button mat-raised-button color="primary" class="mb-2" (click)="modalComponent.open(1)">Painel de Segmento</button>
+          <button mat-raised-button color="primary" class="mb-2" (click)="modalComponent.open(2)">Painel de Família</button>
+          <button mat-raised-button color="primary" class="mb-2" (click)="modalComponent.open(3)">Painel de Classe</button>
+          <button mat-raised-button color="primary" class="mb-2" (click)="modalComponent.open(4)">Painel de Produto</button>
         </div>
     </div>
 </div>

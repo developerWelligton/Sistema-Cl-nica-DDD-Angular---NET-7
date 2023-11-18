@@ -31,10 +31,7 @@ export class TreeViewUnspscComponent {
 
 
   ngOnInit() {
-    //padding
-    this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
-      this.containerPadding = padding;
-    });
+
 
     this.unspscService.listWithDescription().subscribe(data => {
 

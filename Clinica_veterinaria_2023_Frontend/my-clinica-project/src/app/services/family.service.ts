@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class FamilyService {
 
+
   private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) { }
@@ -28,5 +29,9 @@ export class FamilyService {
 
    // Method to add a new segment
 
+   getAllFamily() : Observable<any>{
+    const url = `${this.baseUrl}/Familia`;
+    return this.http.get(url);
+  }
 
 }

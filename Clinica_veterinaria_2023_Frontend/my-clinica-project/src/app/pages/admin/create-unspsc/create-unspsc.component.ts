@@ -448,5 +448,10 @@ export class CreateUnspscComponent {
   }
 
 
+  handleSubmittedData2(event: any) {
+    // Handle the submitted data from the modal
+    console.log(event);
+    // Refresh data or perform other actions
+  }
 
 }

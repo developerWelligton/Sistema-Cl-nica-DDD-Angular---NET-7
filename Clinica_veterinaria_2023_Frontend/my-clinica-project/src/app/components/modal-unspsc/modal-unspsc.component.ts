@@ -10,6 +10,17 @@ import { FamilyService } from 'src/app/services/family.service';
 import { CommodityService } from 'src/app/services/commodity.service';
 import { ClassService } from 'src/app/services/classe.service';
 
+export interface PeriodicElement {
+  codigo: number;
+  nome: string;
+}
+
+const ELEMENT_DATA: PeriodicElement[] = [
+  {codigo: 1, nome: 'Hydrogen' },
+  {codigo: 2, nome: 'Helium' },
+  {codigo: 3, nome: 'Lithium' },
+  {codigo: 4, nome: 'Beryllium'},
+];
 @Component({
   selector: 'modal-unspsc',
   templateUrl: './modal-unspsc.component.html',
@@ -23,30 +34,61 @@ export class ModalUnspscComponent implements OnInit {
 
   @Input() modalType: number; // You can use Input if you want to pass data directly via template
   @Output() onSubmitted = new EventEmitter<any>();
-
+  dataSource: PeriodicElement[];
 
   constructor(
     private segmentService: SegmentService, // These are hypothetical service names
     private familyService: FamilyService,   // Replace with your actual services
     private classService: ClassService,
     private commodityService: CommodityService
-  ) {}
+  ) {
+
+  }
 
   ngOnInit(): void {
     throw new Error('Method not implemented.');
+    this.segmentService.getAllSegment().subscribe(res=>{
+      alert(res)
+    });
   }
 
 
   open(type: number) {
-
     this.modalType = type;
     this.showModal = true;
 
-    // 1 - Segmento
-    // 2 - Família
-    // 3 - Classe
-    // 4 - Mercadoria
+    switch (type) {
+      case 1: // Segmento
+        this.segmentService.getAllSegment().subscribe(data => {
+          this.dataSource = data;
+        });
+        break;
+
+      case 2: // Família
+        this.familyService.getAllFamily().subscribe(data => {
+          this.dataSource = data;
+        });
+        break;
+
+      case 3: // Classe
+        this.classService.getAllClasse().subscribe(data => {
+          this.dataSource = data;
+        });
+        break;
+
+      case 4: // Mercadoria
+        this.commodityService.getlAllCommodity().subscribe(data => {
+          this.dataSource = data;
+        });
+        break;
+
+      default:
+        console.error('Invalid modal type:', type);
+        // Optionally, handle invalid type case here
+        break;
+    }
   }
+
 
   onCloseModal() {
     this.showModal = false;
@@ -140,4 +182,7 @@ export class ModalUnspscComponent implements OnInit {
       default: return 'Item';
     }
   }
+
+  displayedColumns: string[] = [ 'codigo', 'nome',  ];
+
 }

@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class SegmentService {
 
+
   private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) { }
@@ -25,6 +26,12 @@ export class SegmentService {
       iD_Usuario: 1 // Assuming this will be handled on the backend or you will add logic to include it
     };
     return this.http.post(url, payload);
+  }
+
+
+  getAllSegment() : Observable<any>{
+    const url = `${this.baseUrl}/Segmento`;
+    return this.http.get(url);
   }
 
 }

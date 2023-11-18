@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class ClassService {
 
+
   private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) { }
@@ -26,4 +27,8 @@ export class ClassService {
     return this.http.post(url, payload);
   }
 
+  getAllClasse() : Observable<any>{
+    const url = `${this.baseUrl}/Classe`;
+    return this.http.get(url);
+  }
 }

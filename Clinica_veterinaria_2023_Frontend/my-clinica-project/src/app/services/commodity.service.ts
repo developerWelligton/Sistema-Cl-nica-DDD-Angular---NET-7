@@ -10,6 +10,7 @@ import { environment } from 'src/environments/environment';
 })
 export class CommodityService {
 
+
   private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(private http: HttpClient) { }
@@ -26,4 +27,10 @@ export class CommodityService {
     return this.http.post(url, payload);
   }
 
+
+  getlAllCommodity()  : Observable<any>{
+    const url = `${this.baseUrl}/Mercadoria`;
+    return this.http.get(url);
+
+}
 }
