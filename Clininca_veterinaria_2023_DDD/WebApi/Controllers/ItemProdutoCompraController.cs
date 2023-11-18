@@ -83,6 +83,7 @@ namespace WebApi.Controllers
                 {
                     IdCompra = dto.IdCompra,
                     IdProduto = dto.IdProduto,
+                    IdEstoque = dto.IdEstoque,
                     DataEntrada = dto.DataEntrada,
                     QuantidadeTotal = dto.QuantidadeTotal,
                     Lote = dto.Lote
