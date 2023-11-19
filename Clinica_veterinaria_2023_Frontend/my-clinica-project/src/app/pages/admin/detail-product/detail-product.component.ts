@@ -217,9 +217,21 @@ loadEstoques() {
   );
 }
 
-teste(){
-  alert('OI')
-}
+estoqueSelecionado: number;
+  atualizarPrioridadeDeEstoque(estoque: any): void {
+    if (estoque) {
+      alert(JSON.stringify(estoque))
+    } else {
+      // Lógica caso o estoque não seja mais prioridade
+    }
+
+    // Agora você precisa atualizar o produto no servidor ou no seu estado local
+    //this.atualizarProduto();
+  }
+  // Método para atualizar o produto
+  atualizarProduto(produto: any): void {
+    // Implemente a atualização do produto aqui, pode ser uma chamada de API ou atualização local
+  }
 }
 
 

@@ -25,5 +25,15 @@ namespace Entities.Entidades
 
         [StringLength(10)]
         public int? Quantidade { get; set; }
+
+        // Relacionamento com Estoque (agora opcional)
+        public long? IdEstoque { get; set; } // Permite valores nulos com '?'
+        [ForeignKey("IdEstoque")]
+        public virtual Estoque? Estoque { get; set; } // A entidade Estoque é opcional
+
+        [StringLength(50)]
+        public string? Status { get; set; } // 'string' já é um tipo de referência, então é opcional por padrão
+
+
     }
 }

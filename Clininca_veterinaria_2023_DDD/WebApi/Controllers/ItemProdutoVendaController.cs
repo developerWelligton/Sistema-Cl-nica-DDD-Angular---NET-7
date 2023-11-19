@@ -50,8 +50,10 @@ namespace WebApi.Controllers
                 IdProduto = p.IdProduto,
                 IdVenda = p.IdVenda,
                 Observacao = p.Observacao,
-                Quantidade = p.Quantidade
-                // Add other properties here
+                Quantidade = p.Quantidade,
+                IdEstoque = p.IdEstoque, // Novo campo adicionado
+                Status = p.Status // Novo campo adicionado
+                                  // Adicione outros mapeamentos aqui se necessário
             }).ToList();
 
             // Now, you can save each item to the database

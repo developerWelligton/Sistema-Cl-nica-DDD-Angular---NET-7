@@ -29,6 +29,7 @@ export class Product {
   price: number;
   unit: string;
   image: string;
+  idEstoque:any
 }
 
 
@@ -75,10 +76,7 @@ export class PanelPdvComponent {
   ) {}
 
   ngOnInit() {
-    //padding
-    this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
-      this.containerPadding = padding;
-    });
+
   //ROLE
   this.userRole = this.userService.getCurrentUser()
   //alert(this.userRole)
@@ -135,7 +133,8 @@ debugger
                     price: response.precoVenda,
                     unit: '', // Como mencionado antes, você pode ajustar conforme necessário
                     image: 'data:image/jpeg;base64,' + response.imagemBase64,
-                    code:response.idProduto
+                    code:response.idProduto,
+                    idEstoque: response.idEstoque
                 };
 
             },
@@ -187,7 +186,8 @@ debugger
           price: 0,
           unit: '',
           quantity: 0,
-          image: ''
+          image: '',
+          idEstoque:''
         };
 
         // Call the calculateSubtotal method
@@ -212,7 +212,8 @@ debugger
       idVenda: this.saleId, // supondo que você tem uma saleId, senão, ajuste conforme necessário
       totalProdutosVendas: product.price * product.quantity,
       observacao: '', // preencha conforme necessário
-      quantidade: product.quantity
+      quantidade: product.quantity,
+      idEstoque: product.idEstoque
     }));
 
     console.log(JSON.stringify(productListToSend))
@@ -286,7 +287,8 @@ this.index =index;
       price: product.price,
       unit: '', // Como mencionado antes, você pode ajustar conforme necessário
       image: 'data:image/jpeg;base64,' + product.image,
-      code:product.code
+      code:product.code,
+      idEstoque: product.idEstoque
   };
 
   }
@@ -339,7 +341,8 @@ this.index =index;
       price: null,
       unit: '',
       image: '',
-      code: ''
+      code: '',
+      idEstoque:''
     };
 
     // If you have a form reference, you might also want to reset the form directly
