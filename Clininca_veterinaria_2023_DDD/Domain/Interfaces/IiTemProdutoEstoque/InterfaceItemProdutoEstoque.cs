@@ -15,7 +15,11 @@ namespace Domain.Interfaces.IFamilia
         Task UpdateQuantidadeEstoqueCompra(int estoqueId, int produtoId, int novaQuantidade);
         Task<int>  GetEstoqueByProduto(int idProduto);
 
-        Task<List<ItemProdutoEstoque>> GetAllProdutoByStock(int idStock); 
+        Task<List<ItemProdutoEstoque>> GetAllProdutoByStock(int idStock);
+
+        Task<List<ItemProdutoEstoque>> GetEstoquesByProdutos(int idProduct);
+
          
+
     }
 }

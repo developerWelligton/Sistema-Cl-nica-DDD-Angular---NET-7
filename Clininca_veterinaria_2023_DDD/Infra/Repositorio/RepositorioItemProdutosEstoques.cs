@@ -120,15 +120,38 @@ namespace Infra.Repositorio
 
                 return result.Select(r => new ItemProdutoEstoque
                 {
-                    IdProduto = r.IdProduto,
-                    Status = r.Status,
+                    IdProduto = r.IdProduto, 
                     Quantidade_Estoque = r.Quantidade_Estoque,
                     Produto = new Produto { Nome = r.Nome }  // Setting the 'Nome' value in the navigation property
                 }).ToList();
             }
         }
 
-       
+        public async Task<List<ItemProdutoEstoque>> GetEstoquesByProdutos(int idProduto)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                var result = await(from produto in banco.Produtos
+                                   join itemEstoque in banco.ItensProdutoEstoques
+                                   on produto.IdProduto equals itemEstoque.IdProduto
+                                   where itemEstoque.IdProduto == idProduto
+                                   select new
+                                   {
+                                       IdProduto = produto.IdProduto,
+                                       IdEstoque = itemEstoque.IdEstoque,
+                                       Nome = produto.Nome,  // Accessing 'Nome' using the navigation property
+                                       Status = produto.Status,
+                                       Quantidade_Estoque = itemEstoque.Quantidade_Estoque
+                                   }).ToListAsync();
 
+                return result.Select(r => new ItemProdutoEstoque
+                {
+                    IdProduto = r.IdProduto,
+                    IdEstoque = r.IdEstoque , 
+                    Quantidade_Estoque = r.Quantidade_Estoque,
+                    Produto = new Produto { Nome = r.Nome }  // Setting the 'Nome' value in the navigation property
+                }).ToList();
+            }
+        }
     }
 }

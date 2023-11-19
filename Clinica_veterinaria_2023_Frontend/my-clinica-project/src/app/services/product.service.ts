@@ -72,7 +72,8 @@ export class ProductService {
   }
 
 
-    removeProductFromInventory(productsPaidOut: any) {
+      removeProductFromInventory(productsPaidOut: any) {
+        debugger
     // Aqui iria a lógica para comunicar-se com o backend e remover o produto do inventário
     console.log(`Produto com ID ${JSON.stringify(productsPaidOut)} foi removido do inventário.`);
     // Implementação mockada para simulação:
@@ -88,7 +89,7 @@ export class ProductService {
       idEstoque: stockItem.idEstoque || 0,
       dataEntrada: stockItem.dataEntrada || new Date().toISOString(),
       dataSaida: stockItem.dataSaida || new Date().toISOString(),
-      status: stockItem.status || "Disponível"
+      status: "habilitado"
     };
 
     return this.http.post(`${this.baseUrl}/ItemProdutoEstoque`, payload)

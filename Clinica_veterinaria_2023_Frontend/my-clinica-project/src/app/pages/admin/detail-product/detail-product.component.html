@@ -57,10 +57,33 @@
       </div>
 
   </form>
-  <!-- Início da seção dos cards explicativos -->
-<div class="row mt-5">
+  <div class="container mt-5">
+    <!-- ... seu código anterior ... -->
 
-<!-- Card do Segmento -->
+  <!-- Início da seção dos cards de estoque -->
+  <div class="row mt-5">
+    <h1>Estoque disponível para Venda</h1>
+    <!-- Usamos o ngFor para criar um card para cada estoque -->
+    <div class="col-md-3 mb-4" *ngFor="let estoque of estoques; let i = index">
+      <div class="card">
+        <h2>{{estoque.sala}}</h2> <!-- Corrigido para acessar diretamente a propriedade sala do objeto estoque -->
+        <h3>Estoque #{{estoque.idEstoque}}</h3>
+        <div class="card-body">
+          <!-- Toggle button -->
+          <label class="switch">
+            <input type="checkbox" [value]="estoque.idEstoque" [(ngModel)]="estoqueHabilitado" (click)="teste()">
+            <span class="slider round"></span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+<!-- <div class="row mt-5">
+
 <div class="col-md-3 mb-4">
   <div class="card">
       <div class="card-body">
@@ -70,7 +93,6 @@
   </div>
 </div>
 
-<!-- Card da Família -->
 <div class="col-md-3 mb-4">
   <div class="card">
       <div class="card-body">
@@ -80,7 +102,6 @@
   </div>
 </div>
 
-<!-- Card da Classe -->
 <div class="col-md-3 mb-4">
   <div class="card">
       <div class="card-body">
@@ -90,7 +111,6 @@
   </div>
 </div>
 
-<!-- Card da Mercadoria -->
 <div class="col-md-3 mb-4">
   <div class="card">
       <div class="card-body">
@@ -104,7 +124,6 @@
 
 <div class="row mt-5">
 
-<!-- Card do Segmento -->
 <div class="col-md-3 mb-4">
   <div class="card">
       <div class="card-body">
@@ -114,7 +133,6 @@
   </div>
 </div>
 
-<!-- Card da Família -->
 <div class="col-md-3 mb-4">
   <div class="card">
       <div class="card-body">
@@ -124,7 +142,6 @@
   </div>
 </div>
 
-<!-- Card da Classe -->
 <div class="col-md-3 mb-4">
   <div class="card">
       <div class="card-body">
@@ -134,7 +151,6 @@
   </div>
 </div>
 
-<!-- Card da Mercadoria -->
 <div class="col-md-3 mb-4">
   <div class="card">
       <div class="card-body">
@@ -144,7 +160,7 @@
   </div>
 </div>
 
-</div>
-<!-- Fim da seção dos cards -->
+ -->
+
 
  </div>

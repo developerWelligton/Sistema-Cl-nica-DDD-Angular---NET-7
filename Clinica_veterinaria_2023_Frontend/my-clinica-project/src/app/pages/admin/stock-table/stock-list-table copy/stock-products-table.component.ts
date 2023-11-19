@@ -1,7 +1,7 @@
 import { FormControl, FormGroup } from '@angular/forms';
 import { ProductService } from './../../../../services/product.service';
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ItemProductStockService } from 'src/app/services/itemProductStock.service';
 
@@ -42,7 +42,8 @@ export class StockProductsTableComponent implements OnInit {
   constructor(
     private itemProductStockService : ItemProductStockService,
     private route: ActivatedRoute,
-    private productService : ProductService
+    private productService : ProductService,
+    private router: Router
     ) {
     // For now, we'll use the mock data
     this.productList = this.mockProducts;
@@ -50,7 +51,7 @@ export class StockProductsTableComponent implements OnInit {
 
   ngOnInit() {
     // Usar 'snapshot' é OK para o valor inicial, mas se o id pode mudar sem recriar o componente, você deve se inscrever às mudanças
-    this.stokeId = +this.route.snapshot.paramMap.get('id');
+    this.stokeId = this.route.snapshot.paramMap.get('id');
     // Here you would subscribe to a service that provides padding value
     // For mockup purposes, we'll set a static value
     this.containerPadding = '15px';
@@ -144,6 +145,10 @@ export class StockProductsTableComponent implements OnInit {
     console.log(idProduto)
     console.log( this.stokeId)
     //this.itemProductStockService.deleteProductFromStoke()
+  }
+
+  onNavigateToProduct(idProduto:any){
+    this.router.navigate([`/admin/detail-product/${idProduto}`])
   }
 
 }

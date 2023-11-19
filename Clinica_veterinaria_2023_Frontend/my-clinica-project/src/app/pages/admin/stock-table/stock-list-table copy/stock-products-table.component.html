@@ -14,6 +14,7 @@
           <th>Status do Estoque</th>
           <th>Quantidade</th>
           <th>Ações</th>
+          <th>Venda</th>
         </tr>
       </thead>
       <tbody>
@@ -24,6 +25,9 @@
           <td>{{ product.quantidade_Estoque }}</td>
           <td>
             <button type="button" class="btn btn-danger btn-sm" (click)="deleteProductFromStock(product.idProduto)">Excluir</button>
+          </td>
+          <td>
+            <button type="button" class="btn btn-danger btn-sm" (click)="onNavigateToProduct(product.idProduto)">Ver Produto</button>
           </td>
         </tr>
       </tbody>

@@ -11,6 +11,7 @@ using Domain.Interfaces.IVeterinario;
 using Domain.Interfaces.ISegmento;
 using Domain.Interfaces.IFamilia;
 using Domain.Interfaces.IEstoque;
+using Domain.Servicos;
 
 namespace WebApi.Controllers
 {
@@ -82,7 +83,23 @@ namespace WebApi.Controllers
             }
 
             return Ok(estoque);
-        } 
+        }
+
+
+        [HttpGet("porProduto/{productId}")]
+        public async Task<ActionResult<IEnumerable<Estoque>>> GetAllStockByProductId(int productId)
+        {
+            var estoques = await _interfaceEstoques.GetAllStockByProductId(productId);
+            if (estoques == null || !estoques.Any())
+            {
+                return NotFound();
+            }
+
+            return Ok(estoques);
+        }
+
+
+
 
     }
 }

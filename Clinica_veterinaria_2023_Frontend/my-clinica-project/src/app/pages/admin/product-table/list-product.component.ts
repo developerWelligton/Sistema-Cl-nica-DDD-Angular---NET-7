@@ -66,6 +66,7 @@ export class ListProductComponent {
 //carregar produto por id unspsc
   loadProductsByUnspsc(idUnspsc:any) {
     this.productService.getAllProductFromUnspsc(idUnspsc).subscribe(data => {
+      console.log(JSON.stringify(data))
       this.productList = data;
     })
   }

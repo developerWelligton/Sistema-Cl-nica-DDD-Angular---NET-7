@@ -186,11 +186,10 @@ namespace WebApi.Controllers
                 while (productStack.Count > 0)
                 {
                     var currentProduct = productStack.Pop();
-                    var stockDetails = await _InterfaceItemProdutoEstoque.GetEstoqueByProduto((int)currentProduct.IdProduto);
-                
-                    
+                    var stockDetails = await _InterfaceItemProdutoEstoque.GetEstoqueByProduto((int)currentProduct.IdProduto); 
 
-                    var stockUpdateObject = new StockUpdateObject
+
+                var stockUpdateObject = new StockUpdateObject
                     {
                         idEstoque = stockDetails,
                         idProduto = (int)currentProduct.IdProduto,

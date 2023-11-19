@@ -63,10 +63,7 @@ export class ModalStockComponent {
     this.buyId = this.routerActivate.snapshot.paramMap.get('id');
 
     alert(this.buyId)
-    this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
-      this.containerPadding = padding;
 
-    });
 
 
   }

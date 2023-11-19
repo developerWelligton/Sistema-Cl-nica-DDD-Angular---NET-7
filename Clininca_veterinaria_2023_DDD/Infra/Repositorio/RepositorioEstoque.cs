@@ -26,6 +26,19 @@ namespace Infra.Repositorio
 
         }
 
-      
+        public async Task<IEnumerable<Estoque>> GetAllStockByProductId(int productId)
+        {
+            // Exemplo de implementação, ajuste conforme a lógica de seu negócio
+            using (var data = new ContextBase(_optionsBuilder))
+            {
+                // A lógica a seguir é um exemplo e deve ser ajustada de acordo
+                // com a estrutura de dados e relacionamento entre estoques e produtos
+                var estoques = await data.Estoques
+                    // .Where(e => e.ProdutoId == productId) // Exemplo de filtro
+                    .ToListAsync();
+
+                return estoques;
+            }
+        }
     }
 }

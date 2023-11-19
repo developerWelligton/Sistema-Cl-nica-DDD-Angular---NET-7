@@ -10,6 +10,6 @@ namespace Domain.Interfaces.IEstoque
 {
     public interface InterfaceEstoque : InterfaceGeneric<Estoque>
     {
-         
+        Task<IEnumerable<Estoque>> GetAllStockByProductId(int productId);
     }
 }

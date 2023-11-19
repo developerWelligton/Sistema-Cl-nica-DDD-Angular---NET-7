@@ -41,6 +41,14 @@ export class StockService {
     );
   }
 
+  getAllStockByProductId(productId: number): Observable<any> {
+    return this.http.get(`${this.baseUrl}/Estoque/porProduto/${productId}`)
+      .pipe(
+        catchError(this.handleError) // Certifique-se de que a função handleError está definida para tratar erros
+      );
+  }
+
+
 
 
   private handleError(error: any): Observable<never> {

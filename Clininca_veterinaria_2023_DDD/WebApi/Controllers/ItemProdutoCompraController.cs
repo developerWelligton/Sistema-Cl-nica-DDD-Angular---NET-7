@@ -79,14 +79,14 @@ namespace WebApi.Controllers
                 }
 
                 // Convert the list of ItemProdutoCompraDto to a list of ItemProdutoCompra entities
-                var itensProdutoCompra = itensProdutoCompraDto.Select(dto => new ItemProdutoCompra
+                var itensProdutoCompra = itensProdutoCompraDto.Select(dto => new ItemProdutoCompraDto
                 {
                     IdCompra = dto.IdCompra,
-                    IdProduto = dto.IdProduto,
-                    IdEstoque = dto.IdEstoque,
+                    IdProduto = dto.IdProduto, 
                     DataEntrada = dto.DataEntrada,
                     QuantidadeTotal = dto.QuantidadeTotal,
-                    Lote = dto.Lote
+                    Lote = dto.Lote,
+                    IdEstoque = dto.IdEstoque
                     // Add other properties here if needed
                 }).ToList();
 
@@ -95,12 +95,10 @@ namespace WebApi.Controllers
                 {
                     var produtoId = (int)item.IdProduto;
                     var novaQuantidade = item.QuantidadeTotal;
-
-                    var estoqueIdTask = await _interfaceItemProdutoEstoque.GetEstoqueByProduto(produtoId);
-                    int idEstoque = estoqueIdTask;
+                    var estoqueId = item.IdEstoque; 
 
                     // If estoqueId is not null, safely cast it to int and call UpdateQuantidadeEstoqueCompra
-                    await _interfaceItemProdutoEstoque.UpdateQuantidadeEstoqueCompra(((int)idEstoque), produtoId, (int)novaQuantidade);
+                    await _interfaceItemProdutoEstoque.UpdateQuantidadeEstoqueCompra(estoqueId, produtoId, (int)novaQuantidade);
                 }
 
 

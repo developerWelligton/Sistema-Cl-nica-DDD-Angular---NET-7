@@ -1,3 +1,4 @@
+import { ItemProductStockService } from './../../../../services/itemProductStock.service';
 import { ItemProductBuyService } from './../../../../services/itemProductBuy.service';
 import { ProductService } from './../../../../services/product.service';
 import { Component } from '@angular/core';
@@ -44,7 +45,8 @@ export class PaymentComponent {
     private productService: ProductService,
     public dialog: MatDialog,
     private itemProductSaleService: ItemProductSaleService,
-    private itemProductBuyService:ItemProductBuyService
+    private itemProductBuyService:ItemProductBuyService,
+    private itemProductStockService: ItemProductStockService
   ) {
     const navigation = this.router.getCurrentNavigation();
     const state = navigation.extras.state as {saleId: number, total: number};
@@ -60,6 +62,7 @@ export class PaymentComponent {
   ngOnInit() {
 
     this.buyId = this.routerActivate.snapshot.paramMap.get('id');
+    alert( this.buyId)
     this.itemProductSaleService.getAllProductListByBuy(this.buyId).subscribe(data => {
       // Aqui está assumindo que data é um array de objetos com a estrutura desejada
       // Transforma os dados recebidos para a nova estrutura e adiciona à lista de produtos
@@ -68,19 +71,30 @@ export class PaymentComponent {
         quantidadeTotal: item.quantidadeTotal || "", // Use a quantidade total fornecida
         lote: item.lote || "", // Use o lote fornecido
         idCompra: item.idCompra  , // Use o ID de compra fornecido
-        idProduto: item.idProduto  // Use o ID do produto fornecido
+        idProduto: item.idProduto,  // Use o ID do produto fornecido
+        idEstoque: ""
       }));
 
+      alert(JSON.stringify(newProducts))
       // Aqui você pode concatenar a nova lista de produtos com a lista existente
       // ou substituir a lista antiga pela nova, dependendo do comportamento desejado
       this.productsList = [...this.productsList, ...newProducts];
 
+      for(let product of this.productsList){
+        debugger
+        this.itemProductStockService.GetEstoqueId(product.idProduto).subscribe(data => {
+          for(let product of data){
+            //console.log(product)
+            this.productsList2.push(product)
+          }
+
+        })
+      }
+
+
     });
 
-    this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
-      this.containerPadding = padding;
 
-    });
 
 
 
@@ -104,9 +118,24 @@ events = [
     content: 'Confirme a chegada do produto.',
   },
 ];
+
+updateProductsListWithSelected(productsList: any[], selectedProducts: { [key: string]: string }): any[] {
+  return productsList.map(product => {
+    if (selectedProducts[product.idProduto]) {
+      // Se o produto está em selectedProducts, atualize idEstoque
+      return { ...product, idEstoque: selectedProducts[product.idProduto] };
+    }
+    // Se o produto não está em selectedProducts, mantenha-o como está
+    return product;
+  });
+}
 productsList = [];// produtos para serem finalizandos
+productsList2 = [];// produtos para serem finalizandos
 
 openEstoqueModal() {
+  console.log(JSON.stringify(this.selectedProducts));
+
+
   const dialogRef = this.dialog.open(ModalStockComponent, {
     width: '250px',
   });
@@ -114,7 +143,10 @@ openEstoqueModal() {
   dialogRef.afterClosed().subscribe(result => {
     if (result === 'confirmar') {
       // Se a confirmação for feita no modal, execute a ação
-      this.itemProductBuyService.finalizarProdutoCompraAsync(this.productsList).subscribe(
+
+      const updatedProductsList = this.updateProductsListWithSelected(this.productsList, this.selectedProducts);
+      console.log(this.productsList)
+      this.itemProductBuyService.finalizarProdutoCompraAsync(updatedProductsList).subscribe(
         data => {
           // Navegar para o painel de administração após a atualização do estoque
           this.router.navigate(['admin', 'panel-buy']);
@@ -148,6 +180,19 @@ openEstoqueModal() {
 
 atualizaEstoque(){
 
+}
+selectedProducts: { [key: string]: string } = {};
+// Função para atualizar o estoque
+updateStock(product: any, event: Event) {
+  const checkbox = event.target as HTMLInputElement;
+  const isChecked = checkbox.checked;
+
+  if (isChecked) {
+    this.selectedProducts[product.idProduto] = product.idEstoque;
+  } else if (this.selectedProducts[product.idProduto] === product.idEstoque) {
+    delete this.selectedProducts[product.idProduto];
+  }
+  console.log(this.selectedProducts)
 }
 
 }

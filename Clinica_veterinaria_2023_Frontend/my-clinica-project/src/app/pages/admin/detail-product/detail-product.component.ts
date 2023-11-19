@@ -12,7 +12,12 @@ import Swal from 'sweetalert2';
 import { UnspscService } from 'src/app/services/unspsc.service';
 import { Unspsc } from 'src/app/models/unspsc.model';
 import { ProductService } from 'src/app/services/product.service';
+import { StockService } from 'src/app/services/stock.service';
 
+interface Estoque {
+  nome: string;
+  habilitado: boolean;
+}
 
 export enum UserGroup {
   Cliente = 'cliente',
@@ -38,11 +43,16 @@ export class DetailProductComponent {
   file: File;
   preview: string;
   unspscCode:any
-  productId: string;
+  productId: any;
 
 
   //DESCRIÇÃO UNSPSC
 
+  estoques: any[] = [
+    // ... outros estoques
+  ];
+
+  estoqueHabilitado: boolean = false;
   constructor(
     private fb: FormBuilder,
     private adminService: AdminService,
@@ -51,7 +61,8 @@ export class DetailProductComponent {
     private paddingService: PaddingService,
     private unspscService : UnspscService,
     private productService: ProductService,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private stokeService: StockService
   ) {}
 
   ngOnInit() {
@@ -101,6 +112,8 @@ export class DetailProductComponent {
     this.userRole = this.userService.getCurrentUser()
     //alert(this.userRole)
 
+
+    this.loadEstoques();
   }
 
 
@@ -171,10 +184,43 @@ submitForm(event?: Event): void {
       confirmButtonText: 'OK'
     });
   }
+
+}
+
+
+// toggleEstoque(nomeEstoque: string): void {
+//   this.estoques.forEach(estoque => {
+//     estoque.habilitado = estoque.nome === nomeEstoque;
+//   });
+
+//   this.estoqueHabilitado = nomeEstoque;
+// }
+
+loadEstoques() {
+  // Call the service to get stock data for a specific product.
+  this.stokeService.getAllStockByProductId(this.productId).subscribe(
+    data => {
+      // Assuming the response data is in the format of the JSON you provided.
+      // Assign the data to the 'estoques' array in your component.
+      this.estoques = data;
+
+      // Optional: Log the data for debugging.
+      alert(JSON.stringify(this.estoques));
+    },
+    error => {
+      // Handle any errors that occur during the request.
+      console.error('Erro ao carregar estoques:', error);
+
+      // You can also implement additional error handling here,
+      // such as displaying an error message to the user.
+    }
+  );
+}
+
+teste(){
+  alert('OI')
+}
 }
 
 
 
-
-
-}

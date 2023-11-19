@@ -5,6 +5,8 @@ import { Veterinario } from '../models/veterinario-model';
 import { environment } from 'src/environments/environment';
 import { AuthService } from '../core/auth/auth.service';
 
+
+
 @Injectable({
   providedIn: 'root'
 })
@@ -13,12 +15,14 @@ export class ItemProductBuyService {
 
   finalizarProdutoCompraAsync(ListProductsBuy: any[]): Observable<any> {
 
+    debugger
   const payload = ListProductsBuy.map(product => ({
     dataEntrada: product.dataEntrada || new Date().toISOString(), // Use the provided dataEntrada or set the current timestamp
     quantidadeTotal: product.quantidadeTotal, // Use the provided quantidadeTotal
     lote: product.lote || "", // Use the provided lote
     idCompra: product.idCompra, // Use the provided idCompra
-    idProduto: product.idProduto // Use the provided idProduto
+    idProduto: product.idProduto, // Use the provided idProduto
+    idEstoque: product.idEstoque
   }));
 
   return this.http.post(`${this.baseUrl}/ItemProdutoCompra/FinalizarProdutoCompraAsync`, payload)

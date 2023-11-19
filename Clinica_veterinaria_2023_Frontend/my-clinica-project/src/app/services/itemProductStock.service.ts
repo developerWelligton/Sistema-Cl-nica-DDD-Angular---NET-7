@@ -18,6 +18,7 @@ export interface StockItem {
   providedIn: 'root'
 })
 export class ItemProductStockService {
+
   private baseUrl = `${environment.apiUrl}/api`;
 
   constructor(
@@ -53,6 +54,20 @@ export class ItemProductStockService {
       });
 
       return this.http.post<StockItem>(endpoint, stockItem, { headers })
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
+
+
+      GetEstoqueId(produto: any): Observable<any> {
+      const endpoint = `${this.baseUrl}/ItemProdutoEstoque/estoques-por-produto?idProduto=${produto }`;
+
+      const headers = new HttpHeaders({
+        'Content-Type': 'application/json',
+      });
+
+      return this.http.get(endpoint, { headers })
         .pipe(
           catchError(this.handleError)
         );

@@ -15,7 +15,8 @@ namespace Entities.Entidades
 
         [StringLength(50)]
         public string Prateleira { get; set; }
-         
+
+        public bool status { get; set; } // Tipo corrigido para bool
 
         // Relacionamento com UsuarioSistemaClinica
         public int ID_Usuario { get; set; }
