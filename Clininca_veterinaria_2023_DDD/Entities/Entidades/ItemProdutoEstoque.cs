@@ -32,5 +32,7 @@ namespace Entities.Entidades
         public string? Status { get; set; }
 
         public int? Quantidade_Estoque { get; set; }
+
+
     }
 }

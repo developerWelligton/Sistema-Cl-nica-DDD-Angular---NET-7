@@ -51,8 +51,7 @@ namespace WebApi.Controllers
                 IdVenda = p.IdVenda,
                 Observacao = p.Observacao,
                 Quantidade = p.Quantidade,
-                IdEstoque = p.IdEstoque, // Novo campo adicionado
-                Status = p.Status // Novo campo adicionado
+                IdEstoque = p.IdEstoque, // Novo campo adicionado  // Novo campo adicionado
                                   // Adicione outros mapeamentos aqui se necessário
             }).ToList();
 

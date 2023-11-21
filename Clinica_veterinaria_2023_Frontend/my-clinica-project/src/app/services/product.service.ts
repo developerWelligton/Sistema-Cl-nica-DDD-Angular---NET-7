@@ -89,7 +89,7 @@ export class ProductService {
       idEstoque: stockItem.idEstoque || 0,
       dataEntrada: stockItem.dataEntrada || new Date().toISOString(),
       dataSaida: stockItem.dataSaida || new Date().toISOString(),
-      status: "habilitado"
+      status: "0"
     };
 
     return this.http.post(`${this.baseUrl}/ItemProdutoEstoque`, payload)

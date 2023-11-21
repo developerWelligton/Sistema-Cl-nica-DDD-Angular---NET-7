@@ -18,8 +18,6 @@ namespace Domain.Interfaces.IFamilia
         Task<List<ItemProdutoEstoque>> GetAllProdutoByStock(int idStock);
 
         Task<List<ItemProdutoEstoque>> GetEstoquesByProdutos(int idProduct);
-
-         
-
+        Task<IEnumerable<ItemProdutoEstoque>> GetByProdutoId(int idProduto);
     }
 }

@@ -25,6 +25,7 @@ export class ItemProductSaleService {
     });
 
     const payloads = productList.map(product => ({
+        idEstoque: product.idEstoque || 0,
         idProduto: product.idProduto || 0,
         idVenda: product.idVenda || 0,
         totalProdutosVendas: product.totalProdutosVendas || 0,

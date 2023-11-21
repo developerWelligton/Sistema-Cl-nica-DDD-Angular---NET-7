@@ -1,3 +1,4 @@
+import { StockService } from './../../../services/stock.service';
 import { ItemProductSaleService } from './../../../services/itemProductSale.service';
 import { UserService } from '../../../core/user/user.service';
 // ... previous imports ...
@@ -12,6 +13,7 @@ import { Subscription } from 'rxjs';
 import { ProductService } from 'src/app/services/product.service';
 import Swal from 'sweetalert2';
 import { SaleProductService } from 'src/app/services/saleProduto.service';
+import { ItemProductStockService } from 'src/app/services/itemProductStock.service';
 
 
 export enum UserGroup {
@@ -72,7 +74,9 @@ export class PanelPdvComponent {
     private productService: ProductService,
     private saleProductService: SaleProductService,
     private itemProductSaleService:ItemProductSaleService,
-    private cdr: ChangeDetectorRef
+    private cdr: ChangeDetectorRef,
+    private stockService: StockService,
+    private itemProductStockService : ItemProductStockService
   ) {}
 
   ngOnInit() {
@@ -116,41 +120,69 @@ debugger
     const formData = this.createSaleForm.value;
 
   }
-
-  //
-  productSeached:boolean=false;
   searchProduct() {
     this.productSeached = true;
     this.productService.getProductByCode(this.productCode)
         .subscribe(
             response => {
-                console.log(response);
+                // Supondo que response contém o idProduto necessário
+                const idProduto = response.idProduto;
 
-                // Mapeando os dados retornados para o objeto 'Product'
-                this.product = {
-                    quantity: 1,
-                    description: response.descricao,
-                    price: response.precoVenda,
-                    unit: '', // Como mencionado antes, você pode ajustar conforme necessário
-                    image: 'data:image/jpeg;base64,' + response.imagemBase64,
-                    code:response.idProduto,
-                    idEstoque: response.idEstoque
-                };
-
+                // Agora chama o método getEstoqueByProductId
+                this.itemProductStockService.getEstoqueByProductId(idProduto)
+                    .subscribe(
+                        estoqueResponse => {
+                            // Processar a resposta do estoque aqui
+                            console.log('Estoque para o produto:', estoqueResponse);
+                            alert(estoqueResponse)
+                        },
+                        estoqueError => {
+                            console.error('Erro ao buscar estoque:', estoqueError);
+                        }
+                    );
             },
             error => {
-                console.error("Error fetching product:", error);
-
-                // Adicionado o SweetAlert2 para exibir uma notificação de erro
-                Swal.fire({
-                    icon: 'error',
-                    title: 'Oops...',
-                    text: 'Produto não encontrado!',
-                    footer: 'Tente novamente com outro código'
-                });
+                console.error('Erro ao buscar produto:', error);
             }
         );
-    }
+}
+
+
+  //
+  productSeached:boolean=false;
+  // searchProduct() {
+  //   this.productSeached = true;
+  //   this.productService.getProductByCode(this.productCode)
+  //       .subscribe(
+  //           response => {
+  //               console.log(response);
+
+  //               this.stockService.getAllStockByProductId(this.productCode)
+  //               // Mapeando os dados retornados para o objeto 'Product'
+  //               this.product = {
+  //                   quantity: 1,
+  //                   description: response.descricao,
+  //                   price: response.precoVenda,
+  //                   unit: '', // Como mencionado antes, você pode ajustar conforme necessário
+  //                   image: 'data:image/jpeg;base64,' + response.imagemBase64,
+  //                   code:response.idProduto,
+  //                   idEstoque: response.idEstoque
+  //               };
+
+  //           },
+  //           error => {
+  //               console.error("Error fetching product:", error);
+
+  //               // Adicionado o SweetAlert2 para exibir uma notificação de erro
+  //               Swal.fire({
+  //                   icon: 'error',
+  //                   title: 'Oops...',
+  //                   text: 'Produto não encontrado!',
+  //                   footer: 'Tente novamente com outro código'
+  //               });
+  //           }
+  //       );
+  //   }
     fecharVenda:boolean=false
     addItem() {
       // se existir venda, faça somente adição de item

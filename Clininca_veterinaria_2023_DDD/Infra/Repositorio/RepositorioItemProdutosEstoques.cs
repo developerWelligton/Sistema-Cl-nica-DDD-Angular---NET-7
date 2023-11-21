@@ -153,5 +153,18 @@ namespace Infra.Repositorio
                 }).ToList();
             }
         }
+
+        public async Task<IEnumerable<ItemProdutoEstoque>> GetByProdutoId(int idProduto)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                var result = await banco.ItensProdutoEstoques
+                                        .Where(item => item.IdProduto == idProduto)
+                                        .ToListAsync();
+
+                return result;
+            }
+        }
+
     }
 }

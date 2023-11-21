@@ -72,4 +72,12 @@ export class ItemProductStockService {
           catchError(this.handleError)
         );
     }
+
+    getEstoqueByProductId(idProduto: number): Observable<StockItem[]> {
+      const endpoint = `${this.baseUrl}/ItemProdutoEstoque/itens-por-produto?idProduto=${idProduto}`;
+      return this.http.get<StockItem[]>(endpoint)
+        .pipe(
+          catchError(this.handleError)
+        );
+    }
 }

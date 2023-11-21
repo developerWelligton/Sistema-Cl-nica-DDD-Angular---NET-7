@@ -145,6 +145,32 @@ namespace WebApi.Controllers
         }
 
 
+        [HttpGet("itens-por-produto")]
+        [Produces("application/json")]
+        public async Task<ActionResult<IEnumerable<ItemProdutoEstoque>>> GetItensByProdutoId(int idProduto)
+        {
+            if (idProduto <= 0)
+            {
+                return BadRequest("IdProduto deve ser maior que zero.");
+            }
+
+            try
+            {
+                var itens = await _interfaceItemProdutoEstoques.GetByProdutoId(idProduto);
+
+                if (itens == null || !itens.Any())
+                {
+                    return NotFound($"Nenhum item de estoque encontrado para o produto com ID = {idProduto}.");
+                }
+
+                return Ok(itens);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno do servidor ao tentar buscar itens de estoque: {ex.Message}");
+            }
+        }
+
 
 
     }
