@@ -16,10 +16,10 @@
 
           </thead>
           <tbody>
-            <tr *ngFor="let product of productsList2.slice().reverse()">
+            <tr *ngFor="let product of productsList.slice().reverse()">
               <td>{{  product.idProduto   }}</td>
               <td>{{  product.idEstoque   }}</td>
-              <td>{{  product.quantidade_Estoque   }}</td>
+              <td>{{  product.quantidadeTotal   }}</td>
               <td>
                 <input type="checkbox" [checked]="selectedProducts[product.idProduto] === product.idEstoque"
                 (change)="updateStock(product, $event)">

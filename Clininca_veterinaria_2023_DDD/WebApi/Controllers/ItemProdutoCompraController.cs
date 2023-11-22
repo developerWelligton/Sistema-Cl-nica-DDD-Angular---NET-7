@@ -85,8 +85,7 @@ namespace WebApi.Controllers
                     IdProduto = dto.IdProduto, 
                     DataEntrada = dto.DataEntrada,
                     QuantidadeTotal = dto.QuantidadeTotal,
-                    Lote = dto.Lote,
-                    IdEstoque = dto.IdEstoque
+                    Lote = dto.Lote
                     // Add other properties here if needed
                 }).ToList();
 
@@ -95,7 +94,7 @@ namespace WebApi.Controllers
                 {
                     var produtoId = (int)item.IdProduto;
                     var novaQuantidade = item.QuantidadeTotal;
-                    var estoqueId = item.IdEstoque; 
+                    var estoqueId = await _interfaceItemProdutoEstoque.GetEstoqueByProduto(produtoId);
 
                     // If estoqueId is not null, safely cast it to int and call UpdateQuantidadeEstoqueCompra
                     await _interfaceItemProdutoEstoque.UpdateQuantidadeEstoqueCompra(estoqueId, produtoId, (int)novaQuantidade);
@@ -115,7 +114,7 @@ namespace WebApi.Controllers
 
         [HttpGet("produtos-por-compra")] // Ensure this route matches your Angular service call
         public async Task<ActionResult<IEnumerable<ItemProdutoCompra>>> ListarProdutoCompra([FromQuery] int idCompra)
-        {
+            {
             try
             {
                 var produtos = await _interfaceItemCompraProduto.GetAllProdutoByBuy(idCompra);

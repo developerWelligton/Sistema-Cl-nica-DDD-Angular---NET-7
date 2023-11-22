@@ -120,6 +120,7 @@ events = [
 ];
 
 updateProductsListWithSelected(productsList: any[], selectedProducts: { [key: string]: string }): any[] {
+  debugger
   return productsList.map(product => {
     if (selectedProducts[product.idProduto]) {
       // Se o produto está em selectedProducts, atualize idEstoque
@@ -133,6 +134,7 @@ productsList = [];// produtos para serem finalizandos
 productsList2 = [];// produtos para serem finalizandos
 
 openEstoqueModal() {
+  debugger
   console.log(JSON.stringify(this.selectedProducts));
 
 
@@ -184,6 +186,7 @@ atualizaEstoque(){
 selectedProducts: { [key: string]: string } = {};
 // Função para atualizar o estoque
 updateStock(product: any, event: Event) {
+  debugger
   const checkbox = event.target as HTMLInputElement;
   const isChecked = checkbox.checked;
 

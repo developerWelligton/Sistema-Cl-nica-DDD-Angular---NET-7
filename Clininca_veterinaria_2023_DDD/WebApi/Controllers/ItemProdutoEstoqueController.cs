@@ -43,7 +43,7 @@ namespace WebApi.Controllers
         [HttpPost]
         [Produces("application/json")]
         public async Task<ActionResult> CriarProdutoEstoque([FromBody] ProdutoEstoqueDto produtoEstoqueDto)
-        {
+            {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
