@@ -27,14 +27,17 @@ interface AsaasPaymentLinkPayload {
   notificationEnabled: boolean;
   callback: CallbackPayload;
 }
+
+interface PaymentDinheiro {
+  saleId:string;
+  value: number;
+}
 @Component({
   selector: 'app-payment',
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent {
-  public containerPadding: string;
-  private paddingSubscription: Subscription;
 
   isPaymentCardVisible: boolean = false;
   isCashPaymentCardVisible: boolean = false; // você pode modificar isso conforme a lógica da sua aplicação
@@ -62,13 +65,8 @@ export class PaymentComponent {
     }
    }
 
-
-
   ngOnInit() {
-    this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
-      this.containerPadding = padding;
 
-    });
 
     this.paymentForm = new FormGroup({
       paymentName: new FormControl('PORTAL-PETZ-LINK-PAGAMENTO-'+this.saleIdPayment, Validators.required),
@@ -156,52 +154,59 @@ export class PaymentComponent {
 
   }
   submitCashPaymentForm() {
+    debugger
     if (this.cashPaymentForm.valid) {
-      const paymentData = {
-        ...this.cashPaymentForm.value,
-        idVenda: this.saleIdPayment,
-        total: this.totalPayment
-      };
+      console.log(this.paymentForm.value);
 
-      console.log('Dados de pagamento:', paymentData);
+      const paymentData: PaymentDinheiro = {
+        saleId: `${this.saleIdPayment}`,
+        value: this.paymentForm.value.totalValue,
+      }
 
-      this.saleServicePaymentService.sendPayment(paymentData).subscribe(response => {
-        console.log('Resposta:', response);
-debugger
-        // Confirmação usando Swal.fire
-        Swal.fire({
-          icon: 'success',
-          title: 'Pagamento Confirmado!',
-          html: `
-            <p><strong>ID Venda Serviço Pagamento:</strong> ${response.idVendaServicoPagamento}</p>
-            <p><strong>Data Pagamento:</strong> ${response.dataPagamento}</p>
-            <p><strong>Forma Pagamento:</strong> ${response.formaPagamento}</p>
-            <p><strong>ID Usuário:</strong> ${response.iD_Usuario}</p>
-            <p><strong>ID Venda:</strong> ${response.idVenda}</p>
-            <p><strong>Status:</strong> ${response.status}</p>
-            <p><strong>Total:</strong> ${response.total}</p>
-          `
-        }).then(() => {
-          this.router.navigate(['/admin/panel-pdv']);  // Redirecionamento após a confirmação no Swal
-        });
 
+
+      this.saleServicePaymentService.sendPaymentDinheiro(paymentData).subscribe(response => {
+        console.log('Resposta da API do Asaas:', response);
+        if(response && response.url) {
+          // Abre o link automaticamente em uma nova aba
+          window.open(response.url, '_blank');
+
+      this.productService.removeProductFromInventory(this.cashPaymentForm.value);
+
+          Swal.fire({
+            icon: 'success',
+            title: 'Link de pagamento criado com sucesso!',
+            html: `O link de pagamento foi aberto em uma nova aba. Se não abrir automaticamente, clique <a href="${response.url}" target="_blank">aqui</a>.`,
+            confirmButtonText: 'Fechar'
+          }).then(() => {
+            this.router.navigate(['/admin/panel-pdv']);  // Redirecionamento após a confirmação no Swal
+          });
+
+        } else {
+          Swal.fire({
+            icon: 'error',
+            title: 'Falha ao criar o link de pagamento.',
+            text: 'Por favor, tente novamente mais tarde.'
+          });
+        }
       }, error => {
-        console.error('Erro ao enviar pagamento:', error);
+        console.error('Error:', error);
         Swal.fire({
           icon: 'error',
-          title: 'Erro ao confirmar pagamento',
-          text: 'Por favor, tente novamente mais tarde.'
+          title: 'Erro na API',
+          text: 'Ocorreu um erro ao tentar criar o link de pagamento. Por favor, tente novamente.'
         });
       });
     } else {
-      console.error('Formulário inválido!');
       Swal.fire({
         icon: 'error',
         title: 'Formulário inválido',
         text: 'Por favor, preencha todos os campos obrigatórios.'
       });
     }
-  }
+
+  };
+
 
 
 

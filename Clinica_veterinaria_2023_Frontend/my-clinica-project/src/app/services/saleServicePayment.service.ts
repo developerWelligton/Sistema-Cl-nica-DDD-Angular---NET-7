@@ -24,4 +24,9 @@ export class SaleServicePaymentService {
   getAllPayments(): Observable<any[]> {
     return this.http.get<any[]>(`${this.baseUrl}/Pagamentos`);
   }
+
+  // Método para enviar pagamento (which updates stock as well)
+  sendPaymentDinheiro(paymentData: any): Observable<any> {
+    return this.http.post(`${this.baseUrl}/CreatePaymentDinheiro`, paymentData);
+  }
 }

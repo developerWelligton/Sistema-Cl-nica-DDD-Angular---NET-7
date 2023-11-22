@@ -72,7 +72,7 @@ export class ProductService {
   }
 
 
-      removeProductFromInventory(productsPaidOut: any) {
+  removeProductFromInventory(productsPaidOut: any) {
         debugger
     // Aqui iria a lógica para comunicar-se com o backend e remover o produto do inventário
     console.log(`Produto com ID ${JSON.stringify(productsPaidOut)} foi removido do inventário.`);

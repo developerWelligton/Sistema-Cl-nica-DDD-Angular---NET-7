@@ -206,7 +206,61 @@ namespace WebApi.Controllers
 
             var responseObject = JsonSerializer.Deserialize<PaymentResponse>(responseString);
             return Ok(new { url = responseObject.url });    
-        } 
+        }
+
+
+        [HttpPost("/api/CreatePaymentDinheiro")]
+        [Produces("application/json")]
+        public async Task<ActionResult> CreatePaymentDinheiro([FromBody] SaleCreatePaymentDinheiroDTO saleCreatePaymentDinheiroDTO)
+        {
+         
+            var payload = new
+            {
+                saleId = saleCreatePaymentDinheiroDTO.SaleId, 
+                value = saleCreatePaymentDinheiroDTO.Value,
+                 
+            }; 
+
+            // Fetch the Venda product details
+            var vendaProductDetails = await _InterfaceItemProdutoVenda.GetVendaDetailsAsync(payload.saleId);
+
+            // Store products in a stack
+            Stack<ItemProdutoVenda> productStack = new Stack<ItemProdutoVenda>();
+            foreach (var product in vendaProductDetails)
+            {
+                productStack.Push(product);
+            }
+
+            // Empty the product stack and process each product
+            while (productStack.Count > 0)
+            {
+                var currentProduct = productStack.Pop(); 
+
+                var stockDetails = await _InterfaceItemProdutoEstoque.GetByProdutoId((int)currentProduct.IdProduto);
+
+                int idEstoqueWithStatusOne = 0;
+
+                foreach (var item in stockDetails)
+                {
+                    if (item.Status == "1")
+                    {
+                        idEstoqueWithStatusOne = (int)item.IdEstoque;
+                        break; // Sai do loop quando encontra o primeiro item com status 1
+                    }
+                }
+
+                var stockUpdateObject = new StockUpdateObject
+                {
+                    idEstoque = idEstoqueWithStatusOne,
+                    idProduto = (int)currentProduct.IdProduto,
+                    novaQuantidade = (int)currentProduct.Quantidade
+                };
+
+                // Now call your API or method to update the stock using stockUpdateObject
+                await _InterfaceItemProdutoEstoque.UpdateQuantidadeEstoque(stockUpdateObject.idEstoque, stockUpdateObject.idProduto, stockUpdateObject.novaQuantidade);
+            }
+            return Ok(new { success = true });
+        }
 
     }
 }

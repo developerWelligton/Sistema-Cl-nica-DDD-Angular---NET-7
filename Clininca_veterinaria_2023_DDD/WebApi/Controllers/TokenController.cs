@@ -67,7 +67,7 @@ namespace WebApi.Controllers
             }
 
             var result = await _signInManager.PasswordSignInAsync(Input.Email, Input.Password, false, lockoutOnFailure: false);
-            if (result.Succeeded)
+            if (result.Succeeded)   
             {
                 // Retrieve user information
                 var user = await _userManager.FindByEmailAsync(Input.Email);

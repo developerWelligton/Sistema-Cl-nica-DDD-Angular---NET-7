@@ -128,24 +128,64 @@ debugger
                 // Supondo que response contém o idProduto necessário
                 const idProduto = response.idProduto;
 
-                // Agora chama o método getEstoqueByProductId
+                // Chama o método getEstoqueByProductId
                 this.itemProductStockService.getEstoqueByProductId(idProduto)
                     .subscribe(
                         estoqueResponse => {
-                            // Processar a resposta do estoque aqui
-                            console.log('Estoque para o produto:', estoqueResponse);
-                            alert(estoqueResponse)
+                            // Filtrar para encontrar o estoque com status = 0
+                            const estoqueComStatusUm = estoqueResponse.find(item => item.status === '1');
+
+
+                            if (estoqueComStatusUm) {
+                                console.log('Estoque com status 1 encontrado:', estoqueComStatusUm.idEstoque);
+                                this.product = {
+                                                    quantity: 1,
+                                                    description: response.descricao,
+                                                    price: response.precoVenda,
+                                                    unit: '', // Como mencionado antes, você pode ajustar conforme necessário
+                                                    image: 'data:image/jpeg;base64,' + response.imagemBase64,
+                                                    code:response.idProduto,
+                                                    idEstoque: estoqueComStatusUm.idEstoque
+                                                };
+
+
+
+
+                                Swal.fire({
+                                    icon: 'success',
+                                    title: 'Estoque encontrado',
+                                    text: 'ID do Estoque com status 1: ' + estoqueComStatusUm.idEstoque
+                                });
+                            } else {
+                                console.log('Nenhum estoque com status 0 encontrado para este produto.');
+                                Swal.fire({
+                                    icon: 'warning',
+                                    title: 'Estoque não encontrado',
+                                    text: 'Nenhum estoque com status 0 encontrado para este produto.'
+                                });
+                            }
                         },
                         estoqueError => {
                             console.error('Erro ao buscar estoque:', estoqueError);
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erro',
+                                text: 'Ocorreu um erro ao buscar o estoque.'
+                            });
                         }
                     );
             },
             error => {
                 console.error('Erro ao buscar produto:', error);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro ao buscar produto',
+                    text: 'Não foi possível encontrar o produto.'
+                });
             }
         );
 }
+
 
 
   //
