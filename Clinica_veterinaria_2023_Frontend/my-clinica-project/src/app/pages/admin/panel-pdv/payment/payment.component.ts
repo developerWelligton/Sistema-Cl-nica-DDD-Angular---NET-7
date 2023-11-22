@@ -166,29 +166,15 @@ export class PaymentComponent {
 
 
       this.saleServicePaymentService.sendPaymentDinheiro(paymentData).subscribe(response => {
-        console.log('Resposta da API do Asaas:', response);
-        if(response && response.url) {
-          // Abre o link automaticamente em uma nova aba
-          window.open(response.url, '_blank');
 
-      this.productService.removeProductFromInventory(this.cashPaymentForm.value);
+              // Handle success here
+        Swal.fire({
+          icon: 'success',
+          title: 'Pagamento realizado',
+          text: 'O pagamento foi realizado com sucesso.'
+      });
+      this.router.navigate(['/admin/panel-pdv']);
 
-          Swal.fire({
-            icon: 'success',
-            title: 'Link de pagamento criado com sucesso!',
-            html: `O link de pagamento foi aberto em uma nova aba. Se não abrir automaticamente, clique <a href="${response.url}" target="_blank">aqui</a>.`,
-            confirmButtonText: 'Fechar'
-          }).then(() => {
-            this.router.navigate(['/admin/panel-pdv']);  // Redirecionamento após a confirmação no Swal
-          });
-
-        } else {
-          Swal.fire({
-            icon: 'error',
-            title: 'Falha ao criar o link de pagamento.',
-            text: 'Por favor, tente novamente mais tarde.'
-          });
-        }
       }, error => {
         console.error('Error:', error);
         Swal.fire({
@@ -206,6 +192,8 @@ export class PaymentComponent {
     }
 
   };
+               // Redirecionamento após a confirmação no Swal
+
 
 
 
