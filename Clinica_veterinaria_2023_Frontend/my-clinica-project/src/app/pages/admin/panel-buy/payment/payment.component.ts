@@ -62,7 +62,7 @@ export class PaymentComponent {
   ngOnInit() {
 
     this.buyId = this.routerActivate.snapshot.paramMap.get('id');
-    alert( this.buyId)
+    //alert( this.buyId)
     this.itemProductSaleService.getAllProductListByBuy(this.buyId).subscribe(data => {
       // Aqui está assumindo que data é um array de objetos com a estrutura desejada
       // Transforma os dados recebidos para a nova estrutura e adiciona à lista de produtos
@@ -75,7 +75,7 @@ export class PaymentComponent {
         idEstoque: ""
       }));
 
-      alert(JSON.stringify(newProducts))
+      //alert(JSON.stringify(newProducts))
       // Aqui você pode concatenar a nova lista de produtos com a lista existente
       // ou substituir a lista antiga pela nova, dependendo do comportamento desejado
       this.productsList = [...this.productsList, ...newProducts];

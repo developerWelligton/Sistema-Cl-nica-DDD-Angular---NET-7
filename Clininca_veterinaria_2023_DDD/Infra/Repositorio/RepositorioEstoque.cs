@@ -40,5 +40,7 @@ namespace Infra.Repositorio
                 return estoques;
             }
         }
+
+
     }
 }

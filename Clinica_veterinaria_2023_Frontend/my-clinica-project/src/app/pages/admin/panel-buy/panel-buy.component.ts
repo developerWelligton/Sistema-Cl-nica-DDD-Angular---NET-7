@@ -211,7 +211,7 @@ debugger
       }));
 
       this.itemProductBuyService.createItemProductsBuy(productListToSend).subscribe(data => {
-        console.log("itemProductBuyService:" + data);
+        //console.log("itemProductBuyService:" + data);
         // Exibir um alerta de confirmação
         Swal.fire({
           title: 'Confirmação',

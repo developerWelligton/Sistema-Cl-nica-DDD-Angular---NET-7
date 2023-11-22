@@ -80,4 +80,10 @@ export class ItemProductStockService {
           catchError(this.handleError)
         );
     }
+
+
+    updateEstoqueStatus(idEstoque: number, idProduto: number): Observable<any> {
+      const url = `${this.baseUrl}/ItemProdutoEstoque/atualizar-status-produto`;
+      return this.http.patch(url, { idEstoque, idProduto });
+    }
 }

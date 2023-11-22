@@ -151,11 +151,11 @@ debugger
 
 
 
-                                Swal.fire({
-                                    icon: 'success',
-                                    title: 'Estoque encontrado',
-                                    text: 'ID do Estoque com status 1: ' + estoqueComStatusUm.idEstoque
-                                });
+                                // Swal.fire({
+                                //     icon: 'success',
+                                //     title: 'Estoque encontrado',
+                                //     text: 'ID do Estoque com status 1: ' + estoqueComStatusUm.idEstoque
+                                // });
                             } else {
                                 console.log('Nenhum estoque com status 0 encontrado para este produto.');
                                 Swal.fire({

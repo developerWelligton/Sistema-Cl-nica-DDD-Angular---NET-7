@@ -8,9 +8,7 @@
           <thead>
             <tr>
               <th>Código Do Produto</th>
-              <th>Código Do Estoque</th>
               <th>Quantidade</th>
-              <th>Check</th>
 
             </tr>
 
@@ -18,14 +16,10 @@
           <tbody>
             <tr *ngFor="let product of productsList.slice().reverse()">
               <td>{{  product.idProduto   }}</td>
-              <td>{{  product.idEstoque   }}</td>
               <td>{{  product.quantidadeTotal   }}</td>
-              <td>
-                <input type="checkbox" [checked]="selectedProducts[product.idProduto] === product.idEstoque"
-                (change)="updateStock(product, $event)">
 
 
-              </td>
+
 
             </tr>
           </tbody>

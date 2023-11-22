@@ -21,6 +21,7 @@ namespace WebApi.Controllers
         private readonly InterfaceItemCompraProduto _interfaceItemCompraProduto;
         private readonly InterfaceItemProdutoEstoque _interfaceItemProdutoEstoque;
         private readonly IitemProdutoCompraServico _iItemProdutoCompraServico;
+         
         public ItemProdutoCompraController(InterfaceItemProdutoEstoque interfaceItemProdutoEstoque, InterfaceItemCompraProduto interfaceItemCompraProduto, IitemProdutoCompraServico iItemProdutoCompraServico)
         {
             _interfaceItemProdutoEstoque = interfaceItemProdutoEstoque;
@@ -94,10 +95,16 @@ namespace WebApi.Controllers
                 {
                     var produtoId = (int)item.IdProduto;
                     var novaQuantidade = item.QuantidadeTotal;
-                    var estoqueId = await _interfaceItemProdutoEstoque.GetEstoqueByProduto(produtoId);
 
-                    // If estoqueId is not null, safely cast it to int and call UpdateQuantidadeEstoqueCompra
-                    await _interfaceItemProdutoEstoque.UpdateQuantidadeEstoqueCompra(estoqueId, produtoId, (int)novaQuantidade);
+                    // Retrieve the items again (this might be redundant if the list doesn't change)
+                    var itens = await _interfaceItemProdutoEstoque.GetByProdutoId((int)produtoId);
+                    var estoqueId = itens.FirstOrDefault(i => i.Status == "1")?.IdEstoque;
+
+                    // Ensure estoqueId is not null before updating
+                    if (estoqueId != null)
+                    {
+                        await _interfaceItemProdutoEstoque.UpdateQuantidadeEstoqueCompra((int)estoqueId, produtoId, (int)novaQuantidade);
+                    }
                 }
 
 

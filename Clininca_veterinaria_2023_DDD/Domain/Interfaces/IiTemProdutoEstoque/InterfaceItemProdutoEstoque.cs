@@ -19,5 +19,8 @@ namespace Domain.Interfaces.IFamilia
 
         Task<List<ItemProdutoEstoque>> GetEstoquesByProdutos(int idProduct);
         Task<IEnumerable<ItemProdutoEstoque>> GetByProdutoId(int idProduto);
+
+        // toogle para alterar estoque/venda/compra
+        Task UpdateStatusByProdutoId(int produtoId, int status);
     }
 }

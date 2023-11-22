@@ -1,3 +1,4 @@
+
 import { UserService } from '../../../core/user/user.service';
 // ... previous imports ...
 
@@ -13,6 +14,7 @@ import { UnspscService } from 'src/app/services/unspsc.service';
 import { Unspsc } from 'src/app/models/unspsc.model';
 import { ProductService } from 'src/app/services/product.service';
 import { StockService } from 'src/app/services/stock.service';
+import { ItemProductStockService } from 'src/app/services/itemProductStock.service';
 
 interface Estoque {
   nome: string;
@@ -62,7 +64,8 @@ export class DetailProductComponent {
     private unspscService : UnspscService,
     private productService: ProductService,
     private route: ActivatedRoute,
-    private stokeService: StockService
+    private stokeService: StockService,
+    private itemProductStockService: ItemProductStockService
   ) {}
 
   ngOnInit() {
@@ -197,37 +200,43 @@ submitForm(event?: Event): void {
 // }
 
 loadEstoques() {
-  // Call the service to get stock data for a specific product.
-  this.stokeService.getAllStockByProductId(this.productId).subscribe(
+  this.itemProductStockService.getEstoqueByProductId(this.productId).subscribe(
     data => {
-      // Assuming the response data is in the format of the JSON you provided.
-      // Assign the data to the 'estoques' array in your component.
       this.estoques = data;
 
-      // Optional: Log the data for debugging.
-      alert(JSON.stringify(this.estoques));
+      // Find the estoque with status = 1 and set it as selected
+      const selectedEstoque = this.estoques.find(e => e.status === '1');
+      this.estoqueSelecionado = selectedEstoque ? selectedEstoque.idEstoque : null;
+
+      console.log(JSON.stringify(data));
     },
     error => {
-      // Handle any errors that occur during the request.
       console.error('Erro ao carregar estoques:', error);
-
-      // You can also implement additional error handling here,
-      // such as displaying an error message to the user.
     }
   );
 }
 
 estoqueSelecionado: number;
-  atualizarPrioridadeDeEstoque(estoque: any): void {
-    if (estoque) {
-      alert(JSON.stringify(estoque))
-    } else {
-      // Lógica caso o estoque não seja mais prioridade
-    }
 
-    // Agora você precisa atualizar o produto no servidor ou no seu estado local
-    //this.atualizarProduto();
+atualizarPrioridadeDeEstoque(estoque: any): void {
+  if (estoque) {
+    console.log(JSON.stringify(estoque));
+
+    debugger
+    // Call your service to update the status
+    this.itemProductStockService.updateEstoqueStatus(estoque.idEstoque, estoque.idProduto).subscribe(
+      response => {
+        // Handle the response
+        console.log('Status updated successfully');
+      },
+      error => {
+        // Handle the error
+        console.error('Error updating status', error);
+      }
+    );
   }
+}
+
   // Método para atualizar o produto
   atualizarProduto(produto: any): void {
     // Implemente a atualização do produto aqui, pode ser uma chamada de API ou atualização local

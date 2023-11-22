@@ -57,26 +57,26 @@
       </div>
 
   </form>
-  <div class="container mt-5">
-    <div class="row mt-5">
-      <h1>Estoque disponível para Venda</h1>
-      <!-- Usamos o ngFor para criar um card para cada estoque -->
-      <div class="col-md-3 mb-4" *ngFor="let estoque of estoques; let i = index">
-        <div class="card">
-          <h2>{{estoque.sala}}</h2>
-          <h3>Estoque #{{estoque.idEstoque}}</h3>
-          <div class="card-body">
-            <!-- Toggle button styled as radio for exclusivity -->
-            <label class="switch">
-              <input type="radio" name="estoqueSelecionado" [value]="estoque.idEstoque"
-                     [(ngModel)]="estoqueSelecionado"
-                     (change)="atualizarPrioridadeDeEstoque(estoque)">
-              <span class="slider round"></span>
-            </label>
-          </div>
-        </div>
+  <div class="col-md-3 mb-4" *ngFor="let estoque of estoques; let i = index">
+    <div class="card">
+      <h2>{{estoque.sala}}</h2>
+      <h2>{{estoque.prateleira}}</h2>
+      <h3>Estoque #{{estoque.idEstoque}}</h3>
+      <h3>Quantidade Disponível: {{estoque.quantidade_Estoque}} Unidades</h3>
+
+
+      <div class="card-body">
+        <label class="switch">
+          <input type="radio" name="estoqueSelecionado" [value]="estoque.idEstoque"
+                 [(ngModel)]="estoqueSelecionado"
+                 [checked]="estoque.idEstoque === estoqueSelecionado"
+                 (change)="atualizarPrioridadeDeEstoque(estoque)">
+          <span class="slider round"></span>
+        </label>
       </div>
     </div>
+  </div>
+
 
 
 

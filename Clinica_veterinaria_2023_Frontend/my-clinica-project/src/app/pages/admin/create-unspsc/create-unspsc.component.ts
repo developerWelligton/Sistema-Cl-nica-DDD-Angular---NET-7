@@ -418,7 +418,7 @@ export class CreateUnspscComponent {
                           // Resetar o formulário após o envio bem-sucedido
                           this.createUnspscForm.reset();
                           this.unspscCode=''
-                          this.router.navigate(['/admin/list-unspsc']);
+                          //this.router.navigate(['/admin/list-unspsc']);
                       },
                       error => {
                           console.error('API error:', error);

@@ -24,10 +24,10 @@ namespace Infra.Repositorio
             _optionsBuilder = new DbContextOptions<ContextBase>();
 
         }
- 
+
 
         public async Task UpdateQuantidadeEstoque(int idEstoque, int idProduto, int quantidadeASubtrair)
-            {
+        {
             using (var banco = new ContextBase(_optionsBuilder))
             {
                 // Encontrar o item específico com base no IdEstoque e IdProduto
@@ -120,7 +120,7 @@ namespace Infra.Repositorio
 
                 return result.Select(r => new ItemProdutoEstoque
                 {
-                    IdProduto = r.IdProduto, 
+                    IdProduto = r.IdProduto,
                     Quantidade_Estoque = r.Quantidade_Estoque,
                     Produto = new Produto { Nome = r.Nome }  // Setting the 'Nome' value in the navigation property
                 }).ToList();
@@ -131,23 +131,23 @@ namespace Infra.Repositorio
         {
             using (var banco = new ContextBase(_optionsBuilder))
             {
-                var result = await(from produto in banco.Produtos
-                                   join itemEstoque in banco.ItensProdutoEstoques
-                                   on produto.IdProduto equals itemEstoque.IdProduto
-                                   where itemEstoque.IdProduto == idProduto
-                                   select new
-                                   {
-                                       IdProduto = produto.IdProduto,
-                                       IdEstoque = itemEstoque.IdEstoque,
-                                       Nome = produto.Nome,  // Accessing 'Nome' using the navigation property
-                                       Status = produto.Status,
-                                       Quantidade_Estoque = itemEstoque.Quantidade_Estoque
-                                   }).ToListAsync();
+                var result = await (from produto in banco.Produtos
+                                    join itemEstoque in banco.ItensProdutoEstoques
+                                    on produto.IdProduto equals itemEstoque.IdProduto
+                                    where itemEstoque.IdProduto == idProduto
+                                    select new
+                                    {
+                                        IdProduto = produto.IdProduto,
+                                        IdEstoque = itemEstoque.IdEstoque,
+                                        Nome = produto.Nome,  // Accessing 'Nome' using the navigation property
+                                        Status = produto.Status,
+                                        Quantidade_Estoque = itemEstoque.Quantidade_Estoque
+                                    }).ToListAsync();
 
                 return result.Select(r => new ItemProdutoEstoque
                 {
                     IdProduto = r.IdProduto,
-                    IdEstoque = r.IdEstoque , 
+                    IdEstoque = r.IdEstoque,
                     Quantidade_Estoque = r.Quantidade_Estoque,
                     Produto = new Produto { Nome = r.Nome }  // Setting the 'Nome' value in the navigation property
                 }).ToList();
@@ -166,5 +166,27 @@ namespace Infra.Repositorio
             }
         }
 
+        public async Task UpdateStatusByProdutoId(int produtoId, int idEstoque)
+        {
+            using (var banco = new ContextBase(_optionsBuilder))
+            {
+                // Update all items with IdProduto = produtoId to Status = 0
+                var itemsToUpdate = await banco.ItensProdutoEstoques
+                                              .Where(i => i.IdProduto == produtoId)
+                                              .ToListAsync();
+
+                itemsToUpdate.ForEach(i => i.Status = "0");
+
+                // Update the specific item with IdEstoque = 1 and IdProduto = 1 to Status = 1
+                var specificItem = itemsToUpdate.FirstOrDefault(i => i.IdEstoque == idEstoque);
+                if (specificItem != null)
+                {
+                    specificItem.Status = "1";
+                }
+
+                // Save the changes to the database
+                await banco.SaveChangesAsync();
+            }
+        }
     }
 }

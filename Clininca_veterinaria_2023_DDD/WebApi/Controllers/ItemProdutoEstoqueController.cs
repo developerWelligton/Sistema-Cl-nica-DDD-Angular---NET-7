@@ -172,6 +172,25 @@ namespace WebApi.Controllers
         }
 
 
+        [HttpPatch("atualizar-status-produto")]
+        public async Task<ActionResult> AtualizarStatusProduto([FromBody] StatusUpdateDto statusUpdate)
+        {
+            try
+            {
+                await _interfaceItemProdutoEstoques.UpdateStatusByProdutoId(statusUpdate.IdProduto, statusUpdate.IdEstoque);
+                return NoContent(); // Retorna um 204 No Content como resposta de sucesso.
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Erro interno do servidor: {ex.Message}");
+            }
+        }
 
+
+    }
+    public class StatusUpdateDto
+    {
+        public int IdEstoque { get; set; }
+        public int IdProduto { get; set; }
     }
 }
