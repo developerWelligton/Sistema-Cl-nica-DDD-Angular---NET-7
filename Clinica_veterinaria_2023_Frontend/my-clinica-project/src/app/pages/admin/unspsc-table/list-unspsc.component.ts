@@ -23,10 +23,6 @@ export class ListUnspscComponent implements OnInit, OnDestroy {
   ) { }
 
   ngOnInit() {
-    this.paddingSubscription = this.paddingService.globalPadding$.subscribe(padding => {
-      this.containerPadding = padding;
-    });
-
 
     this.unspscService.getAllUnspscCodeDetails().subscribe((data: any[]) => {
       this.unspscList = data;
