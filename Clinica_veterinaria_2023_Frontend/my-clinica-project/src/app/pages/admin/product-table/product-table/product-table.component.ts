@@ -25,7 +25,7 @@ export class UserProductComponent {
     private productService: ProductService,
     private route: ActivatedRoute ) {
       this.unspscId = this.route.snapshot.paramMap.get('idUnspsc');
-      alert(this.unspscId)
+
     }
 
   editProduct(user: any) {
